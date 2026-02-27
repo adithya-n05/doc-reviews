@@ -14,6 +14,10 @@ type ModuleOfferingSummary = Pick<
 type ModuleLeaderSummary = Pick<Tables<"module_leaders">, "leader_name" | "profile_url" | "photo_url">;
 
 type ModuleAggregateSummary = Tables<"module_review_aggregates">;
+type ModuleReviewInsightsSummary = Pick<
+  Tables<"module_review_insights">,
+  "module_id" | "reviews_fingerprint" | "summary" | "top_keywords" | "sentiment" | "source" | "generated_at" | "updated_at"
+>;
 
 type ModuleWithRelations = Omit<ModulePresentationRow, "module_offerings"> & {
   module_offerings: ModuleOfferingSummary[] | null;
@@ -138,4 +142,17 @@ export async function fetchHelpfulVoteRowsForReviews(
     .in("review_id", reviewIds);
 
   return (data ?? []) as Array<{ review_id: string; user_id: string }>;
+}
+
+export async function fetchModuleReviewInsightsRow(
+  client: SupabaseClient,
+  moduleId: string,
+): Promise<ModuleReviewInsightsSummary | null> {
+  const { data } = await client
+    .from("module_review_insights")
+    .select("module_id,reviews_fingerprint,summary,top_keywords,sentiment,source,generated_at,updated_at")
+    .eq("module_id", moduleId)
+    .maybeSingle();
+
+  return (data as ModuleReviewInsightsSummary | null) ?? null;
 }
