@@ -17,6 +17,7 @@ AGENTS.md
 /coverage
 /.playwright-cli/
 /output/playwright/
+/logs/local-artifacts/
 
 # next.js
 /.next/
