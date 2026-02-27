@@ -675,7 +675,6 @@
       display: flex;
       align-items: center;
       gap: 16px;
-      flex-wrap: wrap;
     }
 
     .helpful-btn {
@@ -714,12 +713,13 @@
 
     .helpful-count {
       font-weight: 700;
-      min-width: 16px;
+      min-width: 20px;
       text-align: center;
     }
 
     .review-thread-shell {
-      border-top: 1px solid var(--border);
+      padding: 10px 20px 0;
+      background: var(--cream);
     }
 
     .reply-toggle {
@@ -734,7 +734,7 @@
       transition: color 0.15s ease;
       background: none;
       border: none;
-      margin: 12px 20px;
+      margin: 0;
       padding: 0;
     }
 
@@ -845,7 +845,7 @@
     .reply-actions {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 12px;
       padding-left: 42px;
       flex-wrap: wrap;
     }
