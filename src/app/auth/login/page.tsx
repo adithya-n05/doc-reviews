@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { loginAction } from "@/app/actions/auth";
-import { SiteNav } from "@/components/site-nav";
+import { AuthBrand } from "@/components/auth-brand";
 
 type LoginPageProps = {
   searchParams?: Promise<Record<string, string | string[] | undefined>>;
@@ -23,9 +23,9 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
 
   return (
     <div className="site-shell">
-      <SiteNav authed={false} />
       <main className="auth-wrap">
         <section className="auth-card">
+          <AuthBrand />
           <p className="label-caps">Sign In</p>
           <h1 className="auth-title">Sign in to your account</h1>
           <p className="auth-subtitle">Use your Imperial College email address.</p>

@@ -1295,7 +1295,7 @@
 .form-banner.error { border-color: #cc9999; background: #fff1f1; color: #7b2c2c; }
 
 .auth-wrap {
-  min-height: calc(100vh - 56px);
+  min-height: 100vh;
   display: grid;
   place-items: center;
   padding: 36px 24px;
@@ -1306,6 +1306,22 @@
   border: 1px solid var(--border);
   background: #fff;
   padding: 28px;
+}
+
+.auth-brand {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.auth-brand-title {
+  font-family: var(--font-serif);
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.auth-brand-title span {
+  color: var(--accent);
 }
 
 .auth-title {

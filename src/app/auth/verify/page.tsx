@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { SiteNav } from "@/components/site-nav";
+import { AuthBrand } from "@/components/auth-brand";
 
 type VerifyPageProps = {
   searchParams?: Promise<Record<string, string | string[] | undefined>>;
@@ -24,9 +24,9 @@ export default async function VerifyPage({ searchParams }: VerifyPageProps) {
 
   return (
     <div className="site-shell">
-      <SiteNav authed={false} />
       <main className="auth-wrap">
         <section className="auth-card">
+          <AuthBrand />
           <p className="label-caps">Create Your Account</p>
           <h1 className="auth-title">Step 2 of 4 - Verify Email</h1>
           <p className="auth-subtitle">

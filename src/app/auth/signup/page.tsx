@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { signupAction } from "@/app/actions/auth";
-import { SiteNav } from "@/components/site-nav";
+import { AuthBrand } from "@/components/auth-brand";
 
 type SignupPageProps = {
   searchParams?: Promise<Record<string, string | string[] | undefined>>;
@@ -23,9 +23,9 @@ export default async function SignupPage({ searchParams }: SignupPageProps) {
 
   return (
     <div className="site-shell">
-      <SiteNav authed={false} />
       <main className="auth-wrap">
         <section className="auth-card">
+          <AuthBrand />
           <p className="label-caps">Create Your Account</p>
           <h1 className="auth-title">Step 1 of 4 - Your Details</h1>
           <p className="auth-subtitle">
