@@ -123,3 +123,19 @@ export async function fetchUserReviewForModule(
 
   return (data as ReviewPresentationRow | null) ?? null;
 }
+
+export async function fetchHelpfulVoteRowsForReviews(
+  client: SupabaseClient,
+  reviewIds: string[],
+): Promise<Array<{ review_id: string; user_id: string }>> {
+  if (reviewIds.length === 0) {
+    return [];
+  }
+
+  const { data } = await client
+    .from("review_helpful_votes")
+    .select("review_id,user_id")
+    .in("review_id", reviewIds);
+
+  return (data ?? []) as Array<{ review_id: string; user_id: string }>;
+}

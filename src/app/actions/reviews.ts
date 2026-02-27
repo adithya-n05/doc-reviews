@@ -5,6 +5,7 @@ import {
   deleteReviewForUser,
   upsertReviewForUser,
 } from "@/lib/services/review-service";
+import { toggleHelpfulVoteForReview } from "@/lib/services/review-helpful-service";
 import { requireUserContext } from "@/lib/server/auth-context";
 
 function firstError(errors: Record<string, string | undefined>): string {
@@ -123,4 +124,59 @@ export async function deleteReviewAction(formData: FormData): Promise<never> {
   }
 
   redirect(`/modules/${moduleCode}?success=review_deleted`);
+}
+
+export async function toggleHelpfulReviewAction(formData: FormData): Promise<never> {
+  const { client, user } = await requireUserContext({
+    requireVerified: true,
+    requireOnboarded: true,
+  });
+
+  const moduleCode = String(formData.get("moduleCode") ?? "").trim().toUpperCase();
+  const reviewId = String(formData.get("reviewId") ?? "");
+
+  const result = await toggleHelpfulVoteForReview(
+    {
+      async hasVote(payload) {
+        const { data } = await client
+          .from("review_helpful_votes")
+          .select("id")
+          .eq("review_id", payload.reviewId)
+          .eq("user_id", payload.userId)
+          .maybeSingle();
+
+        return Boolean(data);
+      },
+      async addVote(payload) {
+        const { error } = await client.from("review_helpful_votes").insert({
+          review_id: payload.reviewId,
+          user_id: payload.userId,
+        });
+        return {
+          error: error?.message ?? null,
+        };
+      },
+      async removeVote(payload) {
+        const { error } = await client
+          .from("review_helpful_votes")
+          .delete()
+          .eq("review_id", payload.reviewId)
+          .eq("user_id", payload.userId);
+
+        return {
+          error: error?.message ?? null,
+        };
+      },
+    },
+    {
+      userId: user.id,
+      reviewId,
+    },
+  );
+
+  if (!result.ok) {
+    redirect(`/modules/${moduleCode}?error=${encodeURIComponent(result.message)}`);
+  }
+
+  redirect(`/modules/${moduleCode}#review-${reviewId}`);
 }

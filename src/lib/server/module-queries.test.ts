@@ -9,4 +9,10 @@ describe("module review query shape", () => {
       "id,user_id,module_id,teaching_rating,workload_rating,difficulty_rating,assessment_rating,comment,tips,created_at,updated_at",
     );
   });
+
+  it("fetches helpful vote rows for module reviews", () => {
+    expect(source).toContain("fetchHelpfulVoteRowsForReviews");
+    expect(source).toContain('.from("review_helpful_votes")');
+    expect(source).toContain('.select("review_id,user_id")');
+  });
 });

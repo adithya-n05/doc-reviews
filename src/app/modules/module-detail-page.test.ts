@@ -20,9 +20,11 @@ describe("module detail review rendering", () => {
   });
 
   it("shows helpful/reply review actions and editorial tip label", () => {
-    expect(source).toContain('className="helpful-btn"');
+    expect(source).toContain('className={`helpful-btn ${');
     expect(source).toContain('className="reply-btn"');
     expect(source).toContain("Tip for future students:");
+    expect(source).toContain("toggleHelpfulReviewAction");
+    expect(source).toContain('name="reviewId"');
   });
 
   it("switches primary CTA to edit state when user already has a review", () => {

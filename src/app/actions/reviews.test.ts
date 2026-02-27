@@ -11,4 +11,10 @@ describe("review actions tips wiring", () => {
   it("persists tips in the reviews upsert payload", () => {
     expect(source).toContain("tips: payload.tips,");
   });
+
+  it("provides helpful-vote toggle action for module detail reviews", () => {
+    expect(source).toContain("toggleHelpfulReviewAction");
+    expect(source).toContain("toggleHelpfulVoteForReview");
+    expect(source).toContain('formData.get("reviewId")');
+  });
 });

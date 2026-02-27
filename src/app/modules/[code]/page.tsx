@@ -1,12 +1,16 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { deleteReviewAction } from "@/app/actions/reviews";
+import {
+  deleteReviewAction,
+  toggleHelpfulReviewAction,
+} from "@/app/actions/reviews";
 import { SiteNav } from "@/components/site-nav";
 import { deriveReviewInsights } from "@/lib/metrics/review-insights";
 import { mapReviewsWithProfiles, toModuleListItem } from "@/lib/modules/presenter";
 import { requireUserContext } from "@/lib/server/auth-context";
 import {
   fetchModuleByCode,
+  fetchHelpfulVoteRowsForReviews,
   fetchModuleReviews,
   fetchProfilesByIds,
 } from "@/lib/server/module-queries";
@@ -75,6 +79,21 @@ export default async function ModuleDetailPage({
     Array.from(new Set(reviewRows.map((row) => row.user_id))),
   );
   const reviews = mapReviewsWithProfiles(reviewRows, profileMap);
+  const helpfulVoteRows = await fetchHelpfulVoteRowsForReviews(
+    client,
+    reviewRows.map((row) => row.id),
+  );
+  const helpfulCountByReviewId = new Map<string, number>();
+  const currentUserHelpfulReviewIds = new Set<string>();
+  for (const vote of helpfulVoteRows) {
+    helpfulCountByReviewId.set(
+      vote.review_id,
+      (helpfulCountByReviewId.get(vote.review_id) ?? 0) + 1,
+    );
+    if (vote.user_id === user.id) {
+      currentUserHelpfulReviewIds.add(vote.review_id);
+    }
+  }
   const currentUserReview = reviews.find((review) => review.userId === user.id) ?? null;
   const insights = deriveReviewInsights(
     reviewRows.map((row) => ({
@@ -300,7 +319,7 @@ export default async function ModuleDetailPage({
             4;
 
           return (
-            <article className="review" key={review.id}>
+            <article className="review" id={`review-${review.id}`} key={review.id}>
               <div className="review-header">
                 <div className="review-avatar">{review.reviewerInitials}</div>
                 <div className="review-meta">
@@ -333,9 +352,17 @@ export default async function ModuleDetailPage({
                 </div>
               ) : null}
               <div className="review-actions">
-                <button className="helpful-btn" type="button">
-                  ✓ Helpful (0)
-                </button>
+                <form action={toggleHelpfulReviewAction}>
+                  <input type="hidden" name="moduleCode" value={moduleItem.code} />
+                  <input type="hidden" name="reviewId" value={review.id} />
+                  <button
+                    className={`helpful-btn ${currentUserHelpfulReviewIds.has(review.id) ? "voted" : ""}`}
+                    type="submit"
+                  >
+                    {currentUserHelpfulReviewIds.has(review.id) ? "✓ Helpful" : "Helpful"} (
+                    {helpfulCountByReviewId.get(review.id) ?? 0})
+                  </button>
+                </form>
                 <button className="reply-btn" type="button">
                   Reply
                 </button>
