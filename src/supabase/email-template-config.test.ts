@@ -8,7 +8,7 @@ describe("supabase auth email branding config", () => {
   it("wires confirmation emails to a custom branded html template", () => {
     expect(config).toContain("[auth.email.template.confirmation]");
     expect(config).toContain('subject = "Confirm your DoC Reviews account"');
-    expect(config).toContain('content_path = "./templates/confirmation.html"');
+    expect(config).toContain('content_path = "./supabase/templates/confirmation.html"');
   });
 
   it("declares SMTP sender settings via environment variables", () => {

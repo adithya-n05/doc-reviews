@@ -225,7 +225,7 @@ sender_name = "DoC Reviews"
 
 [auth.email.template.confirmation]
 subject = "Confirm your DoC Reviews account"
-content_path = "./templates/confirmation.html"
+content_path = "./supabase/templates/confirmation.html"
 
 # Uncomment to customize notification email template
 # [auth.email.notification.password_changed]
