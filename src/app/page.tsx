@@ -48,6 +48,9 @@ export default async function HomePage() {
     signedInDisplayName = null;
   }
 
+  const primaryHeroCtaLabel = signedInDisplayName ? "Browse Modules" : "Start Reading";
+  const primaryHeroCtaHref = signedInDisplayName ? "/modules" : "/auth/signup";
+
   return (
     <div className="site-shell">
       <div className="landing-masthead">
@@ -64,15 +67,15 @@ export default async function HomePage() {
             <div className="masthead-date">
               Imperial College London · Department of Computing
             </div>
-          <div
-            style={{
-              marginTop: "10px",
-              display: "flex",
-              gap: "10px",
-              justifyContent: "flex-end",
-              alignItems: "center",
-            }}
-          >
+            <div
+              style={{
+                marginTop: "10px",
+                display: "flex",
+                gap: "10px",
+                justifyContent: "flex-end",
+                alignItems: "center",
+              }}
+            >
               {signedInDisplayName ? (
                 <>
                   <span
@@ -139,12 +142,18 @@ export default async function HomePage() {
             and exam fairness.
           </p>
           <div className="hero-actions">
-            <Link className="btn btn-primary" href="/auth/signup">
-              Start Reading
+            <Link className="btn btn-primary" href={primaryHeroCtaHref}>
+              {primaryHeroCtaLabel}
             </Link>
-            <Link className="btn" href="/modules">
-              Browse Modules
-            </Link>
+            {signedInDisplayName ? (
+              <Link className="btn" href="/profile">
+                Profile
+              </Link>
+            ) : (
+              <Link className="btn" href="/modules">
+                Browse Modules
+              </Link>
+            )}
           </div>
         </div>
         <div>
@@ -245,8 +254,11 @@ export default async function HomePage() {
 
       <footer className="footer">
         <div className="footer-inner">
-          <div className="footer-logo">
-            DoC <span>Reviews</span>
+          <div>
+            <div className="footer-logo">
+              DoC <span>Reviews</span>
+            </div>
+            <div className="footer-attribution">Made by Adithya</div>
           </div>
           <div className="footer-copy">
             Unofficial student-run platform · Not affiliated with Imperial College

@@ -13,4 +13,13 @@ describe("home page auth state chrome", () => {
     expect(source).toContain("Signed in as");
     expect(source).toContain("Go to Modules");
   });
+
+  it("uses signed-in aware hero CTA label and destination", () => {
+    expect(source).toContain(
+      'const primaryHeroCtaLabel = signedInDisplayName ? "Browse Modules" : "Start Reading";',
+    );
+    expect(source).toContain(
+      'const primaryHeroCtaHref = signedInDisplayName ? "/modules" : "/auth/signup";',
+    );
+  });
 });
