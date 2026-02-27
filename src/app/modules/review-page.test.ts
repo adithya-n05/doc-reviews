@@ -8,4 +8,11 @@ describe("write review page fields", () => {
     expect(source).toContain("name=\"tips\"");
     expect(source).toContain("Tips for Future Students");
   });
+
+  it("uses editorial textarea styling and guidance copy", () => {
+    expect(source).toContain('className="form-input"');
+    expect(source).toContain("Be specific and constructive.");
+    expect(source).toContain("Minimum 80 characters.");
+    expect(source).not.toContain("className=\"form-textarea\"");
+  });
 });

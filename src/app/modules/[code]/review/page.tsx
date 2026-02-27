@@ -121,25 +121,32 @@ export default async function WriteReviewPage({
               </label>
               <textarea
                 id="review-comment"
-                className="form-textarea"
+                className="form-input"
                 name="comment"
                 defaultValue={existingReview?.comment ?? ""}
                 minLength={80}
+                rows={8}
                 required
-                placeholder="Share your honest experience. Minimum 80 characters."
+                placeholder="Share your honest experience of this module — what worked, what didn't, what surprised you. Minimum 80 characters."
               />
+              <span className="form-hint">
+                Be specific and constructive. Your review helps other students make informed
+                decisions.
+              </span>
             </div>
             <div className="form-group">
               <label className="form-label" htmlFor="review-tips">
-                Tips for Future Students
+                Tips for Future Students{" "}
+                <span style={{ color: "var(--ink-light)", fontWeight: 400 }}>(optional)</span>
               </label>
               <textarea
                 id="review-tips"
-                className="form-textarea"
+                className="form-input"
                 name="tips"
                 defaultValue={existingReview?.tips ?? ""}
                 maxLength={500}
-                placeholder="Optional: practical advice for future students."
+                rows={4}
+                placeholder="Any practical advice — how to prepare, how to approach the exam, resources you found useful..."
               />
             </div>
 
