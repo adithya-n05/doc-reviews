@@ -1,6 +1,7 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Tables } from "@/lib/supabase/database.types";
 import type {
+  ModuleCataloguePresentationRow,
   ModulePresentationRow,
   ReviewPresentationRow,
 } from "@/lib/modules/presenter";
@@ -20,22 +21,31 @@ type ModuleWithRelations = Omit<ModulePresentationRow, "module_offerings"> & {
   module_review_aggregates: ModuleAggregateSummary | ModuleAggregateSummary[] | null;
 };
 
+type ModuleCatalogueOfferingSummary = Pick<Tables<"module_offerings">, "study_year">;
+
+type ModuleCatalogueWithRelations = Omit<
+  ModuleCataloguePresentationRow,
+  "module_offerings"
+> & {
+  module_offerings: ModuleCatalogueOfferingSummary[] | null;
+  module_review_aggregates: ModuleAggregateSummary | ModuleAggregateSummary[] | null;
+};
+
 export async function fetchModuleCatalogueRows(
   client: SupabaseClient,
-): Promise<ModuleWithRelations[]> {
+): Promise<ModuleCatalogueWithRelations[]> {
   const { data } = await client
     .from("modules")
     .select(
       `
-        id,code,title,description,
-        module_offerings(study_year,term,offering_type,degree_path,academic_year_label),
-        module_leaders(leader_name),
+        id,code,title,
+        module_offerings(study_year),
         module_review_aggregates(review_count,avg_overall,avg_difficulty,avg_teaching,avg_workload,avg_assessment,module_id)
       `,
     )
     .order("code", { ascending: true });
 
-  return (data ?? []) as ModuleWithRelations[];
+  return (data ?? []) as ModuleCatalogueWithRelations[];
 }
 
 export async function fetchModuleByCode(

@@ -27,6 +27,14 @@ export type ModulePresentationRow = {
   module_review_aggregates: ModuleAggregateLite | ModuleAggregateLite[] | null;
 };
 
+export type ModuleCataloguePresentationRow = {
+  id: string;
+  code: string;
+  title: string;
+  module_offerings: ModuleOfferingLite[] | null;
+  module_review_aggregates: ModuleAggregateLite | ModuleAggregateLite[] | null;
+};
+
 export type ReviewPresentationRow = {
   id: string;
   user_id: string;
@@ -124,6 +132,22 @@ export function toModuleListItem(row: ModulePresentationRow): ModuleListItem & {
     avgTeaching: normalizeScore(aggregate?.avg_teaching),
     avgWorkload: normalizeScore(aggregate?.avg_workload),
     avgAssessment: normalizeScore(aggregate?.avg_assessment),
+  };
+}
+
+export function toModuleCatalogueItem(
+  row: ModuleCataloguePresentationRow,
+): ModuleListItem {
+  const aggregate = pickAggregate(row.module_review_aggregates);
+
+  return {
+    id: row.id,
+    code: row.code,
+    title: row.title,
+    studyYears: dedupeStudyYears(row.module_offerings),
+    reviewCount: normalizeCount(aggregate?.review_count),
+    avgOverall: normalizeScore(aggregate?.avg_overall),
+    avgDifficulty: normalizeScore(aggregate?.avg_difficulty),
   };
 }
 

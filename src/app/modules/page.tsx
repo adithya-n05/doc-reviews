@@ -6,7 +6,7 @@ import {
   difficultyPipCount,
   paginateModules,
 } from "@/lib/modules/catalog";
-import { toModuleListItem } from "@/lib/modules/presenter";
+import { toModuleCatalogueItem } from "@/lib/modules/presenter";
 import { parseModuleCatalogueSearchParams } from "@/lib/modules/query-params";
 import { requireUserContext } from "@/lib/server/auth-context";
 import { fetchModuleCatalogueRows } from "@/lib/server/module-queries";
@@ -45,7 +45,7 @@ export default async function ModulesPage({ searchParams }: ModulesPageProps) {
   const activeYear = parsed.year;
 
   const rows = await fetchModuleCatalogueRows(client);
-  const modules = rows.map((row) => toModuleListItem(row));
+  const modules = rows.map((row) => toModuleCatalogueItem(row));
   const filtered = applyModuleListQuery(modules, {
     search: parsed.search,
     year: activeYear,
