@@ -60,6 +60,13 @@ export default async function ProfilePage() {
         ).toFixed(1)
       : "0.0";
 
+  const joinedDate = user.created_at
+    ? new Date(user.created_at).toLocaleDateString("en-GB", {
+        month: "short",
+        year: "numeric",
+      })
+    : "Unknown";
+
   return (
     <div className="site-shell">
       <SiteNav authed active="profile" displayName={profile.full_name} />
@@ -80,6 +87,9 @@ export default async function ProfilePage() {
               <span className="year-badge">Year {profile.year}</span>
               <span style={{ fontSize: "13px", color: "var(--ink-light)" }}>{profile.email}</span>
             </div>
+            <p className="form-note" style={{ marginTop: "8px" }}>
+              Member since {joinedDate}
+            </p>
           </div>
           <div style={{ display: "flex", border: "1px solid var(--border)" }}>
             <div className="profile-stat">
@@ -101,7 +111,7 @@ export default async function ProfilePage() {
           <div>
             <div className="section-header" style={{ paddingTop: 0, marginBottom: 0 }}>
               <h2 className="section-title" style={{ fontSize: "20px" }}>
-                Your Modules
+                Review Activity
               </h2>
               <span style={{ fontSize: "12px", color: "var(--ink-light)" }}>
                 {modules.length} enrolled
@@ -148,7 +158,7 @@ export default async function ProfilePage() {
           <div>
             <div className="section-header" style={{ paddingTop: 0, marginBottom: 0 }}>
               <h2 className="section-title" style={{ fontSize: "20px" }}>
-                Account
+                Account Settings
               </h2>
             </div>
 
