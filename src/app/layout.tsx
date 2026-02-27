@@ -7,7 +7,7 @@ import {
 import { SITE_DESCRIPTION, SITE_NAME, getSiteUrl } from "@/lib/site-metadata";
 import "./globals.css";
 
-const ICON_ASSET_VERSION = "20260227-2";
+const ICON_ASSET_VERSION = "20260227-3";
 
 const newsreader = Newsreader({
   subsets: ["latin"],
@@ -59,6 +59,11 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
+      {
+        url: `/favicon.svg?v=${ICON_ASSET_VERSION}`,
+        type: "image/svg+xml",
+        sizes: "any",
+      },
       {
         url: `/favicon.ico?v=${ICON_ASSET_VERSION}`,
       },
