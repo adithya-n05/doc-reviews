@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/module-insights",
+      "schedule": "0 7 * * *"
+    }
+  ]
+}
