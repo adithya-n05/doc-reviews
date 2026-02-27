@@ -12,6 +12,13 @@ type ReviewPersistence = {
   }) => Promise<{ error: string | null }>;
 };
 
+type ReviewDeletePersistence = {
+  deleteReview: (payload: {
+    userId: string;
+    reviewId: string;
+  }) => Promise<{ error: string | null }>;
+};
+
 type ReviewContext = {
   userId: string;
   moduleId: string;
@@ -73,6 +80,48 @@ export async function upsertReviewForUser(
     difficultyRating: value.difficultyRating,
     assessmentRating: value.assessmentRating,
     comment: value.comment,
+  });
+
+  if (error) {
+    return {
+      ok: false,
+      type: "db",
+      message: error,
+    };
+  }
+
+  return {
+    ok: true,
+  };
+}
+
+export async function deleteReviewForUser(
+  persistence: ReviewDeletePersistence,
+  input: {
+    userId: string;
+    reviewId: string;
+  },
+): Promise<
+  | Success
+  | {
+      ok: false;
+      type: "validation";
+      message: string;
+    }
+  | DbFailure
+> {
+  const reviewId = input.reviewId.trim();
+  if (!reviewId) {
+    return {
+      ok: false,
+      type: "validation",
+      message: "Review id is required.",
+    };
+  }
+
+  const { error } = await persistence.deleteReview({
+    userId: input.userId,
+    reviewId,
   });
 
   if (error) {

@@ -1,5 +1,8 @@
 import { describe, expect, it, vi } from "vitest";
-import { upsertReviewForUser } from "@/lib/services/review-service";
+import {
+  deleteReviewForUser,
+  upsertReviewForUser,
+} from "@/lib/services/review-service";
 
 describe("upsertReviewForUser", () => {
   it("returns validation errors without calling persistence", async () => {
@@ -95,6 +98,60 @@ describe("upsertReviewForUser", () => {
       ok: false,
       type: "db",
       message: "duplicate review",
+    });
+  });
+});
+
+describe("deleteReviewForUser", () => {
+  it("rejects empty review ids", async () => {
+    const persistence = {
+      deleteReview: vi.fn(async () => ({ error: null })),
+    };
+
+    const result = await deleteReviewForUser(persistence, {
+      userId: "user-1",
+      reviewId: "  ",
+    });
+
+    expect(result).toEqual({
+      ok: false,
+      type: "validation",
+      message: "Review id is required.",
+    });
+    expect(persistence.deleteReview).not.toHaveBeenCalled();
+  });
+
+  it("forwards deletion to persistence for valid requests", async () => {
+    const persistence = {
+      deleteReview: vi.fn(async () => ({ error: null })),
+    };
+
+    const result = await deleteReviewForUser(persistence, {
+      userId: "user-1",
+      reviewId: "review-1",
+    });
+
+    expect(result).toEqual({ ok: true });
+    expect(persistence.deleteReview).toHaveBeenCalledWith({
+      userId: "user-1",
+      reviewId: "review-1",
+    });
+  });
+
+  it("returns database failures", async () => {
+    const persistence = {
+      deleteReview: vi.fn(async () => ({ error: "permission denied" })),
+    };
+
+    const result = await deleteReviewForUser(persistence, {
+      userId: "user-1",
+      reviewId: "review-1",
+    });
+
+    expect(result).toEqual({
+      ok: false,
+      type: "db",
+      message: "permission denied",
     });
   });
 });
