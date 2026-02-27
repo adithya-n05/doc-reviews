@@ -6,6 +6,7 @@ import {
   toggleHelpfulReviewAction,
 } from "@/app/actions/reviews";
 import { SiteNav } from "@/components/site-nav";
+import { logInfo } from "@/lib/logging";
 import { deriveReviewInsights } from "@/lib/metrics/review-insights";
 import { mapReviewsWithProfiles, toModuleListItem } from "@/lib/modules/presenter";
 import { requireUserContext } from "@/lib/server/auth-context";
@@ -17,6 +18,7 @@ import {
   fetchProfilesByIds,
   fetchReviewRepliesForReviews,
 } from "@/lib/server/module-queries";
+import { elapsedMs, startTiming } from "@/lib/server/timing";
 import { resolveModuleReviewInsights } from "@/lib/services/module-review-insights-resolver";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 
@@ -94,16 +96,84 @@ export default async function ModuleDetailPage({
   }
 
   const moduleItem = toModuleListItem(moduleRow);
-  const reviewRows = await fetchModuleReviews(client, moduleItem.id);
-  const replyRows = await fetchReviewRepliesForReviews(
-    client,
-    reviewRows.map((row) => row.id),
-  );
+  const queryDurationsMs: Record<string, number> = {};
+  const queryPipelineStart = startTiming();
+
+  const reviewsAndCacheStart = startTiming();
+  const [reviewRows, cachedInsightsRow] = await Promise.all([
+    fetchModuleReviews(client, moduleItem.id),
+    fetchModuleReviewInsightsRow(client, moduleItem.id),
+  ]);
+  queryDurationsMs.reviewsAndInsightsCache = elapsedMs(reviewsAndCacheStart);
+
+  const insightsResolverStart = startTiming();
+  const insightsPromise = resolveModuleReviewInsights({
+    moduleId: moduleItem.id,
+    reviews: reviewRows.map((row) => ({
+      id: row.id,
+      updatedAt: row.updated_at,
+      teachingRating: row.teaching_rating,
+      workloadRating: row.workload_rating,
+      difficultyRating: row.difficulty_rating,
+      assessmentRating: row.assessment_rating,
+      comment: row.comment,
+    })),
+    cachedRow: cachedInsightsRow,
+    apiKey: process.env.OPENAI_API_KEY,
+    model: process.env.OPENAI_MODEL ?? "gpt-4.1-mini",
+    adminClient: createSupabaseAdminClient(),
+  }).then((result) => {
+    queryDurationsMs.insightsResolver = elapsedMs(insightsResolverStart);
+    return result;
+  });
+
+  const repliesAndVotesStart = startTiming();
+  const [replyRows, helpfulVoteRows] = await Promise.all([
+    fetchReviewRepliesForReviews(
+      client,
+      reviewRows.map((row) => row.id),
+    ),
+    fetchHelpfulVoteRowsForReviews(
+      client,
+      reviewRows.map((row) => row.id),
+    ),
+  ]);
+  queryDurationsMs.repliesAndHelpfulVotes = elapsedMs(repliesAndVotesStart);
+
+  const profileLookupStart = startTiming();
   const profileMap = await fetchProfilesByIds(
     client,
-    Array.from(new Set([...reviewRows.map((row) => row.user_id), ...replyRows.map((row) => row.user_id)])),
+    Array.from(
+      new Set([
+        ...reviewRows.map((row) => row.user_id),
+        ...replyRows.map((row) => row.user_id),
+      ]),
+    ),
   );
+  queryDurationsMs.profiles = elapsedMs(profileLookupStart);
+
   const reviews = mapReviewsWithProfiles(reviewRows, profileMap);
+  const currentUserReview = reviews.find((review) => review.userId === user.id) ?? null;
+  const derivedInsights = deriveReviewInsights(
+    reviewRows.map((row) => ({
+      teachingRating: row.teaching_rating,
+      workloadRating: row.workload_rating,
+      difficultyRating: row.difficulty_rating,
+      assessmentRating: row.assessment_rating,
+      comment: row.comment,
+    })),
+  );
+  const { insights } = await insightsPromise;
+
+  queryDurationsMs.total = elapsedMs(queryPipelineStart);
+  logInfo("module_detail_timing", {
+    moduleCode,
+    moduleId: moduleItem.id,
+    reviewCount: reviewRows.length,
+    replyCount: replyRows.length,
+    queryDurationsMs,
+  });
+
   const replyPresentationRows = replyRows.map((row) => {
     const profileRow = profileMap[row.user_id];
     const reviewerName = profileRow?.fullName ?? "Unknown Student";
@@ -135,9 +205,51 @@ export default async function ModuleDetailPage({
       ]);
     }
   }
-  const helpfulVoteRows = await fetchHelpfulVoteRowsForReviews(
-    client,
-    reviewRows.map((row) => row.id),
+  const renderReplyThread = (
+    reply: (typeof replyPresentationRows)[number],
+    moduleCodeValue: string,
+    reviewId: string,
+    depth: number,
+  ) => (
+    <div
+      className={`review-reply ${depth > 0 ? "review-reply-child" : ""}`}
+      key={reply.id}
+    >
+      <div className="review-header">
+        <div className="review-avatar review-avatar-small">{reply.authorInitials}</div>
+        <div className="review-meta">
+          <div className="review-author">{reply.authorName}</div>
+          <div className="review-date">{formatReviewDate(reply.createdAt)}</div>
+          <div className="review-email">{reply.authorEmail}</div>
+        </div>
+      </div>
+      <p className="review-body">{reply.body}</p>
+
+      {(repliesByParentId.get(reply.id) ?? []).map((childReply) =>
+        renderReplyThread(childReply, moduleCodeValue, reviewId, depth + 1),
+      )}
+
+      <details className={`reply-details ${depth > 0 ? "reply-details-nested" : ""}`}>
+        <summary className="reply-btn">Reply</summary>
+        <form
+          action={postReviewReplyAction}
+          className={`reply-form ${depth > 0 ? "reply-form-nested" : ""}`}
+        >
+          <input type="hidden" name="moduleCode" value={moduleCodeValue} />
+          <input type="hidden" name="reviewId" value={reviewId} />
+          <input type="hidden" name="parentReplyId" value={reply.id} />
+          <textarea
+            name="body"
+            rows={2}
+            maxLength={2000}
+            placeholder="Reply to this comment..."
+          />
+          <button className="btn btn-ghost btn-sm" type="submit">
+            Reply
+          </button>
+        </form>
+      </details>
+    </div>
   );
   const helpfulCountByReviewId = new Map<string, number>();
   const currentUserHelpfulReviewIds = new Set<string>();
@@ -150,33 +262,6 @@ export default async function ModuleDetailPage({
       currentUserHelpfulReviewIds.add(vote.review_id);
     }
   }
-  const currentUserReview = reviews.find((review) => review.userId === user.id) ?? null;
-  const derivedInsights = deriveReviewInsights(
-    reviewRows.map((row) => ({
-      teachingRating: row.teaching_rating,
-      workloadRating: row.workload_rating,
-      difficultyRating: row.difficulty_rating,
-      assessmentRating: row.assessment_rating,
-      comment: row.comment,
-    })),
-  );
-  const cachedInsightsRow = await fetchModuleReviewInsightsRow(client, moduleItem.id);
-  const { insights } = await resolveModuleReviewInsights({
-    moduleId: moduleItem.id,
-    reviews: reviewRows.map((row) => ({
-      id: row.id,
-      updatedAt: row.updated_at,
-      teachingRating: row.teaching_rating,
-      workloadRating: row.workload_rating,
-      difficultyRating: row.difficulty_rating,
-      assessmentRating: row.assessment_rating,
-      comment: row.comment,
-    })),
-    cachedRow: cachedInsightsRow,
-    apiKey: process.env.OPENAI_API_KEY,
-    model: process.env.OPENAI_MODEL ?? "gpt-4.1-mini",
-    adminClient: createSupabaseAdminClient(),
-  });
 
   const studyYear = moduleItem.studyYears[0] ?? profile.year ?? 1;
   const leaders =
@@ -454,6 +539,23 @@ export default async function ModuleDetailPage({
                     {helpfulCountByReviewId.get(review.id) ?? 0})
                   </button>
                 </form>
+                <details className="reply-details">
+                  <summary className="reply-btn">Reply</summary>
+                  <form action={postReviewReplyAction} className="reply-form">
+                    <input type="hidden" name="moduleCode" value={moduleItem.code} />
+                    <input type="hidden" name="reviewId" value={review.id} />
+                    <input type="hidden" name="parentReplyId" value="" />
+                    <textarea
+                      name="body"
+                      rows={2}
+                      maxLength={2000}
+                      placeholder="Add a reply..."
+                    />
+                    <button className="btn btn-ghost btn-sm" type="submit">
+                      Reply
+                    </button>
+                  </form>
+                </details>
                 <span style={{ flex: 1 }} />
                 <span style={{ fontSize: "11px", color: "var(--ink-faint)" }}>
                   Overall: {overallScore.toFixed(1)} | Difficulty: {review.difficultyRating} |
@@ -464,66 +566,8 @@ export default async function ModuleDetailPage({
               <div className="review-replies">
                 {(repliesByReviewId.get(review.id) ?? [])
                   .filter((reply) => !reply.parentReplyId)
-                  .map((reply) => (
-                    <div className="review-reply" key={reply.id}>
-                      <div className="review-header">
-                        <div className="review-avatar review-avatar-small">{reply.authorInitials}</div>
-                        <div className="review-meta">
-                          <div className="review-author">{reply.authorName}</div>
-                          <div className="review-date">{formatReviewDate(reply.createdAt)}</div>
-                          <div className="review-email">{reply.authorEmail}</div>
-                        </div>
-                      </div>
-                      <p className="review-body">{reply.body}</p>
-
-                      {(repliesByParentId.get(reply.id) ?? []).map((childReply) => (
-                        <div className="review-reply review-reply-child" key={childReply.id}>
-                          <div className="review-header">
-                            <div className="review-avatar review-avatar-small">
-                              {childReply.authorInitials}
-                            </div>
-                            <div className="review-meta">
-                              <div className="review-author">{childReply.authorName}</div>
-                              <div className="review-date">{formatReviewDate(childReply.createdAt)}</div>
-                              <div className="review-email">{childReply.authorEmail}</div>
-                            </div>
-                          </div>
-                          <p className="review-body">{childReply.body}</p>
-                        </div>
-                      ))}
-
-                      <form action={postReviewReplyAction} className="reply-form reply-form-nested">
-                        <input type="hidden" name="moduleCode" value={moduleItem.code} />
-                        <input type="hidden" name="reviewId" value={review.id} />
-                        <input type="hidden" name="parentReplyId" value={reply.id} />
-                        <textarea
-                          name="body"
-                          rows={2}
-                          maxLength={2000}
-                          placeholder="Reply to this comment..."
-                        />
-                        <button className="btn btn-ghost btn-sm" type="submit">
-                          Reply
-                        </button>
-                      </form>
-                    </div>
-                  ))}
+                  .map((reply) => renderReplyThread(reply, moduleItem.code, review.id, 0))}
               </div>
-
-              <form action={postReviewReplyAction} className="reply-form">
-                <input type="hidden" name="moduleCode" value={moduleItem.code} />
-                <input type="hidden" name="reviewId" value={review.id} />
-                <input type="hidden" name="parentReplyId" value="" />
-                <textarea
-                  name="body"
-                  rows={2}
-                  maxLength={2000}
-                  placeholder="Add a reply..."
-                />
-                <button className="btn btn-ghost btn-sm" type="submit">
-                  Reply
-                </button>
-              </form>
               {review.userId === user.id ? (
                 <div
                   className="review-actions"

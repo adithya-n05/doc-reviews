@@ -27,6 +27,8 @@ describe("module detail review rendering", () => {
 
   it("shows helpful/reply review actions and editorial tip label", () => {
     expect(source).toContain('className={`helpful-btn ${');
+    expect(source).toContain('className="reply-details"');
+    expect(source).toContain('className="reply-btn"');
     expect(source).toContain("postReviewReplyAction");
     expect(source).toContain('name="parentReplyId"');
     expect(source).toContain('className="reply-form"');

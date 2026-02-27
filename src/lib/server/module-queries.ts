@@ -8,7 +8,7 @@ import type {
 
 type ModuleOfferingSummary = Pick<
   Tables<"module_offerings">,
-  "study_year" | "term" | "offering_type" | "degree_path" | "academic_year_label"
+  "study_year"
 >;
 
 type ModuleLeaderSummary = Pick<Tables<"module_leaders">, "leader_name" | "profile_url" | "photo_url">;
@@ -65,7 +65,7 @@ export async function fetchModuleByCode(
     .select(
       `
         id,code,title,description,
-        module_offerings(study_year,term,offering_type,degree_path,academic_year_label),
+        module_offerings(study_year),
         module_leaders(leader_name,profile_url,photo_url),
         module_review_aggregates(review_count,avg_overall,avg_difficulty,avg_teaching,avg_workload,avg_assessment,module_id)
       `,

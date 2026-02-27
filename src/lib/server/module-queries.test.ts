@@ -31,4 +31,9 @@ describe("module review query shape", () => {
       '.select("id,review_id,user_id,parent_reply_id,body,created_at,updated_at")',
     );
   });
+
+  it("keeps module detail offerings select minimal for performance", () => {
+    expect(source).toContain("module_offerings(study_year)");
+    expect(source).not.toContain("module_offerings(study_year,term,offering_type,degree_path,academic_year_label)");
+  });
 });
