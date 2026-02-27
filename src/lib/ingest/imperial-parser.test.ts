@@ -106,4 +106,27 @@ describe("parseModuleDetailHtml", () => {
       moduleLeaders: [],
     });
   });
+
+  it("includes aims bullet points and decodes html entities", () => {
+    const html = `
+      <div id="dss-mainview">
+        <h2>Logic-Based Learning</h2>
+        <h3>Module aims</h3>
+        <p>In this module you will have the opportunity to:</p>
+        <ul>
+          <li>develop robust inference skills</li>
+          <li>evaluate models under uncertainty</li>
+        </ul>
+        <p>[Formerly &quot;Methods and Tools in the Theory of Computing&quot;]</p>
+        <h3>Module leaders</h3>
+          Dr C Example
+      </div>
+    `;
+
+    const result = parseModuleDetailHtml(html);
+    expect(result.description).toContain("In this module you will have the opportunity to:");
+    expect(result.description).toContain("develop robust inference skills");
+    expect(result.description).toContain("evaluate models under uncertainty");
+    expect(result.description).toContain("[Formerly \"Methods and Tools in the Theory of Computing\"]");
+  });
 });

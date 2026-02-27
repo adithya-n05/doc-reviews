@@ -13,6 +13,8 @@ function stripTags(value: string): string {
     .replace(/<[^>]+>/g, " ")
     .replace(/&nbsp;/g, " ")
     .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, "\"")
+    .replace(/&#39;/g, "'")
     .replace(/\s+/g, " ")
     .trim();
 }
@@ -120,9 +122,16 @@ export function parseModuleDetailHtml(html: string): {
   const title = titleMatch ? stripTags(titleMatch[1]) : "";
 
   const aimsMatch = html.match(
-    /<h3>\s*Module aims\s*<\/h3>\s*<p>([\s\S]*?)<\/p>/i,
+    /<h3>\s*Module aims\s*<\/h3>([\s\S]*?)(?=<h3>|<h2>|<\/div>)/i,
   );
-  const description = aimsMatch ? stripTags(aimsMatch[1]) : "";
+  const description = aimsMatch
+    ? stripTags(
+        aimsMatch[1]
+          .replace(/<li[^>]*>/gi, "<p>")
+          .replace(/<\/li>/gi, "</p>")
+          .replace(/<br\s*\/?>/gi, " "),
+      )
+    : "";
 
   const leadersMatch = html.match(
     /<h3>\s*Module leaders\s*<\/h3>([\s\S]*?)(?:<h2>|<\/div>)/i,

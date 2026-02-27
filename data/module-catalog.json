@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-02-27T02:46:35.260Z",
+  "generatedAt": "2026-02-27T09:14:00.579Z",
   "source": "Imperial DoC dynamic degree structure pages + module pages",
   "moduleCount": 81,
   "modules": [
@@ -44,7 +44,7 @@
     {
       "code": "40007",
       "title": "Introduction to Databases",
-      "description": "In this module you will have the opportunity to:",
+      "description": "In this module you will have the opportunity to: learn how modern database systems are structured model relational databases normalise relational schemas write SQL queries learn about recent developments in database technology",
       "moduleLeaders": [
         "Dr Peter McBrien"
       ],
@@ -62,7 +62,7 @@
     {
       "code": "40008",
       "title": "Graphs and Algorithms",
-      "description": "In this module you will have the opportunity to:",
+      "description": "In this module you will have the opportunity to: prove mathematical properties of graphs explore classical algorithms associated with graphs and trees design algorithms for sorting and searching apply various methods for determining the time complexity of algorithm study the complexity classes P and NP and the concept of NP-completeness",
       "moduleLeaders": [
         "Dr Iain Phillips"
       ],
@@ -162,7 +162,7 @@
     {
       "code": "50001",
       "title": "Algorithm Design and Analysis",
-      "description": "In this module you will have the opportunity to:",
+      "description": "In this module you will have the opportunity to: Explore the main algorithmic design paradigms Apply algorithmic techniques to practical and unseen problems Quantitatively analyse the performance of algorithms Model the mathematical structure of computational tasks and apply the right algorithmic tools on them Develop your algorithmic thinking and problem solving skills.",
       "moduleLeaders": [
         "Professor Nicolas Wu"
       ],
@@ -180,7 +180,7 @@
     {
       "code": "50002",
       "title": "Software Engineering Design",
-      "description": "In this module you will have the opportunity to:",
+      "description": "In this module you will have the opportunity to: consider the effects of various design choices on the flexibility, maintainability and cost of software systems practise different refactoring techniques to improve code quality practise automated testing techniques select appropriate design patterns and architectural styles to suit a given problem reflect on the impact of different design choices on the long term health of a software system consider how these technical practices fit in the context of iterative and incremental software delivery",
       "moduleLeaders": [
         "Dr Robert Chatley"
       ],
@@ -198,7 +198,7 @@
     {
       "code": "50003",
       "title": "Models of Computation",
-      "description": "This module focuses on formal descriptions (models) of computational behaviour. You will learn about:",
+      "description": "This module focuses on formal descriptions (models) of computational behaviour. You will learn about: the operational semantics (formal description) of a simple 'WHILE' programming language the operational semantics of other styles of real-world languages, such as Java and Haskell equivalent definitions of algorithm, initiated in the 1930s and providing the foundations for programming languages and computation",
       "moduleLeaders": [
         "Dr Herbert Wiklicky",
         "Professor Sophia Drossopoulou"
@@ -217,7 +217,7 @@
     {
       "code": "50004",
       "title": "Operating Systems",
-      "description": "In this module you will have the opportunity to:",
+      "description": "In this module you will have the opportunity to: develop an understanding of the main operating system abstractions explore the trade-offs in the implementations of operating system functionality study the different sub-systems that make up a modern operating system investigate different operating system mechanisms and policies for resource management and allocation apply a theoretical understanding of operating systems to a real-world operating system implementation",
       "moduleLeaders": [
         "Dr Lluis Vilanova",
         "Professor Peter Pietzuch"
@@ -236,7 +236,7 @@
     {
       "code": "50005",
       "title": "Networks and Communications",
-      "description": "In this module you will have the opportunity to:",
+      "description": "In this module you will have the opportunity to: Study the principles of computer networking Analyse and discuss the OSI & TCP/IP models Demonstrate how a network is designed based on specific requirements Familiarise yourself with the basic principles of computer security",
       "moduleLeaders": [
         "Dr Konstantinos Gkoutzis"
       ],
@@ -254,7 +254,7 @@
     {
       "code": "50008",
       "title": "Probability and Statistics",
-      "description": "In this module you will have the opportunity to:",
+      "description": "In this module you will have the opportunity to: use probability theory to model uncertainty design simple probabilistic models that facilitate prediction conduct sound scientific analysis of data study the mathematical foundations of probabilistic modelling with Markov chains and simulation",
       "moduleLeaders": [
         "Dr Giuliano Casale"
       ],
@@ -349,7 +349,7 @@
     {
       "code": "60001",
       "title": "Advanced Computer Architecture",
-      "description": "Computer architecture concerns the design of general-purpose and special-purpose processors, and of parallel computer systems for applications ranging from embedded robotics through mobile handsets to datacentres and supercomputers. Through this module you will:",
+      "description": "Computer architecture concerns the design of general-purpose and special-purpose processors, and of parallel computer systems for applications ranging from embedded robotics through mobile handsets to datacentres and supercomputers. Through this module you will: develop a thorough understanding of high-performance and energy-efficient computer architecture learn principles and techniques for evaluating architectural proposals explore how knowledge of computer architecture informs software performance engineering gain a deep understanding of topical trends in advanced computer architecture, compiler design, operating systems and parallel processing",
       "moduleLeaders": [
         "Professor Paul Kelly"
       ],
@@ -458,7 +458,7 @@
     {
       "code": "60003",
       "title": "Communicating Computer Science in Schools",
-      "description": "In this module you will have the opportunity to support the teaching of Computer Science in a local area school. At first, you will observe the host teacher to help you understand the layout of the school, the teaching and the expecations after which you will take the lead in implementing a teaching project to help teach Computer Science in the school.",
+      "description": "In this module you will have the opportunity to support the teaching of Computer Science in a local area school. At first, you will observe the host teacher to help you understand the layout of the school, the teaching and the expecations after which you will take the lead in implementing a teaching project to help teach Computer Science in the school. https://www.imperial.ac.uk/computing/outreach/computing-in-schools/information-for-current-students/",
       "moduleLeaders": [
         "Dr Jackie Bell"
       ],
@@ -890,7 +890,7 @@
     {
       "code": "60013",
       "title": "Logic-Based Learning",
-      "description": "In this module you will have the opportunity to:",
+      "description": "In this module you will have the opportunity to: acquire foundation knowledge and basic principles of logic-based machine learning cover foundational semantics concepts and methods for logic-based machine learning familiarise with state-of-the-art learning algorithms and heuristics study state-of-the-art machine learning methods for Answer Set Programming (ASP) develop skills for formalising logic-based learning tasks for solving real-world problems explore probabilistic logic-based inference and learning",
       "moduleLeaders": [
         "Professor Alessandra Russo"
       ],
@@ -1010,7 +1010,7 @@
     {
       "code": "60016",
       "title": "Operations Research",
-      "description": "This module will give you the opportunity to:",
+      "description": "This module will give you the opportunity to: explore quantitative mathematical methods for taking decisions in the presence of constraints or finite resources learn about linear programming, integer linear programming, robust optimisation, and game theory and their application classify mathematical programs on the basis of the number and types of their solutions implement solution techniques for linear programs with both real and integer-valued variables familiarise yourself with fundamental notions of duality, degeneracy, and sensitivity",
       "moduleLeaders": [
         "Dr Dario Paccagnan",
         "Professor Ruth Misener"
@@ -1071,7 +1071,7 @@
     {
       "code": "60017",
       "title": "System Performance Engineering",
-      "description": "Performance engineering is the area of computer science ensuring that computer systems (comprised of hardware as well as software) are responsive, scalable, and efficient. The course aims at introducing fundamental principles and techniques used in performance management of modern computer systems, either purpose-built applications or generic system (single-node as well as distributed). In particular, in this module you will have the opportunity to learn to:",
+      "description": "Performance engineering is the area of computer science ensuring that computer systems (comprised of hardware as well as software) are responsive, scalable, and efficient. The course aims at introducing fundamental principles and techniques used in performance management of modern computer systems, either purpose-built applications or generic system (single-node as well as distributed). In particular, in this module you will have the opportunity to learn to: Design, conduct and interpret a meaningful performance assesments for a given system or application through benchmarking, monitoring and profiling Provision computing resources to meet performance requirements for a given system or application Resolve performance bottlenecks in software and hardware systems using the appropriate tools and techniques Trade-off different resources for each-other to achieve balance in their utilization",
       "moduleLeaders": [
         "Dr Holger Pirk",
         "Dr Lluis Vilanova"
@@ -1132,7 +1132,7 @@
     {
       "code": "60019",
       "title": "Robotics",
-      "description": "This module focuses on mobile robotics, emphasising practical algorithms for navigation, all based around real hardware and tested in the real world. Key elements are:",
+      "description": "This module focuses on mobile robotics, emphasising practical algorithms for navigation, all based around real hardware and tested in the real world. Key elements are: 1) Wheeled locomotion, motor control, and motion calibration 2) Outward-looking sensors for behavioural control loops 3) Probabilistic localisation using particle filtering 4) Advanced use of sensors for place recognition, occupancy mapping and planning 5) An introduction to Simultaneous Localisation and Mapping. This module is intensively practical, and all the key methods you learn will be tested on robots you build and program from scratch in groups using kits based around the Raspberry Pi single board computer and Lego Mindstorms components.",
       "moduleLeaders": [
         "Professor Andrew Davison"
       ],
@@ -1864,7 +1864,7 @@
     {
       "code": "70001",
       "title": "Advanced Computer Graphics",
-      "description": "The module is motivated by modern developments in photorealistic computer graphics, particularly image-based techniques for achieving photorealism, and aims to introduce the fundamental concepts and techniques employed in modern image synthesis combining computation with optics and digital photography.",
+      "description": "The module is motivated by modern developments in photorealistic computer graphics, particularly image-based techniques for achieving photorealism, and aims to introduce the fundamental concepts and techniques employed in modern image synthesis combining computation with optics and digital photography. In this module you will have the opportunity to learn modern techniques in realistic computer graphics and image synthesis. In particular, you will learn image-based techniques for photorealism, recent developments in global illumination, and techniques for material appearance capture and rendering. Up-to-date machine learning approaches for realistic computer graphics will also be introduced.",
       "moduleLeaders": [
         "Professor Abhijeet Ghosh"
       ],
@@ -1985,7 +1985,7 @@
     {
       "code": "70005",
       "title": "Complexity",
-      "description": "In this module you will have the opportunity to:",
+      "description": "In this module you will have the opportunity to: study time and space complexity classes identify the complexity classes associated with computational problems prove that problems are complete for particular complexity classes develop the ability to fit a particular problem into a class of related problems, and so to appreciate the efficiency attainable by algorithms to solve the particular problem study circuit complexity and the class NC of parallelisable problems study randomised computation and the associated complexity classes explore how the P=NP problem is related to cryptography",
       "moduleLeaders": [
         "Dr Iain Phillips"
       ],
@@ -2045,7 +2045,7 @@
     {
       "code": "70006",
       "title": "Computational Finance",
-      "description": "In this module you will have the opportunity to be introduced to the fundamental models and mathematical theories to computer science and engineering students. In particular, in this module you will have the opportunity to learn to:",
+      "description": "In this module you will have the opportunity to be introduced to the fundamental models and mathematical theories to computer science and engineering students. In particular, in this module you will have the opportunity to learn to: Understand the time value of money. Price derivatives using arbitrage pricing theory Optimally design investment strategies that trade-off risk with rewards Use efficient numerical methods to solve optimisation models and simulate stochastic processes",
       "moduleLeaders": [
         "Professor Panos Parpas"
       ],
@@ -2105,7 +2105,7 @@
     {
       "code": "70007",
       "title": "Computational Optimisation",
-      "description": "In this module you will have the opportunity to:",
+      "description": "In this module you will have the opportunity to: learn numerical methods for the solution of non-linear optimisation problems apply optimisation in engineering (e.g., the design of energy efficient chemical processes), machine learning (e.g., learning classifiers from data), and finance (e.g., optimal portfolio allocation) use analytical techniques and numerical algorithms to solve constrained and unconstrained problems identify convexity in a mathematical model and appreciate the importance of convexity both in theory and in practice identify necessary and sufficient conditions of optimality for different classes of optimisation models be able to apply an appropriate numerical method given the characteristics of the optimisation model understand the meaning of Lagrange multipliers be able to implement first/second order methods for constrained and unconstrained models",
       "moduleLeaders": [
         "Professor Panos Parpas",
         "Professor Ruth Misener"
@@ -2589,7 +2589,7 @@
     {
       "code": "70018",
       "title": "Privacy Engineering",
-      "description": "This module will teach you about state-of-the-art privacy-preserving mechanisms and systems and how to attack them. We will then review and discuss improvements and trade-offs.",
+      "description": "This module will teach you about state-of-the-art privacy-preserving mechanisms and systems and how to attack them. We will then review and discuss improvements and trade-offs. First, we will review anonymisation strategies for small and big data datasets and their limits. We will then do the same for query-based systems before learning and applying a theory called Differential Privacy. Finally, throughout the module, we will read and discuss research papers on attack and defenses.",
       "moduleLeaders": [
         "Professor Yves-Alexandre de Montjoye"
       ],
@@ -2649,7 +2649,7 @@
     {
       "code": "70019",
       "title": "Probabilistic Inference",
-      "description": "In this module you will have the opportunity to:",
+      "description": "In this module you will have the opportunity to: - learn about and implement probabilistic inference methods. Probabilistic inference is used to learn posterior distributions over unknown parameters and quantities in probabilistic machine learning models. - look at Gaussian processes as one specific model in more detail, and Bayesian optimisation as one specific application. - find out about classical and modern approximate inference techniques. These are being applied in modern artificial intelligence, e.g., in generative models. The recommended pre-requisite of this module is a strong mathematical understanding, including probability, statistics, linear algebra and vector calculus. Although not required, students are highly recommended to take 70015 Mathematics for Machine Learning to learn relevant mathematical concepts, before taking the Probabilistic Inference module.",
       "moduleLeaders": [
         "Dr Calvin Tsay",
         "Dr Yingzhen Li"
@@ -2830,7 +2830,7 @@
     {
       "code": "70022",
       "title": "Scalable Systems and Data",
-      "description": "In this module you will have the opportunity to:",
+      "description": "In this module you will have the opportunity to: get an overview of data centre technologies, the infrastructure needed to run a variety of workloads, and the design decisions when engineering scalable distributed applications. analyze the full system stack for managing and scheduling data-centre resources discuss the design principles for scalable systems investigate concepts and techniques to build large scale systems, with a focus on distributed storage, coordination, computation and resource allocation. get an overview of NewSQL and NoSQL technologies understand new data models, their associated query languages and systems discuss new storage technology and its impact on query execution and data management systems in general.",
       "moduleLeaders": [
         "Professor Thomas Heinis",
         "Professor Peter Pietzuch"
@@ -2891,7 +2891,7 @@
     {
       "code": "70023",
       "title": "Scalable Software Verification",
-      "description": "Software verification has come of age: proof assistants are mature; verification techniques and tools are tractable; and real-world programs are verified both in academia and industry. A key breakthrough came with separation logic, which introduced compositional reasoning about heap-manipulating programs. The aim of this course is to enable students to reason about heap-manipulating programs using separation logic, both by exploring the underlying theory and by working with cutting-edge academic and industrial analysis tools. The fact that the reasoning is compositional means that it scales. The theoretical part of the course will revolve around a simple While language, whereas the practical part will touch on real-world languages such as Java, JavaScript and C. More specifically, you will:",
+      "description": "Software verification has come of age: proof assistants are mature; verification techniques and tools are tractable; and real-world programs are verified both in academia and industry. A key breakthrough came with separation logic, which introduced compositional reasoning about heap-manipulating programs. The aim of this course is to enable students to reason about heap-manipulating programs using separation logic, both by exploring the underlying theory and by working with cutting-edge academic and industrial analysis tools. The fact that the reasoning is compositional means that it scales. The theoretical part of the course will revolve around a simple While language, whereas the practical part will touch on real-world languages such as Java, JavaScript and C. More specifically, you will: gain an in-depth understanding of the theory underpinning separation logic, why it works and why it is correct; use separation logic to specify and verify sequential programs, focusing on standard data structures and their operations; learn about the academic and industrial tools based on separation logic; gain basic familiarity with concurrent separation logics, in particular their theory and their application to concurrent data-structure algorithms. Recommended pre-requisites: for the M.Eng students, an interest in COMP40018 Discrete Mathematics, Logic and Reasoning, (JMC: COMP40012 Logic and Reasoning), COMP50003 Models of Computation (the part on semantics); for the MSc students, either some experience in formal reasoning about programs or rigorous programming skills or a good knowledge of algorithms and a strength in mathematics.",
       "moduleLeaders": [
         "Professor Philippa Gardner"
       ],
@@ -2951,7 +2951,7 @@
     {
       "code": "70024",
       "title": "Software Reliability",
-      "description": "To introduce students to techniques and tools for improving the reliability of software systems. The course will provide an overview of the main types of software reliability techniques and discuss their respective strengths and weaknesses. The course will present in detail a selection of these techniques and associated tools, focusing on recent directions in both research and practice. More specifically you will:",
+      "description": "To introduce students to techniques and tools for improving the reliability of software systems. The course will provide an overview of the main types of software reliability techniques and discuss their respective strengths and weaknesses. The course will present in detail a selection of these techniques and associated tools, focusing on recent directions in both research and practice. More specifically you will: Gain familiarity with different types of program analysis techniques for improving software reliability Learn how to assess the trade-offs offered by different techniques and tools Experiment with a variety of open-source tools implementing popular software reliability techniques Read and analyse research papers in the area Critically evaluate and present a software reliability tool Implement a software reliability tool for a specific domain Recommended: Compilers, logic, good C programming skills.",
       "moduleLeaders": [
         "Professor Cristian Cadar"
       ],
@@ -3011,7 +3011,7 @@
     {
       "code": "70025",
       "title": "Software Engineering for Industry",
-      "description": "In this module you will have the opportunity to:",
+      "description": "In this module you will have the opportunity to: Find out more about industrial practices for working on large, existing, software systems Discuss how to successfully design, modify, maintain and operate the large software systems that form so much of the infrastructure of trade, commerce, communication and entertainment in the modern world Discuss current issues faced by the practising software engineer, and particularly look at engineering trade-offs in different situations Understand that software engineering problems do not always have right and wrong answers. Recommended:The contents of the 3rd Year Software Engineering Group Project or equivalent experience.",
       "moduleLeaders": [
         "Dr Eoin Woods",
         "Dr Robert Chatley"
@@ -3072,7 +3072,7 @@
     {
       "code": "70028",
       "title": "Reinforcement Learning",
-      "description": "This module provides comprehensive knowledge in reinforcement learning through an integrated approach that traces core algorithmic concepts from their theoretical foundations to state-of-the-art implementations. This course covers tabular and deep reinforcement learning topics and couples classical and modern approaches to provide students with a unified understanding of how RL algorithms have evolved and are applied today.",
+      "description": "This module provides comprehensive knowledge in reinforcement learning through an integrated approach that traces core algorithmic concepts from their theoretical foundations to state-of-the-art implementations. This course covers tabular and deep reinforcement learning topics and couples classical and modern approaches to provide students with a unified understanding of how RL algorithms have evolved and are applied today. Students will develop three core skills: theory, implementation, and evaluation. The module follows a \"\"roots-to-modern\"\" structure where each major algorithmic family (model-free, model-based, etc) is explored from its tabular origins through to contemporary deep learning implementations. By mid-course, students will be equipped to understand and critically evaluate modern RL research papers. Specifically, you will: * Master the theoretical foundations of reinforcement learning (MDPs, dynamic programming, and convergence guarantees) * Trace the evolution of model-free methods from temporal difference learning to Deep Q-Networks and beyond * Understand policy-based approaches from REINFORCE to modern actor-critic methods like SAC and PPO * Explore model-based RL from classical planning to modern neural approaches * Implement and experiment with both classical and deep RL algorithms using Python and PyTorch * Develop skills in performance evaluation, hyperparameter tuning, and algorithmic comparison * Critically analyze current RL research and identify future directions",
       "moduleLeaders": [],
       "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/70028/",
       "offerings": [
@@ -3190,7 +3190,7 @@
     {
       "code": "70067",
       "title": "Robot Learning",
-      "description": "Robot Learning is an exciting new field, which studies how physical robots can learn skills using machine learning techniques, and can be seen as an &quot;advanced reinforcement learning&quot; module. The module first motivates the need for robot learning, by describing classical robot control methods and their limitations. Then, the module explains how reinforcement learning can be applied to physical robots acting in the real world. Finally, the module explores how robots can learn new skills by observing and interacting with humans. Lab sessions and courseworks teach students how to implement these methods in Python for a simulated robot learning to solve tasks, which culminates in a fun live competition in the final lecture.",
+      "description": "Robot Learning is an exciting new field, which studies how physical robots can learn skills using machine learning techniques, and can be seen as an \"advanced reinforcement learning\" module. The module first motivates the need for robot learning, by describing classical robot control methods and their limitations. Then, the module explains how reinforcement learning can be applied to physical robots acting in the real world. Finally, the module explores how robots can learn new skills by observing and interacting with humans. Lab sessions and courseworks teach students how to implement these methods in Python for a simulated robot learning to solve tasks, which culminates in a fun live competition in the final lecture. The module assumes knowledge of the Reinforcement Learning module in the previous term, so taking Reinforcement Learning is strongly recommended, unless students have already taken a similar module elsewhere. For example, the module assumes familiarity with Markov decision processes, Q-learning, and deep reinforcement learning, although these will be briefly recapped",
       "moduleLeaders": [
         "Dr Edward Johns"
       ],
@@ -3372,7 +3372,7 @@
     {
       "code": "70075",
       "title": "System Performance Engineering",
-      "description": "Performance engineering is the area of computer science ensuring that computer systems (comprised of hardware as well as software) are responsive, scalable, and efficient. The course aims at introducing fundamental principles and techniques used in performance management of modern computer systems, either purpose-built applications or generic system (single-node as well as distributed). In particular, in this module you will have the opportunity to learn to:",
+      "description": "Performance engineering is the area of computer science ensuring that computer systems (comprised of hardware as well as software) are responsive, scalable, and efficient. The course aims at introducing fundamental principles and techniques used in performance management of modern computer systems, either purpose-built applications or generic system (single-node as well as distributed). In particular, in this module you will have the opportunity to learn to: Design, conduct and interpret a meaningful performance assesments for a given system or application through benchmarking, monitoring and profiling Provision computing resources to meet performance requirements for a given system or application Resolve performance bottlenecks in software and hardware systems using the appropriate tools and techniques Trade-off different resources for each-other to achieve balance in their utilization",
       "moduleLeaders": [
         "Dr Holger Pirk",
         "Dr Lluis Vilanova"
@@ -3630,7 +3630,7 @@
     {
       "code": "70098",
       "title": "Introduction to Concrete Complexity",
-      "description": "[Formerly &quot;Methods and Tools in the Theory of Computing&quot;]",
+      "description": "[Formerly \"Methods and Tools in the Theory of Computing\"] Can we find solutions to problems as quickly as we can identify the correctness of their solutions once given to us? Does every valid formula have short proofs? Are there functions that are easy to compute but hard to invert? These and similar questions such as the P versus NP problem, are the fundamental hardness questions of computer science, which lie at the heart of both the theory and practice of computing. In this module, you will learn some of the major approaches developed to tackle these questions. We shall focus on elementary tools, methods and results: the combinatorial method, through circuit complexity, and the logical approach, through proof-complexity.",
       "moduleLeaders": [
         "Professor Iddo Tzameret"
       ],
