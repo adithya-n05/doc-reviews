@@ -75,6 +75,7 @@ export default async function ModuleDetailPage({
     Array.from(new Set(reviewRows.map((row) => row.user_id))),
   );
   const reviews = mapReviewsWithProfiles(reviewRows, profileMap);
+  const currentUserReview = reviews.find((review) => review.userId === user.id) ?? null;
   const insights = deriveReviewInsights(
     reviewRows.map((row) => ({
       teachingRating: row.teaching_rating,
@@ -267,42 +268,71 @@ export default async function ModuleDetailPage({
             Student Reviews
           </h2>
           <Link className="btn btn-primary btn-sm" href={`/modules/${moduleItem.code}/review`}>
-            Write a Review
+            {currentUserReview ? "Edit your review" : "Write a review"}
           </Link>
         </div>
         <hr className="rule" />
 
-        {reviews.map((review) => (
-          <article className="review" key={review.id}>
-            <div className="review-header">
-              <div className="review-avatar">{review.reviewerInitials}</div>
-              <div className="review-meta">
-                <div className="review-author">{review.reviewerName}</div>
-                <div className="review-date">
-                  Year {review.year ?? "?"} · {formatReviewDate(review.createdAt)}
-                </div>
-                <div className="review-email">{review.reviewerEmail}</div>
-              </div>
-              <div style={{ marginLeft: "auto", color: "var(--accent)" }}>
-                {renderStars(
-                  (review.teachingRating +
-                    review.workloadRating +
-                    review.difficultyRating +
-                    review.assessmentRating) /
-                    4,
-                )}
-              </div>
-            </div>
+        {reviews.map((review) => {
+          const overallScore =
+            (review.teachingRating +
+              review.workloadRating +
+              review.difficultyRating +
+              review.assessmentRating) /
+            4;
 
-            <p className="review-body">{review.comment}</p>
-            {review.tips ? <div className="review-tip">Tip: {review.tips}</div> : null}
-            <div className="review-actions">
-              <span style={{ fontSize: "12px", color: "var(--ink-light)" }}>
-                Teaching: {review.teachingRating} · Workload: {review.workloadRating} · Difficulty:{" "}
-                {review.difficultyRating} · Assessment: {review.assessmentRating}
-              </span>
+          return (
+            <article className="review" key={review.id}>
+              <div className="review-header">
+                <div className="review-avatar">{review.reviewerInitials}</div>
+                <div className="review-meta">
+                  <div className="review-author">{review.reviewerName}</div>
+                  <div className="review-date">
+                    Year {review.year ?? "?"} · {formatReviewDate(review.createdAt)}
+                  </div>
+                  <div className="review-email">{review.reviewerEmail}</div>
+                </div>
+                <div style={{ marginLeft: "auto", color: "var(--accent)" }}>
+                  {renderStars(overallScore)}
+                </div>
+              </div>
+
+              <p className="review-body">{review.comment}</p>
+              {review.tips ? (
+                <div className="review-tip">
+                  <strong
+                    style={{
+                      fontStyle: "normal",
+                      fontSize: "11px",
+                      letterSpacing: "0.08em",
+                      textTransform: "uppercase",
+                      color: "var(--accent)",
+                    }}
+                  >
+                    Tip for future students:
+                  </strong>{" "}
+                  {review.tips}
+                </div>
+              ) : null}
+              <div className="review-actions">
+                <button className="helpful-btn" type="button">
+                  ✓ Helpful (0)
+                </button>
+                <button className="reply-btn" type="button">
+                  Reply
+                </button>
+                <span style={{ flex: 1 }} />
+                <span style={{ fontSize: "11px", color: "var(--ink-faint)" }}>
+                  Overall: {overallScore.toFixed(1)} | Difficulty: {review.difficultyRating} |
+                  Teaching: {review.teachingRating} | Workload: {review.workloadRating} |
+                  Assessment: {review.assessmentRating}
+                </span>
+              </div>
               {review.userId === user.id ? (
-                <>
+                <div
+                  className="review-actions"
+                  style={{ marginTop: "12px", justifyContent: "flex-end" }}
+                >
                   <Link className="btn btn-ghost btn-sm" href={`/modules/${moduleItem.code}/review`}>
                     Edit
                   </Link>
@@ -313,11 +343,11 @@ export default async function ModuleDetailPage({
                       Delete
                     </button>
                   </form>
-                </>
+                </div>
               ) : null}
-            </div>
-          </article>
-        ))}
+            </article>
+          );
+        })}
 
         {reviews.length === 0 ? (
           <p className="form-note" style={{ marginTop: "20px" }}>
