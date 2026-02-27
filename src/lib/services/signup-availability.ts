@@ -9,12 +9,25 @@ type SignupAvailabilityClient = {
       };
     };
   };
+  auth: {
+    admin: {
+      getUserById: (id: string) => Promise<{
+        data: {
+          user: {
+            email_confirmed_at?: string | null;
+          } | null;
+        };
+        error: { message: string } | null;
+      }>;
+    };
+  };
 };
 
 type AvailabilityResult =
   | { ok: true }
   | {
       ok: false;
+      status: "verified" | "unverified" | "unknown";
       message: string;
     };
 
@@ -37,13 +50,32 @@ export async function checkSignupEmailAvailability(
   if (error) {
     return {
       ok: false,
+      status: "unknown",
       message: "Unable to verify account status right now. Please try again.",
     };
   }
 
   if (data) {
+    const userLookup = await queryClient.auth.admin.getUserById(data.id);
+    if (userLookup.error || !userLookup.data.user) {
+      return {
+        ok: false,
+        status: "unknown",
+        message: "Unable to verify account status right now. Please try again.",
+      };
+    }
+
+    if (!userLookup.data.user.email_confirmed_at) {
+      return {
+        ok: false,
+        status: "unverified",
+        message: "This Imperial email has an account that is not verified yet.",
+      };
+    }
+
     return {
       ok: false,
+      status: "verified",
       message: "An account with this Imperial email already exists. Please sign in instead.",
     };
   }

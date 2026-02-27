@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { needsOnboarding } from "@/lib/auth/user-access";
 import {
   loginWithPassword,
+  resendSignupVerification,
   signOutCurrentUser,
   signupWithPassword,
 } from "@/lib/services/auth-service";
@@ -47,10 +48,26 @@ export async function signupAction(formData: FormData): Promise<never> {
   const email = String(formData.get("email") ?? "");
   const password = String(formData.get("password") ?? "");
   const confirmPassword = String(formData.get("confirmPassword") ?? "");
+  const callbackUrl = await resolveSignupCallbackUrl();
 
   const adminClient = createSupabaseAdminClient();
   const availability = await checkSignupEmailAvailability(adminClient, email);
   if (!availability.ok) {
+    if (availability.status === "unverified") {
+      const client = await createSupabaseServerClient();
+      const resendResult = await resendSignupVerification(
+        client,
+        { email },
+        callbackUrl,
+      );
+      if (resendResult.ok) {
+        redirect("/auth/verify?resent=1");
+      }
+      if (resendResult.type === "validation") {
+        withError("/auth/signup", resendResult.message);
+      }
+      withError("/auth/signup", resendResult.message);
+    }
     withError("/auth/signup", availability.message);
   }
 
@@ -63,7 +80,7 @@ export async function signupAction(formData: FormData): Promise<never> {
       password,
       confirmPassword,
     },
-    await resolveSignupCallbackUrl(),
+    callbackUrl,
   );
 
   if (!result.ok) {

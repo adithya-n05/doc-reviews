@@ -1,19 +1,24 @@
 import { describe, expect, it, vi } from "vitest";
 import {
   loginWithPassword,
+  resendSignupVerification,
   signOutCurrentUser,
   signupWithPassword,
 } from "./auth-service";
 
 type MockSupabaseAuth = {
   signUp: ReturnType<typeof vi.fn>;
+  resend?: ReturnType<typeof vi.fn>;
   signInWithPassword: ReturnType<typeof vi.fn>;
   signOut: ReturnType<typeof vi.fn>;
 };
 
 function buildClient(auth: MockSupabaseAuth) {
   return {
-    auth,
+    auth: {
+      resend: vi.fn().mockResolvedValue({ data: null, error: null }),
+      ...auth,
+    },
   };
 }
 
@@ -166,6 +171,84 @@ describe("loginWithPassword", () => {
     if (!result.ok) {
       expect(result.type).toBe("auth");
       expect(result.message).toMatch(/invalid/i);
+    }
+  });
+});
+
+describe("resendSignupVerification", () => {
+  it("rejects non-imperial resend requests", async () => {
+    const auth = {
+      signUp: vi.fn(),
+      signInWithPassword: vi.fn(),
+      signOut: vi.fn(),
+      resend: vi.fn(),
+    };
+
+    const result = await resendSignupVerification(
+      buildClient(auth),
+      {
+        email: "user@gmail.com",
+      },
+      "https://doc-reviews.vercel.app/auth/callback",
+    );
+
+    expect(result.ok).toBe(false);
+    if (!result.ok) {
+      expect(result.type).toBe("validation");
+      expect(result.message).toMatch(/imperial/i);
+    }
+    expect(auth.resend).not.toHaveBeenCalled();
+  });
+
+  it("calls auth.resend for valid imperial email", async () => {
+    const auth = {
+      signUp: vi.fn(),
+      signInWithPassword: vi.fn(),
+      signOut: vi.fn(),
+      resend: vi.fn().mockResolvedValue({ data: null, error: null }),
+    };
+
+    const result = await resendSignupVerification(
+      buildClient(auth),
+      {
+        email: "Ada@IC.AC.UK",
+      },
+      "https://doc-reviews.vercel.app/auth/callback",
+    );
+
+    expect(result).toEqual({ ok: true });
+    expect(auth.resend).toHaveBeenCalledWith({
+      type: "signup",
+      email: "ada@ic.ac.uk",
+      options: {
+        emailRedirectTo: "https://doc-reviews.vercel.app/auth/callback",
+      },
+    });
+  });
+
+  it("surfaces resend failures", async () => {
+    const auth = {
+      signUp: vi.fn(),
+      signInWithPassword: vi.fn(),
+      signOut: vi.fn(),
+      resend: vi.fn().mockResolvedValue({
+        data: null,
+        error: { message: "resend throttled" },
+      }),
+    };
+
+    const result = await resendSignupVerification(
+      buildClient(auth),
+      {
+        email: "ada@ic.ac.uk",
+      },
+      "https://doc-reviews.vercel.app/auth/callback",
+    );
+
+    expect(result.ok).toBe(false);
+    if (!result.ok) {
+      expect(result.type).toBe("auth");
+      expect(result.message).toMatch(/throttled/i);
     }
   });
 });

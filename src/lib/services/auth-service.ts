@@ -2,6 +2,7 @@ import {
   validateLoginInput,
   validateSignupInput,
 } from "@/lib/validation/auth";
+import { isImperialEmail } from "@/lib/email-domain";
 
 type AuthClient = {
   auth: {
@@ -13,6 +14,13 @@ type AuthClient = {
         data: {
           full_name: string;
         };
+      };
+    }) => Promise<{ error: { message: string } | null }>;
+    resend: (params: {
+      type: "signup";
+      email: string;
+      options: {
+        emailRedirectTo: string;
       };
     }) => Promise<{ error: { message: string } | null }>;
     signInWithPassword: (params: {
@@ -103,6 +111,59 @@ export async function loginWithPassword(
   const { error } = await client.auth.signInWithPassword({
     email: value.email,
     password: value.password,
+  });
+
+  if (error) {
+    return {
+      ok: false,
+      type: "auth",
+      message: error.message,
+    };
+  }
+
+  return {
+    ok: true,
+  };
+}
+
+export async function resendSignupVerification(
+  client: AuthClient,
+  input: {
+    email: string;
+  },
+  emailRedirectTo: string,
+): Promise<
+  | Success
+  | {
+      ok: false;
+      type: "validation";
+      message: string;
+    }
+  | AuthFailure
+> {
+  const email = input.email.trim().toLowerCase();
+  if (!email) {
+    return {
+      ok: false,
+      type: "validation",
+      message: "Email is required.",
+    };
+  }
+
+  if (!isImperialEmail(email)) {
+    return {
+      ok: false,
+      type: "validation",
+      message: "Please use your Imperial email address (@ic.ac.uk or @imperial.ac.uk).",
+    };
+  }
+
+  const { error } = await client.auth.resend({
+    type: "signup",
+    email,
+    options: {
+      emailRedirectTo,
+    },
   });
 
   if (error) {
