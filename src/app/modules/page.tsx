@@ -57,14 +57,6 @@ export default async function ModulesPage({ searchParams }: ModulesPageProps) {
     pageSize: 12,
   });
 
-  const totalReviews = modules.reduce((acc, item) => acc + item.reviewCount, 0);
-  const averageRating =
-    modules.length > 0
-      ? (
-          modules.reduce((acc, item) => acc + item.avgOverall, 0) / modules.length
-        ).toFixed(1)
-      : "0.0";
-
   const buildFilterHref = (year: string) =>
     buildQueryString({
       q: parsed.search,
@@ -78,27 +70,6 @@ export default async function ModulesPage({ searchParams }: ModulesPageProps) {
       <SiteNav authed active="modules" displayName={profile.full_name} />
 
       <main className="page" style={{ paddingTop: "40px", paddingBottom: "60px" }}>
-        <div className="landing-ticker" style={{ marginBottom: "24px" }}>
-          <div className="ticker-inner">
-            <span className="ticker-label">Live Stats</span>
-            <span className="ticker-stat">
-              <strong>{totalReviews}</strong> reviews published
-            </span>
-            <span className="ticker-stat" style={{ color: "rgba(255,255,255,0.3)" }}>
-              ·
-            </span>
-            <span className="ticker-stat">
-              <strong>{modules.length}</strong> modules covered
-            </span>
-            <span className="ticker-stat" style={{ color: "rgba(255,255,255,0.3)" }}>
-              ·
-            </span>
-            <span className="ticker-stat">
-              Average rating <strong>{averageRating} / 5</strong>
-            </span>
-          </div>
-        </div>
-
         <div className="section-header">
           <div>
             <div className="label-caps" style={{ marginBottom: "8px" }}>
@@ -106,19 +77,28 @@ export default async function ModulesPage({ searchParams }: ModulesPageProps) {
             </div>
             <h1 className="section-title">Module Catalogue</h1>
           </div>
-          <form method="get" className="search-row" style={{ margin: 0 }}>
+          <form method="get" className="search-row" style={{ margin: 0, gap: "10px" }}>
             <input type="hidden" name="year" value={activeYear} />
-            <input className="search-input" type="search" name="q" defaultValue={parsed.search} />
-            <select name="sort" className="form-select" defaultValue={parsed.sort}>
+            <div className="search-bar" style={{ margin: 0, minWidth: "220px", borderColor: "var(--border)" }}>
+              <span className="search-icon" style={{ fontSize: "13px" }}>
+                ⌖
+              </span>
+              <input
+                className="search-input"
+                type="search"
+                name="q"
+                defaultValue={parsed.search}
+                style={{ fontSize: "13px" }}
+                placeholder="Search modules..."
+              />
+            </div>
+            <select name="sort" className="form-select" style={{ height: "40px" }} defaultValue={parsed.sort}>
               <option value="rating_desc">Sort: Rating (High-Low)</option>
               <option value="rating_asc">Sort: Rating (Low-High)</option>
               <option value="most_reviewed">Sort: Most Reviewed</option>
               <option value="difficulty_desc">Sort: Difficulty</option>
               <option value="alphabetical">Sort: Alphabetical</option>
             </select>
-            <button className="btn btn-ghost btn-sm" type="submit">
-              Apply
-            </button>
           </form>
         </div>
 
