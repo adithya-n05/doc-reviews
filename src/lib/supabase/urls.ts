@@ -11,13 +11,19 @@ function normalizeOrigin(origin: string): string {
   return `https://${trimmed.replace(/\/$/, "")}`;
 }
 
+function isLocalhostOrigin(origin: string): boolean {
+  return /^https?:\/\/(localhost|127(?:\.\d{1,3}){3})(:\d+)?$/i.test(origin);
+}
+
 export function getSiteOrigin(): string {
   if (cachedOrigin) {
     return cachedOrigin;
   }
 
   const fromPublicEnv = normalizeOrigin(process.env.NEXT_PUBLIC_SITE_URL ?? "");
-  if (fromPublicEnv) {
+  const runningOnVercel =
+    process.env.VERCEL === "1" || Boolean(process.env.VERCEL_URL);
+  if (fromPublicEnv && !(runningOnVercel && isLocalhostOrigin(fromPublicEnv))) {
     cachedOrigin = fromPublicEnv;
     return cachedOrigin;
   }

@@ -23,6 +23,14 @@ describe("getSiteOrigin", () => {
     expect(getSiteOrigin()).toBe("https://doc-reviews.vercel.app");
   });
 
+  it("ignores localhost NEXT_PUBLIC_SITE_URL in vercel runtime", () => {
+    process.env.NEXT_PUBLIC_SITE_URL = "http://127.0.0.1:3000";
+    process.env.VERCEL = "1";
+    process.env.VERCEL_PROJECT_PRODUCTION_URL = "doc-reviews.vercel.app";
+
+    expect(getSiteOrigin()).toBe("https://doc-reviews.vercel.app");
+  });
+
   it("falls back to localhost for local development", () => {
     delete process.env.NEXT_PUBLIC_SITE_URL;
     delete process.env.VERCEL_PROJECT_PRODUCTION_URL;
