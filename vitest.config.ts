@@ -1,6 +1,15 @@
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { defineConfig } from "vitest/config";
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 export default defineConfig({
+  resolve: {
+    alias: {
+      "@": path.join(__dirname, "src"),
+    },
+  },
   test: {
     environment: "node",
     include: ["src/**/*.test.ts"],
@@ -8,7 +17,7 @@ export default defineConfig({
       provider: "v8",
       reporter: ["text", "html"],
       include: ["src/lib/**/*.ts"],
-      exclude: ["src/**/*.test.ts"],
+      exclude: ["src/**/*.test.ts", "src/lib/**/types.ts"],
     },
   },
 });
