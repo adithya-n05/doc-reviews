@@ -1,6 +1,12 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { createClient } from "@supabase/supabase-js";
+import {
+  buildStaffDirectoryIndex,
+  matchLeaderProfile,
+  parseStaffDirectoryHtml,
+  type StaffDirectoryEntry,
+} from "../src/lib/ingest/staff-profile-resolver";
 
 type ModuleCatalog = {
   generatedAt: string;
@@ -21,6 +27,13 @@ type ModuleCatalog = {
   }>;
 };
 
+const STAFF_DIRECTORY_URLS = [
+  "https://www.imperial.ac.uk/engineering/departments/computing/people/academic-staff/",
+  "https://www.imperial.ac.uk/engineering/departments/computing/people/teaching-fellows/",
+  "https://www.imperial.ac.uk/engineering/departments/computing/people/research/",
+  "https://www.imperial.ac.uk/engineering/departments/computing/people/professional--technical-support-staff/",
+] as const;
+
 function requiredEnv(name: string): string {
   const value = process.env[name];
   if (!value) {
@@ -34,9 +47,38 @@ async function loadCatalog(filePath: string): Promise<ModuleCatalog> {
   return JSON.parse(raw) as ModuleCatalog;
 }
 
+async function fetchText(url: string): Promise<string> {
+  const response = await fetch(url, {
+    headers: {
+      "User-Agent": "Mozilla/5.0 (compatible; doc-reviews-staff-enrichment/1.0)",
+    },
+  });
+  if (!response.ok) {
+    throw new Error(`Failed to fetch ${url}: ${response.status}`);
+  }
+  return await response.text();
+}
+
+async function buildComputingStaffIndex() {
+  const entries: StaffDirectoryEntry[] = [];
+
+  for (const url of STAFF_DIRECTORY_URLS) {
+    try {
+      const html = await fetchText(url);
+      entries.push(...parseStaffDirectoryHtml(html, url));
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      console.warn(`Staff directory fetch skipped for ${url}: ${message}`);
+    }
+  }
+
+  return buildStaffDirectoryIndex(entries);
+}
+
 async function main() {
   const catalogPath = process.argv[2] ?? path.join(process.cwd(), "data/module-catalog.json");
   const catalog = await loadCatalog(catalogPath);
+  const staffIndex = await buildComputingStaffIndex();
 
   const url = requiredEnv("NEXT_PUBLIC_SUPABASE_URL");
   const serviceRoleKey = requiredEnv("SUPABASE_SERVICE_ROLE_KEY");
@@ -97,6 +139,8 @@ async function main() {
     return module.moduleLeaders.map((leaderName) => ({
       module_id: moduleId,
       leader_name: leaderName,
+      profile_url: matchLeaderProfile(leaderName, staffIndex)?.profileUrl ?? null,
+      photo_url: matchLeaderProfile(leaderName, staffIndex)?.photoUrl ?? null,
     }));
   });
 
