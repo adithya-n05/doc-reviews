@@ -62,6 +62,21 @@ const SEMANTIC_KEYWORD_RULES: SemanticKeywordRule[] = [
   },
 ];
 
+const LOW_SIGNAL_KEYWORDS = new Set([
+  "before",
+  "after",
+  "line",
+  "final",
+  "module",
+  "course",
+  "review",
+  "thing",
+  "stuff",
+  "good",
+  "bad",
+  "nice",
+]);
+
 function deriveSemanticKeywords(reviews: ReviewInsightInput[]): Array<{ word: string; count: number }> {
   const counts = new Map<string, number>();
 
@@ -84,6 +99,66 @@ function deriveSemanticKeywords(reviews: ReviewInsightInput[]): Array<{ word: st
     .map(([word, count]) => ({ word, count }))
     .sort((a, b) => b.count - a.count || a.word.localeCompare(b.word))
     .slice(0, 8);
+}
+
+function isLowSignalAiKeyword(word: string): boolean {
+  const normalized = word.trim().toLowerCase();
+  if (!normalized) {
+    return true;
+  }
+
+  if (normalized.includes(" ")) {
+    return false;
+  }
+
+  if (!/[a-z]/.test(normalized)) {
+    return true;
+  }
+
+  if (LOW_SIGNAL_KEYWORDS.has(normalized)) {
+    return true;
+  }
+
+  return normalized.length < 5;
+}
+
+function selectHighSignalKeywords(
+  aiKeywords: Array<{ word: string; count: number }>,
+  fallbackKeywords: Array<{ word: string; count: number }>,
+): Array<{ word: string; count: number }> {
+  if (aiKeywords.length === 0) {
+    return fallbackKeywords;
+  }
+
+  const deduped = new Map<string, { word: string; count: number }>();
+  for (const keyword of aiKeywords) {
+    const normalized = keyword.word.trim().toLowerCase();
+    if (!normalized) {
+      continue;
+    }
+    if (!deduped.has(normalized)) {
+      deduped.set(normalized, {
+        word: keyword.word.trim(),
+        count: Math.max(1, Math.round(keyword.count)),
+      });
+    }
+  }
+
+  const cleanedKeywords = Array.from(deduped.values()).slice(0, 8);
+  if (cleanedKeywords.length === 0) {
+    return fallbackKeywords;
+  }
+
+  const lowSignalCount = cleanedKeywords.filter((keyword) =>
+    isLowSignalAiKeyword(keyword.word),
+  ).length;
+  const lowSignalRatio = lowSignalCount / cleanedKeywords.length;
+
+  if (lowSignalRatio >= 0.5) {
+    return fallbackKeywords;
+  }
+
+  return cleanedKeywords;
 }
 
 function normalizeKeywordList(value: unknown): Array<{ word: string; count: number }> {
@@ -290,10 +365,10 @@ export async function generateModuleReviewInsightPayload(
 
     return {
       summary: aiPayload.summary,
-      topKeywords:
-        aiPayload.topKeywords.length > 0
-          ? aiPayload.topKeywords
-          : fallback.topKeywords,
+      topKeywords: selectHighSignalKeywords(
+        aiPayload.topKeywords,
+        fallback.topKeywords,
+      ),
       sentiment: aiPayload.sentiment,
       source: "ai",
     };

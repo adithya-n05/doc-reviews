@@ -147,4 +147,54 @@ describe("generateModuleReviewInsightPayload", () => {
     expect(result.source).toBe("ai");
     expect(result.topKeywords).toHaveLength(8);
   });
+
+  it("falls back to semantic keyword themes when AI returns low-signal literal tokens", async () => {
+    const fetchImpl = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({
+        choices: [
+          {
+            message: {
+              content: JSON.stringify({
+                summary: "Students mention a fair but challenging module with strong tutorial support.",
+                keywords: [
+                  { word: "before", count: 1 },
+                  { word: "line", count: 1 },
+                  { word: "final", count: 1 },
+                ],
+                sentiment: { positive: 1, neutral: 0, negative: 0 },
+              }),
+            },
+          },
+        ],
+      }),
+    });
+
+    const result = await generateModuleReviewInsightPayload(
+      [
+        {
+          teachingRating: 5,
+          workloadRating: 3,
+          difficultyRating: 4,
+          assessmentRating: 4,
+          comment:
+            "The module is challenging but fair, and tutorials line up well with lectures. Practicing weekly problem sheets made revision much easier before the final exam.",
+        },
+      ],
+      {
+        apiKey: "test-key",
+        model: "gpt-4.1-mini",
+        fetchImpl,
+      },
+    );
+
+    const words = result.topKeywords.map((entry) => entry.word);
+    expect(result.source).toBe("ai");
+    expect(words).toContain("module difficulty");
+    expect(words).toContain("assessment fairness");
+    expect(words).toContain("tutorial support");
+    expect(words).not.toContain("before");
+    expect(words).not.toContain("line");
+    expect(words).not.toContain("final");
+  });
 });
