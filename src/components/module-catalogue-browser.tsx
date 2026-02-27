@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import {
   applyModuleListQuery,
@@ -53,6 +54,7 @@ export function ModuleCatalogueBrowser({
   initialPage,
   profileYear,
 }: ModuleCatalogueBrowserProps) {
+  const router = useRouter();
   const [year, setYear] = useState(initialYear);
   const [search, setSearch] = useState(initialSearch);
   const [debouncedSearch, setDebouncedSearch] = useState(initialSearch);
@@ -201,7 +203,13 @@ export function ModuleCatalogueBrowser({
 
       <div className="module-grid">
         {paginated.items.map((module) => (
-          <Link key={module.code} href={`/modules/${module.code}`} className="module-card">
+          <Link
+            key={module.code}
+            href={`/modules/${module.code}`}
+            className="module-card"
+            onMouseEnter={() => router.prefetch(`/modules/${module.code}`)}
+            onFocus={() => router.prefetch(`/modules/${module.code}`)}
+          >
             <span className="module-code">{module.code}</span>
             <div className="module-name">{module.title}</div>
             <div className="module-meta">
