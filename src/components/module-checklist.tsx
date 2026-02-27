@@ -42,13 +42,71 @@ export function ModuleChecklist({
     };
   }, [yearSelectId]);
 
+  const modulesByYear = useMemo(() => {
+    const buckets: Record<number | "all", OnboardingModuleOption[]> = {
+      all: modules,
+      1: [],
+      2: [],
+      3: [],
+      4: [],
+    };
+
+    for (const module of modules) {
+      for (const year of module.studyYears) {
+        if (year >= 1 && year <= 4) {
+          buckets[year].push(module);
+        }
+      }
+    }
+
+    return buckets;
+  }, [modules]);
+
+  const baseModules = selectedYear
+    ? modulesByYear[selectedYear]
+    : modulesByYear.all;
+
   const filtered = useMemo(
-    () => filterOnboardingModules(modules, selectedYear, query),
-    [modules, query, selectedYear],
+    () => filterOnboardingModules(baseModules, null, query),
+    [baseModules, query],
   );
 
   return (
     <div>
+      <div className="inline-row" style={{ justifyContent: "space-between", marginBottom: "10px" }}>
+        <div className="inline-row">
+          <button
+            className="btn btn-ghost btn-sm"
+            type="button"
+            onClick={() =>
+              setSelected((previous) => {
+                const next = new Set(previous);
+                for (const module of filtered) {
+                  next.add(module.code);
+                }
+                return next;
+              })
+            }
+          >
+            Select All Shown
+          </button>
+          <button
+            className="btn btn-ghost btn-sm"
+            type="button"
+            onClick={() =>
+              setSelected((previous) => {
+                const next = new Set(previous);
+                for (const module of filtered) {
+                  next.delete(module.code);
+                }
+                return next;
+              })
+            }
+          >
+            Clear Shown
+          </button>
+        </div>
+      </div>
       <div className="search-row">
         <input
           className="search-input"
@@ -76,17 +134,18 @@ export function ModuleChecklist({
             >
               <input
                 type="checkbox"
-                name="moduleCodes"
                 value={module.code}
                 checked={checked}
                 onChange={(event) => {
-                  const next = new Set(selected);
-                  if (event.target.checked) {
-                    next.add(module.code);
-                  } else {
-                    next.delete(module.code);
-                  }
-                  setSelected(next);
+                  setSelected((previous) => {
+                    const next = new Set(previous);
+                    if (event.target.checked) {
+                      next.add(module.code);
+                    } else {
+                      next.delete(module.code);
+                    }
+                    return next;
+                  });
                 }}
               />
               <div style={{ flex: 1 }}>
@@ -104,6 +163,11 @@ export function ModuleChecklist({
             No modules match your selected year/search.
           </p>
         ) : null}
+      </div>
+      <div aria-hidden style={{ display: "none" }}>
+        {Array.from(selected).map((code) => (
+          <input key={code} type="hidden" name="moduleCodes" value={code} />
+        ))}
       </div>
       <p className="form-note" style={{ textAlign: "right" }}>
         {selected.size} modules selected
