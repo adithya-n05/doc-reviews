@@ -45,12 +45,12 @@ describe("resolveModuleReviewInsights", () => {
     expect(persistInsights).not.toHaveBeenCalled();
   });
 
-  it("generates and persists when cache is missing", async () => {
+  it("returns fallback and persists without request-path AI when cache is missing", async () => {
     const generateInsights = vi.fn().mockResolvedValue({
-      summary: "Generated summary",
+      summary: "Fallback summary",
       topKeywords: [{ word: "teaching clarity", count: 2 }],
       sentiment: { positive: 1, neutral: 0, negative: 0 },
-      source: "ai",
+      source: "fallback",
     });
     const persistInsights = vi.fn().mockResolvedValue(undefined);
 
@@ -66,8 +66,13 @@ describe("resolveModuleReviewInsights", () => {
       { generateInsights, persistInsights },
     );
 
-    expect(result.insights.summary).toBe("Generated summary");
+    expect(result.insights.summary).toBe("Fallback summary");
+    expect(result.insights.source).toBe("fallback");
     expect(generateInsights).toHaveBeenCalledOnce();
+    expect(generateInsights).toHaveBeenCalledWith(
+      expect.any(Array),
+      expect.objectContaining({ apiKey: "" }),
+    );
     expect(persistInsights).toHaveBeenCalledOnce();
   });
 

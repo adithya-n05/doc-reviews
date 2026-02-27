@@ -87,14 +87,25 @@ export async function resolveModuleReviewInsights(
       fetchImpl: params.fetchImpl,
     });
 
+    if (params.adminClient) {
+      await persistInsights(params.adminClient, {
+        moduleId: params.moduleId,
+        reviewsFingerprint,
+        summary: fallbackInsights.summary,
+        topKeywords: fallbackInsights.topKeywords,
+        sentiment: fallbackInsights.sentiment,
+        source: fallbackInsights.source,
+      });
+    }
+
     return {
       insights: fallbackInsights,
       reviewsFingerprint,
     };
   }
 
-  const generatedInsights = await generateInsights(reviewCorpus, {
-    apiKey: params.apiKey,
+  const fallbackInsights = await generateInsights(reviewCorpus, {
+    apiKey: "",
     model: params.model,
     fetchImpl: params.fetchImpl,
   });
@@ -103,15 +114,15 @@ export async function resolveModuleReviewInsights(
     await persistInsights(params.adminClient, {
       moduleId: params.moduleId,
       reviewsFingerprint,
-      summary: generatedInsights.summary,
-      topKeywords: generatedInsights.topKeywords,
-      sentiment: generatedInsights.sentiment,
-      source: generatedInsights.source,
+      summary: fallbackInsights.summary,
+      topKeywords: fallbackInsights.topKeywords,
+      sentiment: fallbackInsights.sentiment,
+      source: fallbackInsights.source,
     });
   }
 
   return {
-    insights: generatedInsights,
+    insights: fallbackInsights,
     reviewsFingerprint,
   };
 }
