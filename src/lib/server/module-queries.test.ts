@@ -42,4 +42,10 @@ describe("module review query shape", () => {
     expect(source).toContain("fetchModuleByCodeCached");
     expect(source).toContain("unstable_cache");
   });
+
+  it("supports review query limits for faster module detail default loads", () => {
+    expect(source).toContain("fetchModuleReviews(");
+    expect(source).toContain("options: { limit?: number } = {}");
+    expect(source).toContain("query = query.limit(options.limit);");
+  });
 });

@@ -26,15 +26,23 @@ describe("module detail review rendering", () => {
   });
 
   it("shows helpful/reply review actions and editorial tip label", () => {
-    expect(source).toContain('className={`helpful-btn ${');
+    expect(source).toContain('import { HelpfulToggleButton } from "@/components/helpful-toggle-button";');
+    expect(source).toContain("<HelpfulToggleButton");
+    expect(source).toContain("initialCount={helpfulCountByReviewId.get(review.id) ?? 0}");
+    expect(source).toContain("initiallyVoted={currentUserHelpfulReviewIds.has(review.id)}");
     expect(source).toContain('className="reply-details"');
     expect(source).toContain('className="reply-btn"');
     expect(source).toContain("postReviewReplyAction");
     expect(source).toContain('name="parentReplyId"');
     expect(source).toContain('className="reply-form"');
     expect(source).toContain("Tip for future students:");
-    expect(source).toContain("toggleHelpfulReviewAction");
-    expect(source).toContain('name="reviewId"');
+  });
+
+  it("renders collapsible reply threads with explicit expand controls", () => {
+    expect(source).toContain('className="review-thread"');
+    expect(source).toContain('className="reply-thread-btn"');
+    expect(source).toContain("View replies");
+    expect(source).toContain("Hide replies");
   });
 
   it("switches primary CTA to edit state when user already has a review", () => {

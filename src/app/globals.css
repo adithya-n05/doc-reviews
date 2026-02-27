@@ -509,6 +509,9 @@
       line-height: 1.85;
       color: var(--ink-mid);
       margin-bottom: 12px;
+      white-space: pre-wrap;
+      word-break: break-word;
+      max-width: 980px;
     }
 
     .review-tip {
@@ -526,22 +529,26 @@
       gap: 12px;
       align-items: center;
       flex-wrap: wrap;
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+      margin-top: 10px;
     }
 
     .review-replies {
-      margin-top: 14px;
+      margin-top: 12px;
       display: grid;
-      gap: 12px;
+      gap: 10px;
     }
 
     .review-reply {
-      border-left: 1px solid var(--border);
-      padding-left: 12px;
+      border: 1px solid var(--border);
+      background: var(--cream-dark);
+      padding: 12px;
     }
 
     .review-reply-child {
       margin-top: 8px;
-      margin-left: 10px;
+      margin-left: 14px;
     }
 
     .review-avatar-small {
@@ -566,6 +573,8 @@
       font-size: 13px;
       font-family: inherit;
       color: var(--ink-mid);
+      white-space: pre-wrap;
+      word-break: break-word;
     }
 
     .reply-form-nested {
@@ -624,6 +633,49 @@
     }
     .reply-btn:hover {
       color: var(--accent);
+    }
+
+    .review-thread {
+      margin-top: 12px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      padding: 10px 12px 12px;
+    }
+
+    .review-thread > summary {
+      list-style: none;
+    }
+
+    .review-thread > summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .reply-thread-btn {
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .reply-thread-hide {
+      display: none;
+      color: var(--ink-light);
+      font-weight: 500;
+      text-transform: none;
+      letter-spacing: normal;
+    }
+
+    .review-thread[open] .reply-thread-show {
+      display: none;
+    }
+
+    .review-thread[open] .reply-thread-hide {
+      display: inline;
     }
 
     /* =========================================================

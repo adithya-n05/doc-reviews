@@ -18,4 +18,10 @@ describe("dark theme css variables", () => {
     expect(css).toContain(".theme-toggle-icon");
     expect(css).toContain(".sr-only");
   });
+
+  it("styles collapsible review thread controls for reply readability", () => {
+    expect(css).toContain(".review-thread");
+    expect(css).toContain(".reply-thread-btn");
+    expect(css).toContain(".review-reply");
+  });
 });

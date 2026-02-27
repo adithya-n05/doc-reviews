@@ -107,14 +107,21 @@ export async function fetchModuleByCodeCached(code: string): Promise<ModuleWithR
 export async function fetchModuleReviews(
   client: SupabaseClient,
   moduleId: string,
+  options: { limit?: number } = {},
 ): Promise<ReviewPresentationRow[]> {
-  const { data } = await client
+  let query = client
     .from("reviews")
     .select(
       "id,user_id,module_id,teaching_rating,workload_rating,difficulty_rating,assessment_rating,comment,tips,created_at,updated_at",
     )
-    .eq("module_id", moduleId)
-    .order("created_at", { ascending: false });
+    .eq("module_id", moduleId);
+
+  query = query.order("created_at", { ascending: false });
+  if (typeof options.limit === "number") {
+    query = query.limit(options.limit);
+  }
+
+  const { data } = await query;
 
   return (data ?? []) as ReviewPresentationRow[];
 }

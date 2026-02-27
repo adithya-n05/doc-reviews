@@ -3,8 +3,8 @@ import { notFound } from "next/navigation";
 import {
   deleteReviewAction,
   postReviewReplyAction,
-  toggleHelpfulReviewAction,
 } from "@/app/actions/reviews";
+import { HelpfulToggleButton } from "@/components/helpful-toggle-button";
 import { SiteNav } from "@/components/site-nav";
 import { logInfo } from "@/lib/logging";
 import { deriveReviewInsights } from "@/lib/metrics/review-insights";
@@ -90,6 +90,8 @@ export default async function ModuleDetailPage({
   const resolvedSearchParams = (await searchParams) ?? {};
   const error = getParam(resolvedSearchParams, "error");
   const success = getParam(resolvedSearchParams, "success");
+  const reviewsMode = getParam(resolvedSearchParams, "reviews");
+  const showAllReviews = reviewsMode === "all";
 
   const moduleRow = await moduleRowPromise;
   if (!moduleRow) {
@@ -102,7 +104,9 @@ export default async function ModuleDetailPage({
 
   const reviewsAndCacheStart = startTiming();
   const [reviewRows, cachedInsightsRow] = await Promise.all([
-    fetchModuleReviews(client, moduleItem.id),
+    fetchModuleReviews(client, moduleItem.id, {
+      limit: showAllReviews ? undefined : 24,
+    }),
     fetchModuleReviewInsightsRow(client, moduleItem.id),
   ]);
   queryDurationsMs.reviewsAndInsightsCache = elapsedMs(reviewsAndCacheStart);
@@ -478,7 +482,7 @@ export default async function ModuleDetailPage({
         </div>
 
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <h2 className="section-sub" style={{ border: "none" }}>
+          <h2 className="section-sub" id="reviews" style={{ border: "none" }}>
             Student Reviews
           </h2>
           <Link className="btn btn-primary btn-sm" href={`/modules/${moduleItem.code}/review`}>
@@ -529,17 +533,11 @@ export default async function ModuleDetailPage({
                 </div>
               ) : null}
               <div className="review-actions">
-                <form action={toggleHelpfulReviewAction}>
-                  <input type="hidden" name="moduleCode" value={moduleItem.code} />
-                  <input type="hidden" name="reviewId" value={review.id} />
-                  <button
-                    className={`helpful-btn ${currentUserHelpfulReviewIds.has(review.id) ? "voted" : ""}`}
-                    type="submit"
-                  >
-                    {currentUserHelpfulReviewIds.has(review.id) ? "✓ Helpful" : "Helpful"} (
-                    {helpfulCountByReviewId.get(review.id) ?? 0})
-                  </button>
-                </form>
+                <HelpfulToggleButton
+                  reviewId={review.id}
+                  initialCount={helpfulCountByReviewId.get(review.id) ?? 0}
+                  initiallyVoted={currentUserHelpfulReviewIds.has(review.id)}
+                />
                 <details className="reply-details">
                   <summary className="reply-btn">Reply</summary>
                   <form action={postReviewReplyAction} className="reply-form">
@@ -564,11 +562,28 @@ export default async function ModuleDetailPage({
                   Assessment: {review.assessmentRating}
                 </span>
               </div>
-              <div className="review-replies">
-                {(repliesByReviewId.get(review.id) ?? [])
-                  .filter((reply) => !reply.parentReplyId)
-                  .map((reply) => renderReplyThread(reply, moduleItem.code, review.id, 0))}
-              </div>
+              {(repliesByReviewId.get(review.id) ?? []).filter((reply) => !reply.parentReplyId).length >
+              0 ? (
+                <details className="review-thread">
+                  <summary className="reply-thread-btn">
+                    <span className="reply-thread-show">
+                      View replies (
+                      {
+                        (repliesByReviewId.get(review.id) ?? []).filter(
+                          (reply) => !reply.parentReplyId,
+                        ).length
+                      }
+                      )
+                    </span>
+                    <span className="reply-thread-hide">Hide replies</span>
+                  </summary>
+                  <div className="review-replies">
+                    {(repliesByReviewId.get(review.id) ?? [])
+                      .filter((reply) => !reply.parentReplyId)
+                      .map((reply) => renderReplyThread(reply, moduleItem.code, review.id, 0))}
+                  </div>
+                </details>
+              ) : null}
               {review.userId === user.id ? (
                 <div
                   className="review-actions"
@@ -594,6 +609,17 @@ export default async function ModuleDetailPage({
           <p className="form-note" style={{ marginTop: "20px" }}>
             No reviews yet. Be the first to add one.
           </p>
+        ) : null}
+
+        {!showAllReviews && moduleItem.reviewCount > reviews.length ? (
+          <div style={{ marginTop: "18px", textAlign: "center" }}>
+            <Link
+              className="btn btn-ghost btn-sm"
+              href={`/modules/${moduleItem.code}?reviews=all#reviews`}
+            >
+              Load all {moduleItem.reviewCount} reviews
+            </Link>
+          </div>
         ) : null}
       </main>
     </div>
