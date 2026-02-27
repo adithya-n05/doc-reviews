@@ -36,4 +36,10 @@ describe("module review query shape", () => {
     expect(source).toContain("module_offerings(study_year)");
     expect(source).not.toContain("module_offerings(study_year,term,offering_type,degree_path,academic_year_label)");
   });
+
+  it("exposes cached catalogue and detail helpers for shared reads", () => {
+    expect(source).toContain("fetchModuleCatalogueRowsCached");
+    expect(source).toContain("fetchModuleByCodeCached");
+    expect(source).toContain("unstable_cache");
+  });
 });

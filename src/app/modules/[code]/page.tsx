@@ -11,7 +11,7 @@ import { deriveReviewInsights } from "@/lib/metrics/review-insights";
 import { mapReviewsWithProfiles, toModuleListItem } from "@/lib/modules/presenter";
 import { requireUserContext } from "@/lib/server/auth-context";
 import {
-  fetchModuleByCode,
+  fetchModuleByCodeCached,
   fetchHelpfulVoteRowsForReviews,
   fetchModuleReviewInsightsRow,
   fetchModuleReviews,
@@ -81,6 +81,7 @@ export default async function ModuleDetailPage({
 }: ModuleDetailPageProps) {
   const { code } = await params;
   const moduleCode = code.toUpperCase();
+  const moduleRowPromise = fetchModuleByCodeCached(moduleCode);
   const { client, user, profile } = await requireUserContext({
     requireVerified: true,
     requireOnboarded: true,
@@ -90,7 +91,7 @@ export default async function ModuleDetailPage({
   const error = getParam(resolvedSearchParams, "error");
   const success = getParam(resolvedSearchParams, "success");
 
-  const moduleRow = await fetchModuleByCode(client, moduleCode);
+  const moduleRow = await moduleRowPromise;
   if (!moduleRow) {
     notFound();
   }

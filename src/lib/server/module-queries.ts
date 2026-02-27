@@ -91,6 +91,19 @@ export async function fetchModuleByCode(
   return (data as ModuleWithRelations | null) ?? null;
 }
 
+const fetchModuleByCodeCachedInternal = unstable_cache(
+  async (code: string): Promise<ModuleWithRelations | null> => {
+    const adminClient = createSupabaseAdminClient();
+    return fetchModuleByCode(adminClient, code);
+  },
+  ["module-by-code"],
+  { revalidate: 60 },
+);
+
+export async function fetchModuleByCodeCached(code: string): Promise<ModuleWithRelations | null> {
+  return fetchModuleByCodeCachedInternal(code);
+}
+
 export async function fetchModuleReviews(
   client: SupabaseClient,
   moduleId: string,
