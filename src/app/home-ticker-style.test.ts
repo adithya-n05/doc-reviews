@@ -12,7 +12,10 @@ describe("landing ticker readability", () => {
 
     expect(tickerBlock).toContain("background: var(--inverse-bg);");
     expect(tickerBlock).toContain("color: var(--inverse-text);");
-    expect(labelBlock).toContain("color: var(--accent);");
+    expect(labelBlock).toContain("color: var(--inverse-text);");
+    expect(labelBlock).toContain("font-size: 11px;");
+    expect(labelBlock).toContain("background: rgba(255, 255, 255, 0.1);");
+    expect(labelBlock).toContain("border: 1px solid var(--inverse-divider);");
     expect(statBlock).toContain("color: var(--inverse-text-muted);");
     expect(separatorBlock).toContain("color: var(--inverse-divider);");
   });
