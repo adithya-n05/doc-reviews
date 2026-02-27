@@ -57,6 +57,22 @@ function metricBarWidth(value: number) {
   return `${Math.round((clamped / 5) * 100)}%`;
 }
 
+function isLikelyPlaceholderStaffPhoto(photoUrl: string): boolean {
+  const normalized = photoUrl.trim().toLowerCase();
+  if (!normalized) {
+    return true;
+  }
+
+  return (
+    normalized.includes("placeholder") ||
+    normalized.includes("silhouette") ||
+    normalized.includes("blank-profile") ||
+    normalized.includes("default-profile") ||
+    normalized.includes("default-avatar") ||
+    normalized.includes("no-photo")
+  );
+}
+
 export default async function ModuleDetailPage({
   params,
   searchParams,
@@ -312,27 +328,42 @@ export default async function ModuleDetailPage({
               .slice(0, 2)
               .map((part) => part[0]?.toUpperCase() ?? "")
               .join("");
-            return (
-              <div key={leader.name} className="staff-card">
-                {leader.photoUrl ? (
+            const hasUsablePhoto =
+              typeof leader.photoUrl === "string" &&
+              leader.photoUrl.trim().length > 0 &&
+              !isLikelyPlaceholderStaffPhoto(leader.photoUrl);
+
+            const cardBody = (
+              <>
+                {hasUsablePhoto ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img className="staff-photo" src={leader.photoUrl} alt={`${leader.name} profile`} />
                 ) : (
                   <div className="staff-initials">{initials || "?"}</div>
                 )}
                 <div>
-                  <div className="staff-name">
-                    {leader.profileUrl ? (
-                      <a href={leader.profileUrl} target="_blank" rel="noreferrer noopener">
-                        {leader.name}
-                      </a>
-                    ) : (
-                      leader.name
-                    )}
-                  </div>
+                  <div className="staff-name">{leader.name}</div>
                   <div className="staff-role">Module Leader</div>
                 </div>
-              </div>
+              </>
+            );
+
+            return (
+              leader.profileUrl ? (
+                <a
+                  key={leader.name}
+                  className="staff-card staff-card-link"
+                  href={leader.profileUrl}
+                  rel="noreferrer noopener"
+                  target="_blank"
+                >
+                  {cardBody}
+                </a>
+              ) : (
+                <div key={leader.name} className="staff-card">
+                  {cardBody}
+                </div>
+              )
             );
           })}
         </div>

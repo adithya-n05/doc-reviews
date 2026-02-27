@@ -51,8 +51,13 @@ describe("module detail review rendering", () => {
   });
 
   it("renders leader photos when available with initials fallback", () => {
-    expect(source).toContain("leader.photoUrl ? (");
+    expect(source).toContain("const hasUsablePhoto =");
     expect(source).toContain("className=\"staff-photo\"");
     expect(source).toContain("className=\"staff-initials\"");
+  });
+
+  it("makes the entire staff card clickable when a profile url exists", () => {
+    expect(source).toContain("className=\"staff-card staff-card-link\"");
+    expect(source).toContain("href={leader.profileUrl}");
   });
 });
