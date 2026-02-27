@@ -245,6 +245,7 @@ export default async function ModuleDetailPage({
             </div>
 
             <p className="review-body">{review.comment}</p>
+            {review.tips ? <div className="review-tip">Tip: {review.tips}</div> : null}
             <div className="review-actions">
               <span style={{ fontSize: "12px", color: "var(--ink-light)" }}>
                 Teaching: {review.teachingRating} · Workload: {review.workloadRating} · Difficulty:{" "}

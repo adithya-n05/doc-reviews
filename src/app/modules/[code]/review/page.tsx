@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { saveReviewAction } from "@/app/actions/reviews";
+import { ReviewRatingFields } from "@/components/review-rating-fields";
 import { SiteNav } from "@/components/site-nav";
 import { toModuleListItem } from "@/lib/modules/presenter";
 import { requireUserContext } from "@/lib/server/auth-context";
@@ -23,18 +24,6 @@ function getParam(
     return value[0] ?? "";
   }
   return value ?? "";
-}
-
-function ratingSelect(name: string, defaultValue: number) {
-  return (
-    <select className="form-select" name={name} defaultValue={String(defaultValue)}>
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-    </select>
-  );
 }
 
 export default async function WriteReviewPage({
@@ -118,22 +107,14 @@ export default async function WriteReviewPage({
           <form action={saveReviewAction}>
             <input type="hidden" name="moduleCode" value={moduleItem.code} />
 
-            <div className="form-group">
-              <label className="form-label">Teaching Rating</label>
-              {ratingSelect("teachingRating", existingReview?.teaching_rating ?? 4)}
-            </div>
-            <div className="form-group">
-              <label className="form-label">Workload Rating</label>
-              {ratingSelect("workloadRating", existingReview?.workload_rating ?? 3)}
-            </div>
-            <div className="form-group">
-              <label className="form-label">Difficulty Rating</label>
-              {ratingSelect("difficultyRating", existingReview?.difficulty_rating ?? 3)}
-            </div>
-            <div className="form-group">
-              <label className="form-label">Assessment Rating</label>
-              {ratingSelect("assessmentRating", existingReview?.assessment_rating ?? 3)}
-            </div>
+            <ReviewRatingFields
+              defaults={{
+                teaching: existingReview?.teaching_rating ?? 4,
+                workload: existingReview?.workload_rating ?? 3,
+                difficulty: existingReview?.difficulty_rating ?? 3,
+                assessment: existingReview?.assessment_rating ?? 3,
+              }}
+            />
             <div className="form-group">
               <label className="form-label" htmlFor="review-comment">
                 Your Review
@@ -146,6 +127,19 @@ export default async function WriteReviewPage({
                 minLength={80}
                 required
                 placeholder="Share your honest experience. Minimum 80 characters."
+              />
+            </div>
+            <div className="form-group">
+              <label className="form-label" htmlFor="review-tips">
+                Tips for Future Students
+              </label>
+              <textarea
+                id="review-tips"
+                className="form-textarea"
+                name="tips"
+                defaultValue={existingReview?.tips ?? ""}
+                maxLength={500}
+                placeholder="Optional: practical advice for future students."
               />
             </div>
 

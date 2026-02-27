@@ -38,3 +38,22 @@
   - Added migration `supabase/migrations/20260227041000_add_review_tips.sql`.
 - Verification:
   - `npm test -- src/lib/supabase/database-types-reviews.test.ts src/lib/supabase/reviews-tips-migration.test.ts src/lib/server/module-queries.test.ts src/lib/modules/presenter.test.ts` (fail then pass)
+
+### 03:53 UTC - Review page/editorial parity (tips + star ratings)
+- Added failing UI contract tests:
+  - `src/app/modules/review-page.test.ts` for optional tips field
+  - `src/app/modules/module-detail-page.test.ts` for review tip rendering
+  - `src/app/modules/review-rating-ui.test.ts` for replacing dropdown ratings with star rows
+- Implemented minimal UI updates:
+  - Added optional tips textarea and prefill in `src/app/modules/[code]/review/page.tsx`
+  - Added `ReviewRatingFields` client component (`src/components/review-rating-fields.tsx`) using editorial-style star rows and hidden rating inputs
+  - Rendered tip callout on module detail reviews in `src/app/modules/[code]/page.tsx`
+- Runtime validation and fix:
+  - Playwright revealed runtime error when saving tips (`tips` column missing in DB schema cache)
+  - Applied migration to linked Supabase with `supabase db push --linked --include-all`
+- Verification:
+  - Unit tests:
+    - `npm test -- src/app/modules/module-detail-page.test.ts src/app/modules/review-page.test.ts src/app/modules/review-rating-ui.test.ts src/app/actions/reviews.test.ts src/lib/modules/presenter.test.ts`
+  - Playwright:
+    - Verified authenticated review form shows star ratings + tips field
+    - Submitted/updated review successfully and confirmed tip renders on module detail page
