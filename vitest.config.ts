@@ -17,7 +17,11 @@ export default defineConfig({
       provider: "v8",
       reporter: ["text", "html"],
       include: ["src/lib/**/*.ts"],
-      exclude: ["src/**/*.test.ts", "src/lib/**/types.ts"],
+      exclude: [
+        "src/**/*.test.ts",
+        "src/lib/**/types.ts",
+        "src/lib/supabase/database.types.ts",
+      ],
     },
   },
 });
