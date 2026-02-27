@@ -23,6 +23,12 @@
       --inverse-text: #F4F7FC;
       --inverse-text-muted: #D4DDEB;
       --inverse-divider: #3A4A60;
+      --success-border: #6ca87f;
+      --success-bg: #eef8f1;
+      --success-text: #21592f;
+      --error-border: #cc9999;
+      --error-bg: #fff1f1;
+      --error-text: #7b2c2c;
       --font-serif: 'Newsreader', Georgia, serif;
       --font-sans:  'Source Sans 3', system-ui, sans-serif;
       --font-mono:  'Source Code Pro', monospace;
@@ -46,6 +52,12 @@
       --inverse-text: #EEF5FF;
       --inverse-text-muted: #C9D9EE;
       --inverse-divider: #4A6386;
+      --success-border: #2f9d64;
+      --success-bg: #143223;
+      --success-text: #9de8bf;
+      --error-border: #c0707b;
+      --error-bg: #341820;
+      --error-text: #f2c0c8;
     }
 
     html, body {
@@ -1688,8 +1700,16 @@
 }
 
 .site-shell { min-height: 100vh; }
-.form-banner.success { border-color: #6ca87f; background: #eef8f1; color: #21592f; }
-.form-banner.error { border-color: #cc9999; background: #fff1f1; color: #7b2c2c; }
+.form-banner.success {
+  border-color: var(--success-border);
+  background: var(--success-bg);
+  color: var(--success-text);
+}
+.form-banner.error {
+  border-color: var(--error-border);
+  background: var(--error-bg);
+  color: var(--error-text);
+}
 
 .auth-wrap {
   min-height: 100vh;

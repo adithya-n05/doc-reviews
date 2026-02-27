@@ -36,4 +36,19 @@ describe("dark theme css variables", () => {
     expect(css).toContain(".reply-open-label");
     expect(css).toContain(".reply-close-label");
   });
+
+  it("styles success/error banners with theme tokens instead of raw light-only colors", () => {
+    const successBlock = css.match(/\.form-banner\.success\s*\{[^}]*\}/)?.[0] ?? "";
+    const errorBlock = css.match(/\.form-banner\.error\s*\{[^}]*\}/)?.[0] ?? "";
+
+    expect(successBlock).toContain("var(--success-border)");
+    expect(successBlock).toContain("var(--success-bg)");
+    expect(successBlock).toContain("var(--success-text)");
+    expect(successBlock).not.toContain("#");
+
+    expect(errorBlock).toContain("var(--error-border)");
+    expect(errorBlock).toContain("var(--error-bg)");
+    expect(errorBlock).toContain("var(--error-text)");
+    expect(errorBlock).not.toContain("#");
+  });
 });
