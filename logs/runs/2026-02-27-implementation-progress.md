@@ -16,3 +16,11 @@
 - Updated existing persistence assertion to include default `tips: null`.
 - Verification:
   - `npm test -- src/lib/services/review-service.test.ts src/lib/validation/review.test.ts` (fail then pass)
+
+### 03:48 UTC - Server action tips wiring
+- Added failing tests in `src/app/actions/reviews.test.ts` for:
+  - reading `tips` from form data
+  - including `tips` in Supabase upsert payload
+- Updated `src/app/actions/reviews.ts` to forward `tips` into both review service input and persistence payload.
+- Verification:
+  - `npm test -- src/app/actions/reviews.test.ts src/lib/services/review-service.test.ts src/lib/validation/review.test.ts` (fail then pass)

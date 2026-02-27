@@ -47,6 +47,7 @@ export async function saveReviewAction(formData: FormData): Promise<never> {
             difficulty_rating: payload.difficultyRating,
             assessment_rating: payload.assessmentRating,
             comment: payload.comment,
+            tips: payload.tips,
           },
           {
             onConflict: "module_id,user_id",
@@ -69,6 +70,7 @@ export async function saveReviewAction(formData: FormData): Promise<never> {
       difficultyRating: toInt(formData.get("difficultyRating")),
       assessmentRating: toInt(formData.get("assessmentRating")),
       comment: String(formData.get("comment") ?? ""),
+      tips: String(formData.get("tips") ?? ""),
     },
   );
 
