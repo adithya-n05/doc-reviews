@@ -58,6 +58,11 @@ describe("module detail review rendering", () => {
 
   it("makes the entire staff card clickable when a profile url exists", () => {
     expect(source).toContain("className=\"staff-card staff-card-link\"");
-    expect(source).toContain("href={leader.profileUrl}");
+    expect(source).toContain("href={staffCardHref}");
+  });
+
+  it("keeps staff cards clickable with a profile-search fallback link", () => {
+    expect(source).toContain("const staffCardHref =");
+    expect(source).toContain("https://profiles.imperial.ac.uk/search?query=");
   });
 });

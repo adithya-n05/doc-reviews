@@ -333,6 +333,9 @@ export default async function ModuleDetailPage({
             const hasUsablePhoto =
               normalizedPhotoUrl.length > 0 &&
               !isLikelyPlaceholderStaffPhoto(normalizedPhotoUrl);
+            const staffCardHref =
+              leader.profileUrl ??
+              `https://profiles.imperial.ac.uk/search?query=${encodeURIComponent(leader.name)}`;
 
             const cardBody = (
               <>
@@ -350,21 +353,15 @@ export default async function ModuleDetailPage({
             );
 
             return (
-              leader.profileUrl ? (
-                <a
-                  key={leader.name}
-                  className="staff-card staff-card-link"
-                  href={leader.profileUrl}
-                  rel="noreferrer noopener"
-                  target="_blank"
-                >
-                  {cardBody}
-                </a>
-              ) : (
-                <div key={leader.name} className="staff-card">
-                  {cardBody}
-                </div>
-              )
+              <a
+                key={leader.name}
+                className="staff-card staff-card-link"
+                href={staffCardHref}
+                rel="noreferrer noopener"
+                target="_blank"
+              >
+                {cardBody}
+              </a>
             );
           })}
         </div>
