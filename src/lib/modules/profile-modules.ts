@@ -35,15 +35,15 @@ export function normalizeUserModuleRows(
   const modules: UserModuleSummary[] = [];
 
   for (const row of rows) {
-    const module = pickModuleRelation(row.modules);
-    if (!module) {
+    const moduleInfo = pickModuleRelation(row.modules);
+    if (!moduleInfo) {
       continue;
     }
 
     modules.push({
-      id: module.id,
-      code: module.code,
-      title: module.title,
+      id: moduleInfo.id,
+      code: moduleInfo.code,
+      title: moduleInfo.title,
     });
   }
 
