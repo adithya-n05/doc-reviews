@@ -20,6 +20,7 @@ describe("profile page editorial parity", () => {
 
   it("renders editorial account settings rows", () => {
     expect(source).toContain("Email Notifications");
+    expect(source).toContain("Profile Photo");
     expect(source).toContain("Display Name");
     expect(source).toContain("Change Password");
   });
@@ -37,5 +38,13 @@ describe("profile page editorial parity", () => {
   it("includes an affordance to edit enrolled modules", () => {
     expect(source).toContain("Edit Modules");
     expect(source).toContain("href=\"/onboarding\"");
+  });
+
+  it("wires profile photo update and remove actions", () => {
+    expect(source).toContain("updateProfilePhotoAction");
+    expect(source).toContain("clearProfilePhotoAction");
+    expect(source).toContain("name=\"avatarUrl\"");
+    expect(source).toContain("Save Photo");
+    expect(source).toContain("Remove Photo");
   });
 });

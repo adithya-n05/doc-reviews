@@ -1,5 +1,9 @@
 import Link from "next/link";
 import { signOutAction } from "@/app/actions/auth";
+import {
+  clearProfilePhotoAction,
+  updateProfilePhotoAction,
+} from "@/app/actions/profile";
 import { SiteNav } from "@/components/site-nav";
 import { normalizeUserModuleRows } from "@/lib/modules/profile-modules";
 import { requireUserContext } from "@/lib/server/auth-context";
@@ -30,11 +34,29 @@ type ReviewRow = {
   comment: string;
 };
 
-export default async function ProfilePage() {
+type ProfilePageProps = {
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+};
+
+function getParam(
+  params: Record<string, string | string[] | undefined>,
+  key: string,
+): string {
+  const value = params[key];
+  if (Array.isArray(value)) {
+    return value[0] ?? "";
+  }
+  return value ?? "";
+}
+
+export default async function ProfilePage({ searchParams }: ProfilePageProps) {
   const { client, user, profile } = await requireUserContext({
     requireVerified: true,
     requireOnboarded: true,
   });
+  const resolvedSearchParams = (await searchParams) ?? {};
+  const error = getParam(resolvedSearchParams, "error");
+  const photoStatus = getParam(resolvedSearchParams, "photo");
 
   const { data: modulesRows } = await client
     .from("user_modules")
@@ -85,6 +107,14 @@ export default async function ProfilePage() {
         avatarUrl={profile.avatar_url}
       />
       <main className="page" style={{ paddingTop: 0, paddingBottom: "60px" }}>
+        {error ? <p className="form-banner error">{error}</p> : null}
+        {photoStatus === "updated" ? (
+          <p className="form-banner success">Profile photo updated.</p>
+        ) : null}
+        {photoStatus === "removed" ? (
+          <p className="form-banner success">Profile photo removed.</p>
+        ) : null}
+
         <section className="profile-header">
           <div className="profile-avatar-large">
             {profile.avatar_url ? (
@@ -198,6 +228,35 @@ export default async function ProfilePage() {
                 <input type="checkbox" defaultChecked />
                 <span className="toggle-slider" />
               </label>
+            </div>
+            <div className="setting-row">
+              <div style={{ flex: 1 }}>
+                <div className="setting-label">Profile Photo</div>
+                <div className="setting-desc">
+                  Set a public HTTPS avatar image URL shown on your profile and reviews.
+                </div>
+                <form
+                  action={updateProfilePhotoAction}
+                  style={{ marginTop: "12px", display: "flex", gap: "8px", alignItems: "center" }}
+                >
+                  <input
+                    className="form-input"
+                    defaultValue={profile.avatar_url ?? ""}
+                    name="avatarUrl"
+                    placeholder="https://..."
+                    type="url"
+                    required
+                  />
+                  <button className="btn btn-primary btn-sm" type="submit">
+                    Save Photo
+                  </button>
+                </form>
+              </div>
+              <form action={clearProfilePhotoAction}>
+                <button className="btn btn-ghost btn-sm" type="submit">
+                  Remove Photo
+                </button>
+              </form>
             </div>
             <div className="setting-row">
               <div>
