@@ -58,3 +58,60 @@ export async function clearProfilePhotoAction(): Promise<never> {
 
   redirect("/profile?photo=removed");
 }
+
+export async function updateDisplayNameAction(formData: FormData): Promise<never> {
+  const fullName = String(formData.get("fullName") ?? "").trim();
+  if (fullName.length < 2 || fullName.length > 80) {
+    withError("Display name must be between 2 and 80 characters.");
+  }
+
+  const { client, user } = await requireUserContext({
+    requireVerified: true,
+    requireOnboarded: true,
+  });
+
+  const { error } = await client
+    .from("profiles")
+    .update({ full_name: fullName })
+    .eq("id", user.id);
+
+  if (error) {
+    withError("Unable to update display name right now.");
+  }
+
+  await client.auth.updateUser({
+    data: {
+      full_name: fullName,
+    },
+  });
+
+  redirect("/profile?name=updated");
+}
+
+export async function updatePasswordAction(formData: FormData): Promise<never> {
+  const newPassword = String(formData.get("newPassword") ?? "");
+  const confirmPassword = String(formData.get("confirmPassword") ?? "");
+
+  if (newPassword.length < 8) {
+    withError("Password must be at least 8 characters.");
+  }
+
+  if (newPassword !== confirmPassword) {
+    withError("Password confirmation does not match.");
+  }
+
+  const { client } = await requireUserContext({
+    requireVerified: true,
+    requireOnboarded: true,
+  });
+
+  const { error } = await client.auth.updateUser({
+    password: newPassword,
+  });
+
+  if (error) {
+    withError(error.message || "Unable to update password right now.");
+  }
+
+  redirect("/profile?password=updated");
+}

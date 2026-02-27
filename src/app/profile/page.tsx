@@ -2,6 +2,8 @@ import Link from "next/link";
 import { signOutAction } from "@/app/actions/auth";
 import {
   clearProfilePhotoAction,
+  updateDisplayNameAction,
+  updatePasswordAction,
   updateProfilePhotoAction,
 } from "@/app/actions/profile";
 import { SiteNav } from "@/components/site-nav";
@@ -57,6 +59,8 @@ export default async function ProfilePage({ searchParams }: ProfilePageProps) {
   const resolvedSearchParams = (await searchParams) ?? {};
   const error = getParam(resolvedSearchParams, "error");
   const photoStatus = getParam(resolvedSearchParams, "photo");
+  const nameStatus = getParam(resolvedSearchParams, "name");
+  const passwordStatus = getParam(resolvedSearchParams, "password");
 
   const { data: modulesRows } = await client
     .from("user_modules")
@@ -113,6 +117,12 @@ export default async function ProfilePage({ searchParams }: ProfilePageProps) {
         ) : null}
         {photoStatus === "removed" ? (
           <p className="form-banner success">Profile photo removed.</p>
+        ) : null}
+        {nameStatus === "updated" ? (
+          <p className="form-banner success">Display name updated.</p>
+        ) : null}
+        {passwordStatus === "updated" ? (
+          <p className="form-banner success">Password updated.</p>
         ) : null}
 
         <section className="profile-header">
@@ -275,18 +285,52 @@ export default async function ProfilePage({ searchParams }: ProfilePageProps) {
                 <div className="setting-label">Display Name</div>
                 <div className="setting-desc">{profile.full_name}</div>
               </div>
-              <button className="btn btn-ghost btn-sm" type="button">
-                Edit
-              </button>
+              <details className="reply-details">
+                <summary className="btn btn-ghost btn-sm reply-btn">Edit</summary>
+                <form action={updateDisplayNameAction} className="reply-form" style={{ marginTop: "10px" }}>
+                  <input
+                    className="form-input"
+                    defaultValue={profile.full_name}
+                    maxLength={80}
+                    minLength={2}
+                    name="fullName"
+                    required
+                  />
+                  <button className="btn btn-ghost btn-sm" type="submit">
+                    Save Name
+                  </button>
+                </form>
+              </details>
             </div>
             <div className="setting-row">
               <div>
                 <div className="setting-label">Change Password</div>
                 <div className="setting-desc">Use your account recovery flow to update credentials.</div>
               </div>
-              <button className="btn btn-ghost btn-sm" type="button">
-                Update
-              </button>
+              <details className="reply-details">
+                <summary className="btn btn-ghost btn-sm reply-btn">Update</summary>
+                <form action={updatePasswordAction} className="reply-form" style={{ marginTop: "10px" }}>
+                  <input
+                    className="form-input"
+                    minLength={8}
+                    name="newPassword"
+                    placeholder="New password"
+                    required
+                    type="password"
+                  />
+                  <input
+                    className="form-input"
+                    minLength={8}
+                    name="confirmPassword"
+                    placeholder="Confirm new password"
+                    required
+                    type="password"
+                  />
+                  <button className="btn btn-ghost btn-sm" type="submit">
+                    Save Password
+                  </button>
+                </form>
+              </details>
             </div>
             <div className="setting-row" style={{ borderBottom: "none" }}>
               <div>

@@ -55,4 +55,17 @@ describe("profile page editorial parity", () => {
     expect(source).toContain("profile-photo-upload-form");
     expect(source).toContain("profile-photo-action-group");
   });
+
+  it("wires display name editing form with profile action", () => {
+    expect(source).toContain("updateDisplayNameAction");
+    expect(source).toContain('name="fullName"');
+    expect(source).toContain("Save Name");
+  });
+
+  it("wires password update form with confirmation fields", () => {
+    expect(source).toContain("updatePasswordAction");
+    expect(source).toContain('name="newPassword"');
+    expect(source).toContain('name="confirmPassword"');
+    expect(source).toContain("Save Password");
+  });
 });
