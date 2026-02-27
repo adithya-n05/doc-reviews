@@ -13,6 +13,7 @@ describe("teaching staff layout", () => {
   it("styles linked staff cards as full-surface interactive blocks", () => {
     expect(css).toContain(".staff-card-link");
     expect(css).toContain("width: 100%;");
-    expect(css).toContain("box-shadow: inset 0 0 0 1px var(--accent);");
+    expect(css).toContain("background: var(--cream-dark);");
+    expect(css).not.toContain("box-shadow: inset 0 0 0 1px var(--accent);");
   });
 });
