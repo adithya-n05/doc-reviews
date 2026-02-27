@@ -1,0 +1,2 @@
+-- Seed file intentionally starts empty.
+-- Module data is loaded via manual ingestion scripts.
