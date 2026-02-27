@@ -1,40 +1,51 @@
 "use client";
 
-import { useMemo, useState } from "react";
-
-type ModuleOption = {
-  code: string;
-  title: string;
-  studyYears: number[];
-};
+import { useEffect, useMemo, useState } from "react";
+import {
+  filterOnboardingModules,
+  type OnboardingModuleOption,
+} from "@/lib/modules/onboarding-filter";
 
 type ModuleChecklistProps = {
-  modules: ModuleOption[];
+  modules: OnboardingModuleOption[];
   initialSelected: string[];
+  yearSelectId?: string;
 };
 
 export function ModuleChecklist({
   modules,
   initialSelected,
+  yearSelectId = "onboarding-year",
 }: ModuleChecklistProps) {
   const [query, setQuery] = useState("");
+  const [selectedYear, setSelectedYear] = useState<number | null>(null);
   const [selected, setSelected] = useState<Set<string>>(
     new Set(initialSelected.map((code) => code.toUpperCase())),
   );
 
-  const filtered = useMemo(() => {
-    const normalized = query.trim().toLowerCase();
-    if (!normalized) {
-      return modules;
+  useEffect(() => {
+    const element = document.getElementById(yearSelectId);
+    if (!(element instanceof HTMLSelectElement)) {
+      return;
     }
 
-    return modules.filter((module) => {
-      return (
-        module.code.toLowerCase().includes(normalized) ||
-        module.title.toLowerCase().includes(normalized)
-      );
-    });
-  }, [modules, query]);
+    const updateSelectedYear = () => {
+      const next = Number.parseInt(element.value, 10);
+      setSelectedYear(Number.isNaN(next) ? null : next);
+    };
+
+    updateSelectedYear();
+    element.addEventListener("change", updateSelectedYear);
+
+    return () => {
+      element.removeEventListener("change", updateSelectedYear);
+    };
+  }, [yearSelectId]);
+
+  const filtered = useMemo(
+    () => filterOnboardingModules(modules, selectedYear, query),
+    [modules, query, selectedYear],
+  );
 
   return (
     <div>
@@ -88,6 +99,11 @@ export function ModuleChecklist({
             </label>
           );
         })}
+        {filtered.length === 0 ? (
+          <p className="form-note" style={{ margin: 0, padding: "14px" }}>
+            No modules match your selected year/search.
+          </p>
+        ) : null}
       </div>
       <p className="form-note" style={{ textAlign: "right" }}>
         {selected.size} modules selected
