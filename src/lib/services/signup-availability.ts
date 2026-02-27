@@ -1,7 +1,7 @@
 type SignupAvailabilityClient = {
-  from: (table: "profiles") => {
-    select: (columns: "id") => {
-      eq: (column: "email", value: string) => {
+  from: (table: string) => {
+    select: (columns: string) => {
+      eq: (column: string, value: string) => {
         maybeSingle: () => Promise<{
           data: { id: string } | null;
           error: { message: string } | null;
@@ -19,7 +19,7 @@ type AvailabilityResult =
     };
 
 export async function checkSignupEmailAvailability(
-  client: SignupAvailabilityClient,
+  client: unknown,
   rawEmail: string,
 ): Promise<AvailabilityResult> {
   const email = rawEmail.trim().toLowerCase();
@@ -27,7 +27,8 @@ export async function checkSignupEmailAvailability(
     return { ok: true };
   }
 
-  const { data, error } = await client
+  const queryClient = client as SignupAvailabilityClient;
+  const { data, error } = await queryClient
     .from("profiles")
     .select("id")
     .eq("email", email)
