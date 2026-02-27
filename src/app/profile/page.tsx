@@ -1,11 +1,10 @@
 import Link from "next/link";
 import { signOutAction } from "@/app/actions/auth";
 import {
-  clearProfilePhotoAction,
   updateDisplayNameAction,
   updatePasswordAction,
-  updateProfilePhotoAction,
 } from "@/app/actions/profile";
+import { ProfilePhotoUploader } from "@/components/profile-photo-uploader";
 import { SiteNav } from "@/components/site-nav";
 import { normalizeUserModuleRows } from "@/lib/modules/profile-modules";
 import { requireUserContext } from "@/lib/server/auth-context";
@@ -245,39 +244,10 @@ export default async function ProfilePage({ searchParams }: ProfilePageProps) {
                 <div className="setting-desc">
                   Drag and drop an image to set your public avatar for profile and reviews.
                 </div>
-                <div className="profile-photo-controls">
-                  <form
-                    action={updateProfilePhotoAction}
-                    className="profile-photo-upload-form"
-                    encType="multipart/form-data"
-                  >
-                    <label className="profile-photo-dropzone">
-                      <input
-                        className="profile-photo-file-input"
-                        name="avatarFile"
-                        type="file"
-                        accept="image/png,image/jpeg,image/webp"
-                        required
-                      />
-                      <span className="profile-photo-dropzone-label">
-                        Drag and drop a photo here, or click to browse.
-                      </span>
-                      <span className="profile-photo-dropzone-meta">
-                        PNG, JPG, or WEBP. Maximum file size 5MB.
-                      </span>
-                    </label>
-                    <div className="profile-photo-action-group">
-                      <button className="btn btn-primary btn-sm profile-photo-action-btn" type="submit">
-                        Save Photo
-                      </button>
-                    </div>
-                  </form>
-                  <form action={clearProfilePhotoAction} className="profile-photo-action-group">
-                    <button className="btn btn-ghost btn-sm profile-photo-action-btn" type="submit">
-                      Remove Photo
-                    </button>
-                  </form>
-                </div>
+                <ProfilePhotoUploader
+                  initialAvatarUrl={profile.avatar_url}
+                  avatarAlt={`${profile.full_name} avatar`}
+                />
               </div>
             </div>
             <div className="setting-row">

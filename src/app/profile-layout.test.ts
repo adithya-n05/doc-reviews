@@ -40,20 +40,13 @@ describe("profile page editorial parity", () => {
     expect(source).toContain("href=\"/onboarding\"");
   });
 
-  it("wires profile photo update and remove actions", () => {
-    expect(source).toContain("updateProfilePhotoAction");
-    expect(source).toContain("clearProfilePhotoAction");
-    expect(source).toContain("name=\"avatarFile\"");
-    expect(source).toContain("Drag and drop");
-    expect(source).not.toContain("name=\"avatarUrl\"");
-    expect(source).toContain("Save Photo");
-    expect(source).toContain("Remove Photo");
-  });
-
-  it("uses dedicated profile photo control layout wrappers for consistent spacing", () => {
-    expect(source).toContain("profile-photo-controls");
-    expect(source).toContain("profile-photo-upload-form");
-    expect(source).toContain("profile-photo-action-group");
+  it("uses client profile photo uploader with initial avatar props", () => {
+    expect(source).toContain('import { ProfilePhotoUploader } from "@/components/profile-photo-uploader";');
+    expect(source).toContain("<ProfilePhotoUploader");
+    expect(source).toContain("initialAvatarUrl={profile.avatar_url}");
+    expect(source).toContain("avatarAlt={`${profile.full_name} avatar`}");
+    expect(source).not.toContain("updateProfilePhotoAction");
+    expect(source).not.toContain("clearProfilePhotoAction");
   });
 
   it("wires display name editing form with profile action", () => {
