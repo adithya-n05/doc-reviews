@@ -1,6 +1,16 @@
 {
   "name": "site",
   "version": "0.1.0",
+  "description": "Student-run module review platform for Imperial Computing built with Next.js and Supabase.",
+  "keywords": [
+    "doc-reviews",
+    "module-reviews",
+    "student-feedback",
+    "nextjs",
+    "supabase",
+    "typescript",
+    "education"
+  ],
   "private": true,
   "scripts": {
     "dev": "next dev",
