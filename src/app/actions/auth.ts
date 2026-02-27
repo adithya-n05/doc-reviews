@@ -1,5 +1,6 @@
 "use server";
 
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { needsOnboarding } from "@/lib/auth/user-access";
 import {
@@ -23,6 +24,24 @@ function withError(path: string, message: string): never {
   redirect(`${path}?error=${encodeURIComponent(message)}`);
 }
 
+async function resolveSignupCallbackUrl(): Promise<string> {
+  const requestHeaders = await headers();
+  const forwardedProto = requestHeaders.get("x-forwarded-proto");
+  const forwardedHost = requestHeaders.get("x-forwarded-host");
+  const host = forwardedHost || requestHeaders.get("host");
+
+  if (host) {
+    const proto =
+      forwardedProto ||
+      (host.startsWith("localhost") || host.startsWith("127.0.0.1")
+        ? "http"
+        : "https");
+    return `${proto}://${host}/auth/callback`;
+  }
+
+  return buildAbsoluteUrl("/auth/callback");
+}
+
 export async function signupAction(formData: FormData): Promise<never> {
   const fullName = String(formData.get("fullName") ?? "");
   const email = String(formData.get("email") ?? "");
@@ -44,7 +63,7 @@ export async function signupAction(formData: FormData): Promise<never> {
       password,
       confirmPassword,
     },
-    buildAbsoluteUrl("/auth/callback"),
+    await resolveSignupCallbackUrl(),
   );
 
   if (!result.ok) {
