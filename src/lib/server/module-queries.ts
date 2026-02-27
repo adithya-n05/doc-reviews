@@ -65,7 +65,7 @@ export async function fetchModuleReviews(
   const { data } = await client
     .from("reviews")
     .select(
-      "id,user_id,module_id,teaching_rating,workload_rating,difficulty_rating,assessment_rating,comment,created_at,updated_at",
+      "id,user_id,module_id,teaching_rating,workload_rating,difficulty_rating,assessment_rating,comment,tips,created_at,updated_at",
     )
     .eq("module_id", moduleId)
     .order("created_at", { ascending: false });
@@ -105,7 +105,7 @@ export async function fetchUserReviewForModule(
   const { data } = await client
     .from("reviews")
     .select(
-      "id,user_id,module_id,teaching_rating,workload_rating,difficulty_rating,assessment_rating,comment,created_at,updated_at",
+      "id,user_id,module_id,teaching_rating,workload_rating,difficulty_rating,assessment_rating,comment,tips,created_at,updated_at",
     )
     .eq("user_id", userId)
     .eq("module_id", moduleId)

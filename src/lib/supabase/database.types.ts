@@ -156,6 +156,7 @@ export type Database = {
           id: string
           module_id: string
           teaching_rating: number
+          tips: string | null
           updated_at: string
           user_id: string
           workload_rating: number
@@ -168,6 +169,7 @@ export type Database = {
           id?: string
           module_id: string
           teaching_rating: number
+          tips?: string | null
           updated_at?: string
           user_id: string
           workload_rating: number
@@ -180,6 +182,7 @@ export type Database = {
           id?: string
           module_id?: string
           teaching_rating?: number
+          tips?: string | null
           updated_at?: string
           user_id?: string
           workload_rating?: number

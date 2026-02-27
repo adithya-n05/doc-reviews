@@ -93,6 +93,7 @@ describe("mapReviewsWithProfiles", () => {
       assessment_rating: 4,
       comment:
         "This module was excellent and clear. Weekly tutorials were genuinely helpful and rewarding throughout the term.",
+      tips: "Start tutorial sheets early every week.",
       created_at: "2026-01-10T00:00:00.000Z",
       updated_at: "2026-01-10T00:00:00.000Z",
     },
@@ -110,6 +111,7 @@ describe("mapReviewsWithProfiles", () => {
     expect(mapped[0].reviewerName).toBe("Sophie M.");
     expect(mapped[0].reviewerEmail).toBe("sm123@ic.ac.uk");
     expect(mapped[0].reviewerInitials).toBe("SM");
+    expect(mapped[0].tips).toBe("Start tutorial sheets early every week.");
   });
 
   it("throws when profile is missing to prevent anonymous rendering", () => {

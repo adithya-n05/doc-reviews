@@ -36,6 +36,7 @@ export type ReviewPresentationRow = {
   difficulty_rating: number;
   assessment_rating: number;
   comment: string;
+  tips: string | null;
   created_at: string;
   updated_at: string;
 };
@@ -58,6 +59,7 @@ export type PublicReview = {
   difficultyRating: number;
   assessmentRating: number;
   comment: string;
+  tips: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -169,6 +171,7 @@ export function mapReviewsWithProfiles(
       difficultyRating: review.difficulty_rating,
       assessmentRating: review.assessment_rating,
       comment: review.comment,
+      tips: review.tips ? review.tips.trim() : null,
       createdAt: review.created_at,
       updatedAt: review.updated_at,
     };
