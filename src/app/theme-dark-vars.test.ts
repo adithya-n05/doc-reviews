@@ -23,5 +23,7 @@ describe("dark theme css variables", () => {
     expect(css).toContain(".review-thread");
     expect(css).toContain(".reply-thread-btn");
     expect(css).toContain(".review-reply");
+    expect(css).toContain(".reply-open-label");
+    expect(css).toContain(".reply-close-label");
   });
 });

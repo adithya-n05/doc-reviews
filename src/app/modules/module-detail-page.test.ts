@@ -31,10 +31,12 @@ describe("module detail review rendering", () => {
     expect(source).toContain("initialCount={helpfulCountByReviewId.get(review.id) ?? 0}");
     expect(source).toContain("initiallyVoted={currentUserHelpfulReviewIds.has(review.id)}");
     expect(source).toContain('className="reply-details"');
-    expect(source).toContain('className="reply-btn"');
+    expect(source).toContain('className="btn btn-ghost btn-sm reply-btn"');
     expect(source).toContain("postReviewReplyAction");
     expect(source).toContain('name="parentReplyId"');
     expect(source).toContain('className="reply-form"');
+    expect(source).toContain("reply-open-label");
+    expect(source).toContain("reply-close-label");
     expect(source).toContain("Tip for future students:");
   });
 
@@ -59,6 +61,7 @@ describe("module detail review rendering", () => {
     expect(source).toContain("Delete Reply");
     expect(source).toContain("reply.userId === user.id");
     expect(source).toContain('id={`reply-${reply.id}`}');
+    expect(source).toContain('className="btn btn-ghost btn-sm reply-btn"');
   });
 
   it("switches primary CTA to edit state when user already has a review", () => {

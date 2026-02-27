@@ -601,8 +601,9 @@
     .reply-form {
       margin-top: 12px;
       display: flex;
+      flex-direction: column;
       gap: 10px;
-      align-items: flex-start;
+      align-items: stretch;
       width: 100%;
     }
 
@@ -616,6 +617,10 @@
       color: var(--ink-mid);
       white-space: pre-wrap;
       word-break: break-word;
+    }
+
+    .reply-form .btn {
+      align-self: flex-start;
     }
 
     .reply-form-nested {
@@ -662,18 +667,35 @@
     }
 
     .reply-btn {
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--ink-light);
-      background: none;
-      border: none;
-      padding: 4px 0;
-      cursor: pointer;
-      letter-spacing: 0.04em;
-      transition: color 0.15s;
+      min-width: 100px;
+      justify-content: center;
+      text-decoration: none;
     }
-    .reply-btn:hover {
+    .reply-details[open] > .reply-btn {
+      border-color: var(--accent);
       color: var(--accent);
+      background: var(--accent-bg);
+    }
+
+    .reply-open-label {
+      display: inline;
+    }
+
+    .reply-close-label {
+      display: none;
+    }
+
+    .reply-details[open] .reply-open-label {
+      display: none;
+    }
+
+    .reply-details[open] .reply-close-label {
+      display: inline;
+    }
+
+    .review-breakdown {
+      font-size: 11px;
+      color: var(--ink-light);
     }
 
     .review-thread {

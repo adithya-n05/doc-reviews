@@ -266,7 +266,10 @@ export default async function ModuleDetailPage({
 
       <div className="reply-actions">
         <details className={`reply-details ${depth > 0 ? "reply-details-nested" : ""}`}>
-          <summary className="reply-btn">Reply</summary>
+          <summary className="btn btn-ghost btn-sm reply-btn">
+            <span className="reply-open-label">Reply</span>
+            <span className="reply-close-label">Close</span>
+          </summary>
           <form
             action={postReviewReplyAction}
             className={`reply-form ${depth > 0 ? "reply-form-nested" : ""}`}
@@ -289,7 +292,10 @@ export default async function ModuleDetailPage({
         {reply.userId === user.id ? (
           <>
             <details className="reply-details">
-              <summary className="reply-btn">Edit Reply</summary>
+              <summary className="btn btn-ghost btn-sm reply-btn">
+                <span className="reply-open-label">Edit Reply</span>
+                <span className="reply-close-label">Close</span>
+              </summary>
               <form action={updateReviewReplyAction} className="reply-form">
                 <input type="hidden" name="moduleCode" value={moduleCodeValue} />
                 <input type="hidden" name="reviewId" value={reviewId} />
@@ -617,8 +623,11 @@ export default async function ModuleDetailPage({
                   initialCount={helpfulCountByReviewId.get(review.id) ?? 0}
                   initiallyVoted={currentUserHelpfulReviewIds.has(review.id)}
                 />
-                <details className="reply-details">
-                  <summary className="reply-btn">Reply</summary>
+              <details className="reply-details">
+                  <summary className="btn btn-ghost btn-sm reply-btn">
+                    <span className="reply-open-label">Reply</span>
+                    <span className="reply-close-label">Close</span>
+                  </summary>
                   <form action={postReviewReplyAction} className="reply-form">
                     <input type="hidden" name="moduleCode" value={moduleItem.code} />
                     <input type="hidden" name="reviewId" value={review.id} />
@@ -635,7 +644,7 @@ export default async function ModuleDetailPage({
                   </form>
                 </details>
                 <span style={{ flex: 1 }} />
-                <span style={{ fontSize: "11px", color: "var(--ink-faint)" }}>
+                <span className="review-breakdown">
                   Overall: {overallScore.toFixed(1)} | Difficulty: {review.difficultyRating} |
                   Teaching: {review.teachingRating} | Workload: {review.workloadRating} |
                   Assessment: {review.assessmentRating}
