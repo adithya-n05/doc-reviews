@@ -5,6 +5,20 @@ export type StaffDirectoryEntry = {
   photoUrl: string | null;
 };
 
+const STAFF_PHOTO_OVERRIDES_BY_NORMALIZED_NAME: Record<string, string> = {
+  "jamie willis": "https://fp.doc.ic.ac.uk/img/jwillis.jpg",
+};
+
+const PLACEHOLDER_STAFF_PHOTO_MARKERS = [
+  "placeholder",
+  "silhouette",
+  "blank-profile",
+  "default-profile",
+  "default-avatar",
+  "no-photo",
+  "19351700--tojpeg_1427379998905_x2.jpg",
+] as const;
+
 function stripTags(value: string): string {
   return value
     .replace(/<[^>]+>/g, " ")
@@ -47,6 +61,39 @@ export function normalizeStaffName(name: string): string {
   }
 
   return withoutHonorifics.join(" ");
+}
+
+export function isLikelyPlaceholderStaffPhotoUrl(photoUrl: string): boolean {
+  const normalized = photoUrl.trim().toLowerCase();
+  if (!normalized) {
+    return true;
+  }
+
+  return PLACEHOLDER_STAFF_PHOTO_MARKERS.some((marker) =>
+    normalized.includes(marker),
+  );
+}
+
+export function resolveStaffPhotoUrl(
+  leaderName: string,
+  photoUrl: string | null,
+): string | null {
+  const normalizedLeaderName = normalizeStaffName(leaderName);
+  const manualOverride = STAFF_PHOTO_OVERRIDES_BY_NORMALIZED_NAME[normalizedLeaderName];
+  if (manualOverride) {
+    return manualOverride;
+  }
+
+  if (!photoUrl) {
+    return null;
+  }
+
+  const normalizedPhotoUrl = photoUrl.trim();
+  if (!normalizedPhotoUrl || isLikelyPlaceholderStaffPhotoUrl(normalizedPhotoUrl)) {
+    return null;
+  }
+
+  return normalizedPhotoUrl;
 }
 
 function extractImageSource(htmlBlock: string, sourceUrl: string): string | null {
@@ -155,6 +202,6 @@ export function matchLeaderProfile(
   return {
     canonicalName: matched.name,
     profileUrl: matched.profileUrl,
-    photoUrl: matched.photoUrl,
+    photoUrl: resolveStaffPhotoUrl(matched.name, matched.photoUrl),
   };
 }

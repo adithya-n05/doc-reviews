@@ -1,9 +1,11 @@
 import { describe, expect, it } from "vitest";
 import {
   buildStaffDirectoryIndex,
+  isLikelyPlaceholderStaffPhotoUrl,
   matchLeaderProfile,
   normalizeStaffName,
   parseStaffDirectoryHtml,
+  resolveStaffPhotoUrl,
 } from "@/lib/ingest/staff-profile-resolver";
 
 describe("normalizeStaffName", () => {
@@ -70,5 +72,24 @@ describe("matchLeaderProfile", () => {
   it("returns null when no directory match exists", () => {
     const index = buildStaffDirectoryIndex([]);
     expect(matchLeaderProfile("Unknown Person", index)).toBeNull();
+  });
+});
+
+describe("staff photo quality", () => {
+  it("filters known placeholder silhouette images", () => {
+    expect(
+      isLikelyPlaceholderStaffPhotoUrl(
+        "https://pxl01-imperialacuk.terminalfour.net/fit-in/428x572/filters:upscale()/prod01/channel_3/media/imperial-college/faculty-of-engineering/computing/public/website-images/-people-list-300X400/19351700--tojpeg_1427379998905_x2.jpg",
+      ),
+    ).toBe(true);
+  });
+
+  it("uses curated Jamie Willis override when directory photo is a placeholder", () => {
+    expect(
+      resolveStaffPhotoUrl(
+        "Dr Jamie Willis",
+        "https://pxl01-imperialacuk.terminalfour.net/fit-in/428x572/filters:upscale()/prod01/channel_3/media/imperial-college/faculty-of-engineering/computing/public/website-images/-people-list-300X400/19351700--tojpeg_1427379998905_x2.jpg",
+      ),
+    ).toBe("https://fp.doc.ic.ac.uk/img/jwillis.jpg");
   });
 });
