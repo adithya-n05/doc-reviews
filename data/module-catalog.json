@@ -1,0 +1,4111 @@
+{
+  "generatedAt": "2026-02-27T02:46:35.260Z",
+  "source": "Imperial DoC dynamic degree structure pages + module pages",
+  "moduleCount": 81,
+  "modules": [
+    {
+      "code": "40001",
+      "title": "Introduction to Computer Systems",
+      "description": "In this module you will study the fundamental principles and devices used in the design of digital computers, and the way in which primitive control logic can be organised to construct a programmable machine.",
+      "moduleLeaders": [
+        "Dr Lluis Vilanova",
+        "Mr Bjoern Schuller"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/40001/",
+      "offerings": [
+        {
+          "studyYear": 1,
+          "term": "autumn",
+          "offeringType": "core",
+          "degreePath": "BEng/MEng Computing (Year 1)",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "40005",
+      "title": "Introduction to Computer Architecture",
+      "description": "In this module you will have the opportunity to develop a fundamental understanding of the organisation and operation of a computer system. The emphasis of the module is on understanding how high-level language programs are represented and executed at an architectural level.",
+      "moduleLeaders": [
+        "Professor Wayne Luk",
+        "Dr Maria Valera-Espina"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/40005/",
+      "offerings": [
+        {
+          "studyYear": 1,
+          "term": "spring",
+          "offeringType": "core",
+          "degreePath": "BEng/MEng Computing (Year 1)",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "40007",
+      "title": "Introduction to Databases",
+      "description": "In this module you will have the opportunity to:",
+      "moduleLeaders": [
+        "Dr Peter McBrien"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/40007/",
+      "offerings": [
+        {
+          "studyYear": 1,
+          "term": "autumn",
+          "offeringType": "core",
+          "degreePath": "BEng/MEng Computing (Year 1)",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "40008",
+      "title": "Graphs and Algorithms",
+      "description": "In this module you will have the opportunity to:",
+      "moduleLeaders": [
+        "Dr Iain Phillips"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/40008/",
+      "offerings": [
+        {
+          "studyYear": 1,
+          "term": "spring",
+          "offeringType": "core",
+          "degreePath": "BEng/MEng Computing (Year 1)",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "40009",
+      "title": "Computing Practical 1",
+      "description": "In this module you will have the opportunity to develop various practical skills, including programming, Web development, basic academic research and both written and oral communication skills, all of which are important attributes of a professional software engineer. The programming aspects of this module will also give you a chance to put into practice some of the theoretical material covered in the first year lecture courses and to explore additional topics in Computing that will be built on in later years.",
+      "moduleLeaders": [
+        "Dr Jamie Willis",
+        "Mr Duncan White",
+        "Dr Matt Collison",
+        "Dr Thomas Lancaster",
+        "Professor Nicolas Wu",
+        "Dr Maria Valera-Espina",
+        "Dr Konstantinos Gkoutzis",
+        "Professor Alastair Donaldson"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/40009/",
+      "offerings": [
+        {
+          "studyYear": 1,
+          "term": "full_year",
+          "offeringType": "core",
+          "degreePath": "BEng/MEng Computing (Year 1)",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "40016",
+      "title": "Calculus",
+      "description": "In this module you will study the calculus needed for many applications of Computing, such as graphics, vision, robotics, operations research and statsitical machine learning. It also provides the background for follow-on mathematics modules that lay the foundations for advanced electives in the above topics and other mathematically-focused areas such as optimisation and finance.",
+      "moduleLeaders": [
+        "Professor Abbas Edalat"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/40016/",
+      "offerings": [
+        {
+          "studyYear": 1,
+          "term": "autumn",
+          "offeringType": "core",
+          "degreePath": "BEng/MEng Computing (Year 1)",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "40017",
+      "title": "Linear Algebra",
+      "description": "In this module you will study linear algebra which underpins many applications of Computing that involve analysis of aggregated data in vector or matrix form. A core central topic is the formalisation and solution of linear systems of equations which are ubiquitous. Linear algebra features in many later modules, including graphics, robotics, performance engineering, operations research and statstical machine learning. The module also provides the background for follow-on mathematics modules that lay the foundations for advanced electives in the above topics and other mathematically-focused areas such as optimisation and finance.",
+      "moduleLeaders": [
+        "Dr Chiraag Lala"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/40017/",
+      "offerings": [
+        {
+          "studyYear": 1,
+          "term": "spring",
+          "offeringType": "core",
+          "degreePath": "BEng/MEng Computing (Year 1)",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "40018",
+      "title": "Discrete Mathematics, Logic & Reasoning",
+      "description": "In this module you will learn how discrete mathematics and logic can be used to describe and reason about computational structures and systems. The module provides an important foundation for many core topics in Computing, such as computer hardware design, algorithm analysis, and program reasoning. Central to this module are proof techniques, which are important when establishing whether or not a program or system behaves according to its specification. The ability to use mathematics and logic to formalise such specifications is also a key learning outcome.",
+      "moduleLeaders": [
+        "Dr Mark Wheelhouse",
+        "Dr Steffen van Bakel",
+        "Dr Francesco Leofante",
+        "Professor Sophia Drossopoulou"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/40018/",
+      "offerings": [
+        {
+          "studyYear": 1,
+          "term": "autumn_spring",
+          "offeringType": "core",
+          "degreePath": "BEng/MEng Computing (Year 1)",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "50001",
+      "title": "Algorithm Design and Analysis",
+      "description": "In this module you will have the opportunity to:",
+      "moduleLeaders": [
+        "Professor Nicolas Wu"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/50001/",
+      "offerings": [
+        {
+          "studyYear": 2,
+          "term": "autumn",
+          "offeringType": "compulsory",
+          "degreePath": "BEng/MEng Computing (Year 2)",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "50002",
+      "title": "Software Engineering Design",
+      "description": "In this module you will have the opportunity to:",
+      "moduleLeaders": [
+        "Dr Robert Chatley"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/50002/",
+      "offerings": [
+        {
+          "studyYear": 2,
+          "term": "autumn",
+          "offeringType": "compulsory",
+          "degreePath": "BEng/MEng Computing (Year 2)",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "50003",
+      "title": "Models of Computation",
+      "description": "This module focuses on formal descriptions (models) of computational behaviour. You will learn about:",
+      "moduleLeaders": [
+        "Dr Herbert Wiklicky",
+        "Professor Sophia Drossopoulou"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/50003/",
+      "offerings": [
+        {
+          "studyYear": 2,
+          "term": "spring",
+          "offeringType": "compulsory",
+          "degreePath": "BEng/MEng Computing (Year 2)",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "50004",
+      "title": "Operating Systems",
+      "description": "In this module you will have the opportunity to:",
+      "moduleLeaders": [
+        "Dr Lluis Vilanova",
+        "Professor Peter Pietzuch"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/50004/",
+      "offerings": [
+        {
+          "studyYear": 2,
+          "term": "autumn",
+          "offeringType": "compulsory",
+          "degreePath": "BEng/MEng Computing (Year 2)",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "50005",
+      "title": "Networks and Communications",
+      "description": "In this module you will have the opportunity to:",
+      "moduleLeaders": [
+        "Dr Konstantinos Gkoutzis"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/50005/",
+      "offerings": [
+        {
+          "studyYear": 2,
+          "term": "spring",
+          "offeringType": "compulsory",
+          "degreePath": "BEng/MEng Computing (Year 2)",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "50008",
+      "title": "Probability and Statistics",
+      "description": "In this module you will have the opportunity to:",
+      "moduleLeaders": [
+        "Dr Giuliano Casale"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/50008/",
+      "offerings": [
+        {
+          "studyYear": 2,
+          "term": "autumn",
+          "offeringType": "compulsory",
+          "degreePath": "BEng/MEng Computing (Year 2)",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "50009",
+      "title": "Symbolic Reasoning",
+      "description": "This module covers the foundations of symbolic reasoning: SAT solving, logic programming, answer set programming, and SMT solving. It equips you with the practical skills necessary to use to solve real-world problems in program reasoning and symbolic artificial intelligence. It also provides the theoretical background for more advanced modules in these areas.",
+      "moduleLeaders": [
+        "Mr Charles Pert",
+        "Dr Robert Craven"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/50009/",
+      "offerings": [
+        {
+          "studyYear": 2,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "BEng/MEng Computing (Year 2)",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "50010",
+      "title": "Designing for Real People",
+      "description": "In this module you will have the opportunity to apply the software engineering techniques taught throughout the year to the implementation of a large web-based or mobile-based application that solves a real-world problem. This application will be designed following the principles and practices of Human Centred Design (HCD), which will be taught as part of the module. Additionally, you will learn, and will be expected to adhere to, the core aspects of Computer Law which must be taken into account when developing computing applications of this type.",
+      "moduleLeaders": [
+        "Dr Matt Collison",
+        "Mr Ivan Procaccini"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/50010/",
+      "offerings": [
+        {
+          "studyYear": 2,
+          "term": "summer",
+          "offeringType": "compulsory",
+          "degreePath": "BEng/MEng Computing (Year 2)",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "50011",
+      "title": "Computational Techniques",
+      "description": "In this module you will have the opportunity to study additional mathematical topics that form prerequisites for later third and fourth year modules in areas such as computer graphics, machine learning and computational finance. The focus is on how mathematical methods can be applied to complex computational problems.",
+      "moduleLeaders": [
+        "Dr Calvin Tsay",
+        "Professor Abbas Edalat"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/50011/",
+      "offerings": [
+        {
+          "studyYear": 2,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "BEng/MEng Computing (Year 2)",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "50013",
+      "title": "Machine Learning",
+      "description": "",
+      "moduleLeaders": [
+        "Dr Marek Rei",
+        "Dr Josiah Wang",
+        "Professor Antoine Cully"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/50013/",
+      "offerings": [
+        {
+          "studyYear": 2,
+          "term": "spring",
+          "offeringType": "compulsory",
+          "degreePath": "BEng/MEng Computing (Year 2)",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "60001",
+      "title": "Advanced Computer Architecture",
+      "description": "Computer architecture concerns the design of general-purpose and special-purpose processors, and of parallel computer systems for applications ranging from embedded robotics through mobile handsets to datacentres and supercomputers. Through this module you will:",
+      "moduleLeaders": [
+        "Professor Paul Kelly"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/60001/",
+      "offerings": [
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "BEng Computing (Year 3)",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "extracurricular",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "extracurricular",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "extracurricular",
+          "degreePath": "MEng Computing - Visual Computing and Robotics",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "extracurricular",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "extracurricular",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "extracurricular",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "extracurricular",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "60003",
+      "title": "Communicating Computer Science in Schools",
+      "description": "In this module you will have the opportunity to support the teaching of Computer Science in a local area school. At first, you will observe the host teacher to help you understand the layout of the school, the teaching and the expecations after which you will take the lead in implementing a teaching project to help teach Computer Science in the school.",
+      "moduleLeaders": [
+        "Dr Jackie Bell"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/60003/",
+      "offerings": [
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "BEng Computing (Year 3)",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Visual Computing and Robotics",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "60005",
+      "title": "Graphics",
+      "description": "In this module you will have the opportunity to study core computer graphics concepts, including the mathematical principles used for computer generated imagery, shading and light approximations. You will also learn different geometry representations and modelling techniques and will have the opportunity to apply what you have learnt to practical computer graphics problems, using modern shader languages and graphics accelerators.",
+      "moduleLeaders": [
+        "Professor Abhijeet Ghosh",
+        "Professor Bernhard Kainz"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/60005/",
+      "offerings": [
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "BEng Computing (Year 3)",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "60006",
+      "title": "Computer Vision",
+      "description": "In this module you will learn how images are represented on computers and how they can be analysed by computer algorithms to extract semantic information. As part of the module you will have the opportunity to develop algorithms for detecting interesting features in images, design neural networks to perform natural image classification and explore algorithms for solving real-world problems such as hand-written digit recognition etc.",
+      "moduleLeaders": [
+        "Dr Wenjia Bai"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/60006/",
+      "offerings": [
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "BEng Computing (Year 3)",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "60007",
+      "title": "The Theory and Practice of Concurrent Programming",
+      "description": "This course focuses on the theory and practice of concurrent programming, in order to familiarise the students with a range of modern concurrent programming models, and with the challenges of correct concurrent programming. It is divided into two parts: a largely practical part that gives an overview of shared memory concurrency in modern programming languages, and a more theoretical part that treats shared memory concurrency from the ground up, covering low-level topics such as hardware memory models, primitives for shared-memory concurrency, building up towards higher-level synchronisation techniques such as locks, mutexes and transactional memory. Throughout the course, a main objective is to reinforce correct concurrent programming through the use of tools, formal specification and verification techniques.",
+      "moduleLeaders": [
+        "Dr Azalea Raad",
+        "Professor Alastair Donaldson"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/60007/",
+      "offerings": [
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "BEng Computing (Year 3)",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "core",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "60008",
+      "title": "Custom Computing",
+      "description": "In this module you will have the opportunity to explore applications of custom computing designs in applications such as signal processing and genomics data analysis, and develop parametric descriptions for custom computing designs. You will also analyse performance and resource usage of custom computing designs, optimise them to meet design requirements, and compare their realisations based on simulation.",
+      "moduleLeaders": [
+        "Dr Timothy Todman",
+        "Professor Wayne Luk"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/60008/",
+      "offerings": [
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "BEng Computing (Year 3)",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "core",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "60010",
+      "title": "Individual Project BEng",
+      "description": "In this module you will have the opportunity to demonstrate independence and originality, to plan and organise a large project over a long period, and to put into practice the knowledge, skills and research methods that you have learnt throughout your degree.",
+      "moduleLeaders": [
+        "Dr Thomas Lancaster"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/60010/",
+      "offerings": [
+        {
+          "studyYear": 3,
+          "term": "full_year",
+          "offeringType": "core",
+          "degreePath": "BEng Computing (Year 3)",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "60012",
+      "title": "Introduction to Machine Learning",
+      "description": "This module aims to provide you with a fundamental understanding of core machine learning ideas and concepts. It introduces different machine learning problems and basic algorithms used to address these problems. The module will cover fundamental machine learning knowledge required to tackle more advanced, specialised modules.",
+      "moduleLeaders": [
+        "Dr Marek Rei",
+        "Dr Josiah Wang",
+        "Professor Antoine Cully"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/60012/",
+      "offerings": [
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "BEng Computing (Year 3)",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "60013",
+      "title": "Logic-Based Learning",
+      "description": "In this module you will have the opportunity to:",
+      "moduleLeaders": [
+        "Professor Alessandra Russo"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/60013/",
+      "offerings": [
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "BEng Computing (Year 3)",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "60015",
+      "title": "Network and Web Security",
+      "description": "In this module you will have the opportunity to gain a broad knowledge of network and web security from the network to the application layer. The emphasis of the course is both on the underlying principles and techniques, and on examples of how such principles are applied in practice.",
+      "moduleLeaders": [
+        "Dr Sergio Maffeis"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/60015/",
+      "offerings": [
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "BEng Computing (Year 3)",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "core",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "60016",
+      "title": "Operations Research",
+      "description": "This module will give you the opportunity to:",
+      "moduleLeaders": [
+        "Dr Dario Paccagnan",
+        "Professor Ruth Misener"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/60016/",
+      "offerings": [
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "BEng Computing (Year 3)",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "60017",
+      "title": "System Performance Engineering",
+      "description": "Performance engineering is the area of computer science ensuring that computer systems (comprised of hardware as well as software) are responsive, scalable, and efficient. The course aims at introducing fundamental principles and techniques used in performance management of modern computer systems, either purpose-built applications or generic system (single-node as well as distributed). In particular, in this module you will have the opportunity to learn to:",
+      "moduleLeaders": [
+        "Dr Holger Pirk",
+        "Dr Lluis Vilanova"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/60017/",
+      "offerings": [
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "BEng Computing (Year 3)",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "60019",
+      "title": "Robotics",
+      "description": "This module focuses on mobile robotics, emphasising practical algorithms for navigation, all based around real hardware and tested in the real world. Key elements are:",
+      "moduleLeaders": [
+        "Professor Andrew Davison"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/60019/",
+      "offerings": [
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "BEng Computing (Year 3)",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "60021",
+      "title": "Year 3 Software Engineering Group Project",
+      "description": "This is a project-based module where you work in a team to carry out the development and management of a relatively large scale software project, building a piece of software to fulfil the needs of a particular customer. You will put into practice state-of-the-art techniques used in industrial software development to ensure that your team produces software co-operatively, reliably and on schedule. Each team will work on a different project, and will receive individual coaching to provide support and advice relevant to their particular project.",
+      "moduleLeaders": [
+        "Dr Thomas Lancaster"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/60021/",
+      "offerings": [
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "BEng Computing (Year 3)",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "60023",
+      "title": "Type Systems for Programming Languages",
+      "description": "In this module you will study in detail the design of type assignment systems for programming languages and focus on the importance of a sound theoretical framework, in order to be able to reason about the properties of a typed program. You will also study and compare the types systems of various modern functional and object-oriented programming languages.",
+      "moduleLeaders": [
+        "Dr Steffen van Bakel"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/60023/",
+      "offerings": [
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "BEng Computing (Year 3)",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "60024",
+      "title": "Researching Academic Integrity in an Artificial Intelligence Driven World",
+      "description": "",
+      "moduleLeaders": [],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/60024/",
+      "offerings": [
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "compulsory",
+          "degreePath": "BEng Computing (Year 3)",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "compulsory",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "compulsory",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "compulsory",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "compulsory",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "compulsory",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "compulsory",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "60027",
+      "title": "Computing Year Abroad (Year 3)",
+      "description": "This module gives you the opportunity to study abroad at one our European or American host institutions. You will undertake an equivalent workload to students at the host institution, similar in scope to students remaining at Imperial College.",
+      "moduleLeaders": [],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/60027/",
+      "offerings": [
+        {
+          "studyYear": 3,
+          "term": "full_year",
+          "offeringType": "extracurricular",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "60028",
+      "title": "Demystifying Machine Learning: Theory and Applications",
+      "description": "",
+      "moduleLeaders": [],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/60028/",
+      "offerings": [
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "compulsory",
+          "degreePath": "BEng Computing (Year 3)",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "compulsory",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "compulsory",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "compulsory",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "compulsory",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "compulsory",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "compulsory",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "60029",
+      "title": "Data Processing Systems",
+      "description": "In this module you will have the opportunity to: - advance your knowledge of data-structures and algorithms to data-processing algorithms and applications - acquire theoretical and practical knowledge of data processing systems design and implementation for correct results and (close-to) optimal performance - understand how Database Management Systems (DBMSs) optimize query performance - understand Data Processing System tuning - explore challenges & opportunities of cloud-native Data Processing Systems - explore research directions such as Big Data or data management on modern hardware",
+      "moduleLeaders": [
+        "Dr Holger Pirk"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/60029/",
+      "offerings": [
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "BEng Computing (Year 3)",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "60031",
+      "title": "Industrial Placement COMP (Part 1)",
+      "description": "In this module, you will work in the industry as a fully-paid employee over an extended period. The placement gives you the opportunity to put into place the technical, professional and team working skills you have learnt on your degree course and to develop those skills in an industrial setting.",
+      "moduleLeaders": [],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/60031/",
+      "offerings": [
+        {
+          "studyYear": 3,
+          "term": "summer",
+          "offeringType": "core",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "summer",
+          "offeringType": "core",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "summer",
+          "offeringType": "core",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "summer",
+          "offeringType": "core",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "summer",
+          "offeringType": "core",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "summer",
+          "offeringType": "core",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "60032",
+      "title": "Networked Systems",
+      "description": "In this module, you will get an overview and hands-on experience on how modern networked systems are designed and implemented. The module assumes prior networking knowledge and goes into more detail on the evolution of networking, new network architectures, and new software and hardware infrastructure at the network control plane, data plane, and the endpoints. You will also explore and enumerate the systems principles, e.g. layering and the end-to-end argument, that led to certain design choices and understand how the same principles are applied across a variety of systems.",
+      "moduleLeaders": [
+        "Dr Marios Kogias"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/60032/",
+      "offerings": [
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "BEng Computing (Year 3)",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "core",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "extracurricular",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "60033",
+      "title": "Computing Research Collective",
+      "description": "In this module, you will work as a member of a small research Collective, supported by a mentor, to explore an area of Computing research. You will identify, read and critique academic research papers, and present your findings to the group verbally and in writing. The Collective provides you with an opportunity to meet researchers within the Department, explore areas of personal and/or emerging interest, and to hone your research skills to support your Individual Project. The range of Collectives formed will vary from year-to-year.",
+      "moduleLeaders": [
+        "Dr Thomas Lancaster"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/60033/",
+      "offerings": [
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "BEng Computing (Year 3)",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "60034",
+      "title": "Deep Learning",
+      "description": "This module addresses the fundamental concepts and advanced methodologies of deep learning and relates them to real-world problems in a variety of domains. The aim is to provide an overview of different approaches, both classical and emerging. The module will equip you with the necessary knowledge and skills to work in the field of deep learning and to contribute to ongoing research in the area.",
+      "moduleLeaders": [
+        "Dr Yingzhen Li",
+        "Professor Bernhard Kainz"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/60034/",
+      "offerings": [
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "BEng Computing (Year 3)",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "60035",
+      "title": "Natural Language Processing",
+      "description": "In this module you will have the opportunity to: - Learn about the foundations, building blocks and applications of Natural Language Processing (NLP), with an emphasis on approaches based on deep learning. - Study the models used to represent words and word meanings. - Use these representations to study classification tasks (e.g. sentiment analysis) and tagging tasks (e.g. part of speech tagging). - View languages as sequences of variable length, from pure language models to machine translation models. - See approaches that are based on modern neural machine learning algorithms, where linguistic information is provided by instances of uses of language.",
+      "moduleLeaders": [
+        "Dr Marek Rei",
+        "Dr Chiraag Lala"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/60035/",
+      "offerings": [
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "BEng Computing (Year 3)",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "60037",
+      "title": "Mathematics for Machine Learning",
+      "description": "In this module you will have the opportunity to study the advanced mathematical techniques required to understand, design and implement modern statistical machine learning algorithms and inference mechanisms.",
+      "moduleLeaders": [
+        "Dr Matthew Wicker"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/60037/",
+      "offerings": [
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "BEng Computing (Year 3)",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 3,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "70001",
+      "title": "Advanced Computer Graphics",
+      "description": "The module is motivated by modern developments in photorealistic computer graphics, particularly image-based techniques for achieving photorealism, and aims to introduce the fundamental concepts and techniques employed in modern image synthesis combining computation with optics and digital photography.",
+      "moduleLeaders": [
+        "Professor Abhijeet Ghosh"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/70001/",
+      "offerings": [
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Visual Computing and Robotics",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "70004",
+      "title": "Advanced Computer Security",
+      "description": "At the end of the course, you will have an in-depth understanding of the themes and challenges of host-level native, web, and mobile security and privacy. Many of the skills learned in this module will directly influence your ability to create secure and privacy-preserving software. Students will also develop abilities to analyse and critique foundational and state of the art research papers in this space.",
+      "moduleLeaders": [
+        "Dr Ben Livshits",
+        "Dr Soteris Demetriou"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/70004/",
+      "offerings": [
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Visual Computing and Robotics",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "70005",
+      "title": "Complexity",
+      "description": "In this module you will have the opportunity to:",
+      "moduleLeaders": [
+        "Dr Iain Phillips"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/70005/",
+      "offerings": [
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Visual Computing and Robotics",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "70006",
+      "title": "Computational Finance",
+      "description": "In this module you will have the opportunity to be introduced to the fundamental models and mathematical theories to computer science and engineering students. In particular, in this module you will have the opportunity to learn to:",
+      "moduleLeaders": [
+        "Professor Panos Parpas"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/70006/",
+      "offerings": [
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Visual Computing and Robotics",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "70007",
+      "title": "Computational Optimisation",
+      "description": "In this module you will have the opportunity to:",
+      "moduleLeaders": [
+        "Professor Panos Parpas",
+        "Professor Ruth Misener"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/70007/",
+      "offerings": [
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Visual Computing and Robotics",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "70010",
+      "title": "Deep Learning",
+      "description": "This module addresses the fundamental concepts and advanced methodologies of deep learning and relates them to real-world problems in a variety of domains. The aim is to provide an overview of different approaches, both classical and emerging. The module will equip you with the necessary knowledge and skills to work in the field of deep learning and to contribute to ongoing research in the area.",
+      "moduleLeaders": [
+        "Dr Yingzhen Li",
+        "Professor Bernhard Kainz"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/70010/",
+      "offerings": [
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Visual Computing and Robotics",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "70011",
+      "title": "Individual Project MEng",
+      "description": "In this module you will have the opportunity to demonstrate independence and originality, to plan and organise a large project over a long period, and to put into practice the knowledge, skills and research methods that you have learnt throughout your degree.",
+      "moduleLeaders": [
+        "Dr Thomas Lancaster"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/70011/",
+      "offerings": [
+        {
+          "studyYear": 4,
+          "term": "full_year",
+          "offeringType": "core",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "full_year",
+          "offeringType": "core",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "full_year",
+          "offeringType": "core",
+          "degreePath": "MEng Computing - Visual Computing and Robotics",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "full_year",
+          "offeringType": "extracurricular",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "full_year",
+          "offeringType": "core",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "full_year",
+          "offeringType": "core",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "full_year",
+          "offeringType": "core",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "70012",
+      "title": "Industrial Placement (Part 2)",
+      "description": "In this module you will work in industry as a fully-paid employee over an extended period of time. The placement gives you the opportunity to put into place the technical, professional and team working skills that you have learnt on your degree course and to develop those skills in an industrial or research setting.",
+      "moduleLeaders": [],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/70012/",
+      "offerings": [
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "core",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "core",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "core",
+          "degreePath": "MEng Computing - Visual Computing and Robotics",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "core",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "core",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "core",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "core",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "70014",
+      "title": "Machine Learning for Imaging",
+      "description": "This module covers the fundamental concepts and advanced methodologies of machine learning for imaging and relates those to real-world problems in computer vision and medical image analysis. You will experience different approaches to machine learning including supervised and unsupervised techniques with an emphasis on deep learning methods. Topics include image segmentation, image registration, self-supervised learning, inverse problems (super-resolution, image reconstruction), causality in imaging, and trustworthy machine learning. A key objective is to equip you with the skills needed to work in, and conduct research into, image computing and applied machine learning.",
+      "moduleLeaders": [
+        "Professor Ben Glocker",
+        "Professor Daniel Rueckert"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/70014/",
+      "offerings": [
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Visual Computing and Robotics",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "70015",
+      "title": "Mathematics for Machine Learning",
+      "description": "In this module you will have the opportunity to study the advanced mathematical techniques required to understand, design and implement modern statistical machine learning algorithms and inference mechanisms.",
+      "moduleLeaders": [
+        "Dr Matthew Wicker"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/70015/",
+      "offerings": [
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Visual Computing and Robotics",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "70016",
+      "title": "Natural Language Processing",
+      "description": "In this module you will have the opportunity to: - Learn the foundations, key concepts, and real-world applications of Natural Language Processing (NLP), with an emphasis on deep learning approaches. - Study models for representing words and their meanings. - Use these representations in text classification tasks like Natural Language Inference (NLI). - Analyse deep learning model architectures used in Language modeling and text generation. - Review current methods for training and fine-tuning Large Language Models (LLMs).",
+      "moduleLeaders": [
+        "Dr Marek Rei",
+        "Dr Chiraag Lala"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/70016/",
+      "offerings": [
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Visual Computing and Robotics",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "70017",
+      "title": "Principles of Distributed Ledgers",
+      "description": "Distributed ledgers, such as Bitcoin and Ethereum, have gained rapid popularity, attracting the attention of academics, entrepreneurs, and policy-makers. They promise and have already created new disruptive markets, revolutionizing how we think of money and financial infrastructure. In this module, you will have the opportunity to explore the foundational principles behind distributed ledgers and learn about how software can be developed using this novel technology. This will include the foundations of blockchains, smart-contract programming, and decentralised application development. (There are no strict prerequisites to take this module. However, this module does not cover general programming concepts, and it is assumed that students are familiar with these. While this module does cover some decentralised finance applications in some lectures, no previous knowledge of finance is required.)",
+      "moduleLeaders": [
+        "Mr Paul Pritz",
+        "Mr Sam Werner",
+        "Professor William Knottenbelt"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/70017/",
+      "offerings": [
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Visual Computing and Robotics",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "70018",
+      "title": "Privacy Engineering",
+      "description": "This module will teach you about state-of-the-art privacy-preserving mechanisms and systems and how to attack them. We will then review and discuss improvements and trade-offs.",
+      "moduleLeaders": [
+        "Professor Yves-Alexandre de Montjoye"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/70018/",
+      "offerings": [
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Visual Computing and Robotics",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "70019",
+      "title": "Probabilistic Inference",
+      "description": "In this module you will have the opportunity to:",
+      "moduleLeaders": [
+        "Dr Calvin Tsay",
+        "Dr Yingzhen Li"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/70019/",
+      "offerings": [
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Visual Computing and Robotics",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "70020",
+      "title": "Program Analysis",
+      "description": "The course will provide you with an introduction to the areas of classical and probabilistic program analysis. Starting from methods used in compiler optimisation (Live Variable, etc.) you will be introduced to lattice based approaches to Data-flow Analysis (Monotone Frameworks) and Control-flow Analysis before we discuss the general, semantics based framework of Abstract Interpretation. Considering quantitative properties of (probabilistic) programs you will then see how to extend classical program analysis to this setting. This leads to a framework of Probabilistic Abstract Interpretation which is based to an appropriate formal semantics.",
+      "moduleLeaders": [
+        "Dr Herbert Wiklicky"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/70020/",
+      "offerings": [
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Visual Computing and Robotics",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "70021",
+      "title": "Quantum Computing",
+      "description": "In this module you will have the opportunity to explore this exciting topic that sits at the boundaries of computer science and physics. The module will be taught from a computer science perspective, but will also draw on topics from linear algebra, which provides the mathematical apparatus for formalising quantum systems. You will be introduced to the basic notions of quantum computing, including quantum bits and quantum entanglement and will get to explore quantum algorithms, such as Quantum Search, Quantum Simulation and Quantum Information concepts such as quantum error correction.",
+      "moduleLeaders": [
+        "Dr Roberto Bondesan"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/70021/",
+      "offerings": [
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Visual Computing and Robotics",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "70022",
+      "title": "Scalable Systems and Data",
+      "description": "In this module you will have the opportunity to:",
+      "moduleLeaders": [
+        "Professor Thomas Heinis",
+        "Professor Peter Pietzuch"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/70022/",
+      "offerings": [
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Visual Computing and Robotics",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "70023",
+      "title": "Scalable Software Verification",
+      "description": "Software verification has come of age: proof assistants are mature; verification techniques and tools are tractable; and real-world programs are verified both in academia and industry. A key breakthrough came with separation logic, which introduced compositional reasoning about heap-manipulating programs. The aim of this course is to enable students to reason about heap-manipulating programs using separation logic, both by exploring the underlying theory and by working with cutting-edge academic and industrial analysis tools. The fact that the reasoning is compositional means that it scales. The theoretical part of the course will revolve around a simple While language, whereas the practical part will touch on real-world languages such as Java, JavaScript and C. More specifically, you will:",
+      "moduleLeaders": [
+        "Professor Philippa Gardner"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/70023/",
+      "offerings": [
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Visual Computing and Robotics",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "70024",
+      "title": "Software Reliability",
+      "description": "To introduce students to techniques and tools for improving the reliability of software systems. The course will provide an overview of the main types of software reliability techniques and discuss their respective strengths and weaknesses. The course will present in detail a selection of these techniques and associated tools, focusing on recent directions in both research and practice. More specifically you will:",
+      "moduleLeaders": [
+        "Professor Cristian Cadar"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/70024/",
+      "offerings": [
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Visual Computing and Robotics",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "70025",
+      "title": "Software Engineering for Industry",
+      "description": "In this module you will have the opportunity to:",
+      "moduleLeaders": [
+        "Dr Eoin Woods",
+        "Dr Robert Chatley"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/70025/",
+      "offerings": [
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Visual Computing and Robotics",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "70028",
+      "title": "Reinforcement Learning",
+      "description": "This module provides comprehensive knowledge in reinforcement learning through an integrated approach that traces core algorithmic concepts from their theoretical foundations to state-of-the-art implementations. This course covers tabular and deep reinforcement learning topics and couples classical and modern approaches to provide students with a unified understanding of how RL algorithms have evolved and are applied today.",
+      "moduleLeaders": [],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/70028/",
+      "offerings": [
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Visual Computing and Robotics",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "70031",
+      "title": "Formal Methods for Safe AI",
+      "description": "The overall aim of this module is to provide an overview of current applications of formal methods to modern AI systems, including the verification, certification, and monitoring of agent-based systems and solutions. You will develop intellectual and practical skills in the use of formal methods, including temporal languages, for knowledge representation and automated reasoning in Artificial Intelligence. This module is structured in four parts. The first part focuses on basic modal logic, its syntax and semantics based on Kripke frames and models, as well as the model theory of modal logic, including the notions of satisfaction and validity. The second part will give you the foundations for the specification of strategic behaviours of agents in multi-agent systems (MAS), including the formalism of Concurrent Game Structures as a mathematical representation of MAS. We will then introduce Linear-time Temporal Logic (LTL) and Computation-tree Temporal Logic (CTL) as languages to represent and reason about safety, reachability, and other interesting properties of MAS. In particular, we will present algorithm to solve the model checking problem for both LTL and CTL, thus allowing for the verification of MAS. In the third part we will consider the role played by formal methods in modern AI systems, specifically reinforcement learning (RL). We will see how reward shaping and synthesis from temporal specifications can help solving the problem of reward (mis-)specification in RL. Finally, in the fourth part, we will introduce the language of Alternating-time Temporal Logic (ATL), an extension of the temporal logics CTL and LTL, which will allow you to express game-theoretical notions such as the existence of a winning strategy for a group of agents. You will analyse the various assumptions that can be made about the reasoning capabilities of autonomous agents: agents can have perfect observability on the environment in which they are interacting with the other agents, or they might only have partial observability; they might remember all the sequence of events leading to their current state, or their memory might be limited in some way. You will learn the consequences, in terms of valid/satisfiable formulas, of these modelling assumptions; and you will learn in what cases these different modeling choices are appropriate given a particular MAS scenario. You will also see how the complexity of the model checking problem for ATL depends on these modeling choices. Model checking algorithms will be illustrated for all cases in which the problem is decidable, while undecidable cases will also be explained briefly.",
+      "moduleLeaders": [
+        "Dr Francesco Belardinelli"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/70031/",
+      "offerings": [
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Visual Computing and Robotics",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "70067",
+      "title": "Robot Learning",
+      "description": "Robot Learning is an exciting new field, which studies how physical robots can learn skills using machine learning techniques, and can be seen as an &quot;advanced reinforcement learning&quot; module. The module first motivates the need for robot learning, by describing classical robot control methods and their limitations. Then, the module explains how reinforcement learning can be applied to physical robots acting in the real world. Finally, the module explores how robots can learn new skills by observing and interacting with humans. Lab sessions and courseworks teach students how to implement these methods in Python for a simulated robot learning to solve tasks, which culminates in a fun live competition in the final lecture.",
+      "moduleLeaders": [
+        "Dr Edward Johns"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/70067/",
+      "offerings": [
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Visual Computing and Robotics",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "70068",
+      "title": "Scheduling and Resource Allocation",
+      "description": "Real-life problems arising in computer science, computational management and economics often involve deciding the best way to use a given set of resources (e.g., servers, networks, routes) to complete a desired set of tasks within constraints (e.g., costs, deadline). Examples include job scheduling, workflow allocation, traffic routing, business processes optimization. The module blends methods from optimization, scheduling, and game theory to teach the best decision algorithms for such problems. Emphasis will be given to understand the trade-offs between cooperative and competitive approaches, both in centralized and decentralized decision making.",
+      "moduleLeaders": [
+        "Dr Dario Paccagnan",
+        "Dr Giuliano Casale"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/70068/",
+      "offerings": [
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Visual Computing and Robotics",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "70070",
+      "title": "Custom Computing",
+      "description": "In this module you will have the opportunity to explore applications of custom computing designs in applications such as signal processing and genomics data analysis, and develop parametric descriptions for custom computing designs. You will also analyse performance and resource usage of custom computing designs, optimise them to meet design requirements, and compare their realisations based on simulation and transformation.",
+      "moduleLeaders": [
+        "Dr Timothy Todman",
+        "Professor Wayne Luk"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/70070/",
+      "offerings": [
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Visual Computing and Robotics",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "70075",
+      "title": "System Performance Engineering",
+      "description": "Performance engineering is the area of computer science ensuring that computer systems (comprised of hardware as well as software) are responsive, scalable, and efficient. The course aims at introducing fundamental principles and techniques used in performance management of modern computer systems, either purpose-built applications or generic system (single-node as well as distributed). In particular, in this module you will have the opportunity to learn to:",
+      "moduleLeaders": [
+        "Dr Holger Pirk",
+        "Dr Lluis Vilanova"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/70075/",
+      "offerings": [
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Visual Computing and Robotics",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "70082",
+      "title": "Network and Web Security",
+      "description": "In this module you will have the opportunity to gain a broad knowledge of network and web security from the network to the application layer. The emphasis of the course is both on the underlying principles and techniques, and on examples of how such principles are applied in practice.",
+      "moduleLeaders": [
+        "Dr Sergio Maffeis"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/70082/",
+      "offerings": [
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Visual Computing and Robotics",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "70086",
+      "title": "Advanced Computer Architecture",
+      "description": "Computer architecture concerns the design of general-purpose and special-purpose processors, and of parallel computer systems for applications ranging from embedded robotics through mobile handsets to datacentres and supercomputers. Through this module you will develop a thorough understanding of high-performance and energy-efficient computer architecture and be able to explore how knowledge of computer architecture informs software performance engineering. You will learn principles and techniques for evaluating architectural proposals and gain deep understanding of topical trends in advanced computer architecture, compiler design, operating systems and parallel processing.",
+      "moduleLeaders": [
+        "Professor Paul Kelly"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/70086/",
+      "offerings": [
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Visual Computing and Robotics",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "70090",
+      "title": "Graphics",
+      "description": "In this module you will have the opportunity to study core computer graphics concepts, including the mathematical principles used for computer generated imagery, shading and light approximations. You will also learn different geometry representations and modelling techniques and will have the opportunity to apply what you have learnt to practical computer graphics problems, using modern shader languages and graphics accelerators.",
+      "moduleLeaders": [
+        "Professor Abhijeet Ghosh",
+        "Professor Bernhard Kainz"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/70090/",
+      "offerings": [
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Visual Computing and Robotics",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "70097",
+      "title": "Computing Year Abroad (Year 4)",
+      "description": "This module gives you the opportunity to study abroad at one our European or American host institutions. You will undertake an equivalent workload to students at the host institution, similar in scope to students remaining at Imperial College.",
+      "moduleLeaders": [],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/70097/",
+      "offerings": [
+        {
+          "studyYear": 4,
+          "term": "full_year",
+          "offeringType": "extracurricular",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "70098",
+      "title": "Introduction to Concrete Complexity",
+      "description": "[Formerly &quot;Methods and Tools in the Theory of Computing&quot;]",
+      "moduleLeaders": [
+        "Professor Iddo Tzameret"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/70098/",
+      "offerings": [
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Visual Computing and Robotics",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "70100",
+      "title": "Computational Neurodynamics",
+      "description": "Computational neurodynamics is the use of computer models to study the dynamics of large networks of interacting neurons. The rationale behind the field, which lies at the theoretical end of computational neuroscience, is that the languages of dynamical systems and information theory are the right ones to express the underlying principles of nervous system operation. Throughout the module, you will learn the basic principles behind the brain's intelligent behaviour, the computational tools needed to simulate such behaviour, and illuminating connections between biological and artificial intelligent systems. Interdisciplinary at heart, the module will also include some elements of neuroscience, biology, and physics (although no background in these is required).",
+      "moduleLeaders": [
+        "Dr Pedro Mediano"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/70100/",
+      "offerings": [
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Visual Computing and Robotics",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "70103",
+      "title": "Statistical Information Theory",
+      "description": "What does fitting a machine learning model have to do with copying a file over a computer network? The answer, you may be surprised to hear, is quite a lot. The fundamental principles of information theory were originally devised to study optimal communication over information channels, but have since found widespread applications across areas of data science and computing. This module will introduce the basics of information theory as devised by Claude Shannon in 1948, and then delve into its deep connections with statistics and machine learning. Through mathematical and computational exercises, the module presents information as a unifying theory linking computing, statistics, and geomety, and provides crucial theoretical background for students wishing to pursue a career in data science or machine learning.",
+      "moduleLeaders": [
+        "Dr Pedro Mediano"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/70103/",
+      "offerings": [
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Visual Computing and Robotics",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "70105",
+      "title": "Deep Graph-Based Learning",
+      "description": "This module comes at the intersection of graph theory, machine learning, and deep modeling. It aims to give a flavor of different aspects of the broad and ever-expanding field of graph theory and learning. The module first motivates the need for graph-based learning, by introducing conventional graph data analysis methods. Next, the module covers the nascent field of graph neural networks on both theoretical and application levels. Together, we will explore the foundation of landmark GNN models and cover state-of-the-art models and graph-based learning techniques. We will have sessions to implement a few GNN examples in Python, weekly quizzes for continuous assessment, and stimulating group discussions based on deconstructing recent papers published in this field.",
+      "moduleLeaders": [
+        "Dr Islem Rekik"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/70105/",
+      "offerings": [
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Visual Computing and Robotics",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "70111",
+      "title": "Networked Systems",
+      "description": "In this module, you will get an overview and hands-on experience on how modern networked systems are designed and implemented. The module assumes prior networking knowledge and goes into more detail on the evolution of networking, new network architectures, and new software and hardware infrastructure at the network control plane, data plane, and the endpoints. You will also explore and enumerate the systems principles, e.g. layering and the end-to-end argument, that led to certain design choices and understand how the same principles are applied across a variety of systems.",
+      "moduleLeaders": [
+        "Dr Marios Kogias"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/70111/",
+      "offerings": [
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Visual Computing and Robotics",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "70112",
+      "title": "Non-Euclidean Methods in Machine Learning",
+      "description": "We understand the world by interaction with the bodies we observe. This Kantian empirical realism called experience is made possible by the a priori Euclidean constraints on space. While being subject to limits of scales and tolerances of our senses, such a flat view of the world has been the driving force in many fields laying the foundations of the first AI systems. Recent progress is challenging this perspective by showing that the world around us as well as the answers we are looking for admit a non-Euclidean, curved structure. Hence, it becomes desirable for our machine learning models to adapt naturally. In this course, we cover the nuts and bolts of learning non- Euclidean embeddings connecting non-Euclidean domains and parameter spaces. We will apply optimization techniques from Riemannian geometry, bring in knowledge from graph theory and present novel developments in neural networks that are suited to data living on lower dimensional manifolds.",
+      "moduleLeaders": [
+        "Dr Tolga Birdal"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/70112/",
+      "offerings": [
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Visual Computing and Robotics",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "70113",
+      "title": "Generative AI",
+      "description": "This comprehensive module provides students with a deep understanding of generative AI by exploring its theoretical foundations and practical applications. Covering key concepts in generative models, the module introduces techniques such as Variational Autoencoders (VAEs), Generative Adversarial Networks (GANs), Diffusion Models, Transformers, and Autoregressive Model (AR), equipping learners with the skills to design and implement these models effectively. With a strong focus in the module on real-world applications, students will critically assess the strengths and limitations of different generative AI approaches. The module also emphasizes the ethical considerations surrounding AI-generated content, ensuring learners are prepared to address potential risks and societal impacts. Throughout the module, students engage in hands-on coding exercises, and case studies, progressively building a strategic understanding of generative AI deployment.",
+      "moduleLeaders": [
+        "Dr Jiankang Deng"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/70113/",
+      "offerings": [
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Visual Computing and Robotics",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "spring",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    },
+    {
+      "code": "70114",
+      "title": "Machine Learning Systems and Hardware",
+      "description": "This module presents the systems and hardware foundations of modern machine learning, bridging neural network workloads, compiler optimizations, and advanced AI hardware. The course covers cutting-edge AI hardware, including GPUs, TPUs, and wafer-scale accelerators, highlighting the design trade-offs between cloud and edge deployment. Topics such as efficient ML (quantization, pruning), algorithm&ndash;hardware co-design, federated learning, and system support for large language models (LLMs) are also presented. Through lectures, tutorials, and hands-on programming lab sessions, students gain practical skills and a systems-level understanding of ML deployment, preparing them for advanced research or industry roles in ML system design.",
+      "moduleLeaders": [
+        "Dr Hongxiang Fan"
+      ],
+      "sourceUrl": "https://www.imperial.ac.uk/engineering/departments/computing/current-students/courses/70114/",
+      "offerings": [
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Artificial Intelligence and Machine Learning",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Visual Computing and Robotics",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - International Programme",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Management and Finance",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "selective",
+          "degreePath": "MEng Computing - Software Engineering",
+          "academicYearLabel": "25-26"
+        },
+        {
+          "studyYear": 4,
+          "term": "autumn",
+          "offeringType": "elective",
+          "degreePath": "MEng Computing - Security and Reliability",
+          "academicYearLabel": "25-26"
+        }
+      ]
+    }
+  ]
+}
