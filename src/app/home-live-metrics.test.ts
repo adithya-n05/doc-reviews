@@ -11,8 +11,8 @@ describe("home page live metrics", () => {
   });
 
   it("renders ticker metrics from live values instead of static zeros", () => {
-    expect(source).toContain("{metrics.reviewsCount}");
-    expect(source).toContain("{metrics.modulesCount}");
-    expect(source).toContain("{metrics.averageRating.toFixed(1)} / 5");
+    expect(source).toContain("value={metrics.reviewsCount}");
+    expect(source).toContain("value={metrics.modulesCount}");
+    expect(source).toContain("value={metrics.averageRating} decimals={1}");
   });
 });

@@ -1074,6 +1074,26 @@
       border-bottom: 1px solid var(--border);
     }
 
+    .reveal-up {
+      opacity: 0;
+      transform: translateY(12px);
+      animation: revealUp 520ms ease-out forwards;
+    }
+
+    .reveal-delay-1 { animation-delay: 90ms; }
+    .reveal-delay-2 { animation-delay: 170ms; }
+
+    @keyframes revealUp {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     .features-strip-inner {
       max-width: var(--max-w);
       margin: 0 auto;
@@ -1296,6 +1316,14 @@
       .features-strip-inner { grid-template-columns: 1fr; }
       .two-col { grid-template-columns: 1fr; }
     }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-up {
+    opacity: 1;
+    transform: none;
+    animation: none !important;
+  }
+}
 
 .site-shell { min-height: 100vh; }
 .form-banner.success { border-color: #6ca87f; background: #eef8f1; color: #21592f; }

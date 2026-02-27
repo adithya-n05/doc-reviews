@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CountUpValue } from "@/components/count-up-value";
 import type { LandingMetrics } from "@/lib/metrics/landing-metrics";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
@@ -109,30 +110,39 @@ export default async function HomePage() {
         </div>
       </div>
 
-      <div className="landing-ticker">
+      <div className="landing-ticker reveal-up">
         <div className="ticker-inner">
           <span className="ticker-label">Live Stats</span>
           <span className="ticker-stat">
-            <strong>{metrics.reviewsCount}</strong> reviews published
+            <strong>
+              <CountUpValue value={metrics.reviewsCount} />
+            </strong>{" "}
+            reviews published
           </span>
           <span className="ticker-stat" style={{ color: "rgba(255,255,255,0.3)" }}>
             ·
           </span>
           <span className="ticker-stat">
-            <strong>{metrics.modulesCount}</strong> modules covered
+            <strong>
+              <CountUpValue value={metrics.modulesCount} />
+            </strong>{" "}
+            modules covered
           </span>
           <span className="ticker-stat" style={{ color: "rgba(255,255,255,0.3)" }}>
             ·
           </span>
           <span className="ticker-stat">
-            Average rating <strong>{metrics.averageRating.toFixed(1)} / 5</strong>
+            Average rating{" "}
+            <strong>
+              <CountUpValue value={metrics.averageRating} decimals={1} /> / 5
+            </strong>
           </span>
         </div>
       </div>
 
       <hr className="rule" />
 
-      <div className="hero-section">
+      <div className="hero-section reveal-up reveal-delay-1">
         <div>
           <div className="hero-kicker">A Publication of the Computing Community</div>
           <h1 className="hero-title">Know your modules before you take them.</h1>
@@ -185,7 +195,7 @@ export default async function HomePage() {
                     color: "var(--accent)",
                   }}
                 >
-                  {metrics.topModuleRating.toFixed(1)}
+                  <CountUpValue value={metrics.topModuleRating} decimals={1} />
                 </div>
                 <div className="label-caps" style={{ marginTop: "2px" }}>
                   Avg. top module
@@ -199,7 +209,7 @@ export default async function HomePage() {
                     fontWeight: 500,
                   }}
                 >
-                  {metrics.recommendPercentage}%
+                  <CountUpValue value={metrics.recommendPercentage} />%
                 </div>
                 <div className="label-caps" style={{ marginTop: "2px" }}>
                   Would recommend
@@ -213,7 +223,7 @@ export default async function HomePage() {
                     fontWeight: 500,
                   }}
                 >
-                  {workloadHoursEstimate(metrics.averageWorkload)}h
+                  <CountUpValue value={workloadHoursEstimate(metrics.averageWorkload)} />h
                 </div>
                 <div className="label-caps" style={{ marginTop: "2px" }}>
                   Avg. weekly workload
@@ -226,24 +236,30 @@ export default async function HomePage() {
 
       <hr className="rule" />
 
-      <div className="features-strip">
+      <div className="features-strip reveal-up reveal-delay-2">
         <div className="features-strip-inner">
           <div className="feature-item">
-            <div className="feature-number">{metrics.reviewsCount}</div>
+            <div className="feature-number">
+              <CountUpValue value={metrics.reviewsCount} />
+            </div>
             <div className="feature-label">Reviews Published</div>
             <div className="feature-desc">
               Detailed, attributed reviews from verified Computing students.
             </div>
           </div>
           <div className="feature-item">
-            <div className="feature-number">6</div>
+            <div className="feature-number">
+              <CountUpValue value={6} />
+            </div>
             <div className="feature-label">Quality Dimensions</div>
             <div className="feature-desc">
               Ratings across teaching, content, workload, difficulty, and fairness.
             </div>
           </div>
           <div className="feature-item">
-            <div className="feature-number">{metrics.modulesCount}</div>
+            <div className="feature-number">
+              <CountUpValue value={metrics.modulesCount} />
+            </div>
             <div className="feature-label">Modules Covered</div>
             <div className="feature-desc">
               Coverage from first-year fundamentals to MEng specialisms.
