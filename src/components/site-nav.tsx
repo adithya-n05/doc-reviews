@@ -16,8 +16,8 @@ type SiteNavProps = PublicNavProps | PrivateNavProps;
 export function SiteNav(props: SiteNavProps) {
   if (!props.authed) {
     return (
-      <header className="top-nav">
-        <div className="top-nav-inner">
+      <header className="nav">
+        <div className="nav-inner">
           <Link href="/" className="nav-logo">
             DoC <span>Reviews</span>
           </Link>
@@ -35,8 +35,8 @@ export function SiteNav(props: SiteNavProps) {
   }
 
   return (
-    <header className="top-nav">
-      <div className="top-nav-inner">
+    <header className="nav">
+      <div className="nav-inner">
         <Link href="/" className="nav-logo">
           DoC <span>Reviews</span>
         </Link>

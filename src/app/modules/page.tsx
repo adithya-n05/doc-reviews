@@ -42,8 +42,7 @@ export default async function ModulesPage({ searchParams }: ModulesPageProps) {
   });
 
   const parsed = parseModuleCatalogueSearchParams((await searchParams) ?? {});
-  const defaultYear = profile.year ? String(profile.year) : "all";
-  const activeYear = parsed.year === "all" ? defaultYear : parsed.year;
+  const activeYear = parsed.year;
 
   const rows = await fetchModuleCatalogueRows(client);
   const modules = rows.map((row) => toModuleListItem(row));
