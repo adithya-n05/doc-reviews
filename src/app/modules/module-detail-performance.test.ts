@@ -10,7 +10,7 @@ describe("module detail performance wiring", () => {
     expect(source).toContain("fetchModuleReviews(client, moduleItem.id, {");
     expect(source).toContain("limit: showAllReviews ? undefined : 24");
     expect(source).toContain("const [reviewRows, cachedInsightsRow] = await Promise.all([");
-    expect(source).toContain("const [replyRows, helpfulVoteRows] = await Promise.all([");
+    expect(source).toContain("const [replyRows, helpfulVoteRows, replyHelpfulVoteRows] = await Promise.all([");
   });
 
   it("logs server-side timing checkpoints for module detail rendering", () => {

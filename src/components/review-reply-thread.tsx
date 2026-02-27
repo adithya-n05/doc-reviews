@@ -13,12 +13,21 @@ export type ReviewReplyViewModel = {
   authorInitials: string;
   authorEmail: string;
   authorAvatarUrl: string | null;
+  helpfulCount: number;
+  viewerHasHelpfulVote: boolean;
 };
 
 type ReplyApiPayload = {
   ok?: boolean;
   error?: string;
   reply?: ReviewReplyViewModel;
+};
+
+type ReplyHelpfulApiPayload = {
+  ok?: boolean;
+  error?: string;
+  voted?: boolean;
+  count?: number;
 };
 
 type ReviewReplyThreadProps = {
@@ -30,6 +39,8 @@ type ReviewReplyThreadProps = {
   currentUserInitials: string;
   currentUserAvatarUrl: string | null;
   initialReplies: ReviewReplyViewModel[];
+  initialReplyHelpfulCountByReplyId: Map<string, number>;
+  initialCurrentUserHelpfulReplyIds: Set<string>;
   initiallyOpen?: boolean;
 };
 
@@ -80,8 +91,16 @@ function replyChevronSvg() {
 }
 
 export function ReviewReplyThread(props: ReviewReplyThreadProps) {
-  const [replies, setReplies] = useState(props.initialReplies);
+  const [replies, setReplies] = useState(() =>
+    props.initialReplies.map((reply) => ({
+      ...reply,
+      helpfulCount: props.initialReplyHelpfulCountByReplyId.get(reply.id) ?? reply.helpfulCount,
+      viewerHasHelpfulVote:
+        props.initialCurrentUserHelpfulReplyIds.has(reply.id) || reply.viewerHasHelpfulVote,
+    })),
+  );
   const [pending, setPending] = useState(false);
+  const [pendingHelpfulReplyIds, setPendingHelpfulReplyIds] = useState<Set<string>>(new Set());
   const [error, setError] = useState<string | null>(null);
   const [threadOpen, setThreadOpen] = useState(Boolean(props.initiallyOpen));
   const [rootBody, setRootBody] = useState("");
@@ -115,6 +134,8 @@ export function ReviewReplyThread(props: ReviewReplyThreadProps) {
       authorInitials: props.currentUserInitials,
       authorEmail: props.currentUserEmail,
       authorAvatarUrl: props.currentUserAvatarUrl,
+      helpfulCount: 0,
+      viewerHasHelpfulVote: false,
     };
 
     setError(null);
@@ -140,7 +161,16 @@ export function ReviewReplyThread(props: ReviewReplyThreadProps) {
       }
 
       setReplies((current) =>
-        current.map((reply) => (reply.id === optimisticReply.id ? payload.reply! : reply)),
+        current.map((reply) =>
+          reply.id === optimisticReply.id
+            ? {
+                ...payload.reply!,
+                helpfulCount: payload.reply!.helpfulCount ?? optimisticReply.helpfulCount,
+                viewerHasHelpfulVote:
+                  payload.reply!.viewerHasHelpfulVote ?? optimisticReply.viewerHasHelpfulVote,
+              }
+            : reply,
+        ),
       );
     } catch (replyError) {
       setReplies((current) => current.filter((reply) => reply.id !== optimisticReply.id));
@@ -185,7 +215,15 @@ export function ReviewReplyThread(props: ReviewReplyThreadProps) {
       }
 
       setReplies((current) =>
-        current.map((reply) => (reply.id === replyId ? payload.reply! : reply)),
+        current.map((reply) =>
+          reply.id === replyId
+            ? {
+                ...payload.reply!,
+                helpfulCount: reply.helpfulCount,
+                viewerHasHelpfulVote: reply.viewerHasHelpfulVote,
+              }
+            : reply,
+        ),
       );
     } catch (replyError) {
       setReplies((current) =>
@@ -230,6 +268,75 @@ export function ReviewReplyThread(props: ReviewReplyThreadProps) {
       setError(replyError instanceof Error ? replyError.message : "Unable to delete reply.");
     } finally {
       setPending(false);
+    }
+  }
+
+  async function toggleReplyHelpful(replyId: string) {
+    if (pendingHelpfulReplyIds.has(replyId)) {
+      return;
+    }
+
+    const previousReply = replies.find((entry) => entry.id === replyId);
+    if (!previousReply) {
+      return;
+    }
+
+    const nextVoted = !previousReply.viewerHasHelpfulVote;
+    const nextCount = Math.max(0, previousReply.helpfulCount + (nextVoted ? 1 : -1));
+
+    setReplies((current) =>
+      current.map((reply) =>
+        reply.id === replyId
+          ? {
+              ...reply,
+              viewerHasHelpfulVote: nextVoted,
+              helpfulCount: nextCount,
+            }
+          : reply,
+      ),
+    );
+    setPendingHelpfulReplyIds((current) => new Set(current).add(replyId));
+
+    try {
+      const response = await fetch("/api/replies/helpful", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ replyId }),
+      });
+      const payload = (await response.json()) as ReplyHelpfulApiPayload;
+      if (!response.ok || payload.ok !== true) {
+        throw new Error(payload.error ?? "Unable to update helpful vote.");
+      }
+
+      setReplies((current) =>
+        current.map((reply) =>
+          reply.id === replyId
+            ? {
+                ...reply,
+                viewerHasHelpfulVote: payload.voted ?? nextVoted,
+                helpfulCount: payload.count ?? nextCount,
+              }
+            : reply,
+        ),
+      );
+    } catch {
+      setReplies((current) =>
+        current.map((reply) =>
+          reply.id === replyId
+            ? {
+                ...reply,
+                viewerHasHelpfulVote: previousReply.viewerHasHelpfulVote,
+                helpfulCount: previousReply.helpfulCount,
+              }
+            : reply,
+        ),
+      );
+    } finally {
+      setPendingHelpfulReplyIds((current) => {
+        const next = new Set(current);
+        next.delete(replyId);
+        return next;
+      });
     }
   }
 
@@ -305,6 +412,19 @@ export function ReviewReplyThread(props: ReviewReplyThreadProps) {
           <p className="reply-body">{reply.body}</p>
 
           <div className="reply-actions">
+            <button
+              className={`reply-helpful-btn ${reply.viewerHasHelpfulVote ? "voted" : ""}`}
+              disabled={pendingHelpfulReplyIds.has(reply.id)}
+              onClick={() => {
+                void toggleReplyHelpful(reply.id);
+              }}
+              type="button"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
+              </svg>
+              <span>{reply.helpfulCount}</span>
+            </button>
             <button
               className="reply-action-btn"
               onClick={() => {

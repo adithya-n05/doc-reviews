@@ -84,6 +84,8 @@ function mapReplyRow(row: ReplyRow, userId: string, profile: {
     authorInitials: buildInitials(authorName),
     authorEmail: profile?.email ?? "",
     authorAvatarUrl: profile?.avatar_url ?? null,
+    helpfulCount: 0,
+    viewerHasHelpfulVote: false,
   };
 }
 

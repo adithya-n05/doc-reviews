@@ -67,6 +67,8 @@ describe("module detail review rendering", () => {
   it("renders collapsible reply threads with explicit expand controls", () => {
     expect(source).toContain("<ReviewReplyThread");
     expect(source).toContain("initialReplies={repliesByReviewId.get(review.id) ?? []}");
+    expect(source).toContain("initialReplyHelpfulCountByReplyId={replyHelpfulCountByReplyId}");
+    expect(source).toContain("initialCurrentUserHelpfulReplyIds={currentUserHelpfulReplyIds}");
     expect(source).toContain("reviewId={review.id}");
   });
 

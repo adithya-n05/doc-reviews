@@ -17,6 +17,12 @@ describe("review reply thread optimistic client", () => {
     expect(source).toContain('method: "DELETE"');
   });
 
+  it("persists reply helpful votes via dedicated replies helpful api", () => {
+    expect(source).toContain('fetch("/api/replies/helpful"');
+    expect(source).toContain('className={`reply-helpful-btn ${reply.viewerHasHelpfulVote ? "voted" : ""}`}');
+    expect(source).toContain("reply.helpfulCount");
+  });
+
   it("does not render syncing status text for reply mutations", () => {
     expect(source).not.toContain("Syncing replies...");
   });

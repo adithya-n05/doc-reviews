@@ -189,6 +189,22 @@ export async function fetchHelpfulVoteRowsForReviews(
   return (data ?? []) as Array<{ review_id: string; user_id: string }>;
 }
 
+export async function fetchReplyHelpfulVoteRowsForReplies(
+  client: SupabaseClient,
+  replyIds: string[],
+): Promise<Array<{ reply_id: string; user_id: string }>> {
+  if (replyIds.length === 0) {
+    return [];
+  }
+
+  const { data } = await client
+    .from("reply_helpful_votes")
+    .select("reply_id,user_id")
+    .in("reply_id", replyIds);
+
+  return (data ?? []) as Array<{ reply_id: string; user_id: string }>;
+}
+
 export async function fetchModuleReviewInsightsRow(
   client: SupabaseClient,
   moduleId: string,

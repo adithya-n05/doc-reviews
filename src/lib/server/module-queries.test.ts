@@ -32,6 +32,12 @@ describe("module review query shape", () => {
     );
   });
 
+  it("fetches reply helpful vote rows for rendered reply ids", () => {
+    expect(source).toContain("fetchReplyHelpfulVoteRowsForReplies");
+    expect(source).toContain('.from("reply_helpful_votes")');
+    expect(source).toContain('.select("reply_id,user_id")');
+  });
+
   it("keeps module detail offerings select minimal for performance", () => {
     expect(source).toContain("module_offerings(study_year)");
     expect(source).not.toContain("module_offerings(study_year,term,offering_type,degree_path,academic_year_label)");

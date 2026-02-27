@@ -877,6 +877,43 @@
       background: var(--cream-dark);
     }
 
+    .reply-helpful-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--ink-light);
+      transition: all 0.15s ease;
+    }
+
+    .reply-helpful-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-bg);
+    }
+
+    .reply-helpful-btn.voted {
+      border-color: var(--accent);
+      background: var(--accent-bg);
+      color: var(--accent);
+    }
+
+    .reply-helpful-btn:disabled {
+      opacity: 0.72;
+      cursor: default;
+    }
+
+    .reply-helpful-btn svg {
+      width: 12px;
+      height: 12px;
+    }
+
     .reply-edit-btn {
       color: var(--accent);
     }

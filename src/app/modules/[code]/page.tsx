@@ -14,6 +14,7 @@ import {
   fetchModuleReviewInsightsRow,
   fetchModuleReviews,
   fetchProfilesByIds,
+  fetchReplyHelpfulVoteRowsForReplies,
   fetchReviewRepliesForReviews,
 } from "@/lib/server/module-queries";
 import { elapsedMs, startTiming } from "@/lib/server/timing";
@@ -186,14 +187,16 @@ export default async function ModuleDetailPage({
   });
 
   const repliesAndVotesStart = startTiming();
-  const [replyRows, helpfulVoteRows] = await Promise.all([
-    fetchReviewRepliesForReviews(
-      client,
-      reviewRows.map((row) => row.id),
-    ),
-    fetchHelpfulVoteRowsForReviews(
-      client,
-      reviewRows.map((row) => row.id),
+  const reviewIds = reviewRows.map((row) => row.id);
+  const replyRowsPromise = fetchReviewRepliesForReviews(client, reviewIds);
+  const [replyRows, helpfulVoteRows, replyHelpfulVoteRows] = await Promise.all([
+    replyRowsPromise,
+    fetchHelpfulVoteRowsForReviews(client, reviewIds),
+    replyRowsPromise.then((rows) =>
+      fetchReplyHelpfulVoteRowsForReplies(
+        client,
+        rows.map((row) => row.id),
+      ),
     ),
   ]);
   queryDurationsMs.repliesAndHelpfulVotes = elapsedMs(repliesAndVotesStart);
@@ -239,6 +242,30 @@ export default async function ModuleDetailPage({
     queryDurationsMs,
   });
 
+  const helpfulCountByReviewId = new Map<string, number>();
+  const currentUserHelpfulReviewIds = new Set<string>();
+  for (const vote of helpfulVoteRows) {
+    helpfulCountByReviewId.set(
+      vote.review_id,
+      (helpfulCountByReviewId.get(vote.review_id) ?? 0) + 1,
+    );
+    if (vote.user_id === user.id) {
+      currentUserHelpfulReviewIds.add(vote.review_id);
+    }
+  }
+
+  const replyHelpfulCountByReplyId = new Map<string, number>();
+  const currentUserHelpfulReplyIds = new Set<string>();
+  for (const vote of replyHelpfulVoteRows) {
+    replyHelpfulCountByReplyId.set(
+      vote.reply_id,
+      (replyHelpfulCountByReplyId.get(vote.reply_id) ?? 0) + 1,
+    );
+    if (vote.user_id === user.id) {
+      currentUserHelpfulReplyIds.add(vote.reply_id);
+    }
+  }
+
   const replyPresentationRows = replyRows.map((row) => {
     const profileRow = profileMap[row.user_id];
     const reviewerName = profileRow?.fullName ?? "Unknown Student";
@@ -259,22 +286,13 @@ export default async function ModuleDetailPage({
       authorInitials: reviewerInitials || "?",
       authorEmail: profileRow?.email ?? "",
       authorAvatarUrl: normalizeAvatarUrl(profileRow?.avatarUrl),
+      helpfulCount: replyHelpfulCountByReplyId.get(row.id) ?? 0,
+      viewerHasHelpfulVote: currentUserHelpfulReplyIds.has(row.id),
     };
   });
   const repliesByReviewId = new Map<string, typeof replyPresentationRows>();
   for (const reply of replyPresentationRows) {
     repliesByReviewId.set(reply.reviewId, [...(repliesByReviewId.get(reply.reviewId) ?? []), reply]);
-  }
-  const helpfulCountByReviewId = new Map<string, number>();
-  const currentUserHelpfulReviewIds = new Set<string>();
-  for (const vote of helpfulVoteRows) {
-    helpfulCountByReviewId.set(
-      vote.review_id,
-      (helpfulCountByReviewId.get(vote.review_id) ?? 0) + 1,
-    );
-    if (vote.user_id === user.id) {
-      currentUserHelpfulReviewIds.add(vote.review_id);
-    }
   }
 
   const studyYear = moduleItem.studyYears[0] ?? profile.year ?? 1;
@@ -625,6 +643,8 @@ export default async function ModuleDetailPage({
                 currentUserInitials={currentUserInitials}
                 currentUserAvatarUrl={currentUserAvatarUrl}
                 initialReplies={repliesByReviewId.get(review.id) ?? []}
+                initialReplyHelpfulCountByReplyId={replyHelpfulCountByReplyId}
+                initialCurrentUserHelpfulReplyIds={currentUserHelpfulReplyIds}
                 initiallyOpen={shouldOpenReplies}
               />
               {review.userId === user.id ? (
