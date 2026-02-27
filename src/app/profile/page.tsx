@@ -187,16 +187,6 @@ export default async function ProfilePage() {
             </div>
             <div className="setting-row">
               <div>
-                <div className="setting-label">Weekly Digest</div>
-                <div className="setting-desc">A curated summary of new reviews for your modules.</div>
-              </div>
-              <label className="toggle-switch">
-                <input type="checkbox" />
-                <span className="toggle-slider" />
-              </label>
-            </div>
-            <div className="setting-row">
-              <div>
                 <div className="setting-label">Display Name</div>
                 <div className="setting-desc">{profile.full_name}</div>
               </div>

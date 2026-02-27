@@ -20,9 +20,12 @@ describe("profile page editorial parity", () => {
 
   it("renders editorial account settings rows", () => {
     expect(source).toContain("Email Notifications");
-    expect(source).toContain("Weekly Digest");
     expect(source).toContain("Display Name");
     expect(source).toContain("Change Password");
+  });
+
+  it("omits weekly digest controls per current product scope", () => {
+    expect(source).not.toContain("Weekly Digest");
   });
 
   it("renders review activity summary rows in settings column", () => {
