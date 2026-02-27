@@ -43,7 +43,9 @@ describe("profile page editorial parity", () => {
   it("wires profile photo update and remove actions", () => {
     expect(source).toContain("updateProfilePhotoAction");
     expect(source).toContain("clearProfilePhotoAction");
-    expect(source).toContain("name=\"avatarUrl\"");
+    expect(source).toContain("name=\"avatarFile\"");
+    expect(source).toContain("Drag and drop");
+    expect(source).not.toContain("name=\"avatarUrl\"");
     expect(source).toContain("Save Photo");
     expect(source).toContain("Remove Photo");
   });

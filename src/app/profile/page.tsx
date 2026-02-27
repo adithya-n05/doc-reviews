@@ -233,20 +233,28 @@ export default async function ProfilePage({ searchParams }: ProfilePageProps) {
               <div style={{ flex: 1 }}>
                 <div className="setting-label">Profile Photo</div>
                 <div className="setting-desc">
-                  Set a public HTTPS avatar image URL shown on your profile and reviews.
+                  Drag and drop an image to set your public avatar for profile and reviews.
                 </div>
                 <form
                   action={updateProfilePhotoAction}
+                  encType="multipart/form-data"
                   style={{ marginTop: "12px", display: "flex", gap: "8px", alignItems: "center" }}
                 >
-                  <input
-                    className="form-input"
-                    defaultValue={profile.avatar_url ?? ""}
-                    name="avatarUrl"
-                    placeholder="https://..."
-                    type="url"
-                    required
-                  />
+                  <label className="profile-photo-dropzone">
+                    <input
+                      className="profile-photo-file-input"
+                      name="avatarFile"
+                      type="file"
+                      accept="image/png,image/jpeg,image/webp"
+                      required
+                    />
+                    <span className="profile-photo-dropzone-label">
+                      Drag and drop a photo here, or click to browse.
+                    </span>
+                    <span className="profile-photo-dropzone-meta">
+                      PNG, JPG, or WEBP. Maximum file size 5MB.
+                    </span>
+                  </label>
                   <button className="btn btn-primary btn-sm" type="submit">
                     Save Photo
                   </button>
