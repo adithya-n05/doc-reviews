@@ -7,6 +7,7 @@ describe("global theme toggle wiring", () => {
 
   it("renders global theme toggle from root layout", () => {
     expect(layoutSource).toContain('import { ThemeToggle } from "@/components/theme-toggle";');
+    expect(layoutSource).toContain('className="theme-toggle-footer"');
     expect(layoutSource).toContain("<ThemeToggle />");
   });
 
@@ -17,10 +18,10 @@ describe("global theme toggle wiring", () => {
     expect(toggleSource).toContain("document.documentElement.setAttribute(\"data-theme\"");
   });
 
-  it("uses icon-first button treatment instead of visible light/dark text labels", () => {
-    expect(toggleSource).toContain('className="theme-toggle-icon"');
-    expect(toggleSource).toContain('aria-hidden="true"');
-    expect(toggleSource).toContain("theme === \"dark\" ? \"☀\" : \"☾\"");
-    expect(toggleSource).not.toContain("theme-toggle-label");
+  it("uses a switch-style control integrated with editorial footer treatment", () => {
+    expect(toggleSource).toContain('className="theme-toggle-track"');
+    expect(toggleSource).toContain("theme-toggle-thumb");
+    expect(toggleSource).toContain('className="theme-toggle-state"');
+    expect(toggleSource).toContain("theme === \"dark\" ? \"Dark\" : \"Light\"");
   });
 });

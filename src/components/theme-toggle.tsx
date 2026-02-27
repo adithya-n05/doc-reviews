@@ -37,8 +37,11 @@ export function ThemeToggle() {
       aria-label={`Switch to ${nextTheme} mode`}
       title={`Switch to ${nextTheme} mode`}
     >
-      <span className="theme-toggle-icon" aria-hidden="true">
-        {theme === "dark" ? "☀" : "☾"}
+      <span className="theme-toggle-track" aria-hidden="true">
+        <span className={`theme-toggle-thumb ${theme === "dark" ? "active" : ""}`} />
+      </span>
+      <span className="theme-toggle-state" aria-hidden="true">
+        {theme === "dark" ? "Dark" : "Light"}
       </span>
       <span className="sr-only">{theme === "dark" ? "Dark mode active" : "Light mode active"}</span>
     </button>

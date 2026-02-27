@@ -110,9 +110,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${newsreader.variable} ${sourceSans.variable} ${sourceCode.variable}`}>
-        <ThemeToggle />
         <FeedbackWidget />
         {children}
+        <footer className="theme-toggle-footer">
+          <ThemeToggle />
+        </footer>
         <Analytics />
       </body>
     </html>

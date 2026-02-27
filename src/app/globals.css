@@ -1666,11 +1666,9 @@
 }
 
 .theme-toggle {
-  position: fixed;
-  top: 66px;
-  right: 18px;
-  z-index: 220;
-  width: 38px;
+  position: static;
+  z-index: auto;
+  min-width: 110px;
   height: 38px;
   border-radius: 999px;
   border: 1px solid var(--border);
@@ -1679,14 +1677,15 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
+  padding: 0 12px;
   cursor: pointer;
-  box-shadow: 0 8px 20px rgba(0, 33, 71, 0.12);
+  box-shadow: none;
   transition:
     border-color 140ms ease,
     color 140ms ease,
     background 140ms ease,
-    transform 140ms ease,
-    box-shadow 140ms ease;
+    transform 140ms ease;
 }
 
 .theme-toggle:hover {
@@ -1694,18 +1693,45 @@
   color: var(--accent-dark);
   background: var(--accent-bg);
   transform: translateY(-1px);
-  box-shadow: 0 10px 24px rgba(0, 33, 71, 0.16);
 }
 
 .theme-toggle:focus-visible {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 2px var(--accent-bg), 0 10px 24px rgba(0, 33, 71, 0.18);
+  box-shadow: 0 0 0 2px var(--accent-bg);
 }
 
-.theme-toggle-icon {
-  font-size: 16px;
-  line-height: 1;
+.theme-toggle-track {
+  width: 34px;
+  height: 18px;
+  border-radius: 999px;
+  background: var(--border);
+  display: inline-flex;
+  align-items: center;
+  padding: 2px;
+}
+
+.theme-toggle-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--ink-light);
+  transition: transform 160ms ease;
+}
+
+.theme-toggle-thumb.active {
+  transform: translateX(16px);
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.theme-toggle-state {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-mid);
 }
 
 .sr-only {
@@ -1722,15 +1748,19 @@
 
 :root[data-theme="dark"] .theme-toggle {
   background: var(--cream-dark);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
 }
 
-@media (max-width: 860px) {
-  .theme-toggle {
-    top: auto;
-    bottom: 66px;
-    right: 16px;
-  }
+:root[data-theme="dark"] .theme-toggle-track {
+  background: #29405f;
+}
+
+.theme-toggle-footer {
+  margin-top: 26px;
+  border-top: 1px solid var(--border);
+  padding: 14px 24px 20px;
+  display: flex;
+  justify-content: center;
+  background: var(--cream);
 }
 
 .feedback-widget-shell {
