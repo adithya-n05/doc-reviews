@@ -1675,6 +1675,11 @@
       line-height: 1.2;
     }
 
+    .footer-theme-toggle {
+      margin-top: 10px;
+      display: inline-flex;
+    }
+
     .footer-copy {
       font-size: 12px;
       color: var(--ink-light);
@@ -1908,6 +1913,10 @@
   display: flex;
   justify-content: flex-start;
   background: var(--cream);
+}
+
+.home-shell + .theme-toggle-footer {
+  display: none;
 }
 
 .feedback-widget-shell {

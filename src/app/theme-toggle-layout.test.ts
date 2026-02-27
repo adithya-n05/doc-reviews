@@ -3,12 +3,18 @@ import { describe, expect, it } from "vitest";
 
 describe("global theme toggle wiring", () => {
   const layoutSource = readFileSync("src/app/layout.tsx", "utf8");
+  const homeSource = readFileSync("src/app/page.tsx", "utf8");
   const toggleSource = readFileSync("src/components/theme-toggle.tsx", "utf8");
+  const cssSource = readFileSync("src/app/globals.css", "utf8");
 
-  it("renders global theme toggle from root layout", () => {
-    expect(layoutSource).toContain('import { ThemeToggle } from "@/components/theme-toggle";');
+  it("places theme toggle inside the home footer row and hides standalone row on home", () => {
+    expect(layoutSource).not.toContain('import { ThemeToggle } from "@/components/theme-toggle";');
+    expect(homeSource).toContain('import { ThemeToggle } from "@/components/theme-toggle";');
+    expect(homeSource).toContain('className="footer-theme-toggle"');
+    expect(homeSource).toContain("<ThemeToggle />");
     expect(layoutSource).toContain('className="theme-toggle-footer"');
-    expect(layoutSource).toContain("<ThemeToggle />");
+    expect(cssSource).toContain(".home-shell + .theme-toggle-footer");
+    expect(cssSource).toContain("display: none;");
   });
 
   it("persists user theme preference in localStorage", () => {

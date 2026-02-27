@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { CountUpValue } from "@/components/count-up-value";
+import { ThemeToggle } from "@/components/theme-toggle";
 import type { LandingMetrics } from "@/lib/metrics/landing-metrics";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
@@ -53,7 +54,7 @@ export default async function HomePage() {
   const primaryHeroCtaHref = signedInDisplayName ? "/modules" : "/auth/signup";
 
   return (
-    <div className="site-shell">
+    <div className="site-shell home-shell">
       <div className="landing-masthead">
         <div className="masthead-inner">
           <div>
@@ -275,6 +276,9 @@ export default async function HomePage() {
               DoC <span>Reviews</span>
             </div>
             <div className="footer-attribution">Made by Adithya</div>
+            <div className="footer-theme-toggle">
+              <ThemeToggle />
+            </div>
           </div>
           <div className="footer-copy">
             Unofficial student-run platform · Not affiliated with Imperial College

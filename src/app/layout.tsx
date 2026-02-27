@@ -6,7 +6,7 @@ import {
 } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { FeedbackWidget } from "@/components/feedback-widget";
-import { ThemeToggle } from "@/components/theme-toggle";
+import { FooterThemeToggle } from "@/components/footer-theme-toggle";
 import { SITE_DESCRIPTION, SITE_NAME, getSiteUrl } from "@/lib/site-metadata";
 import "./globals.css";
 
@@ -113,7 +113,7 @@ export default function RootLayout({
         <FeedbackWidget />
         {children}
         <footer className="theme-toggle-footer">
-          <ThemeToggle />
+          <FooterThemeToggle />
         </footer>
         <Analytics />
       </body>
