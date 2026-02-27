@@ -6,11 +6,13 @@ describe("validateFeedbackInput", () => {
     const result = validateFeedbackInput({
       message: "Add a module-level compare view for year 3 electives.",
       pagePath: "/modules?year=3",
+      feedbackType: "feature",
     });
 
     expect(result.ok).toBe(true);
     if (result.ok) {
       expect(result.value.pagePath).toBe("/modules?year=3");
+      expect(result.value.feedbackType).toBe("feature");
     }
   });
 
@@ -18,6 +20,7 @@ describe("validateFeedbackInput", () => {
     const result = validateFeedbackInput({
       message: "   ",
       pagePath: "/profile",
+      feedbackType: "bug",
     });
 
     expect(result.ok).toBe(false);
@@ -30,6 +33,7 @@ describe("validateFeedbackInput", () => {
     const result = validateFeedbackInput({
       message: "a".repeat(4001),
       pagePath: "/",
+      feedbackType: "ui",
     });
 
     expect(result.ok).toBe(false);
@@ -42,11 +46,25 @@ describe("validateFeedbackInput", () => {
     const result = validateFeedbackInput({
       message: "Looks great.",
       pagePath: "https://example.com/not-local",
+      feedbackType: "general",
     });
 
     expect(result.ok).toBe(true);
     if (result.ok) {
       expect(result.value.pagePath).toBe("/");
+    }
+  });
+
+  it("rejects unknown feedback types", () => {
+    const result = validateFeedbackInput({
+      message: "Looks great.",
+      pagePath: "/",
+      feedbackType: "not-a-type",
+    });
+
+    expect(result.ok).toBe(false);
+    if (!result.ok) {
+      expect(result.errors.feedbackType).toMatch(/invalid feedback type/i);
     }
   });
 });

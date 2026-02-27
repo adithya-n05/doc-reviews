@@ -20,11 +20,28 @@ export async function POST(request: Request) {
       typeof (payload as { pagePath?: unknown }).pagePath === "string"
         ? (payload as { pagePath: string }).pagePath
         : "/",
+    feedbackType:
+      typeof (payload as { feedbackType?: unknown }).feedbackType === "string"
+        ? (payload as { feedbackType: string }).feedbackType
+        : "general",
+    context:
+      payload !== null &&
+      typeof payload === "object" &&
+      "context" in payload &&
+      (typeof (payload as { context?: unknown }).context === "object" ||
+        (payload as { context?: unknown }).context === null)
+        ? ((payload as { context?: unknown }).context as Record<string, unknown> | null)
+        : null,
   });
 
   if (!validation.ok) {
     return NextResponse.json(
-      { error: validation.errors.message ?? "Invalid feedback payload." },
+      {
+        error:
+          validation.errors.message ??
+          validation.errors.feedbackType ??
+          "Invalid feedback payload.",
+      },
       { status: 400 },
     );
   }
@@ -38,6 +55,8 @@ export async function POST(request: Request) {
     const { error } = await client.from("feedback_submissions").insert({
       message: validation.value.message,
       page_path: validation.value.pagePath,
+      feedback_type: validation.value.feedbackType,
+      context: validation.value.context,
       user_id: user?.id ?? null,
     });
 

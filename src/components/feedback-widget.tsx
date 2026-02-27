@@ -1,16 +1,43 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
 import { submitFeedback } from "@/lib/services/feedback-submit";
+
+type FeedbackTypeOption = {
+  id: "general" | "bug" | "feature" | "ui" | "data" | "other";
+  label: string;
+  icon: string;
+};
+
+const FEEDBACK_TYPES: FeedbackTypeOption[] = [
+  { id: "general", label: "General", icon: "✍️" },
+  { id: "bug", label: "Bug", icon: "🐞" },
+  { id: "feature", label: "Feature", icon: "✨" },
+  { id: "ui", label: "UI", icon: "🎨" },
+  { id: "data", label: "Data", icon: "📊" },
+  { id: "other", label: "Other", icon: "🧩" },
+];
 
 export function FeedbackWidget() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
+  const [feedbackType, setFeedbackType] = useState<FeedbackTypeOption["id"]>("general");
   const [errorMessage, setErrorMessage] = useState("Could not submit right now.");
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">(
     "idle",
+  );
+
+  const feedbackContext = useMemo(
+    () => ({
+      source: "floating-feedback-widget",
+      path: pathname ?? "/",
+      timestamp: new Date().toISOString(),
+      userAgent:
+        typeof navigator === "undefined" ? "server" : navigator.userAgent.slice(0, 120),
+    }),
+    [pathname],
   );
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -28,6 +55,8 @@ export function FeedbackWidget() {
     const result = await submitFeedback({
       message: trimmedMessage,
       pagePath: pathname ?? "/",
+      feedbackType,
+      context: feedbackContext,
     });
 
     if (!result.ok) {
@@ -42,10 +71,56 @@ export function FeedbackWidget() {
 
   return (
     <div className="feedback-widget-shell">
-      {open ? (
-        <form className="card-box feedback-widget-panel" onSubmit={handleSubmit}>
+      <button
+        className="feedback-trigger"
+        onClick={() => {
+          setOpen(true);
+          setStatus("idle");
+        }}
+        type="button"
+      >
+        Feedback
+      </button>
+
+      <button
+        className={`feedback-overlay ${open ? "open" : ""}`}
+        onClick={() => setOpen(false)}
+        type="button"
+        aria-label="Close feedback panel"
+      />
+
+      <aside className={`feedback-panel ${open ? "open" : ""}`}>
+        <div className="feedback-panel-header">
+          <h2 className="feedback-panel-title">Share feedback</h2>
+          <button
+            className="feedback-panel-close"
+            onClick={() => setOpen(false)}
+            type="button"
+            aria-label="Close feedback panel"
+          >
+            ×
+          </button>
+        </div>
+
+        <form className="feedback-panel-body" onSubmit={handleSubmit}>
+          <div className="feedback-type-grid">
+            {FEEDBACK_TYPES.map((type) => (
+              <button
+                key={type.id}
+                className={`feedback-type-btn ${feedbackType === type.id ? "active" : ""}`}
+                onClick={() => setFeedbackType(type.id)}
+                type="button"
+              >
+                <div className="feedback-type-icon" aria-hidden="true">
+                  {type.icon}
+                </div>
+                <div className="feedback-type-label">{type.label}</div>
+              </button>
+            ))}
+          </div>
+
           <label className="label-caps feedback-widget-label" htmlFor="feedback-message">
-            Share feedback
+            What should we improve?
           </label>
           <textarea
             className="form-input feedback-widget-textarea"
@@ -60,16 +135,20 @@ export function FeedbackWidget() {
             }}
             placeholder="Tell us what to improve..."
             required
-            rows={4}
+            rows={7}
             value={message}
           />
+
           <div className="feedback-widget-actions">
             <button
               className="btn btn-ghost btn-sm feedback-widget-secondary"
-              onClick={() => setOpen(false)}
+              onClick={() => {
+                setMessage("");
+                setStatus("idle");
+              }}
               type="button"
             >
-              Close
+              Clear
             </button>
             <button
               className="btn btn-primary btn-sm feedback-widget-submit"
@@ -79,23 +158,15 @@ export function FeedbackWidget() {
               {status === "sending" ? "Sending..." : "Send"}
             </button>
           </div>
+
           {status === "success" ? (
             <p className="feedback-widget-status">Thanks. Feedback submitted.</p>
           ) : null}
           {status === "error" ? (
-            <p className="feedback-widget-status error">
-              {errorMessage}
-            </p>
+            <p className="feedback-widget-status error">{errorMessage}</p>
           ) : null}
         </form>
-      ) : null}
-      <button
-        className="btn btn-ghost btn-sm feedback-widget-trigger"
-        onClick={() => setOpen((value) => !value)}
-        type="button"
-      >
-        Feedback
-      </button>
+      </aside>
     </div>
   );
 }

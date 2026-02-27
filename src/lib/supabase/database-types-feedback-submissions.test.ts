@@ -8,6 +8,8 @@ describe("supabase feedback_submissions table types", () => {
     expect(source).toContain("feedback_submissions");
     expect(source).toContain("message: string");
     expect(source).toContain("page_path: string");
+    expect(source).toContain("feedback_type: string");
+    expect(source).toContain("context: Json");
     expect(source).toContain("user_id: string | null");
   });
 });

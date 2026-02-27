@@ -1,6 +1,8 @@
 type SubmitFeedbackInput = {
   message: string;
   pagePath: string;
+  feedbackType: string;
+  context: Record<string, unknown> | null;
 };
 
 type SubmitFeedbackResult =

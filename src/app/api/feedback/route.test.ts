@@ -13,5 +13,7 @@ describe("feedback api route", () => {
     expect(source).toContain('.from("feedback_submissions")');
     expect(source).toContain("message");
     expect(source).toContain("page_path");
+    expect(source).toContain("feedback_type");
+    expect(source).toContain("context");
   });
 });

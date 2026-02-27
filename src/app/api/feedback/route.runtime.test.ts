@@ -39,12 +39,20 @@ describe("POST /api/feedback", () => {
       buildRequest({
         message: "Please add profile photos in settings.",
         pagePath: "/profile",
+        feedbackType: "ui",
+        context: { userAgent: "vitest" },
       }),
     );
 
     expect(response.status).toBe(201);
     expect(from).toHaveBeenCalledWith("feedback_submissions");
     expect(insert).toHaveBeenCalledTimes(1);
+    expect(insert).toHaveBeenCalledWith(
+      expect.objectContaining({
+        feedback_type: "ui",
+        context: { userAgent: "vitest" },
+      }),
+    );
   });
 
   it("returns 500 when Supabase client creation throws", async () => {

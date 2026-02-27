@@ -18,7 +18,12 @@ describe("submitFeedback", () => {
       .mockResolvedValueOnce(jsonResponse(201, { ok: true }));
 
     const result = await submitFeedback(
-      { message: "Improve module search ranking", pagePath: "/modules" },
+      {
+        message: "Improve module search ranking",
+        pagePath: "/modules",
+        feedbackType: "feature",
+        context: { source: "widget" },
+      },
       fetchMock,
     );
 
@@ -33,7 +38,12 @@ describe("submitFeedback", () => {
       .mockResolvedValueOnce(jsonResponse(201, { ok: true }));
 
     const result = await submitFeedback(
-      { message: "Feedback message", pagePath: "/profile" },
+      {
+        message: "Feedback message",
+        pagePath: "/profile",
+        feedbackType: "bug",
+        context: null,
+      },
       fetchMock,
     );
 
@@ -47,7 +57,12 @@ describe("submitFeedback", () => {
       .mockResolvedValueOnce(jsonResponse(400, { error: "Invalid payload." }));
 
     const result = await submitFeedback(
-      { message: " ", pagePath: "/modules" },
+      {
+        message: " ",
+        pagePath: "/modules",
+        feedbackType: "general",
+        context: null,
+      },
       fetchMock,
     );
 
@@ -62,7 +77,12 @@ describe("submitFeedback", () => {
       .mockRejectedValueOnce(new Error("socket hang up"));
 
     const result = await submitFeedback(
-      { message: "Feedback", pagePath: "/modules/40001" },
+      {
+        message: "Feedback",
+        pagePath: "/modules/40001",
+        feedbackType: "other",
+        context: { route: "/modules/40001" },
+      },
       fetchMock,
     );
 

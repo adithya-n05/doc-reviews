@@ -12,15 +12,16 @@ describe("feedback widget component", () => {
   });
 
   it("exposes a small non-intrusive trigger button", () => {
-    expect(source).toContain("feedback-widget-trigger");
+    expect(source).toContain("feedback-trigger");
     expect(source).toContain("Feedback");
   });
 
-  it("reuses editorial form/button classes for visual parity", () => {
-    expect(source).toContain("className=\"card-box feedback-widget-panel\"");
-    expect(source).toContain("className=\"form-input feedback-widget-textarea\"");
-    expect(source).toContain("className=\"btn btn-ghost btn-sm feedback-widget-secondary\"");
-    expect(source).toContain("className=\"btn btn-primary btn-sm feedback-widget-submit\"");
-    expect(source).toContain("className=\"btn btn-ghost btn-sm feedback-widget-trigger\"");
+  it("renders v3 slide-over panel with overlay and feedback type selection", () => {
+    expect(source).toContain("feedback-overlay");
+    expect(source).toContain("feedback-panel");
+    expect(source).toContain("feedback-panel-header");
+    expect(source).toContain("feedback-type-grid");
+    expect(source).toContain("feedback-type-btn");
+    expect(source).toContain("feedbackType");
   });
 });

@@ -16,21 +16,27 @@ export type Database = {
     Tables: {
       feedback_submissions: {
         Row: {
+          context: Json
           created_at: string
+          feedback_type: string
           id: string
           message: string
           page_path: string
           user_id: string | null
         }
         Insert: {
+          context?: Json
           created_at?: string
+          feedback_type?: string
           id?: string
           message: string
           page_path: string
           user_id?: string | null
         }
         Update: {
+          context?: Json
           created_at?: string
+          feedback_type?: string
           id?: string
           message?: string
           page_path?: string
