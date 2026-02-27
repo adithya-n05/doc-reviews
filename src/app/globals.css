@@ -1254,8 +1254,8 @@
     ========================================================= */
     .footer {
       border-top: 2px solid var(--ink);
-      margin-top: 80px;
-      padding: 32px 24px 40px;
+      margin-top: 72px;
+      padding: 24px 24px 24px;
     }
 
     .footer-inner {
@@ -1275,11 +1275,10 @@
     .footer-logo span { color: var(--accent); }
 
     .footer-attribution {
-      margin-top: 6px;
-      font-size: 11px;
+      margin-top: 2px;
+      font-size: 10px;
       color: var(--ink-light);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+      line-height: 1.2;
     }
 
     .footer-copy {
