@@ -44,6 +44,7 @@ export default async function ProfilePage() {
   const reviews = (reviewRows ?? []) as ReviewRow[];
 
   const reviewByModuleId = new Map(reviews.map((review) => [review.module_id, review]));
+  const helpfulVotesReceived = 0;
   const averageGiven =
     reviews.length > 0
       ? (
@@ -101,8 +102,8 @@ export default async function ProfilePage() {
               <div className="label-caps">Modules</div>
             </div>
             <div className="profile-stat">
-              <div className="profile-stat-value">{averageGiven}</div>
-              <div className="label-caps">Avg Rating Given</div>
+              <div className="profile-stat-value">{helpfulVotesReceived}</div>
+              <div className="label-caps">Helpful votes</div>
             </div>
           </div>
         </section>
@@ -111,7 +112,7 @@ export default async function ProfilePage() {
           <div>
             <div className="section-header" style={{ paddingTop: 0, marginBottom: 0 }}>
               <h2 className="section-title" style={{ fontSize: "20px" }}>
-                Review Activity
+                Your Modules
               </h2>
               <span style={{ fontSize: "12px", color: "var(--ink-light)" }}>
                 {modules.length} enrolled
@@ -164,21 +165,49 @@ export default async function ProfilePage() {
 
             <div className="setting-row" style={{ borderTop: "1px solid var(--border)" }}>
               <div>
-                <div className="setting-label">Identity Policy</div>
+                <div className="setting-label">Email Notifications</div>
                 <div className="setting-desc">
-                  Your name and Imperial email are publicly shown on your reviews.
+                  Receive an email when someone finds your review helpful or replies.
                 </div>
               </div>
+              <label className="toggle-switch">
+                <input type="checkbox" defaultChecked />
+                <span className="toggle-slider" />
+              </label>
             </div>
             <div className="setting-row">
               <div>
-                <div className="setting-label">Email Verification</div>
-                <div className="setting-desc">Verified via Imperial email confirmation.</div>
+                <div className="setting-label">Weekly Digest</div>
+                <div className="setting-desc">A curated summary of new reviews for your modules.</div>
               </div>
+              <label className="toggle-switch">
+                <input type="checkbox" />
+                <span className="toggle-slider" />
+              </label>
             </div>
             <div className="setting-row">
               <div>
-                <div className="setting-label">Sign Out</div>
+                <div className="setting-label">Display Name</div>
+                <div className="setting-desc">{profile.full_name}</div>
+              </div>
+              <button className="btn btn-ghost btn-sm" type="button">
+                Edit
+              </button>
+            </div>
+            <div className="setting-row">
+              <div>
+                <div className="setting-label">Change Password</div>
+                <div className="setting-desc">Use your account recovery flow to update credentials.</div>
+              </div>
+              <button className="btn btn-ghost btn-sm" type="button">
+                Update
+              </button>
+            </div>
+            <div className="setting-row" style={{ borderBottom: "none" }}>
+              <div>
+                <div className="setting-label" style={{ color: "#c0392b" }}>
+                  Sign Out
+                </div>
                 <div className="setting-desc">Sign out of your DoC Reviews account.</div>
               </div>
               <form action={signOutAction}>
@@ -190,6 +219,31 @@ export default async function ProfilePage() {
                   Sign Out
                 </button>
               </form>
+            </div>
+
+            <hr className="rule" style={{ marginTop: "30px" }} />
+            <div style={{ marginTop: "20px" }}>
+              <div className="label-caps" style={{ marginBottom: "10px" }}>
+                Review Activity
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", fontSize: "13px" }}>
+                  <span style={{ color: "var(--ink-mid)" }}>Reviews written</span>
+                  <span style={{ fontWeight: 600 }}>{reviews.length}</span>
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-between", fontSize: "13px" }}>
+                  <span style={{ color: "var(--ink-mid)" }}>Average rating given</span>
+                  <span style={{ fontWeight: 600 }}>{averageGiven} / 5</span>
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-between", fontSize: "13px" }}>
+                  <span style={{ color: "var(--ink-mid)" }}>Helpful votes received</span>
+                  <span style={{ fontWeight: 600 }}>{helpfulVotesReceived}</span>
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-between", fontSize: "13px" }}>
+                  <span style={{ color: "var(--ink-mid)" }}>Member since</span>
+                  <span style={{ fontWeight: 600 }}>{joinedDate}</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
