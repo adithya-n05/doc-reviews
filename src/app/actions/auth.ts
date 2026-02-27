@@ -7,6 +7,8 @@ import {
   signOutCurrentUser,
   signupWithPassword,
 } from "@/lib/services/auth-service";
+import { checkSignupEmailAvailability } from "@/lib/services/signup-availability";
+import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { buildAbsoluteUrl } from "@/lib/supabase/urls";
 
@@ -26,6 +28,12 @@ export async function signupAction(formData: FormData): Promise<never> {
   const email = String(formData.get("email") ?? "");
   const password = String(formData.get("password") ?? "");
   const confirmPassword = String(formData.get("confirmPassword") ?? "");
+
+  const adminClient = createSupabaseAdminClient();
+  const availability = await checkSignupEmailAvailability(adminClient, email);
+  if (!availability.ok) {
+    withError("/auth/signup", availability.message);
+  }
 
   const client = await createSupabaseServerClient();
   const result = await signupWithPassword(
