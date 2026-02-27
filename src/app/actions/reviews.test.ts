@@ -19,6 +19,7 @@ describe("review actions tips wiring", () => {
   });
 
   it("provides threaded reply action for module detail reviews", () => {
+    expect(source).toContain('import { revalidatePath } from "next/cache";');
     expect(source).toContain("postReviewReplyAction");
     expect(source).toContain("updateReviewReplyAction");
     expect(source).toContain("deleteReviewReplyAction");
@@ -30,5 +31,12 @@ describe("review actions tips wiring", () => {
     expect(source).toContain(".from(\"review_replies\")");
     expect(source).toContain(".update({");
     expect(source).toContain(".delete()");
+    expect(source).toContain("revalidatePath(`/modules/${moduleCode}`)");
+  });
+
+  it("redirects reply mutations with explicit open-thread query state", () => {
+    expect(source).toContain("?reply=created&openReplies=");
+    expect(source).toContain("?reply=updated&openReplies=");
+    expect(source).toContain("?reply=deleted&openReplies=");
   });
 });

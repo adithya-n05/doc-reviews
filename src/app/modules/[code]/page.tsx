@@ -110,6 +110,7 @@ export default async function ModuleDetailPage({
   const error = getParam(resolvedSearchParams, "error");
   const success = getParam(resolvedSearchParams, "success");
   const reviewsMode = getParam(resolvedSearchParams, "reviews");
+  const openRepliesForReviewId = getParam(resolvedSearchParams, "openReplies");
   const showAllReviews = reviewsMode === "all";
 
   const moduleRow = await moduleRowPromise;
@@ -564,6 +565,7 @@ export default async function ModuleDetailPage({
               review.difficultyRating +
               review.assessmentRating) /
             4;
+          const shouldOpenReplies = openRepliesForReviewId === review.id;
 
           return (
             <article className="review" id={`review-${review.id}`} key={review.id}>
@@ -641,7 +643,7 @@ export default async function ModuleDetailPage({
               </div>
               {(repliesByReviewId.get(review.id) ?? []).filter((reply) => !reply.parentReplyId).length >
               0 ? (
-                <details className="review-thread">
+                <details className="review-thread" open={shouldOpenReplies}>
                   <summary className="reply-thread-btn">
                     <span className="reply-thread-show">
                       View replies (

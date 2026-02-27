@@ -45,6 +45,12 @@ describe("module detail review rendering", () => {
     expect(source).toContain("Hide replies");
   });
 
+  it("opens reply thread automatically after reply mutations", () => {
+    expect(source).toContain("const openRepliesForReviewId =");
+    expect(source).toContain("const shouldOpenReplies = openRepliesForReviewId === review.id");
+    expect(source).toContain("<details className=\"review-thread\" open={shouldOpenReplies}>");
+  });
+
   it("renders owner controls for editing and deleting replies", () => {
     expect(source).toContain("updateReviewReplyAction");
     expect(source).toContain("deleteReviewReplyAction");

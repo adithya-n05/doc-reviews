@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import {
   deleteReviewForUser,
@@ -229,7 +230,8 @@ export async function postReviewReplyAction(formData: FormData): Promise<never> 
     redirect(`/modules/${moduleCode}?error=${encodeURIComponent(result.message)}#review-${reviewId}`);
   }
 
-  redirect(`/modules/${moduleCode}#review-${reviewId}`);
+  revalidatePath(`/modules/${moduleCode}`);
+  redirect(`/modules/${moduleCode}?reply=created&openReplies=${reviewId}#review-${reviewId}`);
 }
 
 export async function updateReviewReplyAction(formData: FormData): Promise<never> {
@@ -273,7 +275,8 @@ export async function updateReviewReplyAction(formData: FormData): Promise<never
     redirect(`/modules/${moduleCode}?error=${encodeURIComponent(result.message)}#review-${reviewId}`);
   }
 
-  redirect(`/modules/${moduleCode}#reply-${replyId}`);
+  revalidatePath(`/modules/${moduleCode}`);
+  redirect(`/modules/${moduleCode}?reply=updated&openReplies=${reviewId}#reply-${replyId}`);
 }
 
 export async function deleteReviewReplyAction(formData: FormData): Promise<never> {
@@ -313,5 +316,6 @@ export async function deleteReviewReplyAction(formData: FormData): Promise<never
     redirect(`/modules/${moduleCode}?error=${encodeURIComponent(result.message)}#review-${reviewId}`);
   }
 
-  redirect(`/modules/${moduleCode}#review-${reviewId}`);
+  revalidatePath(`/modules/${moduleCode}`);
+  redirect(`/modules/${moduleCode}?reply=deleted&openReplies=${reviewId}#review-${reviewId}`);
 }
