@@ -18,7 +18,7 @@ type ModuleLeaderSummary = Pick<Tables<"module_leaders">, "leader_name" | "profi
 type ModuleAggregateSummary = Tables<"module_review_aggregates">;
 type ModuleReviewInsightsSummary = Pick<
   Tables<"module_review_insights">,
-  "module_id" | "reviews_fingerprint" | "summary" | "top_keywords" | "sentiment" | "source" | "generated_at" | "updated_at"
+  "module_id" | "review_count" | "reviews_fingerprint" | "summary" | "top_keywords" | "sentiment" | "source" | "generated_at" | "updated_at"
 >;
 type ReviewReplySummary = Pick<
   Tables<"review_replies">,
@@ -195,7 +195,7 @@ export async function fetchModuleReviewInsightsRow(
 ): Promise<ModuleReviewInsightsSummary | null> {
   const { data } = await client
     .from("module_review_insights")
-    .select("module_id,reviews_fingerprint,summary,top_keywords,sentiment,source,generated_at,updated_at")
+    .select("module_id,review_count,reviews_fingerprint,summary,top_keywords,sentiment,source,generated_at,updated_at")
     .eq("module_id", moduleId)
     .maybeSingle();
 

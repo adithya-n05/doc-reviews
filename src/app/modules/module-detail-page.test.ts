@@ -22,13 +22,21 @@ describe("module detail review rendering", () => {
   it("renders AI summary section above keyword tags", () => {
     expect(source).toContain("AI Summary");
     expect(source).toContain("{insights.summary}");
-    expect(source).toContain('className="insight-summary"');
+    expect(source).toContain('className="ai-summary"');
+    expect(source).toContain('className="ai-summary-badge"');
+    expect(source).toContain('className="ai-summary-meta"');
+    expect(source).toContain('className="ai-summary-text"');
+    expect(source).toContain('className="ai-sentiment"');
+    expect(source).toContain('className="ai-keywords"');
   });
 
   it("shows AI summary refresh metadata and source label", () => {
-    expect(source).toContain("Last refreshed");
+    expect(source).toContain("Generated from");
     expect(source).toContain("generatedAt");
-    expect(source).toContain("insights.source === \"ai\" ? \"AI\" : \"Fallback\"");
+    expect(source).toContain("insightReviewCount");
+    expect(source).toContain("positivePercentage");
+    expect(source).toContain("neutralPercentage");
+    expect(source).toContain("negativePercentage");
   });
 
   it("shows helpful/reply review actions and editorial tip label", () => {

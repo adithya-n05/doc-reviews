@@ -201,8 +201,14 @@ export default async function ModuleDetailPage({
       comment: row.comment,
     })),
   );
-  const { insights, generatedAt } = await insightsPromise;
+  const { insights, generatedAt, reviewCount: insightReviewCount } = await insightsPromise;
   const insightRefreshDate = formatInsightsRefreshDate(generatedAt);
+  const sentimentTotal =
+    insights.sentiment.positive + insights.sentiment.neutral + insights.sentiment.negative;
+  const sentimentDenominator = Math.max(1, sentimentTotal, insightReviewCount);
+  const positivePercentage = Math.round((insights.sentiment.positive / sentimentDenominator) * 100);
+  const neutralPercentage = Math.round((insights.sentiment.neutral / sentimentDenominator) * 100);
+  const negativePercentage = Math.round((insights.sentiment.negative / sentimentDenominator) * 100);
 
   queryDurationsMs.total = elapsedMs(queryPipelineStart);
   logInfo("module_detail_timing", {
@@ -317,6 +323,47 @@ export default async function ModuleDetailPage({
         {success === "review_deleted" ? (
           <p className="form-banner success">Your review has been deleted.</p>
         ) : null}
+
+        <div className="ai-summary">
+          <div className="ai-summary-header">
+            <div className="ai-summary-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 6v6l4 2" />
+              </svg>
+              AI Summary
+            </div>
+            <span className="ai-summary-meta">
+              Generated from {insightReviewCount} reviews · Updated {insightRefreshDate}
+            </span>
+          </div>
+          <p className="ai-summary-text">&quot;{insights.summary}&quot;</p>
+          <div className="ai-sentiment">
+            <div className="ai-sentiment-item">
+              <div className="ai-sentiment-dot positive" />
+              <span className="ai-sentiment-label">{positivePercentage}% positive</span>
+            </div>
+            <div className="ai-sentiment-item">
+              <div className="ai-sentiment-dot neutral" />
+              <span className="ai-sentiment-label">{neutralPercentage}% neutral</span>
+            </div>
+            <div className="ai-sentiment-item">
+              <div className="ai-sentiment-dot negative" />
+              <span className="ai-sentiment-label">{negativePercentage}% negative</span>
+            </div>
+          </div>
+          <div className="ai-keywords">
+            {insights.topKeywords.length > 0 ? (
+              insights.topKeywords.map((keyword) => (
+                <span key={keyword.word} className="ai-keyword">
+                  {keyword.word}
+                </span>
+              ))
+            ) : (
+              <span className="ai-keyword">No keyword data yet</span>
+            )}
+          </div>
+        </div>
 
         <div className="metrics-grid">
           <div className="metric-card">
@@ -449,34 +496,6 @@ export default async function ModuleDetailPage({
               </a>
             );
           })}
-        </div>
-
-        <div style={{ marginTop: "26px" }}>
-          <div className="label-caps" style={{ marginBottom: "10px" }}>
-            AI Summary
-          </div>
-          <p className="insight-summary">{insights.summary}</p>
-          <p className="form-note" style={{ marginTop: "0", marginBottom: "12px" }}>
-            Last refreshed {insightRefreshDate} · Source {insights.source === "ai" ? "AI" : "Fallback"}
-          </p>
-
-          <div className="label-caps" style={{ marginBottom: "10px" }}>
-            Student Sentiment
-          </div>
-          <p className="form-note" style={{ marginBottom: "10px" }}>
-            {insights.sentiment.positive}/{derivedInsights.reviewCount} positive reviews
-          </p>
-          <div className="tag-cloud">
-            {insights.topKeywords.length > 0 ? (
-              insights.topKeywords.map((keyword) => (
-                <span key={keyword.word} className="tag tag-positive">
-                  {keyword.word} ({keyword.count})
-                </span>
-              ))
-            ) : (
-              <span className="tag tag-neutral">No keyword data yet</span>
-            )}
-          </div>
         </div>
 
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>

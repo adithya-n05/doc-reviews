@@ -28,6 +28,7 @@ describe("module review insights cache service", () => {
 
     await upsertModuleReviewInsightsCacheRow(adminClient, {
       moduleId: "module-1",
+      reviewCount: 4,
       reviewsFingerprint: "fingerprint",
       summary: "Summary",
       topKeywords: [{ word: "labs", count: 3 }],
@@ -39,6 +40,7 @@ describe("module review insights cache service", () => {
     expect(upsert).toHaveBeenCalledWith(
       expect.objectContaining({
         module_id: "module-1",
+        review_count: 4,
         reviews_fingerprint: "fingerprint",
         source: "ai",
       }),

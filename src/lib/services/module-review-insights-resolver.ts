@@ -26,6 +26,7 @@ type ResolveParams = {
   cachedRow: Pick<
     Tables<"module_review_insights">,
     | "module_id"
+    | "review_count"
     | "reviews_fingerprint"
     | "summary"
     | "top_keywords"
@@ -52,6 +53,7 @@ export async function resolveModuleReviewInsights(
   insights: ModuleReviewInsightPayload;
   reviewsFingerprint: string;
   generatedAt: string | null;
+  reviewCount: number;
 }> {
   const generateInsights = deps.generateInsights ?? generateModuleReviewInsightPayload;
   const persistInsights = deps.persistInsights ?? upsertModuleReviewInsightsCacheRow;
@@ -84,6 +86,7 @@ export async function resolveModuleReviewInsights(
         insights: cachedInsights,
         reviewsFingerprint,
         generatedAt: params.cachedRow.generated_at,
+        reviewCount: params.cachedRow.review_count,
       };
     }
 
@@ -96,6 +99,7 @@ export async function resolveModuleReviewInsights(
     if (params.adminClient) {
       await persistInsights(params.adminClient, {
         moduleId: params.moduleId,
+        reviewCount: reviewCorpus.length,
         reviewsFingerprint,
         summary: fallbackInsights.summary,
         topKeywords: fallbackInsights.topKeywords,
@@ -108,6 +112,7 @@ export async function resolveModuleReviewInsights(
       insights: fallbackInsights,
       reviewsFingerprint,
       generatedAt: new Date().toISOString(),
+      reviewCount: reviewCorpus.length,
     };
   }
 
@@ -121,6 +126,7 @@ export async function resolveModuleReviewInsights(
     if (params.adminClient) {
       await persistInsights(params.adminClient, {
         moduleId: params.moduleId,
+        reviewCount: reviewCorpus.length,
         reviewsFingerprint,
         summary: fallbackInsights.summary,
         topKeywords: fallbackInsights.topKeywords,
@@ -133,6 +139,7 @@ export async function resolveModuleReviewInsights(
       insights: fallbackInsights,
       reviewsFingerprint,
       generatedAt: new Date().toISOString(),
+      reviewCount: reviewCorpus.length,
     };
   }
 
@@ -145,6 +152,7 @@ export async function resolveModuleReviewInsights(
   if (params.adminClient) {
     await persistInsights(params.adminClient, {
       moduleId: params.moduleId,
+      reviewCount: reviewCorpus.length,
       reviewsFingerprint,
       summary: fallbackInsights.summary,
       topKeywords: fallbackInsights.topKeywords,
@@ -157,5 +165,6 @@ export async function resolveModuleReviewInsights(
     insights: fallbackInsights,
     reviewsFingerprint,
     generatedAt: new Date().toISOString(),
+    reviewCount: reviewCorpus.length,
   };
 }

@@ -10,6 +10,7 @@ type FingerprintInput = {
 
 type UpsertInput = {
   moduleId: string;
+  reviewCount: number;
   reviewsFingerprint: string;
   summary: string;
   topKeywords: Array<{ word: string; count: number }>;
@@ -93,6 +94,7 @@ export async function upsertModuleReviewInsightsCacheRow(
   const { error } = await adminClient.from("module_review_insights").upsert(
     {
       module_id: input.moduleId,
+      review_count: Math.max(0, Math.round(input.reviewCount)),
       reviews_fingerprint: input.reviewsFingerprint,
       summary: input.summary,
       top_keywords: input.topKeywords,

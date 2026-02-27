@@ -6,6 +6,7 @@ describe("supabase module_review_insights table types", () => {
 
   it("includes cache fields for summary, keywords, sentiment, and source", () => {
     expect(source).toContain("module_review_insights");
+    expect(source).toContain("review_count: number");
     expect(source).toContain("reviews_fingerprint: string");
     expect(source).toContain("summary: string");
     expect(source).toContain("top_keywords: Json");

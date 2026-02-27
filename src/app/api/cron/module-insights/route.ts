@@ -59,6 +59,7 @@ export async function GET(request: Request) {
 
     await upsertModuleReviewInsightsCacheRow(adminClient, {
       moduleId,
+      reviewCount: moduleReviews.length,
       reviewsFingerprint: createModuleReviewFingerprint(
         moduleReviews.map((row) => ({
           id: row.id,

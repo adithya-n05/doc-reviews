@@ -24,6 +24,7 @@ describe("resolveModuleReviewInsights", () => {
         reviews: REVIEWS,
         cachedRow: {
           module_id: "module-1",
+          review_count: 1,
           reviews_fingerprint:
             "1e922e9399a010b76588bfbbcfd30befa4e7346563b7d374d0f72441ea0bd36b",
           summary: "Cached summary",
@@ -42,6 +43,7 @@ describe("resolveModuleReviewInsights", () => {
     expect(result.insights.summary).toBe("Cached summary");
     expect(result.insights.source).toBe("ai");
     expect(result.generatedAt).toBe("2026-02-27T06:05:00.000Z");
+    expect(result.reviewCount).toBe(1);
     expect(generateInsights).not.toHaveBeenCalled();
     expect(persistInsights).not.toHaveBeenCalled();
   });
@@ -70,6 +72,7 @@ describe("resolveModuleReviewInsights", () => {
     expect(result.insights.summary).toBe("Fallback summary");
     expect(result.insights.source).toBe("fallback");
     expect(result.generatedAt).toMatch(/^\d{4}-\d{2}-\d{2}T/);
+    expect(result.reviewCount).toBe(1);
     expect(generateInsights).toHaveBeenCalledOnce();
     expect(generateInsights).toHaveBeenCalledWith(
       expect.any(Array),
@@ -93,6 +96,7 @@ describe("resolveModuleReviewInsights", () => {
         reviews: REVIEWS,
         cachedRow: {
           module_id: "module-1",
+          review_count: 1,
           reviews_fingerprint:
             "1e922e9399a010b76588bfbbcfd30befa4e7346563b7d374d0f72441ea0bd36b",
           summary: "Cached summary",
@@ -112,6 +116,7 @@ describe("resolveModuleReviewInsights", () => {
     expect(result.insights.summary).toBe("Recovered fallback summary");
     expect(result.insights.topKeywords).toEqual([{ word: "tutorials", count: 1 }]);
     expect(result.generatedAt).toMatch(/^\d{4}-\d{2}-\d{2}T/);
+    expect(result.reviewCount).toBe(1);
     expect(generateInsights).toHaveBeenCalledOnce();
     expect(persistInsights).toHaveBeenCalledOnce();
   });
@@ -131,6 +136,7 @@ describe("resolveModuleReviewInsights", () => {
         reviews: REVIEWS,
         cachedRow: {
           module_id: "module-1",
+          review_count: 1,
           reviews_fingerprint: "outdated",
           summary: "Old summary",
           top_keywords: [{ word: "old", count: 1 }],
@@ -148,6 +154,7 @@ describe("resolveModuleReviewInsights", () => {
     expect(result.insights.summary).toBe("Fallback summary");
     expect(result.insights.source).toBe("fallback");
     expect(result.generatedAt).toMatch(/^\d{4}-\d{2}-\d{2}T/);
+    expect(result.reviewCount).toBe(1);
     expect(persistInsights).not.toHaveBeenCalled();
   });
 });

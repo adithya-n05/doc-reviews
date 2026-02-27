@@ -151,6 +151,7 @@ export type Database = {
         Row: {
           generated_at: string
           module_id: string
+          review_count: number
           reviews_fingerprint: string
           sentiment: Json
           source: string
@@ -161,6 +162,7 @@ export type Database = {
         Insert: {
           generated_at?: string
           module_id: string
+          review_count?: number
           reviews_fingerprint: string
           sentiment?: Json
           source: string
@@ -171,6 +173,7 @@ export type Database = {
         Update: {
           generated_at?: string
           module_id?: string
+          review_count?: number
           reviews_fingerprint?: string
           sentiment?: Json
           source?: string
