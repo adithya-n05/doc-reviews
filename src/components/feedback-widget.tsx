@@ -43,12 +43,12 @@ export function FeedbackWidget() {
   return (
     <div className="feedback-widget-shell">
       {open ? (
-        <form className="feedback-widget-panel" onSubmit={handleSubmit}>
-          <label className="feedback-widget-label" htmlFor="feedback-message">
+        <form className="card-box feedback-widget-panel" onSubmit={handleSubmit}>
+          <label className="label-caps feedback-widget-label" htmlFor="feedback-message">
             Share feedback
           </label>
           <textarea
-            className="feedback-widget-textarea"
+            className="form-input feedback-widget-textarea"
             id="feedback-message"
             maxLength={4000}
             onChange={(event) => {
@@ -65,14 +65,14 @@ export function FeedbackWidget() {
           />
           <div className="feedback-widget-actions">
             <button
-              className="feedback-widget-secondary"
+              className="btn btn-ghost btn-sm feedback-widget-secondary"
               onClick={() => setOpen(false)}
               type="button"
             >
               Close
             </button>
             <button
-              className="feedback-widget-submit"
+              className="btn btn-primary btn-sm feedback-widget-submit"
               disabled={status === "sending" || message.trim().length < 1}
               type="submit"
             >
@@ -90,7 +90,7 @@ export function FeedbackWidget() {
         </form>
       ) : null}
       <button
-        className="feedback-widget-trigger"
+        className="btn btn-ghost btn-sm feedback-widget-trigger"
         onClick={() => setOpen((value) => !value)}
         type="button"
       >

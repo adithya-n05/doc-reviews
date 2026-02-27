@@ -1745,84 +1745,50 @@
 }
 
 .feedback-widget-trigger {
-  border: 1px solid var(--border);
-  background: var(--cream-dark);
-  color: var(--ink-mid);
-  padding: 7px 11px;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: border-color 120ms ease, color 120ms ease, background 120ms ease;
-}
-
-.feedback-widget-trigger:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  background: var(--accent-bg);
+  min-width: 132px;
+  text-align: center;
+  background: var(--surface);
 }
 
 .feedback-widget-panel {
-  width: min(320px, calc(100vw - 24px));
-  border: 1px solid var(--border);
-  background: var(--surface);
-  padding: 12px;
+  width: min(420px, calc(100vw - 24px));
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+  gap: 12px;
+  box-shadow: 0 8px 22px rgba(0, 33, 71, 0.16);
 }
 
 .feedback-widget-label {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ink-mid);
+  color: var(--ink-light);
 }
 
 .feedback-widget-textarea {
   width: 100%;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--ink);
   resize: vertical;
-  min-height: 96px;
-  padding: 8px 10px;
-  font-size: 13px;
-  line-height: 1.45;
-  font-family: var(--font-sans);
+  min-height: 132px;
+  line-height: 1.7;
 }
 
 .feedback-widget-actions {
   display: flex;
   justify-content: flex-end;
-  gap: 8px;
+  gap: 10px;
 }
 
 .feedback-widget-secondary,
 .feedback-widget-submit {
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--ink-mid);
-  font-size: 10px;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  font-weight: 700;
-  cursor: pointer;
-  padding: 6px 10px;
+  min-width: 110px;
+  text-align: center;
 }
 
 .feedback-widget-submit {
-  border-color: var(--accent);
-  background: var(--accent);
-  color: #fff;
+  min-width: 118px;
 }
 
 .feedback-widget-submit:disabled {
-  opacity: 0.7;
-  cursor: wait;
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .feedback-widget-status {

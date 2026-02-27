@@ -15,4 +15,12 @@ describe("feedback widget component", () => {
     expect(source).toContain("feedback-widget-trigger");
     expect(source).toContain("Feedback");
   });
+
+  it("reuses editorial form/button classes for visual parity", () => {
+    expect(source).toContain("className=\"card-box feedback-widget-panel\"");
+    expect(source).toContain("className=\"form-input feedback-widget-textarea\"");
+    expect(source).toContain("className=\"btn btn-ghost btn-sm feedback-widget-secondary\"");
+    expect(source).toContain("className=\"btn btn-primary btn-sm feedback-widget-submit\"");
+    expect(source).toContain("className=\"btn btn-ghost btn-sm feedback-widget-trigger\"");
+  });
 });
