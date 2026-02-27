@@ -753,7 +753,8 @@
        STAFF CARD
     ========================================================= */
     .staff-grid {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 1px;
       background: var(--border);
       border: 1px solid var(--border);
@@ -761,7 +762,6 @@
     }
 
     .staff-card {
-      flex: 1;
       background: var(--cream);
       padding: 20px;
       display: flex;
@@ -1286,7 +1286,6 @@
       .module-grid  { grid-template-columns: 1fr; }
       .metrics-grid { grid-template-columns: repeat(2, 1fr); }
       .features-strip-inner { grid-template-columns: 1fr; }
-      .staff-grid { flex-direction: column; }
       .two-col { grid-template-columns: 1fr; }
     }
 
