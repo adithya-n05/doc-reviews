@@ -9,8 +9,11 @@ describe("profile actions", () => {
     expect(source).toContain("export async function clearProfilePhotoAction");
   });
 
-  it("validates avatar urls and updates profiles.avatar_url", () => {
-    expect(source).toContain("validateProfileAvatarUrl");
+  it("validates avatar file uploads and updates profiles.avatar_url", () => {
+    expect(source).toContain("validateProfileAvatarFile");
+    expect(source).toContain('formData.get("avatarFile")');
+    expect(source).toContain('.storage.from("profile-avatars")');
+    expect(source).toContain(".upload(");
     expect(source).toContain('.from("profiles")');
     expect(source).toContain("avatar_url");
     expect(source).toContain("redirect(\"/profile?photo=updated\")");

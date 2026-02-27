@@ -2,17 +2,16 @@
 
 import { redirect } from "next/navigation";
 import { requireUserContext } from "@/lib/server/auth-context";
-import { validateProfileAvatarUrl } from "@/lib/validation/profile-avatar";
+import { validateProfileAvatarFile } from "@/lib/validation/profile-avatar-file";
 
 function withError(message: string): never {
   redirect(`/profile?error=${encodeURIComponent(message)}`);
 }
 
 export async function updateProfilePhotoAction(formData: FormData): Promise<never> {
-  const avatarUrl = String(formData.get("avatarUrl") ?? "");
-  const validation = validateProfileAvatarUrl(avatarUrl);
+  const validation = validateProfileAvatarFile(formData.get("avatarFile"));
   if (!validation.ok) {
-    withError(validation.errors.avatarUrl ?? "Invalid profile photo URL.");
+    withError(validation.error);
   }
 
   const { client, user } = await requireUserContext({
@@ -20,9 +19,19 @@ export async function updateProfilePhotoAction(formData: FormData): Promise<neve
     requireOnboarded: true,
   });
 
+  const uploadPath = `${user.id}/${crypto.randomUUID()}.${validation.extension}`;
+  const uploadResult = await client.storage.from("profile-avatars").upload(uploadPath, validation.file, {
+    contentType: validation.contentType,
+    upsert: true,
+  });
+  if (uploadResult.error) {
+    withError("Unable to upload profile photo right now.");
+  }
+
+  const { data: publicUrlData } = client.storage.from("profile-avatars").getPublicUrl(uploadPath);
   const { error } = await client
     .from("profiles")
-    .update({ avatar_url: validation.value })
+    .update({ avatar_url: publicUrlData.publicUrl })
     .eq("id", user.id);
 
   if (error) {
