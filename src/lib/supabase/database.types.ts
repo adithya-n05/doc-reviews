@@ -14,6 +14,30 @@ export type Database = {
   }
   public: {
     Tables: {
+      feedback_submissions: {
+        Row: {
+          created_at: string
+          id: string
+          message: string
+          page_path: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          message: string
+          page_path: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          message?: string
+          page_path?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       module_leaders: {
         Row: {
           created_at: string
