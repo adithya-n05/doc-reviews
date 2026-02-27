@@ -43,6 +43,11 @@ function formatReviewDate(value: string) {
   });
 }
 
+function metricBarWidth(value: number) {
+  const clamped = Math.max(0, Math.min(5, value));
+  return `${Math.round((clamped / 5) * 100)}%`;
+}
+
 export default async function ModuleDetailPage({
   params,
   searchParams,
@@ -137,12 +142,27 @@ export default async function ModuleDetailPage({
               {insights.averages.overall.toFixed(1)}{" "}
               <span style={{ fontSize: "18px", color: "var(--ink-light)" }}>/ 5</span>
             </div>
+            <div className="metric-bar">
+              <div
+                className="metric-bar-fill"
+                style={{ width: metricBarWidth(insights.averages.overall) }}
+              />
+            </div>
           </div>
           <div className="metric-card">
             <div className="label-caps">Difficulty</div>
             <div className="metric-value">
               {insights.averages.difficulty.toFixed(1)}{" "}
               <span style={{ fontSize: "18px", color: "var(--ink-light)" }}>/ 5</span>
+            </div>
+            <div className="metric-bar">
+              <div
+                className="metric-bar-fill"
+                style={{
+                  width: metricBarWidth(insights.averages.difficulty),
+                  background: "var(--ink-mid)",
+                }}
+              />
             </div>
           </div>
           <div className="metric-card">
@@ -151,6 +171,12 @@ export default async function ModuleDetailPage({
               {insights.averages.teaching.toFixed(1)}{" "}
               <span style={{ fontSize: "18px", color: "var(--ink-light)" }}>/ 5</span>
             </div>
+            <div className="metric-bar">
+              <div
+                className="metric-bar-fill"
+                style={{ width: metricBarWidth(insights.averages.teaching) }}
+              />
+            </div>
           </div>
           <div className="metric-card">
             <div className="label-caps">Workload</div>
@@ -158,19 +184,40 @@ export default async function ModuleDetailPage({
               {insights.averages.workload.toFixed(1)}{" "}
               <span style={{ fontSize: "18px", color: "var(--ink-light)" }}>/ 5</span>
             </div>
+            <div className="metric-bar">
+              <div
+                className="metric-bar-fill"
+                style={{
+                  width: metricBarWidth(insights.averages.workload),
+                  background: "var(--ink-mid)",
+                }}
+              />
+            </div>
           </div>
           <div className="metric-card">
-            <div className="label-caps">Assessment Fairness</div>
+            <div className="label-caps">Content Quality</div>
+            <div className="metric-value">
+              {insights.averages.overall.toFixed(1)}{" "}
+              <span style={{ fontSize: "18px", color: "var(--ink-light)" }}>/ 5</span>
+            </div>
+            <div className="metric-bar">
+              <div
+                className="metric-bar-fill"
+                style={{ width: metricBarWidth(insights.averages.overall) }}
+              />
+            </div>
+          </div>
+          <div className="metric-card">
+            <div className="label-caps">Exam Fairness</div>
             <div className="metric-value">
               {insights.averages.assessment.toFixed(1)}{" "}
               <span style={{ fontSize: "18px", color: "var(--ink-light)" }}>/ 5</span>
             </div>
-          </div>
-          <div className="metric-card">
-            <div className="label-caps">Sentiment</div>
-            <div className="metric-value">
-              {insights.sentiment.positive}/{insights.reviewCount}{" "}
-              <span style={{ fontSize: "16px", color: "var(--ink-light)" }}>positive</span>
+            <div className="metric-bar">
+              <div
+                className="metric-bar-fill"
+                style={{ width: metricBarWidth(insights.averages.assessment) }}
+              />
             </div>
           </div>
         </div>
@@ -199,6 +246,9 @@ export default async function ModuleDetailPage({
           <div className="label-caps" style={{ marginBottom: "10px" }}>
             Student Sentiment
           </div>
+          <p className="form-note" style={{ marginBottom: "10px" }}>
+            {insights.sentiment.positive}/{insights.reviewCount} positive reviews
+          </p>
           <div className="tag-cloud">
             {insights.topKeywords.length > 0 ? (
               insights.topKeywords.map((keyword) => (
