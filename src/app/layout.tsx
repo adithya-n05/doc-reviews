@@ -7,8 +7,6 @@ import {
 import { SITE_DESCRIPTION, SITE_NAME, getSiteUrl } from "@/lib/site-metadata";
 import "./globals.css";
 
-const ICON_ASSET_VERSION = "20260227-4";
-
 const newsreader = Newsreader({
   subsets: ["latin"],
   variable: "--font-serif",
@@ -60,18 +58,28 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: `/favicon.svg?v=${ICON_ASSET_VERSION}`,
+        url: "/favicon-dr.svg",
         type: "image/svg+xml",
         sizes: "any",
       },
       {
-        url: `/favicon.ico?v=${ICON_ASSET_VERSION}`,
+        url: "/favicon.ico",
+      },
+      {
+        url: "/favicon-dr-32x32.png",
+        sizes: "32x32",
+        type: "image/png",
+      },
+      {
+        url: "/favicon-dr-16x16.png",
+        sizes: "16x16",
+        type: "image/png",
       },
     ],
-    shortcut: [`/favicon.ico?v=${ICON_ASSET_VERSION}`],
+    shortcut: ["/favicon.ico"],
     apple: [
       {
-        url: `/apple-touch-icon.png?v=${ICON_ASSET_VERSION}`,
+        url: "/apple-touch-icon.png",
         sizes: "180x180",
         type: "image/png",
       },
