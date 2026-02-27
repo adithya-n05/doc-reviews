@@ -1,5 +1,7 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { unstable_cache } from "next/cache";
 import type { Tables } from "@/lib/supabase/database.types";
+import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import type {
   ModuleCataloguePresentationRow,
   ModulePresentationRow,
@@ -54,6 +56,19 @@ export async function fetchModuleCatalogueRows(
     .order("code", { ascending: true });
 
   return (data ?? []) as ModuleCatalogueWithRelations[];
+}
+
+const fetchModuleCatalogueRowsCachedInternal = unstable_cache(
+  async (): Promise<ModuleCatalogueWithRelations[]> => {
+    const adminClient = createSupabaseAdminClient();
+    return fetchModuleCatalogueRows(adminClient);
+  },
+  ["module-catalogue-rows"],
+  { revalidate: 60 },
+);
+
+export async function fetchModuleCatalogueRowsCached(): Promise<ModuleCatalogueWithRelations[]> {
+  return fetchModuleCatalogueRowsCachedInternal();
 }
 
 export async function fetchModuleByCode(

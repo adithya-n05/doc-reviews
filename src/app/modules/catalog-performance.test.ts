@@ -14,4 +14,10 @@ describe("module catalogue performance wiring", () => {
   it("does not depend on detail presenter in list page", () => {
     expect(source).not.toContain("toModuleListItem");
   });
+
+  it("uses shared cached catalogue fetch path", () => {
+    expect(source).toContain('import { fetchModuleCatalogueRowsCached } from "@/lib/server/module-queries";');
+    expect(source).toContain("fetchModuleCatalogueRowsCached()");
+    expect(source).not.toContain("fetchModuleCatalogueRows(client)");
+  });
 });

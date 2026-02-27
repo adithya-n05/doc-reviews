@@ -3,14 +3,15 @@ import { SiteNav } from "@/components/site-nav";
 import { toModuleCatalogueItem } from "@/lib/modules/presenter";
 import { parseModuleCatalogueSearchParams } from "@/lib/modules/query-params";
 import { requireUserContext } from "@/lib/server/auth-context";
-import { fetchModuleCatalogueRows } from "@/lib/server/module-queries";
+import { fetchModuleCatalogueRowsCached } from "@/lib/server/module-queries";
 
 type ModulesPageProps = {
   searchParams?: Promise<Record<string, string | string[] | undefined>>;
 };
 
 export default async function ModulesPage({ searchParams }: ModulesPageProps) {
-  const { client, profile } = await requireUserContext({
+  const catalogueRowsPromise = fetchModuleCatalogueRowsCached();
+  const { profile } = await requireUserContext({
     requireVerified: true,
     requireOnboarded: true,
   });
@@ -18,7 +19,7 @@ export default async function ModulesPage({ searchParams }: ModulesPageProps) {
   const parsed = parseModuleCatalogueSearchParams((await searchParams) ?? {});
   const activeYear = parsed.year;
 
-  const rows = await fetchModuleCatalogueRows(client);
+  const rows = await catalogueRowsPromise;
   const modules = rows.map((row) => toModuleCatalogueItem(row));
 
   return (
