@@ -68,4 +68,28 @@ describe("createReviewReplyForUser", () => {
       expect(result.message).toMatch(/db failure/i);
     }
   });
+
+  it("returns db failure when persistence throws", async () => {
+    const persistence = {
+      insertReply: vi.fn(async () => {
+        throw new Error("timeout");
+      }),
+    };
+
+    const result = await createReviewReplyForUser(
+      {
+        userId: "user-1",
+        reviewId: "review-1",
+        parentReplyId: null,
+        body: "Looks useful",
+      },
+      persistence,
+    );
+
+    expect(result).toEqual({
+      ok: false,
+      type: "db",
+      message: "timeout",
+    });
+  });
 });
