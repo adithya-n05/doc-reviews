@@ -16,4 +16,11 @@ describe("global theme toggle wiring", () => {
     expect(toggleSource).toContain("localStorage.setItem");
     expect(toggleSource).toContain("document.documentElement.setAttribute(\"data-theme\"");
   });
+
+  it("uses icon-first button treatment instead of visible light/dark text labels", () => {
+    expect(toggleSource).toContain('className="theme-toggle-icon"');
+    expect(toggleSource).toContain('aria-hidden="true"');
+    expect(toggleSource).toContain("theme === \"dark\" ? \"☀\" : \"☾\"");
+    expect(toggleSource).not.toContain("theme-toggle-label");
+  });
 });

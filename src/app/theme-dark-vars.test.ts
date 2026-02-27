@@ -15,6 +15,7 @@ describe("dark theme css variables", () => {
   it("styles floating theme toggle control", () => {
     expect(css).toContain(".theme-toggle");
     expect(css).toContain(".theme-toggle:hover");
-    expect(css).toContain(".theme-toggle-label");
+    expect(css).toContain(".theme-toggle-icon");
+    expect(css).toContain(".sr-only");
   });
 });
