@@ -1,6 +1,32 @@
 import Link from "next/link";
+import type { LandingMetrics } from "@/lib/metrics/landing-metrics";
+import { createSupabaseAdminClient } from "@/lib/supabase/admin";
+import { fetchLandingMetrics } from "@/lib/server/landing-metrics";
 
-export default function HomePage() {
+const ZERO_METRICS: LandingMetrics = {
+  modulesCount: 0,
+  reviewsCount: 0,
+  averageRating: 0,
+  topModuleRating: 0,
+  averageWorkload: 0,
+  recommendPercentage: 0,
+  modulesWithReviews: 0,
+};
+
+function workloadHoursEstimate(rating: number): number {
+  if (rating <= 0) return 0;
+  return Math.round(rating * 4);
+}
+
+export default async function HomePage() {
+  let metrics = ZERO_METRICS;
+  try {
+    const adminClient = createSupabaseAdminClient();
+    metrics = await fetchLandingMetrics(adminClient);
+  } catch {
+    metrics = ZERO_METRICS;
+  }
+
   return (
     <div className="site-shell">
       <div className="landing-masthead">
@@ -40,19 +66,19 @@ export default function HomePage() {
         <div className="ticker-inner">
           <span className="ticker-label">Live Stats</span>
           <span className="ticker-stat">
-            <strong>0</strong> reviews published
+            <strong>{metrics.reviewsCount}</strong> reviews published
           </span>
           <span className="ticker-stat" style={{ color: "rgba(255,255,255,0.3)" }}>
             ·
           </span>
           <span className="ticker-stat">
-            <strong>0</strong> modules covered
+            <strong>{metrics.modulesCount}</strong> modules covered
           </span>
           <span className="ticker-stat" style={{ color: "rgba(255,255,255,0.3)" }}>
             ·
           </span>
           <span className="ticker-stat">
-            Average rating <strong>0.0 / 5</strong>
+            Average rating <strong>{metrics.averageRating.toFixed(1)} / 5</strong>
           </span>
         </div>
       </div>
@@ -106,7 +132,7 @@ export default function HomePage() {
                     color: "var(--accent)",
                   }}
                 >
-                  0.0
+                  {metrics.topModuleRating.toFixed(1)}
                 </div>
                 <div className="label-caps" style={{ marginTop: "2px" }}>
                   Avg. top module
@@ -120,7 +146,7 @@ export default function HomePage() {
                     fontWeight: 500,
                   }}
                 >
-                  0%
+                  {metrics.recommendPercentage}%
                 </div>
                 <div className="label-caps" style={{ marginTop: "2px" }}>
                   Would recommend
@@ -134,7 +160,7 @@ export default function HomePage() {
                     fontWeight: 500,
                   }}
                 >
-                  0h
+                  {workloadHoursEstimate(metrics.averageWorkload)}h
                 </div>
                 <div className="label-caps" style={{ marginTop: "2px" }}>
                   Avg. weekly workload
@@ -150,7 +176,7 @@ export default function HomePage() {
       <div className="features-strip">
         <div className="features-strip-inner">
           <div className="feature-item">
-            <div className="feature-number">0</div>
+            <div className="feature-number">{metrics.reviewsCount}</div>
             <div className="feature-label">Reviews Published</div>
             <div className="feature-desc">
               Detailed, attributed reviews from verified Computing students.
@@ -164,7 +190,7 @@ export default function HomePage() {
             </div>
           </div>
           <div className="feature-item">
-            <div className="feature-number">0</div>
+            <div className="feature-number">{metrics.modulesCount}</div>
             <div className="feature-label">Modules Covered</div>
             <div className="feature-desc">
               Coverage from first-year fundamentals to MEng specialisms.
