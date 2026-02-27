@@ -2,32 +2,37 @@
 
 import { FormEvent, useState } from "react";
 import { usePathname } from "next/navigation";
+import { submitFeedback } from "@/lib/services/feedback-submit";
 
 export function FeedbackWidget() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("Could not submit right now.");
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">(
     "idle",
   );
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setStatus("sending");
+    const trimmedMessage = message.trim();
+    if (!trimmedMessage) {
+      setStatus("error");
+      setErrorMessage("Feedback must be between 1 and 4000 characters.");
+      return;
+    }
 
-    const response = await fetch("/api/feedback", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        message,
-        pagePath: pathname ?? "/",
-      }),
+    setStatus("sending");
+    setErrorMessage("Could not submit right now.");
+
+    const result = await submitFeedback({
+      message: trimmedMessage,
+      pagePath: pathname ?? "/",
     });
 
-    if (!response.ok) {
+    if (!result.ok) {
       setStatus("error");
+      setErrorMessage(result.error);
       return;
     }
 
@@ -51,6 +56,7 @@ export function FeedbackWidget() {
               if (status !== "idle") {
                 setStatus("idle");
               }
+              setErrorMessage("Could not submit right now.");
             }}
             placeholder="Tell us what to improve..."
             required
@@ -67,7 +73,7 @@ export function FeedbackWidget() {
             </button>
             <button
               className="feedback-widget-submit"
-              disabled={status === "sending"}
+              disabled={status === "sending" || message.trim().length < 1}
               type="submit"
             >
               {status === "sending" ? "Sending..." : "Send"}
@@ -78,7 +84,7 @@ export function FeedbackWidget() {
           ) : null}
           {status === "error" ? (
             <p className="feedback-widget-status error">
-              Could not submit right now.
+              {errorMessage}
             </p>
           ) : null}
         </form>

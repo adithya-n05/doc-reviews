@@ -29,18 +29,25 @@ export async function POST(request: Request) {
     );
   }
 
-  const client = await createSupabaseServerClient();
-  const {
-    data: { user },
-  } = await client.auth.getUser();
+  try {
+    const client = await createSupabaseServerClient();
+    const {
+      data: { user },
+    } = await client.auth.getUser();
 
-  const { error } = await client.from("feedback_submissions").insert({
-    message: validation.value.message,
-    page_path: validation.value.pagePath,
-    user_id: user?.id ?? null,
-  });
+    const { error } = await client.from("feedback_submissions").insert({
+      message: validation.value.message,
+      page_path: validation.value.pagePath,
+      user_id: user?.id ?? null,
+    });
 
-  if (error) {
+    if (error) {
+      return NextResponse.json(
+        { error: "Unable to submit feedback right now." },
+        { status: 500 },
+      );
+    }
+  } catch {
     return NextResponse.json(
       { error: "Unable to submit feedback right now." },
       { status: 500 },

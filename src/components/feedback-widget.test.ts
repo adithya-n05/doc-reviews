@@ -4,9 +4,10 @@ import { describe, expect, it } from "vitest";
 describe("feedback widget component", () => {
   const source = readFileSync("src/components/feedback-widget.tsx", "utf8");
 
-  it("captures route context and posts to feedback api", () => {
+  it("captures route context and submits via resilient feedback service", () => {
     expect(source).toContain("usePathname");
-    expect(source).toContain('fetch("/api/feedback"');
+    expect(source).toContain('import { submitFeedback } from "@/lib/services/feedback-submit";');
+    expect(source).toContain("await submitFeedback");
     expect(source).toContain("pagePath");
   });
 
