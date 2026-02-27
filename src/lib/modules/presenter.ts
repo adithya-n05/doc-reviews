@@ -6,6 +6,8 @@ type ModuleOfferingLite = {
 
 type ModuleLeaderLite = {
   leader_name: string;
+  profile_url: string | null;
+  photo_url: string | null;
 };
 
 type ModuleAggregateLite = {
@@ -113,7 +115,11 @@ function dedupeStudyYears(offerings: ModuleOfferingLite[] | null): number[] {
 
 export function toModuleListItem(row: ModulePresentationRow): ModuleListItem & {
   description: string;
-  leaders: string[];
+  leaders: Array<{
+    name: string;
+    profileUrl: string | null;
+    photoUrl: string | null;
+  }>;
   avgTeaching: number;
   avgWorkload: number;
   avgAssessment: number;
@@ -125,7 +131,11 @@ export function toModuleListItem(row: ModulePresentationRow): ModuleListItem & {
     title: row.title,
     description: row.description,
     studyYears: dedupeStudyYears(row.module_offerings),
-    leaders: (row.module_leaders ?? []).map((leader) => leader.leader_name),
+    leaders: (row.module_leaders ?? []).map((leader) => ({
+      name: leader.leader_name,
+      profileUrl: leader.profile_url,
+      photoUrl: leader.photo_url,
+    })),
     reviewCount: normalizeCount(aggregate?.review_count),
     avgOverall: normalizeScore(aggregate?.avg_overall),
     avgDifficulty: normalizeScore(aggregate?.avg_difficulty),

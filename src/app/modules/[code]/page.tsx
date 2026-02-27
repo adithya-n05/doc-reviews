@@ -87,7 +87,10 @@ export default async function ModuleDetailPage({
   );
 
   const studyYear = moduleItem.studyYears[0] ?? profile.year ?? 1;
-  const leaders = moduleItem.leaders.length > 0 ? moduleItem.leaders : ["TBC"];
+  const leaders =
+    moduleItem.leaders.length > 0
+      ? moduleItem.leaders
+      : [{ name: "TBC", profileUrl: null, photoUrl: null }];
 
   return (
     <div className="site-shell">
@@ -228,16 +231,29 @@ export default async function ModuleDetailPage({
         <h2 className="section-sub">Teaching Staff</h2>
         <div className="staff-grid">
           {leaders.map((leader) => {
-            const initials = leader
+            const initials = leader.name
               .split(/\s+/)
               .slice(0, 2)
               .map((part) => part[0]?.toUpperCase() ?? "")
               .join("");
             return (
-              <div key={leader} className="staff-card">
-                <div className="staff-initials">{initials || "?"}</div>
+              <div key={leader.name} className="staff-card">
+                {leader.photoUrl ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img className="staff-photo" src={leader.photoUrl} alt={`${leader.name} profile`} />
+                ) : (
+                  <div className="staff-initials">{initials || "?"}</div>
+                )}
                 <div>
-                  <div className="staff-name">{leader}</div>
+                  <div className="staff-name">
+                    {leader.profileUrl ? (
+                      <a href={leader.profileUrl} target="_blank" rel="noreferrer noopener">
+                        {leader.name}
+                      </a>
+                    ) : (
+                      leader.name
+                    )}
+                  </div>
                   <div className="staff-role">Module Leader</div>
                 </div>
               </div>

@@ -39,4 +39,10 @@ describe("module detail review rendering", () => {
   it("makes the year breadcrumb clickable back to filtered catalogue", () => {
     expect(source).toContain('href={`/modules?year=${studyYear}`}');
   });
+
+  it("renders leader photos when available with initials fallback", () => {
+    expect(source).toContain("leader.photoUrl ? (");
+    expect(source).toContain("className=\"staff-photo\"");
+    expect(source).toContain("className=\"staff-initials\"");
+  });
 });

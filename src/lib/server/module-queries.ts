@@ -11,7 +11,7 @@ type ModuleOfferingSummary = Pick<
   "study_year" | "term" | "offering_type" | "degree_path" | "academic_year_label"
 >;
 
-type ModuleLeaderSummary = Pick<Tables<"module_leaders">, "leader_name">;
+type ModuleLeaderSummary = Pick<Tables<"module_leaders">, "leader_name" | "profile_url" | "photo_url">;
 
 type ModuleAggregateSummary = Tables<"module_review_aggregates">;
 
@@ -58,7 +58,7 @@ export async function fetchModuleByCode(
       `
         id,code,title,description,
         module_offerings(study_year,term,offering_type,degree_path,academic_year_label),
-        module_leaders(leader_name),
+        module_leaders(leader_name,profile_url,photo_url),
         module_review_aggregates(review_count,avg_overall,avg_difficulty,avg_teaching,avg_workload,avg_assessment,module_id)
       `,
     )

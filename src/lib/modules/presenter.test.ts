@@ -17,7 +17,13 @@ const BASE_ROW: ModulePresentationRow = {
     { study_year: 1 },
     { study_year: 1 },
   ],
-  module_leaders: [{ leader_name: "Prof. Susan Bhattacharya" }],
+  module_leaders: [
+    {
+      leader_name: "Prof. Susan Bhattacharya",
+      profile_url: "https://profiles.imperial.ac.uk/s.bhattacharya",
+      photo_url: "https://example.com/susan.jpg",
+    },
+  ],
   module_review_aggregates: {
     review_count: 42,
     avg_overall: 4.3,
@@ -33,7 +39,13 @@ describe("toModuleListItem", () => {
     const item = toModuleListItem(BASE_ROW);
     expect(item.code).toBe("40008");
     expect(item.studyYears).toEqual([1, 2]);
-    expect(item.leaders).toEqual(["Prof. Susan Bhattacharya"]);
+    expect(item.leaders).toEqual([
+      {
+        name: "Prof. Susan Bhattacharya",
+        profileUrl: "https://profiles.imperial.ac.uk/s.bhattacharya",
+        photoUrl: "https://example.com/susan.jpg",
+      },
+    ]);
     expect(item.reviewCount).toBe(42);
     expect(item.avgOverall).toBe(4.3);
     expect(item.avgDifficulty).toBe(3.4);
@@ -70,6 +82,27 @@ describe("toModuleListItem", () => {
     expect(item.reviewCount).toBe(0);
     expect(item.avgOverall).toBe(0);
     expect(item.avgDifficulty).toBe(0);
+  });
+
+  it("normalizes optional leader profile/photo urls", () => {
+    const item = toModuleListItem({
+      ...BASE_ROW,
+      module_leaders: [
+        {
+          leader_name: "Dr Iain Phillips",
+          profile_url: null,
+          photo_url: null,
+        },
+      ],
+    });
+
+    expect(item.leaders).toEqual([
+      {
+        name: "Dr Iain Phillips",
+        profileUrl: null,
+        photoUrl: null,
+      },
+    ]);
   });
 });
 

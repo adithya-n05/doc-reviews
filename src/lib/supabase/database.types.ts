@@ -20,18 +20,24 @@ export type Database = {
           id: string
           leader_name: string
           module_id: string
+          photo_url: string | null
+          profile_url: string | null
         }
         Insert: {
           created_at?: string
           id?: string
           leader_name: string
           module_id: string
+          photo_url?: string | null
+          profile_url?: string | null
         }
         Update: {
           created_at?: string
           id?: string
           leader_name?: string
           module_id?: string
+          photo_url?: string | null
+          profile_url?: string | null
         }
         Relationships: [
           {
