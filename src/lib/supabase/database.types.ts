@@ -123,6 +123,47 @@ export type Database = {
         }
         Relationships: []
       }
+      module_review_insights: {
+        Row: {
+          generated_at: string
+          module_id: string
+          reviews_fingerprint: string
+          sentiment: Json
+          source: string
+          summary: string
+          top_keywords: Json
+          updated_at: string
+        }
+        Insert: {
+          generated_at?: string
+          module_id: string
+          reviews_fingerprint: string
+          sentiment?: Json
+          source: string
+          summary: string
+          top_keywords?: Json
+          updated_at?: string
+        }
+        Update: {
+          generated_at?: string
+          module_id?: string
+          reviews_fingerprint?: string
+          sentiment?: Json
+          source?: string
+          summary?: string
+          top_keywords?: Json
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "module_review_insights_module_id_fkey"
+            columns: ["module_id"]
+            isOneToOne: true
+            referencedRelation: "modules"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           created_at: string
