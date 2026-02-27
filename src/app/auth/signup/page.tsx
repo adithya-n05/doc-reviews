@@ -25,13 +25,11 @@ export default async function SignupPage({ searchParams }: SignupPageProps) {
   return (
     <div className="site-shell">
       <main className="auth-wrap">
-        <section className="auth-card">
+        <section className="auth-card auth-card-plain">
           <AuthBrand />
           <p className="label-caps">Create Your Account</p>
           <h1 className="auth-title">Step 1 of 4 - Your Details</h1>
-          <p className="auth-subtitle">
-            Registration is restricted to Imperial Computing students.
-          </p>
+          <p className="auth-subtitle">Registration is restricted to Imperial Computing students.</p>
           <SignupProgress step={1} />
 
           {error ? <p className="form-banner error">{error}</p> : null}
@@ -112,6 +110,9 @@ export default async function SignupPage({ searchParams }: SignupPageProps) {
           </form>
 
           <p className="form-note" style={{ marginTop: "22px" }}>
+            Access restricted to Imperial College Computing students.
+          </p>
+          <p className="form-note" style={{ marginTop: "8px" }}>
             Already have an account? <Link href="/auth/login">Sign in</Link>.
           </p>
         </section>
