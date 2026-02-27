@@ -19,6 +19,10 @@
       --accent:     #003E74;
       --accent-dark:#002147;
       --accent-bg:  #EDF3F9;
+      --inverse-bg: #151a20;
+      --inverse-text: #F4F7FC;
+      --inverse-text-muted: #D4DDEB;
+      --inverse-divider: #3A4A60;
       --font-serif: 'Newsreader', Georgia, serif;
       --font-sans:  'Source Sans 3', system-ui, sans-serif;
       --font-mono:  'Source Code Pro', monospace;
@@ -38,6 +42,10 @@
       --accent:     #4ea2ff;
       --accent-dark:#2e80db;
       --accent-bg:  #12263d;
+      --inverse-bg: #182230;
+      --inverse-text: #EEF5FF;
+      --inverse-text-muted: #C9D9EE;
+      --inverse-divider: #4A6386;
     }
 
     html, body {
@@ -1191,8 +1199,8 @@
     }
 
     .landing-ticker {
-      background: var(--ink);
-      color: var(--cream);
+      background: var(--inverse-bg);
+      color: var(--inverse-text);
       padding: 7px 24px;
     }
 
@@ -1209,21 +1217,25 @@
       font-weight: 700;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: #7fb9ff;
+      color: var(--accent);
       flex-shrink: 0;
       padding-right: 20px;
-      border-right: 1px solid rgba(255,255,255,0.28);
+      border-right: 1px solid var(--inverse-divider);
     }
 
     .ticker-stat {
       font-size: 13px;
       font-weight: 400;
-      color: rgba(250,250,247,0.92);
+      color: var(--inverse-text-muted);
     }
 
     .ticker-stat strong {
-      color: var(--cream);
+      color: var(--inverse-text);
       font-weight: 600;
+    }
+
+    .ticker-separator {
+      color: var(--inverse-divider);
     }
 
     .hero-section {

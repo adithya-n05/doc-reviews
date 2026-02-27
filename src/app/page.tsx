@@ -119,7 +119,7 @@ export default async function HomePage() {
             </strong>{" "}
             reviews published
           </span>
-          <span className="ticker-stat" style={{ color: "rgba(255,255,255,0.3)" }}>
+          <span className="ticker-stat ticker-separator">
             ·
           </span>
           <span className="ticker-stat">
@@ -128,7 +128,7 @@ export default async function HomePage() {
             </strong>{" "}
             modules covered
           </span>
-          <span className="ticker-stat" style={{ color: "rgba(255,255,255,0.3)" }}>
+          <span className="ticker-stat ticker-separator">
             ·
           </span>
           <span className="ticker-stat">

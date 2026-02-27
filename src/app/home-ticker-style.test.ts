@@ -4,11 +4,16 @@ import { describe, expect, it } from "vitest";
 describe("landing ticker readability", () => {
   const css = readFileSync("src/app/globals.css", "utf8");
 
-  it("uses higher-contrast ticker label and stat text colors", () => {
+  it("uses inverse-surface tokens for ticker background and text", () => {
+    const tickerBlock = css.match(/\.landing-ticker\s*\{[^}]*\}/)?.[0] ?? "";
     const labelBlock = css.match(/\.ticker-label\s*\{[^}]*\}/)?.[0] ?? "";
     const statBlock = css.match(/\.ticker-stat\s*\{[^}]*\}/)?.[0] ?? "";
+    const separatorBlock = css.match(/\.ticker-separator\s*\{[^}]*\}/)?.[0] ?? "";
 
-    expect(labelBlock).toContain("color: #7fb9ff;");
-    expect(statBlock).toContain("color: rgba(250,250,247,0.92);");
+    expect(tickerBlock).toContain("background: var(--inverse-bg);");
+    expect(tickerBlock).toContain("color: var(--inverse-text);");
+    expect(labelBlock).toContain("color: var(--accent);");
+    expect(statBlock).toContain("color: var(--inverse-text-muted);");
+    expect(separatorBlock).toContain("color: var(--inverse-divider);");
   });
 });

@@ -73,6 +73,7 @@ describe("module detail review rendering", () => {
     expect(source).toContain("justifyContent: \"flex-end\"");
     expect(source).toContain("Edit");
     expect(source).toContain("Delete");
+    expect(source).toContain('className="review-breakdown"');
   });
 
   it("makes the year breadcrumb clickable back to filtered catalogue", () => {

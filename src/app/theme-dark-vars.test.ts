@@ -10,6 +10,8 @@ describe("dark theme css variables", () => {
     expect(css).toContain("--ink:");
     expect(css).toContain("--border:");
     expect(css).toContain("--accent-bg:");
+    expect(css).toContain("--inverse-bg:");
+    expect(css).toContain("--inverse-text:");
   });
 
   it("styles floating theme toggle control", () => {

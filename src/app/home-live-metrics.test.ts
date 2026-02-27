@@ -14,5 +14,6 @@ describe("home page live metrics", () => {
     expect(source).toContain("value={metrics.reviewsCount}");
     expect(source).toContain("value={metrics.modulesCount}");
     expect(source).toContain("value={metrics.averageRating} decimals={1}");
+    expect(source).toContain("ticker-separator");
   });
 });
