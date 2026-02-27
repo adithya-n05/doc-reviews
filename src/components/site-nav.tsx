@@ -9,6 +9,7 @@ type PrivateNavProps = {
   authed: true;
   active: "modules" | "profile";
   displayName: string;
+  avatarUrl?: string | null;
 };
 
 type SiteNavProps = PublicNavProps | PrivateNavProps;
@@ -54,7 +55,16 @@ export function SiteNav(props: SiteNavProps) {
             Profile
           </Link>
           <Link href="/profile" className="nav-avatar" title={props.displayName}>
-            {toPublicReviewerInitials(props.displayName)}
+            {props.avatarUrl ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                className="nav-avatar-photo"
+                src={props.avatarUrl}
+                alt={`${props.displayName} avatar`}
+              />
+            ) : (
+              toPublicReviewerInitials(props.displayName)
+            )}
           </Link>
         </div>
       </div>

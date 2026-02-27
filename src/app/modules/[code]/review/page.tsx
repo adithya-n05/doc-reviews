@@ -50,7 +50,12 @@ export default async function WriteReviewPage({
 
   return (
     <div className="site-shell">
-      <SiteNav authed active="modules" displayName={profile.full_name} />
+      <SiteNav
+        authed
+        active="modules"
+        displayName={profile.full_name}
+        avatarUrl={profile.avatar_url}
+      />
       <main className="page" style={{ paddingTop: "40px", paddingBottom: "80px" }}>
         <div style={{ maxWidth: "760px", margin: "0 auto" }}>
           <div className="detail-breadcrumb">

@@ -24,7 +24,12 @@ export default async function ModulesPage({ searchParams }: ModulesPageProps) {
 
   return (
     <div className="site-shell">
-      <SiteNav authed active="modules" displayName={profile.full_name} />
+      <SiteNav
+        authed
+        active="modules"
+        displayName={profile.full_name}
+        avatarUrl={profile.avatar_url}
+      />
 
       <main className="page" style={{ paddingTop: "40px", paddingBottom: "60px" }}>
         <ModuleCatalogueBrowser

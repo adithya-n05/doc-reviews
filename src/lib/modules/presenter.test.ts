@@ -138,12 +138,14 @@ describe("mapReviewsWithProfiles", () => {
         fullName: "Sophie M.",
         email: "sm123@ic.ac.uk",
         year: 1,
+        avatarUrl: "https://img.example.com/sophie.jpg",
       },
     });
     expect(mapped).toHaveLength(1);
     expect(mapped[0].reviewerName).toBe("Sophie M.");
     expect(mapped[0].reviewerEmail).toBe("sm123@ic.ac.uk");
     expect(mapped[0].reviewerInitials).toBe("SM");
+    expect(mapped[0].reviewerAvatarUrl).toBe("https://img.example.com/sophie.jpg");
     expect(mapped[0].tips).toBe("Start tutorial sheets early every week.");
   });
 
@@ -156,14 +158,27 @@ describe("mapReviewsWithProfiles", () => {
   it("throws when profile has empty name or email", () => {
     expect(() =>
       mapReviewsWithProfiles(reviews, {
-        u1: { fullName: "", email: "sm123@ic.ac.uk", year: 1 },
+        u1: { fullName: "", email: "sm123@ic.ac.uk", year: 1, avatarUrl: null },
       }),
     ).toThrow("Review identity is incomplete for user: u1");
 
     expect(() =>
       mapReviewsWithProfiles(reviews, {
-        u1: { fullName: "Sophie M.", email: "", year: 1 },
+        u1: { fullName: "Sophie M.", email: "", year: 1, avatarUrl: null },
       }),
     ).toThrow("Review identity is incomplete for user: u1");
+  });
+
+  it("normalizes invalid avatar urls to null", () => {
+    const mapped = mapReviewsWithProfiles(reviews, {
+      u1: {
+        fullName: "Sophie M.",
+        email: "sm123@ic.ac.uk",
+        year: 1,
+        avatarUrl: "invalid-url",
+      },
+    });
+
+    expect(mapped[0].reviewerAvatarUrl).toBeNull();
   });
 });

@@ -77,6 +77,23 @@ function isLikelyPlaceholderStaffPhoto(photoUrl: string): boolean {
   );
 }
 
+function normalizeAvatarUrl(value: string | null | undefined): string | null {
+  if (typeof value !== "string") {
+    return null;
+  }
+
+  const trimmed = value.trim();
+  if (!trimmed) {
+    return null;
+  }
+
+  try {
+    return new URL(trimmed).toString();
+  } catch {
+    return null;
+  }
+}
+
 export default async function ModuleDetailPage({
   params,
   searchParams,
@@ -200,6 +217,7 @@ export default async function ModuleDetailPage({
       authorName: reviewerName,
       authorInitials: reviewerInitials || "?",
       authorEmail: profileRow?.email ?? "",
+      authorAvatarUrl: normalizeAvatarUrl(profileRow?.avatarUrl),
     };
   });
   const repliesByReviewId = new Map<string, typeof replyPresentationRows>();
@@ -225,7 +243,18 @@ export default async function ModuleDetailPage({
       key={reply.id}
     >
       <div className="review-reply-header">
-        <div className="review-avatar review-avatar-small">{reply.authorInitials}</div>
+        <div className="review-avatar review-avatar-small">
+          {reply.authorAvatarUrl ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              className="review-avatar-photo"
+              src={reply.authorAvatarUrl}
+              alt={`${reply.authorName} avatar`}
+            />
+          ) : (
+            reply.authorInitials
+          )}
+        </div>
         <div className="review-meta">
           <div className="review-author">{reply.authorName}</div>
           <div className="review-date">{formatReviewDate(reply.createdAt)}</div>
@@ -308,7 +337,12 @@ export default async function ModuleDetailPage({
 
   return (
     <div className="site-shell">
-      <SiteNav authed active="modules" displayName={profile.full_name} />
+      <SiteNav
+        authed
+        active="modules"
+        displayName={profile.full_name}
+        avatarUrl={profile.avatar_url}
+      />
       <main className="page" style={{ paddingTop: 0, paddingBottom: "60px" }}>
         <div className="detail-header">
           <div className="detail-breadcrumb">
@@ -534,7 +568,18 @@ export default async function ModuleDetailPage({
           return (
             <article className="review" id={`review-${review.id}`} key={review.id}>
               <div className="review-header">
-                <div className="review-avatar">{review.reviewerInitials}</div>
+                <div className="review-avatar">
+                  {review.reviewerAvatarUrl ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      className="review-avatar-photo"
+                      src={review.reviewerAvatarUrl}
+                      alt={`${review.reviewerName} avatar`}
+                    />
+                  ) : (
+                    review.reviewerInitials
+                  )}
+                </div>
                 <div className="review-meta">
                   <div className="review-author">{review.reviewerName}</div>
                   <div className="review-date">

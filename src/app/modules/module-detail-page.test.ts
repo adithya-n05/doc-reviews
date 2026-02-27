@@ -70,6 +70,12 @@ describe("module detail review rendering", () => {
     expect(source).toContain('href={`/modules?year=${studyYear}`}');
   });
 
+  it("renders reviewer avatar photos with initials fallback", () => {
+    expect(source).toContain("review.reviewerAvatarUrl ? (");
+    expect(source).toContain("className=\"review-avatar-photo\"");
+    expect(source).toContain("review.reviewerInitials");
+  });
+
   it("renders leader photos when available with initials fallback", () => {
     expect(source).toContain("const hasUsablePhoto =");
     expect(source).toContain("className=\"staff-photo\"");

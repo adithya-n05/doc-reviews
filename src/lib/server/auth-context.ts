@@ -23,7 +23,7 @@ export async function requireUserContext(options: AccessOptions = {}) {
 
   const { data: profile } = await client
     .from("profiles")
-    .select("id,full_name,email,year,degree_track,created_at")
+    .select("id,full_name,email,year,degree_track,created_at,avatar_url")
     .eq("id", user.id)
     .maybeSingle();
 

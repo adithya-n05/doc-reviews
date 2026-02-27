@@ -78,15 +78,29 @@ export default async function ProfilePage() {
 
   return (
     <div className="site-shell">
-      <SiteNav authed active="profile" displayName={profile.full_name} />
+      <SiteNav
+        authed
+        active="profile"
+        displayName={profile.full_name}
+        avatarUrl={profile.avatar_url}
+      />
       <main className="page" style={{ paddingTop: 0, paddingBottom: "60px" }}>
         <section className="profile-header">
           <div className="profile-avatar-large">
-            {profile.full_name
-              .split(/\s+/)
-              .slice(0, 2)
-              .map((part: string) => part[0]?.toUpperCase() ?? "")
-              .join("")}
+            {profile.avatar_url ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                className="profile-avatar-photo"
+                src={profile.avatar_url}
+                alt={`${profile.full_name} avatar`}
+              />
+            ) : (
+              profile.full_name
+                .split(/\s+/)
+                .slice(0, 2)
+                .map((part: string) => part[0]?.toUpperCase() ?? "")
+                .join("")
+            )}
           </div>
           <div style={{ flex: 1 }}>
             <h1 style={{ fontFamily: "var(--font-serif)", fontSize: "28px", fontWeight: 700 }}>

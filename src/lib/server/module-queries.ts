@@ -129,22 +129,28 @@ export async function fetchModuleReviews(
 export async function fetchProfilesByIds(
   client: SupabaseClient,
   userIds: string[],
-): Promise<Record<string, { fullName: string; email: string; year: number | null }>> {
+): Promise<
+  Record<string, { fullName: string; email: string; year: number | null; avatarUrl: string | null }>
+> {
   if (userIds.length === 0) {
     return {};
   }
 
   const { data } = await client
     .from("profiles")
-    .select("id,full_name,email,year")
+    .select("id,full_name,email,year,avatar_url")
     .in("id", userIds);
 
-  const map: Record<string, { fullName: string; email: string; year: number | null }> = {};
+  const map: Record<
+    string,
+    { fullName: string; email: string; year: number | null; avatarUrl: string | null }
+  > = {};
   for (const row of data ?? []) {
     map[row.id] = {
       fullName: row.full_name,
       email: row.email,
       year: row.year,
+      avatarUrl: row.avatar_url,
     };
   }
   return map;

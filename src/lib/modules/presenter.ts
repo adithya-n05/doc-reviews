@@ -55,6 +55,7 @@ type ProfileIdentity = {
   fullName: string;
   email: string;
   year: number | null;
+  avatarUrl: string | null;
 };
 
 export type PublicReview = {
@@ -63,6 +64,7 @@ export type PublicReview = {
   reviewerName: string;
   reviewerEmail: string;
   reviewerInitials: string;
+  reviewerAvatarUrl: string | null;
   year: number | null;
   teachingRating: number;
   workloadRating: number;
@@ -73,6 +75,23 @@ export type PublicReview = {
   createdAt: string;
   updatedAt: string;
 };
+
+function normalizeAvatarUrl(value: string | null | undefined): string | null {
+  if (typeof value !== "string") {
+    return null;
+  }
+
+  const trimmed = value.trim();
+  if (!trimmed) {
+    return null;
+  }
+
+  try {
+    return new URL(trimmed).toString();
+  } catch {
+    return null;
+  }
+}
 
 function pickAggregate(
   value: ModuleAggregateLite | ModuleAggregateLite[] | null,
@@ -199,6 +218,7 @@ export function mapReviewsWithProfiles(
       reviewerName: fullName,
       reviewerEmail: email,
       reviewerInitials: toPublicReviewerInitials(fullName),
+      reviewerAvatarUrl: normalizeAvatarUrl(profile.avatarUrl),
       year: profile.year,
       teachingRating: review.teaching_rating,
       workloadRating: review.workload_rating,
