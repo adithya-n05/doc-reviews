@@ -4,6 +4,7 @@ import {
   Source_Code_Pro,
   Source_Sans_3,
 } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import { FeedbackWidget } from "@/components/feedback-widget";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { SITE_DESCRIPTION, SITE_NAME, getSiteUrl } from "@/lib/site-metadata";
@@ -112,6 +113,7 @@ export default function RootLayout({
         <ThemeToggle />
         <FeedbackWidget />
         {children}
+        <Analytics />
       </body>
     </html>
   );
