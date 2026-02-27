@@ -6,7 +6,11 @@ import {
   upsertReviewForUser,
 } from "@/lib/services/review-service";
 import { toggleHelpfulVoteForReview } from "@/lib/services/review-helpful-service";
-import { createReviewReplyForUser } from "@/lib/services/review-reply-service";
+import {
+  createReviewReplyForUser,
+  deleteReviewReplyForUser,
+  updateReviewReplyForUser,
+} from "@/lib/services/review-reply-service";
 import { requireUserContext } from "@/lib/server/auth-context";
 
 function firstError(errors: Record<string, string | undefined>): string {
@@ -219,6 +223,82 @@ export async function postReviewReplyAction(formData: FormData): Promise<never> 
         `/modules/${moduleCode}?error=${encodeURIComponent(firstError(result.errors))}#review-${reviewId}`,
       );
     }
+    redirect(`/modules/${moduleCode}?error=${encodeURIComponent(result.message)}#review-${reviewId}`);
+  }
+
+  redirect(`/modules/${moduleCode}#review-${reviewId}`);
+}
+
+export async function updateReviewReplyAction(formData: FormData): Promise<never> {
+  const { client, user } = await requireUserContext({
+    requireVerified: true,
+    requireOnboarded: true,
+  });
+
+  const moduleCode = String(formData.get("moduleCode") ?? "").trim().toUpperCase();
+  const reviewId = String(formData.get("reviewId") ?? "");
+  const replyId = String(formData.get("replyId") ?? "");
+
+  const result = await updateReviewReplyForUser(
+    {
+      userId: user.id,
+      replyId,
+      body: String(formData.get("body") ?? ""),
+    },
+    {
+      async updateReply(payload) {
+        const { error } = await client
+          .from("review_replies")
+          .update({
+            body: payload.body,
+            updated_at: new Date().toISOString(),
+          })
+          .eq("id", payload.replyId)
+          .eq("user_id", payload.userId);
+        return { error };
+      },
+    },
+  );
+
+  if (!result.ok) {
+    if (result.type === "validation") {
+      const message = "errors" in result ? firstError(result.errors) : result.message;
+      redirect(`/modules/${moduleCode}?error=${encodeURIComponent(message)}#review-${reviewId}`);
+    }
+    redirect(`/modules/${moduleCode}?error=${encodeURIComponent(result.message)}#review-${reviewId}`);
+  }
+
+  redirect(`/modules/${moduleCode}#reply-${replyId}`);
+}
+
+export async function deleteReviewReplyAction(formData: FormData): Promise<never> {
+  const { client, user } = await requireUserContext({
+    requireVerified: true,
+    requireOnboarded: true,
+  });
+
+  const moduleCode = String(formData.get("moduleCode") ?? "").trim().toUpperCase();
+  const reviewId = String(formData.get("reviewId") ?? "");
+  const replyId = String(formData.get("replyId") ?? "");
+
+  const result = await deleteReviewReplyForUser(
+    {
+      userId: user.id,
+      replyId,
+    },
+    {
+      async deleteReply(payload) {
+        const { error } = await client
+          .from("review_replies")
+          .delete()
+          .eq("id", payload.replyId)
+          .eq("user_id", payload.userId);
+        return { error };
+      },
+    },
+  );
+
+  if (!result.ok) {
     redirect(`/modules/${moduleCode}?error=${encodeURIComponent(result.message)}#review-${reviewId}`);
   }
 

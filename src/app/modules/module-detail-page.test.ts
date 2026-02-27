@@ -45,6 +45,16 @@ describe("module detail review rendering", () => {
     expect(source).toContain("Hide replies");
   });
 
+  it("renders owner controls for editing and deleting replies", () => {
+    expect(source).toContain("updateReviewReplyAction");
+    expect(source).toContain("deleteReviewReplyAction");
+    expect(source).toContain('className="reply-actions"');
+    expect(source).toContain("Edit Reply");
+    expect(source).toContain("Delete Reply");
+    expect(source).toContain("reply.userId === user.id");
+    expect(source).toContain('id={`reply-${reply.id}`}');
+  });
+
   it("switches primary CTA to edit state when user already has a review", () => {
     expect(source).toContain("const currentUserReview =");
     expect(source).toContain("currentUserReview ? \"Edit your review\" : \"Write a review\"");

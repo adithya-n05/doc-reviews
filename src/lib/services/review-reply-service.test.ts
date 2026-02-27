@@ -1,5 +1,9 @@
 import { describe, expect, it, vi } from "vitest";
-import { createReviewReplyForUser } from "./review-reply-service";
+import {
+  createReviewReplyForUser,
+  deleteReviewReplyForUser,
+  updateReviewReplyForUser,
+} from "./review-reply-service";
 
 describe("createReviewReplyForUser", () => {
   it("validates non-empty reply body", async () => {
@@ -90,6 +94,95 @@ describe("createReviewReplyForUser", () => {
       ok: false,
       type: "db",
       message: "timeout",
+    });
+  });
+});
+
+describe("updateReviewReplyForUser", () => {
+  it("validates non-empty reply id", async () => {
+    const persistence = {
+      updateReply: vi.fn(),
+    };
+
+    const result = await updateReviewReplyForUser(
+      {
+        userId: "user-1",
+        replyId: "   ",
+        body: "Updated body",
+      },
+      persistence,
+    );
+
+    expect(result).toEqual({
+      ok: false,
+      type: "validation",
+      message: "Reply id is required.",
+    });
+    expect(persistence.updateReply).not.toHaveBeenCalled();
+  });
+
+  it("updates reply body for valid input", async () => {
+    const persistence = {
+      updateReply: vi.fn().mockResolvedValue({ error: null }),
+    };
+
+    const result = await updateReviewReplyForUser(
+      {
+        userId: "user-1",
+        replyId: "reply-1",
+        body: "  Updated body text  ",
+      },
+      persistence,
+    );
+
+    expect(result).toEqual({ ok: true });
+    expect(persistence.updateReply).toHaveBeenCalledWith({
+      userId: "user-1",
+      replyId: "reply-1",
+      body: "Updated body text",
+    });
+  });
+});
+
+describe("deleteReviewReplyForUser", () => {
+  it("validates non-empty reply id", async () => {
+    const persistence = {
+      deleteReply: vi.fn(),
+    };
+
+    const result = await deleteReviewReplyForUser(
+      {
+        userId: "user-1",
+        replyId: "",
+      },
+      persistence,
+    );
+
+    expect(result).toEqual({
+      ok: false,
+      type: "validation",
+      message: "Reply id is required.",
+    });
+    expect(persistence.deleteReply).not.toHaveBeenCalled();
+  });
+
+  it("deletes owner reply for valid input", async () => {
+    const persistence = {
+      deleteReply: vi.fn().mockResolvedValue({ error: null }),
+    };
+
+    const result = await deleteReviewReplyForUser(
+      {
+        userId: "user-1",
+        replyId: "reply-1",
+      },
+      persistence,
+    );
+
+    expect(result).toEqual({ ok: true });
+    expect(persistence.deleteReply).toHaveBeenCalledWith({
+      userId: "user-1",
+      replyId: "reply-1",
     });
   });
 });

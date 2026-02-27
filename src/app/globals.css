@@ -544,11 +544,35 @@
       border: 1px solid var(--border);
       background: var(--cream-dark);
       padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
 
     .review-reply-child {
       margin-top: 8px;
       margin-left: 14px;
+    }
+
+    .review-reply-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .reply-body {
+      font-size: 14px;
+      line-height: 1.75;
+      margin-bottom: 0;
+    }
+
+    .reply-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
     }
 
     .review-avatar-small {

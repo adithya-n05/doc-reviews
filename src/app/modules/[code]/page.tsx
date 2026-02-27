@@ -2,7 +2,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
   deleteReviewAction,
+  deleteReviewReplyAction,
   postReviewReplyAction,
+  updateReviewReplyAction,
 } from "@/app/actions/reviews";
 import { HelpfulToggleButton } from "@/components/helpful-toggle-button";
 import { SiteNav } from "@/components/site-nav";
@@ -190,6 +192,7 @@ export default async function ModuleDetailPage({
 
     return {
       id: row.id,
+      userId: row.user_id,
       reviewId: row.review_id,
       parentReplyId: row.parent_reply_id,
       body: row.body,
@@ -218,9 +221,10 @@ export default async function ModuleDetailPage({
   ) => (
     <div
       className={`review-reply ${depth > 0 ? "review-reply-child" : ""}`}
+      id={`reply-${reply.id}`}
       key={reply.id}
     >
-      <div className="review-header">
+      <div className="review-reply-header">
         <div className="review-avatar review-avatar-small">{reply.authorInitials}</div>
         <div className="review-meta">
           <div className="review-author">{reply.authorName}</div>
@@ -228,32 +232,60 @@ export default async function ModuleDetailPage({
           <div className="review-email">{reply.authorEmail}</div>
         </div>
       </div>
-      <p className="review-body">{reply.body}</p>
+      <p className="review-body reply-body">{reply.body}</p>
+
+      <div className="reply-actions">
+        <details className={`reply-details ${depth > 0 ? "reply-details-nested" : ""}`}>
+          <summary className="reply-btn">Reply</summary>
+          <form
+            action={postReviewReplyAction}
+            className={`reply-form ${depth > 0 ? "reply-form-nested" : ""}`}
+          >
+            <input type="hidden" name="moduleCode" value={moduleCodeValue} />
+            <input type="hidden" name="reviewId" value={reviewId} />
+            <input type="hidden" name="parentReplyId" value={reply.id} />
+            <textarea
+              name="body"
+              rows={2}
+              maxLength={2000}
+              placeholder="Reply to this comment..."
+            />
+            <button className="btn btn-ghost btn-sm" type="submit">
+              Reply
+            </button>
+          </form>
+        </details>
+
+        {reply.userId === user.id ? (
+          <>
+            <details className="reply-details">
+              <summary className="reply-btn">Edit Reply</summary>
+              <form action={updateReviewReplyAction} className="reply-form">
+                <input type="hidden" name="moduleCode" value={moduleCodeValue} />
+                <input type="hidden" name="reviewId" value={reviewId} />
+                <input type="hidden" name="replyId" value={reply.id} />
+                <textarea name="body" rows={2} maxLength={2000} defaultValue={reply.body} />
+                <button className="btn btn-ghost btn-sm" type="submit">
+                  Save
+                </button>
+              </form>
+            </details>
+
+            <form action={deleteReviewReplyAction}>
+              <input type="hidden" name="moduleCode" value={moduleCodeValue} />
+              <input type="hidden" name="reviewId" value={reviewId} />
+              <input type="hidden" name="replyId" value={reply.id} />
+              <button className="btn btn-ghost btn-sm" type="submit">
+                Delete Reply
+              </button>
+            </form>
+          </>
+        ) : null}
+      </div>
 
       {(repliesByParentId.get(reply.id) ?? []).map((childReply) =>
         renderReplyThread(childReply, moduleCodeValue, reviewId, depth + 1),
       )}
-
-      <details className={`reply-details ${depth > 0 ? "reply-details-nested" : ""}`}>
-        <summary className="reply-btn">Reply</summary>
-        <form
-          action={postReviewReplyAction}
-          className={`reply-form ${depth > 0 ? "reply-form-nested" : ""}`}
-        >
-          <input type="hidden" name="moduleCode" value={moduleCodeValue} />
-          <input type="hidden" name="reviewId" value={reviewId} />
-          <input type="hidden" name="parentReplyId" value={reply.id} />
-          <textarea
-            name="body"
-            rows={2}
-            maxLength={2000}
-            placeholder="Reply to this comment..."
-          />
-          <button className="btn btn-ghost btn-sm" type="submit">
-            Reply
-          </button>
-        </form>
-      </details>
     </div>
   );
   const helpfulCountByReviewId = new Map<string, number>();

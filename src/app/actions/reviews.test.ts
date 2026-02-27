@@ -20,8 +20,15 @@ describe("review actions tips wiring", () => {
 
   it("provides threaded reply action for module detail reviews", () => {
     expect(source).toContain("postReviewReplyAction");
+    expect(source).toContain("updateReviewReplyAction");
+    expect(source).toContain("deleteReviewReplyAction");
     expect(source).toContain("createReviewReplyForUser");
+    expect(source).toContain("updateReviewReplyForUser");
+    expect(source).toContain("deleteReviewReplyForUser");
     expect(source).toContain('formData.get("parentReplyId")');
+    expect(source).toContain('formData.get("replyId")');
     expect(source).toContain(".from(\"review_replies\")");
+    expect(source).toContain(".update({");
+    expect(source).toContain(".delete()");
   });
 });
