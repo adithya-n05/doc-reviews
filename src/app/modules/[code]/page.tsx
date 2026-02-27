@@ -74,6 +74,26 @@ function metricBarWidth(value: number) {
   return `${Math.round((clamped / 5) * 100)}%`;
 }
 
+function reviewMetricTone(value: number, invert = false): "high" | "medium" | "low" {
+  if (invert) {
+    if (value >= 4) {
+      return "low";
+    }
+    if (value >= 3) {
+      return "medium";
+    }
+    return "high";
+  }
+
+  if (value >= 4) {
+    return "high";
+  }
+  if (value >= 3) {
+    return "medium";
+  }
+  return "low";
+}
+
 function isLikelyPlaceholderStaffPhoto(photoUrl: string): boolean {
   const normalized = photoUrl.trim().toLowerCase();
   if (!normalized) {
@@ -515,64 +535,86 @@ export default async function ModuleDetailPage({
               review.difficultyRating +
               review.assessmentRating) /
             4;
+          const roundedOverall = Number(overallScore.toFixed(1));
           const shouldOpenReplies = openRepliesForReviewId === review.id;
+          const reviewMetrics = [
+            { label: "Overall", value: roundedOverall, tone: reviewMetricTone(roundedOverall) },
+            {
+              label: "Difficulty",
+              value: review.difficultyRating,
+              tone: reviewMetricTone(review.difficultyRating, true),
+            },
+            { label: "Teaching", value: review.teachingRating, tone: reviewMetricTone(review.teachingRating) },
+            { label: "Workload", value: review.workloadRating, tone: reviewMetricTone(review.workloadRating, true) },
+            { label: "Content", value: roundedOverall, tone: reviewMetricTone(roundedOverall) },
+            {
+              label: "Exam",
+              value: review.assessmentRating,
+              tone: reviewMetricTone(review.assessmentRating),
+            },
+          ];
 
           return (
-            <article className="review" id={`review-${review.id}`} key={review.id}>
-              <div className="review-header">
-                <div className="review-avatar">
-                  {review.reviewerAvatarUrl ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      className="review-avatar-photo"
-                      src={review.reviewerAvatarUrl}
-                      alt={`${review.reviewerName} avatar`}
-                    />
-                  ) : (
-                    review.reviewerInitials
-                  )}
-                </div>
-                <div className="review-meta">
-                  <div className="review-author">{review.reviewerName}</div>
-                  <div className="review-date">
-                    Year {review.year ?? "?"} · {formatReviewDate(review.createdAt)}
+            <article className="review-card" id={`review-${review.id}`} key={review.id}>
+              <div className="review-card-main">
+                <div className="review-card-header">
+                  <div className="review-author-section">
+                    <div className="review-avatar">
+                      {review.reviewerAvatarUrl ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          className="review-avatar-photo"
+                          src={review.reviewerAvatarUrl}
+                          alt={`${review.reviewerName} avatar`}
+                        />
+                      ) : (
+                        review.reviewerInitials
+                      )}
+                    </div>
+                    <div className="review-author-info">
+                      <div className="review-author-name">{review.reviewerName}</div>
+                      <div className="review-author-meta">
+                        Year {review.year ?? "?"} · {formatReviewDate(review.createdAt)}
+                      </div>
+                      <div className="review-email">{review.reviewerEmail}</div>
+                    </div>
                   </div>
-                  <div className="review-email">{review.reviewerEmail}</div>
+                  <div className="stars-display" style={{ fontSize: "16px" }}>
+                    {renderStars(overallScore)}
+                  </div>
                 </div>
-                <div style={{ marginLeft: "auto", color: "var(--accent)" }}>
-                  {renderStars(overallScore)}
-                </div>
-              </div>
 
-              <p className="review-body">{review.comment}</p>
-              {review.tips ? (
-                <div className="review-tip">
-                  <strong
-                    style={{
-                      fontStyle: "normal",
-                      fontSize: "11px",
-                      letterSpacing: "0.08em",
-                      textTransform: "uppercase",
-                      color: "var(--accent)",
-                    }}
-                  >
-                    Tip for future students:
-                  </strong>{" "}
-                  {review.tips}
+                <div className="review-ratings-grid">
+                  {reviewMetrics.map((metric) => (
+                    <div className="review-rating-item" key={`${review.id}-${metric.label}`}>
+                      <div className={`review-rating-value ${metric.tone}`}>{metric.value}</div>
+                      <div className="review-rating-label">{metric.label}</div>
+                      <div className="review-rating-bar">
+                        <div
+                          className="review-rating-bar-fill"
+                          style={{ width: metricBarWidth(metric.value) }}
+                        />
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ) : null}
-              <div className="review-actions">
-                <HelpfulToggleButton
-                  reviewId={review.id}
-                  initialCount={helpfulCountByReviewId.get(review.id) ?? 0}
-                  initiallyVoted={currentUserHelpfulReviewIds.has(review.id)}
-                />
-                <span style={{ flex: 1 }} />
-                <span className="review-breakdown">
-                  Overall: {overallScore.toFixed(1)} | Difficulty: {review.difficultyRating} |
-                  Teaching: {review.teachingRating} | Workload: {review.workloadRating} |
-                  Assessment: {review.assessmentRating}
-                </span>
+
+                <p className="review-body">{review.comment}</p>
+                {review.tips ? (
+                  <div className="review-tip">
+                    <div className="review-tip-label">Tip for future students</div>
+                    <div className="review-tip-text">{review.tips}</div>
+                  </div>
+                ) : null}
+              </div>
+              <div className="review-card-footer">
+                <div className="review-actions-left">
+                  <HelpfulToggleButton
+                    reviewId={review.id}
+                    initialCount={helpfulCountByReviewId.get(review.id) ?? 0}
+                    initiallyVoted={currentUserHelpfulReviewIds.has(review.id)}
+                  />
+                </div>
               </div>
               <ReviewReplyThread
                 moduleCode={moduleItem.code}
@@ -586,10 +628,7 @@ export default async function ModuleDetailPage({
                 initiallyOpen={shouldOpenReplies}
               />
               {review.userId === user.id ? (
-                <div
-                  className="review-actions"
-                  style={{ marginTop: "12px", justifyContent: "flex-end" }}
-                >
+                <div className="review-owner-actions">
                   <Link className="btn btn-ghost btn-sm" href={`/modules/${moduleItem.code}/review`}>
                     Edit
                   </Link>

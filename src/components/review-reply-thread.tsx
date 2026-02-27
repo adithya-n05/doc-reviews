@@ -71,16 +71,31 @@ function removeReplyTree(
   return replies.filter((reply) => !descendantIds.has(reply.id));
 }
 
+function replyChevronSvg() {
+  return (
+    <svg className="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M6 9l6 6 6-6" />
+    </svg>
+  );
+}
+
 export function ReviewReplyThread(props: ReviewReplyThreadProps) {
   const [replies, setReplies] = useState(props.initialReplies);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [threadOpen, setThreadOpen] = useState(Boolean(props.initiallyOpen));
-  const [composerOpen, setComposerOpen] = useState(false);
+  const [rootBody, setRootBody] = useState("");
   const [activeReplyTargetId, setActiveReplyTargetId] = useState<string | null>(null);
   const [activeEditTargetId, setActiveEditTargetId] = useState<string | null>(null);
 
   const repliesByParent = useMemo(() => buildReplyMap(replies), [replies]);
+  const replyById = useMemo(() => {
+    const map = new Map<string, ReviewReplyViewModel>();
+    for (const reply of replies) {
+      map.set(reply.id, reply);
+    }
+    return map;
+  }, [replies]);
   const rootReplyCount = repliesByParent.get(null)?.length ?? 0;
 
   async function createReply(body: string, parentReplyId: string | null) {
@@ -104,7 +119,6 @@ export function ReviewReplyThread(props: ReviewReplyThreadProps) {
 
     setError(null);
     setThreadOpen(true);
-    setComposerOpen(false);
     setActiveReplyTargetId(null);
     setReplies((current) => [...current, optimisticReply]);
     setPending(true);
@@ -219,44 +233,80 @@ export function ReviewReplyThread(props: ReviewReplyThreadProps) {
     }
   }
 
-  function renderReplyTree(parentReplyId: string | null, depth: number): ReactNode {
+  function renderReplyTree(parentReplyId: string | null): ReactNode {
     const rows = repliesByParent.get(parentReplyId) ?? [];
 
     return rows.map((reply) => {
       const replyComposerOpen = activeReplyTargetId === reply.id;
       const editComposerOpen = activeEditTargetId === reply.id;
+      const replyTargetName = reply.parentReplyId
+        ? replyById.get(reply.parentReplyId)?.authorName ?? null
+        : null;
 
       return (
-        <div
-          className={`review-reply ${depth > 0 ? "review-reply-child" : ""}`}
-          id={`reply-${reply.id}`}
-          key={reply.id}
-        >
-          <div className="review-reply-header">
-            <div className="review-avatar review-avatar-small">
-              {reply.authorAvatarUrl ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  className="review-avatar-photo"
-                  src={reply.authorAvatarUrl}
-                  alt={`${reply.authorName} avatar`}
-                />
-              ) : (
-                reply.authorInitials
-              )}
+        <article className="reply-item" id={`reply-${reply.id}`} key={reply.id}>
+          {replyTargetName ? (
+            <div className="reply-to">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M9 14l-4-4 4-4" />
+                <path d="M5 10h11a4 4 0 0 1 4 4v1" />
+              </svg>
+              Replying to <span className="reply-to-name">@{replyTargetName}</span>
             </div>
-            <div className="review-meta">
-              <div className="review-author">{reply.authorName}</div>
-              <div className="review-date">{formatReplyDate(reply.createdAt)}</div>
-              <div className="review-email">{reply.authorEmail}</div>
+          ) : null}
+
+          <div className="reply-item-header">
+            <div className="reply-author-section">
+              <div className="reply-avatar">
+                {reply.authorAvatarUrl ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    className="review-avatar-photo"
+                    src={reply.authorAvatarUrl}
+                    alt={`${reply.authorName} avatar`}
+                  />
+                ) : (
+                  reply.authorInitials
+                )}
+              </div>
+              <div>
+                <div className="reply-author-name">{reply.authorName}</div>
+                <div className="reply-meta">
+                  <span>{formatReplyDate(reply.createdAt)}</span>
+                </div>
+              </div>
             </div>
+
+            {reply.userId === props.currentUserId ? (
+              <div className="reply-action-group">
+                <button
+                  className="reply-action-btn reply-edit-btn"
+                  onClick={() => {
+                    setActiveEditTargetId((current) => (current === reply.id ? null : reply.id));
+                    setActiveReplyTargetId(null);
+                  }}
+                  type="button"
+                >
+                  Edit
+                </button>
+                <button
+                  className="reply-action-btn reply-delete-btn"
+                  onClick={() => {
+                    void deleteReply(reply.id);
+                  }}
+                  type="button"
+                >
+                  Delete
+                </button>
+              </div>
+            ) : null}
           </div>
 
-          <p className="review-body reply-body">{reply.body}</p>
+          <p className="reply-body">{reply.body}</p>
 
           <div className="reply-actions">
             <button
-              className="btn btn-ghost btn-sm reply-btn"
+              className="reply-action-btn"
               onClick={() => {
                 setActiveReplyTargetId((current) => (current === reply.id ? null : reply.id));
                 setActiveEditTargetId(null);
@@ -265,35 +315,11 @@ export function ReviewReplyThread(props: ReviewReplyThreadProps) {
             >
               {replyComposerOpen ? "Close" : "Reply"}
             </button>
-
-            {reply.userId === props.currentUserId ? (
-              <>
-                <button
-                  className="btn btn-ghost btn-sm reply-btn"
-                  onClick={() => {
-                    setActiveEditTargetId((current) => (current === reply.id ? null : reply.id));
-                    setActiveReplyTargetId(null);
-                  }}
-                  type="button"
-                >
-                  {editComposerOpen ? "Close" : "Edit Reply"}
-                </button>
-                <button
-                  className="btn btn-ghost btn-sm"
-                  onClick={() => {
-                    void deleteReply(reply.id);
-                  }}
-                  type="button"
-                >
-                  Delete Reply
-                </button>
-              </>
-            ) : null}
           </div>
 
           {replyComposerOpen ? (
             <form
-              className={`reply-form ${depth > 0 ? "reply-form-nested" : ""}`}
+              className="reply-inline-form"
               onSubmit={(event) => {
                 event.preventDefault();
                 const formData = new FormData(event.currentTarget);
@@ -302,21 +328,18 @@ export function ReviewReplyThread(props: ReviewReplyThreadProps) {
                 event.currentTarget.reset();
               }}
             >
-              <textarea
-                name="body"
-                rows={2}
-                maxLength={2000}
-                placeholder="Reply to this comment..."
-              />
-              <button className="btn btn-ghost btn-sm" type="submit">
-                Reply
-              </button>
+              <textarea name="body" rows={2} maxLength={2000} placeholder="Write a reply..." />
+              <div className="reply-inline-actions">
+                <button className="btn btn-ghost btn-sm" type="submit">
+                  Post Reply
+                </button>
+              </div>
             </form>
           ) : null}
 
           {editComposerOpen ? (
             <form
-              className={`reply-form ${depth > 0 ? "reply-form-nested" : ""}`}
+              className="reply-inline-form"
               onSubmit={(event) => {
                 event.preventDefault();
                 const formData = new FormData(event.currentTarget);
@@ -325,74 +348,82 @@ export function ReviewReplyThread(props: ReviewReplyThreadProps) {
               }}
             >
               <textarea name="body" rows={2} maxLength={2000} defaultValue={reply.body} />
-              <button className="btn btn-ghost btn-sm" type="submit">
-                Save
-              </button>
+              <div className="reply-inline-actions">
+                <button className="btn btn-ghost btn-sm" type="submit">
+                  Save
+                </button>
+              </div>
             </form>
           ) : null}
 
-          {renderReplyTree(reply.id, depth + 1)}
-        </div>
+          {renderReplyTree(reply.id)}
+        </article>
       );
     });
   }
 
-  return (
-    <section style={{ marginTop: "10px" }}>
-      <div className="reply-actions">
-        <button
-          className="btn btn-ghost btn-sm reply-btn"
-          onClick={() => {
-            setComposerOpen((current) => !current);
-            setActiveReplyTargetId(null);
-            setActiveEditTargetId(null);
-          }}
-          type="button"
-        >
-          {composerOpen ? "Close" : "Reply"}
-        </button>
-        {error ? <span className="form-note">{error}</span> : null}
-      </div>
+  const toggleLabel = rootReplyCount > 0 ? `${rootReplyCount} replies` : "Add reply";
 
-      {composerOpen ? (
+  return (
+    <section className="review-thread-shell">
+      <button
+        className={`reply-toggle ${threadOpen ? "expanded" : ""}`}
+        onClick={() => {
+          setThreadOpen((current) => !current);
+          setActiveReplyTargetId(null);
+          setActiveEditTargetId(null);
+        }}
+        type="button"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+        </svg>
+        {toggleLabel}
+        {replyChevronSvg()}
+      </button>
+
+      <div className={`replies-section ${threadOpen ? "open" : ""}`}>
+        <div className="replies-list">{renderReplyTree(null)}</div>
         <form
-          className="reply-form"
+          className="reply-composer"
           onSubmit={(event) => {
             event.preventDefault();
-            const formData = new FormData(event.currentTarget);
-            const body = String(formData.get("body") ?? "");
-            void createReply(body, null);
-            event.currentTarget.reset();
+            void createReply(rootBody, null);
+            setRootBody("");
           }}
         >
           <textarea
+            className="reply-composer-input"
             name="body"
-            rows={2}
+            rows={3}
             maxLength={2000}
-            placeholder="Add a reply..."
-          />
-          <button className="btn btn-ghost btn-sm" type="submit">
-            Reply
-          </button>
-        </form>
-      ) : null}
-
-      {replies.length > 0 ? (
-        <details className="review-thread" open={threadOpen}>
-          <summary
-            className="reply-thread-btn"
-            onClick={(event) => {
-              event.preventDefault();
-              setThreadOpen((current) => !current);
+            placeholder={rootReplyCount > 0 ? "Write a reply..." : "Be the first to reply..."}
+            value={rootBody}
+            onChange={(event) => {
+              setRootBody(event.target.value);
             }}
-          >
-            <span className="reply-thread-show">View replies ({rootReplyCount})</span>
-            <span className="reply-thread-hide">Hide replies</span>
-          </summary>
-          <div className="review-replies">{renderReplyTree(null, 0)}</div>
-        </details>
-      ) : null}
-
+          />
+          <div className="reply-composer-actions">
+            <span className="reply-composer-hint">
+              {error ? error : "Your reply will be visible to everyone"}
+            </span>
+            <div className="reply-composer-buttons">
+              <button
+                className="btn btn-ghost btn-sm"
+                onClick={() => {
+                  setRootBody("");
+                }}
+                type="button"
+              >
+                Cancel
+              </button>
+              <button className="btn btn-primary btn-sm" disabled={pending} type="submit">
+                Post Reply
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
     </section>
   );
 }

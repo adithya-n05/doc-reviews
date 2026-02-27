@@ -15,4 +15,11 @@ describe("helpful toggle button client behavior", () => {
     expect(source).toContain("setVoted(nextVoted);");
     expect(source).toContain("setCount((value) => Math.max(0, value + (nextVoted ? 1 : -1)));");
   });
+
+  it("renders editorial helpful button with icon and separated count label", () => {
+    expect(source).toContain('className={`helpful-btn ${voted ? "voted" : ""}`}');
+    expect(source).toContain('className="helpful-count"');
+    expect(source).toContain("<svg");
+    expect(source).toContain("Helpful");
+  });
 });

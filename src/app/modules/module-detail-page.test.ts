@@ -46,7 +46,22 @@ describe("module detail review rendering", () => {
     expect(source).toContain("initialCount={helpfulCountByReviewId.get(review.id) ?? 0}");
     expect(source).toContain("initiallyVoted={currentUserHelpfulReviewIds.has(review.id)}");
     expect(source).toContain("<ReviewReplyThread");
-    expect(source).toContain("Tip for future students:");
+    expect(source).toContain("Tip for future students");
+  });
+
+  it("renders editorial v3 review-card wrapper and six-cell ratings grid", () => {
+    expect(source).toContain('className="review-card"');
+    expect(source).toContain('className="review-card-main"');
+    expect(source).toContain('className="review-ratings-grid"');
+    expect(source).toContain('className="review-rating-item"');
+    expect(source).toContain("Overall");
+    expect(source).toContain("Difficulty");
+    expect(source).toContain("Teaching");
+    expect(source).toContain("Workload");
+    expect(source).toContain("Content");
+    expect(source).toContain("Exam");
+    expect(source).toContain('className="review-card-footer"');
+    expect(source).toContain('className="review-actions-left"');
   });
 
   it("renders collapsible reply threads with explicit expand controls", () => {
@@ -74,11 +89,10 @@ describe("module detail review rendering", () => {
     expect(source).toContain("currentUserReview ? \"Edit your review\" : \"Write a review\"");
   });
 
-  it("renders owner edit/delete controls beneath rating summary row", () => {
-    expect(source).toContain("justifyContent: \"flex-end\"");
+  it("renders owner edit/delete controls in dedicated owner action row", () => {
+    expect(source).toContain('className="review-owner-actions"');
     expect(source).toContain("Edit");
     expect(source).toContain("Delete");
-    expect(source).toContain('className="review-breakdown"');
   });
 
   it("makes the year breadcrumb clickable back to filtered catalogue", () => {

@@ -28,12 +28,12 @@ describe("dark theme css variables", () => {
     expect(css).toContain(':root[data-theme="dark"] .theme-toggle .moon');
   });
 
-  it("styles collapsible review thread controls for reply readability", () => {
-    expect(css).toContain(".review-thread");
-    expect(css).toContain(".reply-thread-btn");
-    expect(css).toContain(".review-reply");
-    expect(css).toContain(".reply-open-label");
-    expect(css).toContain(".reply-close-label");
+  it("styles editorial v3 reply thread controls for readability", () => {
+    expect(css).toContain(".review-thread-shell");
+    expect(css).toContain(".reply-toggle");
+    expect(css).toContain(".replies-section");
+    expect(css).toContain(".reply-item");
+    expect(css).toContain(".reply-composer");
   });
 
   it("styles success/error banners with theme tokens instead of raw light-only colors", () => {

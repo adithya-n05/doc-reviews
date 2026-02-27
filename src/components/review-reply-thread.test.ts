@@ -20,4 +20,13 @@ describe("review reply thread optimistic client", () => {
   it("does not render syncing status text for reply mutations", () => {
     expect(source).not.toContain("Syncing replies...");
   });
+
+  it("uses editorial v3 reply section classes and chevron toggle", () => {
+    expect(source).toContain('className={`reply-toggle ${threadOpen ? "expanded" : ""}`}');
+    expect(source).toContain('className={`replies-section ${threadOpen ? "open" : ""}`}');
+    expect(source).toContain('className="replies-list"');
+    expect(source).toContain('className="reply-item"');
+    expect(source).toContain('className="reply-composer"');
+    expect(source).toContain('className="reply-composer-input"');
+  });
 });
