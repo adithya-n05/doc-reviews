@@ -69,6 +69,7 @@ describe("upsertReviewForUser", () => {
       assessmentRating: 2,
       comment:
         "This module had clear lectures and useful assessments. The weekly sheets took time but consistently reinforced key ideas.",
+      tips: null,
     });
   });
 
@@ -99,6 +100,37 @@ describe("upsertReviewForUser", () => {
       type: "db",
       message: "duplicate review",
     });
+  });
+
+  it("passes normalized optional tips to persistence", async () => {
+    const persistence = {
+      upsertReview: vi.fn(async () => ({ error: null })),
+    };
+
+    const result = await upsertReviewForUser(
+      persistence,
+      {
+        userId: "user-1",
+        moduleId: "module-1",
+        moduleCode: "40008",
+      },
+      {
+        teachingRating: 5,
+        workloadRating: 4,
+        difficultyRating: 3,
+        assessmentRating: 2,
+        comment:
+          "This module had clear lectures and useful assessments. The weekly sheets took time but consistently reinforced key ideas.",
+        tips: "   Revise proofs each week and maintain a formula sheet.   ",
+      },
+    );
+
+    expect(result).toEqual({ ok: true });
+    expect(persistence.upsertReview).toHaveBeenCalledWith(
+      expect.objectContaining({
+        tips: "Revise proofs each week and maintain a formula sheet.",
+      }),
+    );
   });
 });
 

@@ -9,6 +9,7 @@ type ReviewPersistence = {
     difficultyRating: number;
     assessmentRating: number;
     comment: string;
+    tips: string | null;
   }) => Promise<{ error: string | null }>;
 };
 
@@ -31,6 +32,7 @@ type ReviewInput = {
   difficultyRating: number;
   assessmentRating: number;
   comment: string;
+  tips?: string;
 };
 
 type ValidationFailure = {
@@ -61,6 +63,7 @@ export async function upsertReviewForUser(
     difficultyRating: input.difficultyRating,
     assessmentRating: input.assessmentRating,
     comment: input.comment,
+    tips: input.tips,
   });
 
   if (!validated.ok) {
@@ -80,6 +83,7 @@ export async function upsertReviewForUser(
     difficultyRating: value.difficultyRating,
     assessmentRating: value.assessmentRating,
     comment: value.comment,
+    tips: value.tips,
   });
 
   if (error) {
