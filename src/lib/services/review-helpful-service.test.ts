@@ -61,4 +61,25 @@ describe("toggleHelpfulVoteForReview", () => {
     });
     expect(persistence.addVote).not.toHaveBeenCalled();
   });
+
+  it("returns db failure when persistence lookup throws", async () => {
+    const persistence = {
+      hasVote: vi.fn(async () => {
+        throw new Error("connection dropped");
+      }),
+      addVote: vi.fn(async () => ({ error: null })),
+      removeVote: vi.fn(async () => ({ error: null })),
+    };
+
+    const result = await toggleHelpfulVoteForReview(persistence, {
+      userId: "u1",
+      reviewId: "r1",
+    });
+
+    expect(result).toEqual({
+      ok: false,
+      type: "db",
+      message: "connection dropped",
+    });
+  });
 });

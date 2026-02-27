@@ -30,22 +30,40 @@ export async function toggleHelpfulVoteForReview(
   persistence: HelpfulVotePersistence,
   input: HelpfulVoteInput,
 ): Promise<Success | ValidationFailure | DbFailure> {
-  const reviewId = input.reviewId.trim();
-  if (!reviewId) {
-    return {
-      ok: false,
-      type: "validation",
-      message: "Review id is required.",
-    };
-  }
+  try {
+    const reviewId = input.reviewId.trim();
+    if (!reviewId) {
+      return {
+        ok: false,
+        type: "validation",
+        message: "Review id is required.",
+      };
+    }
 
-  const alreadyVoted = await persistence.hasVote({
-    userId: input.userId,
-    reviewId,
-  });
+    const alreadyVoted = await persistence.hasVote({
+      userId: input.userId,
+      reviewId,
+    });
 
-  if (alreadyVoted) {
-    const { error } = await persistence.removeVote({
+    if (alreadyVoted) {
+      const { error } = await persistence.removeVote({
+        userId: input.userId,
+        reviewId,
+      });
+      if (error) {
+        return {
+          ok: false,
+          type: "db",
+          message: error,
+        };
+      }
+      return {
+        ok: true,
+        voted: false,
+      };
+    }
+
+    const { error } = await persistence.addVote({
       userId: input.userId,
       reviewId,
     });
@@ -58,23 +76,13 @@ export async function toggleHelpfulVoteForReview(
     }
     return {
       ok: true,
-      voted: false,
+      voted: true,
     };
-  }
-
-  const { error } = await persistence.addVote({
-    userId: input.userId,
-    reviewId,
-  });
-  if (error) {
+  } catch (error) {
     return {
       ok: false,
       type: "db",
-      message: error,
+      message: error instanceof Error ? error.message : "Unable to update helpful vote.",
     };
   }
-  return {
-    ok: true,
-    voted: true,
-  };
 }
