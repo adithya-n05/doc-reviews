@@ -69,6 +69,35 @@ describe("generateModuleReviewInsightPayload", () => {
     expect(result.topKeywords.length).toBeGreaterThan(0);
   });
 
+  it("derives semantic fallback keywords instead of literal filler tokens", async () => {
+    const result = await generateModuleReviewInsightPayload(
+      [
+        {
+          teachingRating: 5,
+          workloadRating: 3,
+          difficultyRating: 4,
+          assessmentRating: 3,
+          comment:
+            "The module is challenging but fair, and tutorials line up well with lectures. Practicing weekly problem sheets made revision much easier before the final exam.",
+        },
+      ],
+      {
+        apiKey: "",
+        model: "gpt-4.1-mini",
+        fetchImpl: vi.fn(),
+      },
+    );
+
+    const words = result.topKeywords.map((item) => item.word);
+    expect(result.source).toBe("fallback");
+    expect(words).toContain("module difficulty");
+    expect(words).toContain("assessment fairness");
+    expect(words).toContain("tutorial support");
+    expect(words).not.toContain("before");
+    expect(words).not.toContain("line");
+    expect(words).not.toContain("final");
+  });
+
   it("falls back when AI returns malformed content", async () => {
     const fetchImpl = vi.fn().mockResolvedValue({
       ok: true,

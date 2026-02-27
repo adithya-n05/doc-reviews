@@ -26,6 +26,65 @@ type GenerateOptions = {
 };
 
 type ParsedAiResponse = Omit<ModuleReviewInsightPayload, "source">;
+type SemanticKeywordRule = {
+  label: string;
+  patterns: RegExp[];
+};
+
+const SEMANTIC_KEYWORD_RULES: SemanticKeywordRule[] = [
+  {
+    label: "teaching clarity",
+    patterns: [/\blecture(?:s)?\b/i, /\bteaching\b/i, /\bclear(?:ly)?\b/i, /\bexplain(?:ed|s|ing)?\b/i],
+  },
+  {
+    label: "tutorial support",
+    patterns: [/\btutorial(?:s)?\b/i, /\bproblem sheet(?:s)?\b/i, /\boffice hour(?:s)?\b/i, /\bsupport\b/i],
+  },
+  {
+    label: "assessment fairness",
+    patterns: [/\bassessment(?:s)?\b/i, /\bexam(?:s)?\b/i, /\bcoursework\b/i, /\bfair(?:ness)?\b/i],
+  },
+  {
+    label: "workload management",
+    patterns: [/\bworkload\b/i, /\bdeadline(?:s)?\b/i, /\bweekly\b/i, /\bmanageable\b/i, /\btime\b/i],
+  },
+  {
+    label: "module difficulty",
+    patterns: [/\bchallenging\b/i, /\bdifficult(?:y)?\b/i, /\bhard\b/i, /\beasy\b/i, /\bcomplex\b/i],
+  },
+  {
+    label: "revision readiness",
+    patterns: [/\brevision\b/i, /\bpractic(?:e|ed|es|ing)\b/i, /\bprepar(?:e|ed|ing|ation)\b/i, /\bfinal exam\b/i],
+  },
+  {
+    label: "practical application",
+    patterns: [/\blab(?:s)?\b/i, /\bpractical\b/i, /\bhands[- ]on\b/i, /\bproject(?:s)?\b/i],
+  },
+];
+
+function deriveSemanticKeywords(reviews: ReviewInsightInput[]): Array<{ word: string; count: number }> {
+  const counts = new Map<string, number>();
+
+  for (const review of reviews) {
+    const comment = review.comment.trim();
+    if (!comment) {
+      continue;
+    }
+
+    for (const rule of SEMANTIC_KEYWORD_RULES) {
+      const matched = rule.patterns.some((pattern) => pattern.test(comment));
+      if (!matched) {
+        continue;
+      }
+      counts.set(rule.label, (counts.get(rule.label) ?? 0) + 1);
+    }
+  }
+
+  return Array.from(counts.entries())
+    .map(([word, count]) => ({ word, count }))
+    .sort((a, b) => b.count - a.count || a.word.localeCompare(b.word))
+    .slice(0, 8);
+}
 
 function normalizeKeywordList(value: unknown): Array<{ word: string; count: number }> {
   if (!Array.isArray(value)) {
@@ -89,6 +148,12 @@ function normalizeSentiment(
 
 function toFallbackPayload(reviews: ReviewInsightInput[]): ModuleReviewInsightPayload {
   const fallback = deriveReviewInsights(reviews);
+  const semanticKeywords = deriveSemanticKeywords(reviews);
+  const keywords =
+    semanticKeywords.length > 0
+      ? semanticKeywords
+      : fallback.topKeywords.slice(0, 8);
+
   if (fallback.reviewCount === 0) {
     return {
       summary: "No student reviews have been submitted yet.",
@@ -102,7 +167,7 @@ function toFallbackPayload(reviews: ReviewInsightInput[]): ModuleReviewInsightPa
     };
   }
 
-  const commonThemes = fallback.topKeywords.slice(0, 3).map((item) => item.word);
+  const commonThemes = keywords.slice(0, 3).map((item) => item.word);
   const summary =
     commonThemes.length > 0
       ? `Based on ${fallback.reviewCount} student reviews, this module scores ${fallback.averages.overall.toFixed(
@@ -114,7 +179,7 @@ function toFallbackPayload(reviews: ReviewInsightInput[]): ModuleReviewInsightPa
 
   return {
     summary,
-    topKeywords: fallback.topKeywords.slice(0, 8),
+    topKeywords: keywords,
     sentiment: fallback.sentiment,
     source: "fallback",
   };
