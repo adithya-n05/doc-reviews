@@ -5,6 +5,7 @@ import {
   buildStaffDirectoryIndex,
   matchLeaderProfile,
   parseStaffDirectoryHtml,
+  preferDoctorHonorific,
   type StaffDirectoryEntry,
 } from "../src/lib/ingest/staff-profile-resolver";
 
@@ -140,7 +141,7 @@ async function main() {
       const matchedProfile = matchLeaderProfile(leaderName, staffIndex);
       return {
         module_id: moduleId,
-        leader_name: matchedProfile?.canonicalName ?? leaderName,
+        leader_name: matchedProfile?.canonicalName ?? preferDoctorHonorific(leaderName),
         profile_url: matchedProfile?.profileUrl ?? null,
         photo_url: matchedProfile?.photoUrl ?? null,
       };

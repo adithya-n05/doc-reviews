@@ -12,7 +12,7 @@ describe("module upsert staff profile enrichment", () => {
 
   it("populates leader profile_url and photo_url when inserting module leaders", () => {
     expect(source).toContain("const matchedProfile = matchLeaderProfile(leaderName, staffIndex);");
-    expect(source).toContain("leader_name: matchedProfile?.canonicalName ?? leaderName");
+    expect(source).toContain("leader_name: matchedProfile?.canonicalName ?? preferDoctorHonorific(leaderName)");
     expect(source).toContain("profile_url: matchedProfile?.profileUrl ?? null");
     expect(source).toContain("photo_url: matchedProfile?.photoUrl ?? null");
   });

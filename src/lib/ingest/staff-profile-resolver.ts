@@ -63,6 +63,20 @@ export function normalizeStaffName(name: string): string {
   return withoutHonorifics.join(" ");
 }
 
+export function preferDoctorHonorific(name: string): string {
+  const trimmed = name.replace(/\s+/g, " ").trim();
+  if (!trimmed) {
+    return "Dr";
+  }
+
+  if (/^(dr|doctor|professor|prof)\b/i.test(trimmed)) {
+    return trimmed;
+  }
+
+  const withoutGenericHonorific = trimmed.replace(/^(mr|mrs|ms|miss)\.?\s+/i, "");
+  return `Dr ${withoutGenericHonorific}`;
+}
+
 export function isLikelyPlaceholderStaffPhotoUrl(photoUrl: string): boolean {
   const normalized = photoUrl.trim().toLowerCase();
   if (!normalized) {

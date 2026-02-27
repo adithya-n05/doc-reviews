@@ -5,6 +5,7 @@ import {
   matchLeaderProfile,
   normalizeStaffName,
   parseStaffDirectoryHtml,
+  preferDoctorHonorific,
   resolveStaffPhotoUrl,
 } from "@/lib/ingest/staff-profile-resolver";
 
@@ -91,5 +92,20 @@ describe("staff photo quality", () => {
         "https://pxl01-imperialacuk.terminalfour.net/fit-in/428x572/filters:upscale()/prod01/channel_3/media/imperial-college/faculty-of-engineering/computing/public/website-images/-people-list-300X400/19351700--tojpeg_1427379998905_x2.jpg",
       ),
     ).toBe("https://fp.doc.ic.ac.uk/img/jwillis.jpg");
+  });
+});
+
+describe("preferDoctorHonorific", () => {
+  it("replaces mr title with dr", () => {
+    expect(preferDoctorHonorific("Mr Bjoern Schuller")).toBe("Dr Bjoern Schuller");
+  });
+
+  it("adds dr when no honorific exists", () => {
+    expect(preferDoctorHonorific("Jamie Willis")).toBe("Dr Jamie Willis");
+  });
+
+  it("keeps canonical academic titles unchanged", () => {
+    expect(preferDoctorHonorific("Professor Nicolas Wu")).toBe("Professor Nicolas Wu");
+    expect(preferDoctorHonorific("Dr Maria Valera-Espina")).toBe("Dr Maria Valera-Espina");
   });
 });
