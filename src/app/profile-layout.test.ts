@@ -49,4 +49,10 @@ describe("profile page editorial parity", () => {
     expect(source).toContain("Save Photo");
     expect(source).toContain("Remove Photo");
   });
+
+  it("uses dedicated profile photo control layout wrappers for consistent spacing", () => {
+    expect(source).toContain("profile-photo-controls");
+    expect(source).toContain("profile-photo-upload-form");
+    expect(source).toContain("profile-photo-action-group");
+  });
 });

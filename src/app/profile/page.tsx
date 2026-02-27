@@ -235,36 +235,40 @@ export default async function ProfilePage({ searchParams }: ProfilePageProps) {
                 <div className="setting-desc">
                   Drag and drop an image to set your public avatar for profile and reviews.
                 </div>
-                <form
-                  action={updateProfilePhotoAction}
-                  encType="multipart/form-data"
-                  style={{ marginTop: "12px", display: "flex", gap: "8px", alignItems: "center" }}
-                >
-                  <label className="profile-photo-dropzone">
-                    <input
-                      className="profile-photo-file-input"
-                      name="avatarFile"
-                      type="file"
-                      accept="image/png,image/jpeg,image/webp"
-                      required
-                    />
-                    <span className="profile-photo-dropzone-label">
-                      Drag and drop a photo here, or click to browse.
-                    </span>
-                    <span className="profile-photo-dropzone-meta">
-                      PNG, JPG, or WEBP. Maximum file size 5MB.
-                    </span>
-                  </label>
-                  <button className="btn btn-primary btn-sm" type="submit">
-                    Save Photo
-                  </button>
-                </form>
+                <div className="profile-photo-controls">
+                  <form
+                    action={updateProfilePhotoAction}
+                    className="profile-photo-upload-form"
+                    encType="multipart/form-data"
+                  >
+                    <label className="profile-photo-dropzone">
+                      <input
+                        className="profile-photo-file-input"
+                        name="avatarFile"
+                        type="file"
+                        accept="image/png,image/jpeg,image/webp"
+                        required
+                      />
+                      <span className="profile-photo-dropzone-label">
+                        Drag and drop a photo here, or click to browse.
+                      </span>
+                      <span className="profile-photo-dropzone-meta">
+                        PNG, JPG, or WEBP. Maximum file size 5MB.
+                      </span>
+                    </label>
+                    <div className="profile-photo-action-group">
+                      <button className="btn btn-primary btn-sm profile-photo-action-btn" type="submit">
+                        Save Photo
+                      </button>
+                    </div>
+                  </form>
+                  <form action={clearProfilePhotoAction} className="profile-photo-action-group">
+                    <button className="btn btn-ghost btn-sm profile-photo-action-btn" type="submit">
+                      Remove Photo
+                    </button>
+                  </form>
+                </div>
               </div>
-              <form action={clearProfilePhotoAction}>
-                <button className="btn btn-ghost btn-sm" type="submit">
-                  Remove Photo
-                </button>
-              </form>
             </div>
             <div className="setting-row">
               <div>
