@@ -30,4 +30,9 @@ describe("profile page editorial parity", () => {
     expect(source).toContain("Average rating given");
     expect(source).toContain("Helpful votes received");
   });
+
+  it("includes an affordance to edit enrolled modules", () => {
+    expect(source).toContain("Edit Modules");
+    expect(source).toContain("href=\"/onboarding\"");
+  });
 });

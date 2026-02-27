@@ -1,15 +1,23 @@
 import Link from "next/link";
 import { signOutAction } from "@/app/actions/auth";
 import { SiteNav } from "@/components/site-nav";
+import { normalizeUserModuleRows } from "@/lib/modules/profile-modules";
 import { requireUserContext } from "@/lib/server/auth-context";
 
 type UserModuleRow = {
   module_id: string;
-  modules: Array<{
-    id: string;
-    code: string;
-    title: string;
-  }> | null;
+  modules:
+    | {
+        id: string;
+        code: string;
+        title: string;
+      }
+    | Array<{
+        id: string;
+        code: string;
+        title: string;
+      }>
+    | null;
 };
 
 type ReviewRow = {
@@ -40,7 +48,7 @@ export default async function ProfilePage() {
     )
     .eq("user_id", user.id);
 
-  const modules = (modulesRows ?? []) as UserModuleRow[];
+  const modules = normalizeUserModuleRows((modulesRows ?? []) as UserModuleRow[]);
   const reviews = (reviewRows ?? []) as ReviewRow[];
 
   const reviewByModuleId = new Map(reviews.map((review) => [review.module_id, review]));
@@ -119,14 +127,10 @@ export default async function ProfilePage() {
               </span>
             </div>
 
-            {modules.map((row) => {
-              const moduleInfo = row.modules?.[0];
-              if (!moduleInfo) {
-                return null;
-              }
-              const review = reviewByModuleId.get(row.module_id);
+            {modules.map((moduleInfo) => {
+              const review = reviewByModuleId.get(moduleInfo.id);
               return (
-                <div key={row.module_id} className="module-review-item">
+                <div key={moduleInfo.id} className="module-review-item">
                   <div style={{ flex: 1 }}>
                     <span className="module-code" style={{ fontSize: "11px", display: "block" }}>
                       {moduleInfo.code}
@@ -154,6 +158,12 @@ export default async function ProfilePage() {
                 </div>
               );
             })}
+
+            <div style={{ marginTop: "18px" }}>
+              <Link className="btn btn-ghost btn-sm" href="/onboarding">
+                Edit Modules
+              </Link>
+            </div>
           </div>
 
           <div>
