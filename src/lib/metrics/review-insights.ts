@@ -57,7 +57,6 @@ const STOP_WORDS = new Set([
   "very",
   "was",
   "week",
-  "weekly",
   "with",
 ]);
 
@@ -102,6 +101,73 @@ function scoreSentiment(comment: string): "positive" | "neutral" | "negative" {
   return "neutral";
 }
 
+function tokenizeComment(comment: string): string[] {
+  return (
+    comment
+      .toLowerCase()
+      .match(/[a-z]{3,}/g)
+      ?.filter((token) => !STOP_WORDS.has(token)) ?? []
+  );
+}
+
+function incrementCount(map: Map<string, number>, token: string) {
+  map.set(token, (map.get(token) ?? 0) + 1);
+}
+
+function extractKeywordScores(comments: string[]): Map<string, number> {
+  const unigramCounts = new Map<string, number>();
+  const bigramCounts = new Map<string, number>();
+  const trigramCounts = new Map<string, number>();
+
+  for (const comment of comments) {
+    const tokens = tokenizeComment(comment);
+
+    for (let index = 0; index < tokens.length; index += 1) {
+      incrementCount(unigramCounts, tokens[index]);
+
+      const bigram = tokens[index + 1]
+        ? `${tokens[index]} ${tokens[index + 1]}`
+        : null;
+      if (bigram) {
+        incrementCount(bigramCounts, bigram);
+      }
+
+      const trigram =
+        tokens[index + 1] && tokens[index + 2]
+          ? `${tokens[index]} ${tokens[index + 1]} ${tokens[index + 2]}`
+          : null;
+      if (trigram) {
+        incrementCount(trigramCounts, trigram);
+      }
+    }
+  }
+
+  const keywordScores = new Map<string, number>();
+  const accumulateKeywordScores = (phrase: string, score: number) => {
+    keywordScores.set(phrase, (keywordScores.get(phrase) ?? 0) + score);
+  };
+
+  for (const [token, count] of unigramCounts.entries()) {
+    if (count >= 2) {
+      accumulateKeywordScores(token, count * 2.2);
+    }
+  }
+
+  for (const [token, count] of bigramCounts.entries()) {
+    if (count >= 2) {
+      accumulateKeywordScores(token, count * 2.8);
+    }
+  }
+
+  for (const [token, count] of trigramCounts.entries()) {
+    if (count >= 2) {
+      accumulateKeywordScores(token, count * 3.4);
+    }
+  }
+
+  return keywordScores;
+}
+
 export function deriveReviewInsights(reviews: ReviewLike[]): ReviewInsights {
   if (reviews.length === 0) {
     return {
@@ -129,7 +195,7 @@ export function deriveReviewInsights(reviews: ReviewLike[]): ReviewInsights {
     assessment: 0,
   };
 
-  const keywords = new Map<string, number>();
+  const keywordScores = extractKeywordScores(reviews.map((review) => review.comment));
   const sentiment = {
     positive: 0,
     neutral: 0,
@@ -144,11 +210,6 @@ export function deriveReviewInsights(reviews: ReviewLike[]): ReviewInsights {
 
     sentiment[scoreSentiment(review.comment)] += 1;
 
-    const words = review.comment.toLowerCase().match(/[a-z]{3,}/g) ?? [];
-    for (const word of words) {
-      if (STOP_WORDS.has(word)) continue;
-      keywords.set(word, (keywords.get(word) ?? 0) + 1);
-    }
   }
 
   const count = reviews.length;
@@ -157,8 +218,8 @@ export function deriveReviewInsights(reviews: ReviewLike[]): ReviewInsights {
   const averageDifficulty = totals.difficulty / count;
   const averageAssessment = totals.assessment / count;
 
-  const topKeywords = Array.from(keywords.entries())
-    .map(([word, keywordCount]) => ({ word, count: keywordCount }))
+  const topKeywords = Array.from(keywordScores.entries())
+    .map(([word, score]) => ({ word, count: Math.max(1, Math.round(score)) }))
     .sort((a, b) => b.count - a.count || a.word.localeCompare(b.word))
     .slice(0, 8);
 

@@ -50,6 +50,31 @@ describe("deriveReviewInsights", () => {
     expect(words).not.toContain("the");
   });
 
+  it("extracts meaningful multi-word phrases for better insight quality", () => {
+    const result = deriveReviewInsights([
+      {
+        teachingRating: 4,
+        workloadRating: 4,
+        difficultyRating: 4,
+        assessmentRating: 4,
+        comment:
+          "Weekly workload was intense but the weekly workload prepared us well for the final exam.",
+      },
+      {
+        teachingRating: 5,
+        workloadRating: 3,
+        difficultyRating: 3,
+        assessmentRating: 5,
+        comment:
+          "The final exam felt fair and the weekly workload was still manageable overall.",
+      },
+    ]);
+
+    const terms = result.topKeywords.map((item) => item.word);
+    expect(terms).toContain("weekly workload");
+    expect(terms).toContain("final exam");
+  });
+
   it("provides sentiment distribution", () => {
     const result = deriveReviewInsights(reviews);
 
