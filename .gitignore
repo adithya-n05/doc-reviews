@@ -1,0 +1,17 @@
+# user-requested local-only folders/files
+.docs/
+.mockups/
+AGENTS.md
+
+# node artifacts
+node_modules/
+**/node_modules/
+.next/
+**/.next/
+dist/
+coverage/
+
+# environment and OS files
+.env
+.env.*
+.DS_Store
