@@ -328,16 +328,17 @@ export default async function ModuleDetailPage({
               .slice(0, 2)
               .map((part) => part[0]?.toUpperCase() ?? "")
               .join("");
+            const normalizedPhotoUrl =
+              typeof leader.photoUrl === "string" ? leader.photoUrl.trim() : "";
             const hasUsablePhoto =
-              typeof leader.photoUrl === "string" &&
-              leader.photoUrl.trim().length > 0 &&
-              !isLikelyPlaceholderStaffPhoto(leader.photoUrl);
+              normalizedPhotoUrl.length > 0 &&
+              !isLikelyPlaceholderStaffPhoto(normalizedPhotoUrl);
 
             const cardBody = (
               <>
                 {hasUsablePhoto ? (
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img className="staff-photo" src={leader.photoUrl} alt={`${leader.name} profile`} />
+                  <img className="staff-photo" src={normalizedPhotoUrl} alt={`${leader.name} profile`} />
                 ) : (
                   <div className="staff-initials">{initials || "?"}</div>
                 )}
