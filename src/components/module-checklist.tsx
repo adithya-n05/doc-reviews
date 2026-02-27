@@ -51,10 +51,10 @@ export function ModuleChecklist({
       4: [],
     };
 
-    for (const module of modules) {
-      for (const year of module.studyYears) {
+    for (const moduleOption of modules) {
+      for (const year of moduleOption.studyYears) {
         if (year >= 1 && year <= 4) {
-          buckets[year].push(module);
+          buckets[year].push(moduleOption);
         }
       }
     }
@@ -81,8 +81,8 @@ export function ModuleChecklist({
             onClick={() =>
               setSelected((previous) => {
                 const next = new Set(previous);
-                for (const module of filtered) {
-                  next.add(module.code);
+                for (const moduleOption of filtered) {
+                  next.add(moduleOption.code);
                 }
                 return next;
               })
@@ -96,8 +96,8 @@ export function ModuleChecklist({
             onClick={() =>
               setSelected((previous) => {
                 const next = new Set(previous);
-                for (const module of filtered) {
-                  next.delete(module.code);
+                for (const moduleOption of filtered) {
+                  next.delete(moduleOption.code);
                 }
                 return next;
               })
@@ -117,11 +117,11 @@ export function ModuleChecklist({
         />
       </div>
       <div style={{ border: "1px solid var(--border)", background: "#fff" }}>
-        {filtered.map((module) => {
-          const checked = selected.has(module.code);
+        {filtered.map((moduleOption) => {
+          const checked = selected.has(moduleOption.code);
           return (
             <label
-              key={module.code}
+              key={moduleOption.code}
               className="module-check-item"
               style={{
                 display: "flex",
@@ -134,25 +134,25 @@ export function ModuleChecklist({
             >
               <input
                 type="checkbox"
-                value={module.code}
+                value={moduleOption.code}
                 checked={checked}
                 onChange={(event) => {
                   setSelected((previous) => {
                     const next = new Set(previous);
                     if (event.target.checked) {
-                      next.add(module.code);
+                      next.add(moduleOption.code);
                     } else {
-                      next.delete(module.code);
+                      next.delete(moduleOption.code);
                     }
                     return next;
                   });
                 }}
               />
               <div style={{ flex: 1 }}>
-                <div className="module-code">{module.code}</div>
-                <div style={{ fontWeight: 600 }}>{module.title}</div>
+                <div className="module-code">{moduleOption.code}</div>
+                <div style={{ fontWeight: 600 }}>{moduleOption.title}</div>
                 <div className="module-meta">
-                  Year {module.studyYears.join(", ") || "Unspecified"}
+                  Year {moduleOption.studyYears.join(", ") || "Unspecified"}
                 </div>
               </div>
             </label>
