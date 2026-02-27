@@ -61,6 +61,7 @@ describe("matchLeaderProfile", () => {
     const index = buildStaffDirectoryIndex(entries);
 
     expect(matchLeaderProfile("Iain Phillips", index)).toEqual({
+      canonicalName: "Dr Iain Phillips",
       profileUrl: "https://www.imperial.ac.uk/profiles/i.phillips",
       photoUrl: "https://img.example.com/iain.jpg",
     });

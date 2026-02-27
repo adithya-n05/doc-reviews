@@ -137,7 +137,11 @@ export function buildStaffDirectoryIndex(
 export function matchLeaderProfile(
   leaderName: string,
   directoryIndex: Map<string, StaffDirectoryEntry>,
-): { profileUrl: string | null; photoUrl: string | null } | null {
+): {
+  canonicalName: string;
+  profileUrl: string | null;
+  photoUrl: string | null;
+} | null {
   const normalizedLeader = normalizeStaffName(leaderName);
   if (!normalizedLeader) {
     return null;
@@ -149,6 +153,7 @@ export function matchLeaderProfile(
   }
 
   return {
+    canonicalName: matched.name,
     profileUrl: matched.profileUrl,
     photoUrl: matched.photoUrl,
   };

@@ -136,12 +136,15 @@ async function main() {
       return [];
     }
 
-    return module.moduleLeaders.map((leaderName) => ({
-      module_id: moduleId,
-      leader_name: leaderName,
-      profile_url: matchLeaderProfile(leaderName, staffIndex)?.profileUrl ?? null,
-      photo_url: matchLeaderProfile(leaderName, staffIndex)?.photoUrl ?? null,
-    }));
+    return module.moduleLeaders.map((leaderName) => {
+      const matchedProfile = matchLeaderProfile(leaderName, staffIndex);
+      return {
+        module_id: moduleId,
+        leader_name: matchedProfile?.canonicalName ?? leaderName,
+        profile_url: matchedProfile?.profileUrl ?? null,
+        photo_url: matchedProfile?.photoUrl ?? null,
+      };
+    });
   });
 
   if (leaderRows.length > 0) {
