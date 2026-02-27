@@ -74,8 +74,36 @@ export async function resolveModuleReviewInsights(
     params.cachedRow &&
     params.cachedRow.reviews_fingerprint === reviewsFingerprint
   ) {
+    const cachedInsights = toModuleInsightPayloadFromCacheRow(params.cachedRow);
+    if (
+      cachedInsights.topKeywords.length > 0 ||
+      reviewCorpus.length === 0
+    ) {
+      return {
+        insights: cachedInsights,
+        reviewsFingerprint,
+      };
+    }
+
+    const fallbackInsights = await generateInsights(reviewCorpus, {
+      apiKey: "",
+      model: params.model,
+      fetchImpl: params.fetchImpl,
+    });
+
+    if (params.adminClient) {
+      await persistInsights(params.adminClient, {
+        moduleId: params.moduleId,
+        reviewsFingerprint,
+        summary: fallbackInsights.summary,
+        topKeywords: fallbackInsights.topKeywords,
+        sentiment: fallbackInsights.sentiment,
+        source: fallbackInsights.source,
+      });
+    }
+
     return {
-      insights: toModuleInsightPayloadFromCacheRow(params.cachedRow),
+      insights: fallbackInsights,
       reviewsFingerprint,
     };
   }

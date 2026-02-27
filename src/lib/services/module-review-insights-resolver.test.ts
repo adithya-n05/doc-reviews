@@ -76,6 +76,43 @@ describe("resolveModuleReviewInsights", () => {
     expect(persistInsights).toHaveBeenCalledOnce();
   });
 
+  it("repairs cache-hit rows with empty keywords by regenerating fallback insights", async () => {
+    const generateInsights = vi.fn().mockResolvedValue({
+      summary: "Recovered fallback summary",
+      topKeywords: [{ word: "tutorials", count: 1 }],
+      sentiment: { positive: 1, neutral: 0, negative: 0 },
+      source: "fallback",
+    });
+    const persistInsights = vi.fn().mockResolvedValue(undefined);
+
+    const result = await resolveModuleReviewInsights(
+      {
+        moduleId: "module-1",
+        reviews: REVIEWS,
+        cachedRow: {
+          module_id: "module-1",
+          reviews_fingerprint:
+            "1e922e9399a010b76588bfbbcfd30befa4e7346563b7d374d0f72441ea0bd36b",
+          summary: "Cached summary",
+          top_keywords: [],
+          sentiment: { positive: 1, neutral: 0, negative: 0 },
+          source: "ai",
+          generated_at: "2026-02-27T06:05:00.000Z",
+          updated_at: "2026-02-27T06:05:00.000Z",
+        },
+        apiKey: "key",
+        model: "gpt-4.1-mini",
+        adminClient: {} as never,
+      },
+      { generateInsights, persistInsights },
+    );
+
+    expect(result.insights.summary).toBe("Recovered fallback summary");
+    expect(result.insights.topKeywords).toEqual([{ word: "tutorials", count: 1 }]);
+    expect(generateInsights).toHaveBeenCalledOnce();
+    expect(persistInsights).toHaveBeenCalledOnce();
+  });
+
   it("returns fallback insights when cache is stale", async () => {
     const generateInsights = vi.fn().mockResolvedValue({
       summary: "Fallback summary",
