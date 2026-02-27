@@ -85,6 +85,10 @@ describe("module detail review rendering", () => {
     expect(source).toContain('href={`/modules?year=${studyYear}`}');
   });
 
+  it("does not keep modules nav tab pinned active on detail route", () => {
+    expect(source).toContain('active="none"');
+  });
+
   it("renders reviewer avatar photos with initials fallback", () => {
     expect(source).toContain("review.reviewerAvatarUrl ? (");
     expect(source).toContain("className=\"review-avatar-photo\"");

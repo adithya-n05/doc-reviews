@@ -52,7 +52,7 @@ export default async function WriteReviewPage({
     <div className="site-shell">
       <SiteNav
         authed
-        active="modules"
+        active="none"
         displayName={profile.full_name}
         avatarUrl={profile.avatar_url}
       />

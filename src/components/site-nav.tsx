@@ -8,7 +8,7 @@ type PublicNavProps = {
 
 type PrivateNavProps = {
   authed: true;
-  active: "modules" | "profile";
+  active: "modules" | "profile" | "none";
   displayName: string;
   avatarUrl?: string | null;
 };

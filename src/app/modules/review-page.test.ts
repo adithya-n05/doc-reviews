@@ -15,4 +15,8 @@ describe("write review page fields", () => {
     expect(source).toContain("Minimum 80 characters.");
     expect(source).not.toContain("className=\"form-textarea\"");
   });
+
+  it("does not keep modules nav tab pinned active on write-review route", () => {
+    expect(source).toContain('active="none"');
+  });
 });
