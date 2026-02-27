@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { toPublicReviewerInitials } from "@/lib/modules/presenter";
 
 type PublicNavProps = {
@@ -54,6 +55,8 @@ export function SiteNav(props: SiteNavProps) {
           >
             Profile
           </Link>
+          <div className="nav-divider" />
+          <ThemeToggle />
           <Link href="/profile" className="nav-avatar" title={props.displayName}>
             {props.avatarUrl ? (
               // eslint-disable-next-line @next/next/no-img-element

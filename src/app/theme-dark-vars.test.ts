@@ -14,19 +14,18 @@ describe("dark theme css variables", () => {
     expect(css).toContain("--inverse-text:");
   });
 
-  it("styles floating theme toggle control", () => {
-    expect(css).toContain(".theme-toggle-footer");
+  it("styles nav theme toggle control", () => {
     expect(css).toContain(".theme-toggle");
     expect(css).toContain(".theme-toggle:hover");
-    expect(css).toContain(".theme-toggle-track");
-    expect(css).toContain(".theme-toggle-thumb");
-    expect(css).toContain(".theme-toggle-state");
-    expect(css).toContain(".sr-only");
+    expect(css).toContain(".nav-divider");
+    expect(css).toContain(".theme-toggle svg");
+    expect(css).toContain(".theme-toggle .sun");
+    expect(css).toContain(".theme-toggle .moon");
   });
 
-  it("anchors footer theme toggle area to the left edge", () => {
-    expect(css).toContain(".theme-toggle-footer");
-    expect(css).toContain("justify-content: flex-start;");
+  it("toggles icon visibility for dark mode", () => {
+    expect(css).toContain(':root[data-theme="dark"] .theme-toggle .sun');
+    expect(css).toContain(':root[data-theme="dark"] .theme-toggle .moon');
   });
 
   it("styles collapsible review thread controls for reply readability", () => {
