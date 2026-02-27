@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { LandingMetrics } from "@/lib/metrics/landing-metrics";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
+import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { fetchLandingMetrics } from "@/lib/server/landing-metrics";
 
 const ZERO_METRICS: LandingMetrics = {
@@ -20,11 +21,31 @@ function workloadHoursEstimate(rating: number): number {
 
 export default async function HomePage() {
   let metrics = ZERO_METRICS;
+  let signedInDisplayName: string | null = null;
   try {
     const adminClient = createSupabaseAdminClient();
     metrics = await fetchLandingMetrics(adminClient);
   } catch {
     metrics = ZERO_METRICS;
+  }
+
+  try {
+    const authClient = await createSupabaseServerClient();
+    const {
+      data: { user },
+    } = await authClient.auth.getUser();
+
+    if (user) {
+      const { data: profile } = await authClient
+        .from("profiles")
+        .select("full_name")
+        .eq("id", user.id)
+        .maybeSingle();
+      signedInDisplayName =
+        profile?.full_name?.trim() || user.email?.trim() || "Imperial Student";
+    }
+  } catch {
+    signedInDisplayName = null;
   }
 
   return (
@@ -43,20 +64,43 @@ export default async function HomePage() {
             <div className="masthead-date">
               Imperial College London · Department of Computing
             </div>
-            <div
-              style={{
-                marginTop: "10px",
-                display: "flex",
-                gap: "10px",
-                justifyContent: "flex-end",
-              }}
-            >
-              <Link className="btn btn-ghost btn-sm" href="/auth/login">
-                Sign In
-              </Link>
-              <Link className="btn btn-primary btn-sm" href="/auth/signup">
-                Get Started
-              </Link>
+          <div
+            style={{
+              marginTop: "10px",
+              display: "flex",
+              gap: "10px",
+              justifyContent: "flex-end",
+              alignItems: "center",
+            }}
+          >
+              {signedInDisplayName ? (
+                <>
+                  <span
+                    style={{
+                      fontSize: "12px",
+                      color: "var(--ink-light)",
+                      marginRight: "4px",
+                    }}
+                  >
+                    Signed in as <strong style={{ color: "var(--ink-mid)" }}>{signedInDisplayName}</strong>
+                  </span>
+                  <Link className="btn btn-ghost btn-sm" href="/profile">
+                    Profile
+                  </Link>
+                  <Link className="btn btn-primary btn-sm" href="/modules">
+                    Go to Modules
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link className="btn btn-ghost btn-sm" href="/auth/login">
+                    Sign In
+                  </Link>
+                  <Link className="btn btn-primary btn-sm" href="/auth/signup">
+                    Get Started
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>
