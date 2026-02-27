@@ -392,6 +392,7 @@
     }
     .module-card:hover {
       background: var(--cream-dark);
+      text-decoration: none;
     }
 
     .module-code {
