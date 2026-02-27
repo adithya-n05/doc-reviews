@@ -24,6 +24,11 @@ describe("dark theme css variables", () => {
     expect(css).toContain(".sr-only");
   });
 
+  it("anchors footer theme toggle area to the left edge", () => {
+    expect(css).toContain(".theme-toggle-footer");
+    expect(css).toContain("justify-content: flex-start;");
+  });
+
   it("styles collapsible review thread controls for reply readability", () => {
     expect(css).toContain(".review-thread");
     expect(css).toContain(".reply-thread-btn");
