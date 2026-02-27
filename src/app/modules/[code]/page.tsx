@@ -52,6 +52,23 @@ function formatReviewDate(value: string) {
   });
 }
 
+function formatInsightsRefreshDate(value: string | null): string {
+  if (!value) {
+    return "Pending refresh";
+  }
+
+  const parsed = new Date(value);
+  if (Number.isNaN(parsed.getTime())) {
+    return "Pending refresh";
+  }
+
+  return parsed.toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
+}
+
 function metricBarWidth(value: number) {
   const clamped = Math.max(0, Math.min(5, value));
   return `${Math.round((clamped / 5) * 100)}%`;
@@ -184,7 +201,8 @@ export default async function ModuleDetailPage({
       comment: row.comment,
     })),
   );
-  const { insights } = await insightsPromise;
+  const { insights, generatedAt } = await insightsPromise;
+  const insightRefreshDate = formatInsightsRefreshDate(generatedAt);
 
   queryDurationsMs.total = elapsedMs(queryPipelineStart);
   logInfo("module_detail_timing", {
@@ -438,6 +456,9 @@ export default async function ModuleDetailPage({
             AI Summary
           </div>
           <p className="insight-summary">{insights.summary}</p>
+          <p className="form-note" style={{ marginTop: "0", marginBottom: "12px" }}>
+            Last refreshed {insightRefreshDate} · Source {insights.source === "ai" ? "AI" : "Fallback"}
+          </p>
 
           <div className="label-caps" style={{ marginBottom: "10px" }}>
             Student Sentiment

@@ -41,6 +41,7 @@ describe("resolveModuleReviewInsights", () => {
 
     expect(result.insights.summary).toBe("Cached summary");
     expect(result.insights.source).toBe("ai");
+    expect(result.generatedAt).toBe("2026-02-27T06:05:00.000Z");
     expect(generateInsights).not.toHaveBeenCalled();
     expect(persistInsights).not.toHaveBeenCalled();
   });
@@ -68,6 +69,7 @@ describe("resolveModuleReviewInsights", () => {
 
     expect(result.insights.summary).toBe("Fallback summary");
     expect(result.insights.source).toBe("fallback");
+    expect(result.generatedAt).toMatch(/^\d{4}-\d{2}-\d{2}T/);
     expect(generateInsights).toHaveBeenCalledOnce();
     expect(generateInsights).toHaveBeenCalledWith(
       expect.any(Array),
@@ -109,6 +111,7 @@ describe("resolveModuleReviewInsights", () => {
 
     expect(result.insights.summary).toBe("Recovered fallback summary");
     expect(result.insights.topKeywords).toEqual([{ word: "tutorials", count: 1 }]);
+    expect(result.generatedAt).toMatch(/^\d{4}-\d{2}-\d{2}T/);
     expect(generateInsights).toHaveBeenCalledOnce();
     expect(persistInsights).toHaveBeenCalledOnce();
   });
@@ -144,6 +147,7 @@ describe("resolveModuleReviewInsights", () => {
 
     expect(result.insights.summary).toBe("Fallback summary");
     expect(result.insights.source).toBe("fallback");
+    expect(result.generatedAt).toMatch(/^\d{4}-\d{2}-\d{2}T/);
     expect(persistInsights).not.toHaveBeenCalled();
   });
 });

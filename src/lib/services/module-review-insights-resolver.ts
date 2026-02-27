@@ -51,6 +51,7 @@ export async function resolveModuleReviewInsights(
 ): Promise<{
   insights: ModuleReviewInsightPayload;
   reviewsFingerprint: string;
+  generatedAt: string | null;
 }> {
   const generateInsights = deps.generateInsights ?? generateModuleReviewInsightPayload;
   const persistInsights = deps.persistInsights ?? upsertModuleReviewInsightsCacheRow;
@@ -82,6 +83,7 @@ export async function resolveModuleReviewInsights(
       return {
         insights: cachedInsights,
         reviewsFingerprint,
+        generatedAt: params.cachedRow.generated_at,
       };
     }
 
@@ -105,6 +107,7 @@ export async function resolveModuleReviewInsights(
     return {
       insights: fallbackInsights,
       reviewsFingerprint,
+      generatedAt: new Date().toISOString(),
     };
   }
 
@@ -129,6 +132,7 @@ export async function resolveModuleReviewInsights(
     return {
       insights: fallbackInsights,
       reviewsFingerprint,
+      generatedAt: new Date().toISOString(),
     };
   }
 
@@ -152,5 +156,6 @@ export async function resolveModuleReviewInsights(
   return {
     insights: fallbackInsights,
     reviewsFingerprint,
+    generatedAt: new Date().toISOString(),
   };
 }

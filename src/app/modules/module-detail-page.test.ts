@@ -25,6 +25,12 @@ describe("module detail review rendering", () => {
     expect(source).toContain('className="insight-summary"');
   });
 
+  it("shows AI summary refresh metadata and source label", () => {
+    expect(source).toContain("Last refreshed");
+    expect(source).toContain("generatedAt");
+    expect(source).toContain("insights.source === \"ai\" ? \"AI\" : \"Fallback\"");
+  });
+
   it("shows helpful/reply review actions and editorial tip label", () => {
     expect(source).toContain('import { HelpfulToggleButton } from "@/components/helpful-toggle-button";');
     expect(source).toContain('import { ReviewReplyThread } from "@/components/review-reply-thread";');
