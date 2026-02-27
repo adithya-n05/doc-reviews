@@ -165,6 +165,14 @@ function extractKeywordScores(comments: string[]): Map<string, number> {
     }
   }
 
+  if (keywordScores.size === 0) {
+    for (const [token, count] of unigramCounts.entries()) {
+      if (token.length >= 4) {
+        accumulateKeywordScores(token, count * 1.4);
+      }
+    }
+  }
+
   return keywordScores;
 }
 

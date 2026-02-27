@@ -100,4 +100,20 @@ describe("deriveReviewInsights", () => {
       negative: 0,
     });
   });
+
+  it("extracts fallback keywords for a single review so tags are never empty", () => {
+    const result = deriveReviewInsights([
+      {
+        teachingRating: 5,
+        workloadRating: 3,
+        difficultyRating: 3,
+        assessmentRating: 4,
+        comment:
+          "The tutorials were practical and the lecturer explained exam strategy clearly.",
+      },
+    ]);
+
+    expect(result.topKeywords.length).toBeGreaterThan(0);
+    expect(result.topKeywords.map((item) => item.word)).toContain("tutorials");
+  });
 });
