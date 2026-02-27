@@ -19,6 +19,12 @@ describe("module detail review rendering", () => {
     expect(source).toContain("Exam Fairness");
   });
 
+  it("renders AI summary section above keyword tags", () => {
+    expect(source).toContain("AI Summary");
+    expect(source).toContain("{insights.summary}");
+    expect(source).toContain('className="insight-summary"');
+  });
+
   it("shows helpful/reply review actions and editorial tip label", () => {
     expect(source).toContain('className={`helpful-btn ${');
     expect(source).toContain('className="reply-btn"');

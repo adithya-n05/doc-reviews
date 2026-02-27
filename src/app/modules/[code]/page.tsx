@@ -11,9 +11,12 @@ import { requireUserContext } from "@/lib/server/auth-context";
 import {
   fetchModuleByCode,
   fetchHelpfulVoteRowsForReviews,
+  fetchModuleReviewInsightsRow,
   fetchModuleReviews,
   fetchProfilesByIds,
 } from "@/lib/server/module-queries";
+import { resolveModuleReviewInsights } from "@/lib/services/module-review-insights-resolver";
+import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 
 type ModuleDetailPageProps = {
   params: Promise<{ code: string }>;
@@ -95,7 +98,7 @@ export default async function ModuleDetailPage({
     }
   }
   const currentUserReview = reviews.find((review) => review.userId === user.id) ?? null;
-  const insights = deriveReviewInsights(
+  const derivedInsights = deriveReviewInsights(
     reviewRows.map((row) => ({
       teachingRating: row.teaching_rating,
       workloadRating: row.workload_rating,
@@ -104,6 +107,23 @@ export default async function ModuleDetailPage({
       comment: row.comment,
     })),
   );
+  const cachedInsightsRow = await fetchModuleReviewInsightsRow(client, moduleItem.id);
+  const { insights } = await resolveModuleReviewInsights({
+    moduleId: moduleItem.id,
+    reviews: reviewRows.map((row) => ({
+      id: row.id,
+      updatedAt: row.updated_at,
+      teachingRating: row.teaching_rating,
+      workloadRating: row.workload_rating,
+      difficultyRating: row.difficulty_rating,
+      assessmentRating: row.assessment_rating,
+      comment: row.comment,
+    })),
+    cachedRow: cachedInsightsRow,
+    apiKey: process.env.OPENAI_API_KEY,
+    model: process.env.OPENAI_MODEL ?? "gpt-4.1-mini",
+    adminClient: createSupabaseAdminClient(),
+  });
 
   const studyYear = moduleItem.studyYears[0] ?? profile.year ?? 1;
   const leaders =
@@ -164,27 +184,27 @@ export default async function ModuleDetailPage({
           <div className="metric-card">
             <div className="label-caps">Overall Rating</div>
             <div className="metric-value accent">
-              {insights.averages.overall.toFixed(1)}{" "}
+              {derivedInsights.averages.overall.toFixed(1)}{" "}
               <span style={{ fontSize: "18px", color: "var(--ink-light)" }}>/ 5</span>
             </div>
             <div className="metric-bar">
               <div
                 className="metric-bar-fill"
-                style={{ width: metricBarWidth(insights.averages.overall) }}
+                style={{ width: metricBarWidth(derivedInsights.averages.overall) }}
               />
             </div>
           </div>
           <div className="metric-card">
             <div className="label-caps">Difficulty</div>
             <div className="metric-value">
-              {insights.averages.difficulty.toFixed(1)}{" "}
+              {derivedInsights.averages.difficulty.toFixed(1)}{" "}
               <span style={{ fontSize: "18px", color: "var(--ink-light)" }}>/ 5</span>
             </div>
             <div className="metric-bar">
               <div
                 className="metric-bar-fill"
                 style={{
-                  width: metricBarWidth(insights.averages.difficulty),
+                  width: metricBarWidth(derivedInsights.averages.difficulty),
                   background: "var(--ink-mid)",
                 }}
               />
@@ -193,27 +213,27 @@ export default async function ModuleDetailPage({
           <div className="metric-card">
             <div className="label-caps">Teaching Quality</div>
             <div className="metric-value">
-              {insights.averages.teaching.toFixed(1)}{" "}
+              {derivedInsights.averages.teaching.toFixed(1)}{" "}
               <span style={{ fontSize: "18px", color: "var(--ink-light)" }}>/ 5</span>
             </div>
             <div className="metric-bar">
               <div
                 className="metric-bar-fill"
-                style={{ width: metricBarWidth(insights.averages.teaching) }}
+                style={{ width: metricBarWidth(derivedInsights.averages.teaching) }}
               />
             </div>
           </div>
           <div className="metric-card">
             <div className="label-caps">Workload</div>
             <div className="metric-value">
-              {insights.averages.workload.toFixed(1)}{" "}
+              {derivedInsights.averages.workload.toFixed(1)}{" "}
               <span style={{ fontSize: "18px", color: "var(--ink-light)" }}>/ 5</span>
             </div>
             <div className="metric-bar">
               <div
                 className="metric-bar-fill"
                 style={{
-                  width: metricBarWidth(insights.averages.workload),
+                  width: metricBarWidth(derivedInsights.averages.workload),
                   background: "var(--ink-mid)",
                 }}
               />
@@ -222,26 +242,26 @@ export default async function ModuleDetailPage({
           <div className="metric-card">
             <div className="label-caps">Content Quality</div>
             <div className="metric-value">
-              {insights.averages.overall.toFixed(1)}{" "}
+              {derivedInsights.averages.overall.toFixed(1)}{" "}
               <span style={{ fontSize: "18px", color: "var(--ink-light)" }}>/ 5</span>
             </div>
             <div className="metric-bar">
               <div
                 className="metric-bar-fill"
-                style={{ width: metricBarWidth(insights.averages.overall) }}
+                style={{ width: metricBarWidth(derivedInsights.averages.overall) }}
               />
             </div>
           </div>
           <div className="metric-card">
             <div className="label-caps">Exam Fairness</div>
             <div className="metric-value">
-              {insights.averages.assessment.toFixed(1)}{" "}
+              {derivedInsights.averages.assessment.toFixed(1)}{" "}
               <span style={{ fontSize: "18px", color: "var(--ink-light)" }}>/ 5</span>
             </div>
             <div className="metric-bar">
               <div
                 className="metric-bar-fill"
-                style={{ width: metricBarWidth(insights.averages.assessment) }}
+                style={{ width: metricBarWidth(derivedInsights.averages.assessment) }}
               />
             </div>
           </div>
@@ -282,10 +302,15 @@ export default async function ModuleDetailPage({
 
         <div style={{ marginTop: "26px" }}>
           <div className="label-caps" style={{ marginBottom: "10px" }}>
+            AI Summary
+          </div>
+          <p className="insight-summary">{insights.summary}</p>
+
+          <div className="label-caps" style={{ marginBottom: "10px" }}>
             Student Sentiment
           </div>
           <p className="form-note" style={{ marginBottom: "10px" }}>
-            {insights.sentiment.positive}/{insights.reviewCount} positive reviews
+            {insights.sentiment.positive}/{derivedInsights.reviewCount} positive reviews
           </p>
           <div className="tag-cloud">
             {insights.topKeywords.length > 0 ? (
