@@ -13,7 +13,10 @@ import {
 } from "@/lib/services/review-reply-service";
 import { requireUserContext } from "@/lib/server/auth-context";
 
-function firstError(errors: Record<string, string | undefined>): string {
+function firstError(errors?: Record<string, string | undefined>): string {
+  if (!errors) {
+    return "Please check your review details.";
+  }
   for (const value of Object.values(errors)) {
     if (value) return value;
   }
@@ -262,7 +265,9 @@ export async function updateReviewReplyAction(formData: FormData): Promise<never
 
   if (!result.ok) {
     if (result.type === "validation") {
-      const message = "errors" in result ? firstError(result.errors) : result.message;
+      const message = result.errors
+        ? firstError(result.errors)
+        : (result.message ?? "Please check your reply details.");
       redirect(`/modules/${moduleCode}?error=${encodeURIComponent(message)}#review-${reviewId}`);
     }
     redirect(`/modules/${moduleCode}?error=${encodeURIComponent(result.message)}#review-${reviewId}`);
@@ -299,6 +304,12 @@ export async function deleteReviewReplyAction(formData: FormData): Promise<never
   );
 
   if (!result.ok) {
+    if (result.type === "validation") {
+      const message = result.errors
+        ? firstError(result.errors)
+        : (result.message ?? "Unable to delete reply.");
+      redirect(`/modules/${moduleCode}?error=${encodeURIComponent(message)}#review-${reviewId}`);
+    }
     redirect(`/modules/${moduleCode}?error=${encodeURIComponent(result.message)}#review-${reviewId}`);
   }
 

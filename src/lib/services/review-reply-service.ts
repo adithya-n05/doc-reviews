@@ -32,7 +32,8 @@ type Success = { ok: true };
 type ValidationFailure = {
   ok: false;
   type: "validation";
-  errors: {
+  message?: string;
+  errors?: {
     body?: string;
   };
 };
