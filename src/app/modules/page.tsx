@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ModuleCatalogueControls } from "@/components/module-catalogue-controls";
 import { SiteNav } from "@/components/site-nav";
 import {
   applyModuleListQuery,
@@ -76,29 +77,11 @@ export default async function ModulesPage({ searchParams }: ModulesPageProps) {
             </div>
             <h1 className="section-title">Module Catalogue</h1>
           </div>
-          <form method="get" className="search-row" style={{ margin: 0, gap: "10px" }}>
-            <input type="hidden" name="year" value={activeYear} />
-            <div className="search-bar" style={{ margin: 0, minWidth: "220px", borderColor: "var(--border)" }}>
-              <span className="search-icon" style={{ fontSize: "13px" }}>
-                ⌖
-              </span>
-              <input
-                className="search-input"
-                type="search"
-                name="q"
-                defaultValue={parsed.search}
-                style={{ fontSize: "13px" }}
-                placeholder="Search modules..."
-              />
-            </div>
-            <select name="sort" className="form-select" style={{ height: "40px" }} defaultValue={parsed.sort}>
-              <option value="rating_desc">Sort: Rating (High-Low)</option>
-              <option value="rating_asc">Sort: Rating (Low-High)</option>
-              <option value="most_reviewed">Sort: Most Reviewed</option>
-              <option value="difficulty_desc">Sort: Difficulty</option>
-              <option value="alphabetical">Sort: Alphabetical</option>
-            </select>
-          </form>
+          <ModuleCatalogueControls
+            year={activeYear}
+            initialSearch={parsed.search}
+            initialSort={parsed.sort}
+          />
         </div>
 
         <div className="tabs">
