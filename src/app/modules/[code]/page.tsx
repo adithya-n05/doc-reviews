@@ -99,7 +99,9 @@ export default async function ModuleDetailPage({
               Modules
             </Link>
             <span>›</span>
-            <span>Year {studyYear}</span>
+            <Link href={`/modules?year=${studyYear}`} style={{ color: "var(--ink-light)" }}>
+              Year {studyYear}
+            </Link>
             <span>›</span>
             <span>{moduleItem.code}</span>
           </div>

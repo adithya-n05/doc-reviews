@@ -35,4 +35,8 @@ describe("module detail review rendering", () => {
     expect(source).toContain("Edit");
     expect(source).toContain("Delete");
   });
+
+  it("makes the year breadcrumb clickable back to filtered catalogue", () => {
+    expect(source).toContain('href={`/modules?year=${studyYear}`}');
+  });
 });
