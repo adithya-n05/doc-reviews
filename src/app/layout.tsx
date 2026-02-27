@@ -4,6 +4,7 @@ import {
   Source_Code_Pro,
   Source_Sans_3,
 } from "next/font/google";
+import { FeedbackWidget } from "@/components/feedback-widget";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { SITE_DESCRIPTION, SITE_NAME, getSiteUrl } from "@/lib/site-metadata";
 import "./globals.css";
@@ -109,6 +110,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${newsreader.variable} ${sourceSans.variable} ${sourceCode.variable}`}>
         <ThemeToggle />
+        <FeedbackWidget />
         {children}
       </body>
     </html>

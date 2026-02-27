@@ -1528,3 +1528,104 @@
   display: block;
   line-height: 1;
 }
+
+.feedback-widget-shell {
+  position: fixed;
+  right: 16px;
+  bottom: 18px;
+  z-index: 220;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.feedback-widget-trigger {
+  border: 1px solid var(--border);
+  background: var(--cream-dark);
+  color: var(--ink-mid);
+  padding: 7px 11px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 120ms ease, color 120ms ease, background 120ms ease;
+}
+
+.feedback-widget-trigger:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-bg);
+}
+
+.feedback-widget-panel {
+  width: min(320px, calc(100vw - 24px));
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+}
+
+.feedback-widget-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-mid);
+}
+
+.feedback-widget-textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--ink);
+  resize: vertical;
+  min-height: 96px;
+  padding: 8px 10px;
+  font-size: 13px;
+  line-height: 1.45;
+  font-family: var(--font-sans);
+}
+
+.feedback-widget-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.feedback-widget-secondary,
+.feedback-widget-submit {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--ink-mid);
+  font-size: 10px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 6px 10px;
+}
+
+.feedback-widget-submit {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.feedback-widget-submit:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.feedback-widget-status {
+  font-size: 12px;
+  color: var(--ink-mid);
+}
+
+.feedback-widget-status.error {
+  color: #c0392b;
+}
