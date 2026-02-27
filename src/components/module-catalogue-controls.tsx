@@ -1,7 +1,15 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { type ChangeEvent, type FormEvent, useState, useTransition } from "react";
+import {
+  useCallback,
+  type ChangeEvent,
+  type FormEvent,
+  useEffect,
+  useRef,
+  useState,
+  useTransition,
+} from "react";
 import type { ModuleListSort } from "@/lib/modules/catalog";
 
 type ModuleCatalogueControlsProps = {
@@ -34,25 +42,48 @@ export function ModuleCatalogueControls({
 }: ModuleCatalogueControlsProps) {
   const router = useRouter();
   const [search, setSearch] = useState(initialSearch);
+  const [debouncedSearch, setDebouncedSearch] = useState(initialSearch);
   const [sort, setSort] = useState<ModuleListSort>(initialSort);
   const [isPending, startTransition] = useTransition();
+  const initializedRef = useRef(false);
 
-  const navigateToFilters = (nextSort: ModuleListSort, nextSearch: string) => {
-    startTransition(() => {
-      router.replace(
-        buildModulesHref({
-          year,
-          search: nextSearch,
-          sort: nextSort,
-        }),
-      );
-    });
-  };
+  const navigateToFilters = useCallback(
+    (nextSort: ModuleListSort, nextSearch: string) => {
+      startTransition(() => {
+        router.replace(
+          buildModulesHref({
+            year,
+            search: nextSearch,
+            sort: nextSort,
+          }),
+        );
+      });
+    },
+    [router, year, startTransition],
+  );
+
+  useEffect(() => {
+    const timeoutId = window.setTimeout(() => {
+      setDebouncedSearch(search);
+    }, 250);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
+  }, [search]);
+
+  useEffect(() => {
+    if (!initializedRef.current) {
+      initializedRef.current = true;
+      return;
+    }
+
+    navigateToFilters(sort, debouncedSearch);
+  }, [debouncedSearch, sort, navigateToFilters]);
 
   const handleSortChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const nextSort = event.target.value as ModuleListSort;
     setSort(nextSort);
-    navigateToFilters(nextSort, search);
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
