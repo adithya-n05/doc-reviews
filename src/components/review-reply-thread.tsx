@@ -393,7 +393,6 @@ export function ReviewReplyThread(props: ReviewReplyThreadProps) {
         </details>
       ) : null}
 
-      {pending ? <p className="form-note">Syncing replies...</p> : null}
     </section>
   );
 }

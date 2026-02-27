@@ -16,4 +16,8 @@ describe("review reply thread optimistic client", () => {
     expect(source).toContain('method: "PATCH"');
     expect(source).toContain('method: "DELETE"');
   });
+
+  it("does not render syncing status text for reply mutations", () => {
+    expect(source).not.toContain("Syncing replies...");
+  });
 });
