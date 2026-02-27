@@ -7,6 +7,7 @@ type ReviewInput = {
   difficultyRating: number;
   assessmentRating: number;
   comment: string;
+  tips?: string;
 };
 
 type ReviewOutput = {
@@ -16,6 +17,7 @@ type ReviewOutput = {
   difficultyRating: number;
   assessmentRating: number;
   comment: string;
+  tips: string | null;
 };
 
 type ReviewErrors = {
@@ -36,6 +38,7 @@ export function validateReviewInput(
   const errors: ReviewErrors = {};
   const moduleCode = input.moduleCode.trim().toUpperCase();
   const comment = input.comment.trim();
+  const tips = (input.tips ?? "").trim();
 
   if (!moduleCode) {
     errors.moduleCode = "Module code is required.";
@@ -77,6 +80,7 @@ export function validateReviewInput(
       difficultyRating: input.difficultyRating,
       assessmentRating: input.assessmentRating,
       comment,
+      tips: tips.length > 0 ? tips : null,
     },
   };
 }

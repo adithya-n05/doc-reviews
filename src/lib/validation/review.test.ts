@@ -78,4 +78,16 @@ describe("validateReviewInput", () => {
       expect(result.value.comment.endsWith("well.")).toBe(true);
     }
   });
+
+  it("normalizes optional tips text when provided", () => {
+    const result = validateReviewInput({
+      ...valid,
+      tips: "   Use past papers and start coursework early.   ",
+    });
+
+    expect(result.ok).toBe(true);
+    if (result.ok) {
+      expect(result.value.tips).toBe("Use past papers and start coursework early.");
+    }
+  });
 });
