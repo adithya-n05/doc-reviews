@@ -71,7 +71,7 @@ export default async function OnboardingPage({
 
   return (
     <div className="site-shell">
-      <SiteNav authed={false} />
+      <SiteNav authed={true} />
       <main className="auth-wrap">
         <section className="auth-card" style={{ width: "min(760px, 100%)" }}>
           <p className="label-caps">Create Your Account</p>
