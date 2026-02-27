@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
-
-const MAX_MESSAGE_LENGTH = 4000;
+import { validateFeedbackInput } from "@/lib/validation/feedback";
 
 export async function POST(request: Request) {
   let payload: unknown;
@@ -12,19 +11,20 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
   }
 
-  const message =
-    typeof (payload as { message?: unknown }).message === "string"
-      ? (payload as { message: string }).message.trim()
-      : "";
-  const pagePathRaw =
-    typeof (payload as { pagePath?: unknown }).pagePath === "string"
-      ? (payload as { pagePath: string }).pagePath.trim()
-      : "/";
-  const pagePath = pagePathRaw.startsWith("/") ? pagePathRaw : "/";
+  const validation = validateFeedbackInput({
+    message:
+      typeof (payload as { message?: unknown }).message === "string"
+        ? (payload as { message: string }).message
+        : "",
+    pagePath:
+      typeof (payload as { pagePath?: unknown }).pagePath === "string"
+        ? (payload as { pagePath: string }).pagePath
+        : "/",
+  });
 
-  if (message.length < 1 || message.length > MAX_MESSAGE_LENGTH) {
+  if (!validation.ok) {
     return NextResponse.json(
-      { error: "Feedback must be between 1 and 4000 characters." },
+      { error: validation.errors.message ?? "Invalid feedback payload." },
       { status: 400 },
     );
   }
@@ -35,8 +35,8 @@ export async function POST(request: Request) {
   } = await client.auth.getUser();
 
   const { error } = await client.from("feedback_submissions").insert({
-    message,
-    page_path: pagePath,
+    message: validation.value.message,
+    page_path: validation.value.pagePath,
     user_id: user?.id ?? null,
   });
 
