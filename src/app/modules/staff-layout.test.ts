@@ -9,4 +9,10 @@ describe("teaching staff layout", () => {
     expect(css).toContain("grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));");
     expect(css).not.toContain(".staff-grid { flex-direction: column; }");
   });
+
+  it("styles linked staff cards as full-surface interactive blocks", () => {
+    expect(css).toContain(".staff-card-link");
+    expect(css).toContain("width: 100%;");
+    expect(css).toContain("box-shadow: inset 0 0 0 1px var(--accent);");
+  });
 });
