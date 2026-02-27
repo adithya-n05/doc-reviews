@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { SITE_DESCRIPTION, SITE_NAME } from "@/lib/site-metadata";
 
-const ICON_ASSET_VERSION = "20260227-3";
+const ICON_ASSET_VERSION = "20260227-4";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {

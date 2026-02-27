@@ -7,7 +7,7 @@ import {
 import { SITE_DESCRIPTION, SITE_NAME, getSiteUrl } from "@/lib/site-metadata";
 import "./globals.css";
 
-const ICON_ASSET_VERSION = "20260227-3";
+const ICON_ASSET_VERSION = "20260227-4";
 
 const newsreader = Newsreader({
   subsets: ["latin"],
@@ -66,16 +66,6 @@ export const metadata: Metadata = {
       },
       {
         url: `/favicon.ico?v=${ICON_ASSET_VERSION}`,
-      },
-      {
-        url: `/favicon-32x32.png?v=${ICON_ASSET_VERSION}`,
-        sizes: "32x32",
-        type: "image/png",
-      },
-      {
-        url: `/favicon-16x16.png?v=${ICON_ASSET_VERSION}`,
-        sizes: "16x16",
-        type: "image/png",
       },
     ],
     shortcut: [`/favicon.ico?v=${ICON_ASSET_VERSION}`],
