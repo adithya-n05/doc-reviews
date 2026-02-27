@@ -6,6 +6,7 @@ import {
   upsertReviewForUser,
 } from "@/lib/services/review-service";
 import { toggleHelpfulVoteForReview } from "@/lib/services/review-helpful-service";
+import { createReviewReplyForUser } from "@/lib/services/review-reply-service";
 import { requireUserContext } from "@/lib/server/auth-context";
 
 function firstError(errors: Record<string, string | undefined>): string {
@@ -176,6 +177,49 @@ export async function toggleHelpfulReviewAction(formData: FormData): Promise<nev
 
   if (!result.ok) {
     redirect(`/modules/${moduleCode}?error=${encodeURIComponent(result.message)}`);
+  }
+
+  redirect(`/modules/${moduleCode}#review-${reviewId}`);
+}
+
+export async function postReviewReplyAction(formData: FormData): Promise<never> {
+  const { client, user } = await requireUserContext({
+    requireVerified: true,
+    requireOnboarded: true,
+  });
+
+  const moduleCode = String(formData.get("moduleCode") ?? "").trim().toUpperCase();
+  const reviewId = String(formData.get("reviewId") ?? "");
+  const parentReplyRaw = String(formData.get("parentReplyId") ?? "").trim();
+  const parentReplyId = parentReplyRaw.length > 0 ? parentReplyRaw : null;
+
+  const result = await createReviewReplyForUser(
+    {
+      userId: user.id,
+      reviewId,
+      parentReplyId,
+      body: String(formData.get("body") ?? ""),
+    },
+    {
+      async insertReply(payload) {
+        const { error } = await client.from("review_replies").insert({
+          review_id: payload.reviewId,
+          user_id: payload.userId,
+          parent_reply_id: payload.parentReplyId,
+          body: payload.body,
+        });
+        return { error };
+      },
+    },
+  );
+
+  if (!result.ok) {
+    if (result.type === "validation") {
+      redirect(
+        `/modules/${moduleCode}?error=${encodeURIComponent(firstError(result.errors))}#review-${reviewId}`,
+      );
+    }
+    redirect(`/modules/${moduleCode}?error=${encodeURIComponent(result.message)}#review-${reviewId}`);
   }
 
   redirect(`/modules/${moduleCode}#review-${reviewId}`);

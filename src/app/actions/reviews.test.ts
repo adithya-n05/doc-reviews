@@ -17,4 +17,11 @@ describe("review actions tips wiring", () => {
     expect(source).toContain("toggleHelpfulVoteForReview");
     expect(source).toContain('formData.get("reviewId")');
   });
+
+  it("provides threaded reply action for module detail reviews", () => {
+    expect(source).toContain("postReviewReplyAction");
+    expect(source).toContain("createReviewReplyForUser");
+    expect(source).toContain('formData.get("parentReplyId")');
+    expect(source).toContain(".from(\"review_replies\")");
+  });
 });

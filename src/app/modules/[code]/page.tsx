@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
   deleteReviewAction,
+  postReviewReplyAction,
   toggleHelpfulReviewAction,
 } from "@/app/actions/reviews";
 import { SiteNav } from "@/components/site-nav";
@@ -14,6 +15,7 @@ import {
   fetchModuleReviewInsightsRow,
   fetchModuleReviews,
   fetchProfilesByIds,
+  fetchReviewRepliesForReviews,
 } from "@/lib/server/module-queries";
 import { resolveModuleReviewInsights } from "@/lib/services/module-review-insights-resolver";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
@@ -77,11 +79,46 @@ export default async function ModuleDetailPage({
 
   const moduleItem = toModuleListItem(moduleRow);
   const reviewRows = await fetchModuleReviews(client, moduleItem.id);
+  const replyRows = await fetchReviewRepliesForReviews(
+    client,
+    reviewRows.map((row) => row.id),
+  );
   const profileMap = await fetchProfilesByIds(
     client,
-    Array.from(new Set(reviewRows.map((row) => row.user_id))),
+    Array.from(new Set([...reviewRows.map((row) => row.user_id), ...replyRows.map((row) => row.user_id)])),
   );
   const reviews = mapReviewsWithProfiles(reviewRows, profileMap);
+  const replyPresentationRows = replyRows.map((row) => {
+    const profileRow = profileMap[row.user_id];
+    const reviewerName = profileRow?.fullName ?? "Unknown Student";
+    const reviewerInitials = reviewerName
+      .split(/\s+/)
+      .map((part) => part[0]?.toUpperCase() ?? "")
+      .slice(0, 2)
+      .join("");
+
+    return {
+      id: row.id,
+      reviewId: row.review_id,
+      parentReplyId: row.parent_reply_id,
+      body: row.body,
+      createdAt: row.created_at,
+      authorName: reviewerName,
+      authorInitials: reviewerInitials || "?",
+      authorEmail: profileRow?.email ?? "",
+    };
+  });
+  const repliesByReviewId = new Map<string, typeof replyPresentationRows>();
+  const repliesByParentId = new Map<string, typeof replyPresentationRows>();
+  for (const reply of replyPresentationRows) {
+    repliesByReviewId.set(reply.reviewId, [...(repliesByReviewId.get(reply.reviewId) ?? []), reply]);
+    if (reply.parentReplyId) {
+      repliesByParentId.set(reply.parentReplyId, [
+        ...(repliesByParentId.get(reply.parentReplyId) ?? []),
+        reply,
+      ]);
+    }
+  }
   const helpfulVoteRows = await fetchHelpfulVoteRowsForReviews(
     client,
     reviewRows.map((row) => row.id),
@@ -388,9 +425,6 @@ export default async function ModuleDetailPage({
                     {helpfulCountByReviewId.get(review.id) ?? 0})
                   </button>
                 </form>
-                <button className="reply-btn" type="button">
-                  Reply
-                </button>
                 <span style={{ flex: 1 }} />
                 <span style={{ fontSize: "11px", color: "var(--ink-faint)" }}>
                   Overall: {overallScore.toFixed(1)} | Difficulty: {review.difficultyRating} |
@@ -398,6 +432,69 @@ export default async function ModuleDetailPage({
                   Assessment: {review.assessmentRating}
                 </span>
               </div>
+              <div className="review-replies">
+                {(repliesByReviewId.get(review.id) ?? [])
+                  .filter((reply) => !reply.parentReplyId)
+                  .map((reply) => (
+                    <div className="review-reply" key={reply.id}>
+                      <div className="review-header">
+                        <div className="review-avatar review-avatar-small">{reply.authorInitials}</div>
+                        <div className="review-meta">
+                          <div className="review-author">{reply.authorName}</div>
+                          <div className="review-date">{formatReviewDate(reply.createdAt)}</div>
+                          <div className="review-email">{reply.authorEmail}</div>
+                        </div>
+                      </div>
+                      <p className="review-body">{reply.body}</p>
+
+                      {(repliesByParentId.get(reply.id) ?? []).map((childReply) => (
+                        <div className="review-reply review-reply-child" key={childReply.id}>
+                          <div className="review-header">
+                            <div className="review-avatar review-avatar-small">
+                              {childReply.authorInitials}
+                            </div>
+                            <div className="review-meta">
+                              <div className="review-author">{childReply.authorName}</div>
+                              <div className="review-date">{formatReviewDate(childReply.createdAt)}</div>
+                              <div className="review-email">{childReply.authorEmail}</div>
+                            </div>
+                          </div>
+                          <p className="review-body">{childReply.body}</p>
+                        </div>
+                      ))}
+
+                      <form action={postReviewReplyAction} className="reply-form reply-form-nested">
+                        <input type="hidden" name="moduleCode" value={moduleItem.code} />
+                        <input type="hidden" name="reviewId" value={review.id} />
+                        <input type="hidden" name="parentReplyId" value={reply.id} />
+                        <textarea
+                          name="body"
+                          rows={2}
+                          maxLength={2000}
+                          placeholder="Reply to this comment..."
+                        />
+                        <button className="btn btn-ghost btn-sm" type="submit">
+                          Reply
+                        </button>
+                      </form>
+                    </div>
+                  ))}
+              </div>
+
+              <form action={postReviewReplyAction} className="reply-form">
+                <input type="hidden" name="moduleCode" value={moduleItem.code} />
+                <input type="hidden" name="reviewId" value={review.id} />
+                <input type="hidden" name="parentReplyId" value="" />
+                <textarea
+                  name="body"
+                  rows={2}
+                  maxLength={2000}
+                  placeholder="Add a reply..."
+                />
+                <button className="btn btn-ghost btn-sm" type="submit">
+                  Reply
+                </button>
+              </form>
               {review.userId === user.id ? (
                 <div
                   className="review-actions"

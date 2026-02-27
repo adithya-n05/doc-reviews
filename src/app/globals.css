@@ -512,6 +512,50 @@
       align-items: center;
     }
 
+    .review-replies {
+      margin-top: 14px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .review-reply {
+      border-left: 1px solid var(--border);
+      padding-left: 12px;
+    }
+
+    .review-reply-child {
+      margin-top: 8px;
+      margin-left: 10px;
+    }
+
+    .review-avatar-small {
+      width: 28px;
+      height: 28px;
+      font-size: 11px;
+    }
+
+    .reply-form {
+      margin-top: 12px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .reply-form textarea {
+      flex: 1;
+      border: 1px solid var(--border);
+      background: #fff;
+      padding: 8px 10px;
+      font-size: 13px;
+      font-family: inherit;
+      color: var(--ink-mid);
+    }
+
+    .reply-form-nested {
+      margin-top: 10px;
+      margin-left: 10px;
+    }
+
     .helpful-btn {
       font-size: 12px;
       font-weight: 500;

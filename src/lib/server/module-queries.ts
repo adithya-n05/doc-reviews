@@ -18,6 +18,10 @@ type ModuleReviewInsightsSummary = Pick<
   Tables<"module_review_insights">,
   "module_id" | "reviews_fingerprint" | "summary" | "top_keywords" | "sentiment" | "source" | "generated_at" | "updated_at"
 >;
+type ReviewReplySummary = Pick<
+  Tables<"review_replies">,
+  "id" | "review_id" | "user_id" | "parent_reply_id" | "body" | "created_at" | "updated_at"
+>;
 
 type ModuleWithRelations = Omit<ModulePresentationRow, "module_offerings"> & {
   module_offerings: ModuleOfferingSummary[] | null;
@@ -155,4 +159,21 @@ export async function fetchModuleReviewInsightsRow(
     .maybeSingle();
 
   return (data as ModuleReviewInsightsSummary | null) ?? null;
+}
+
+export async function fetchReviewRepliesForReviews(
+  client: SupabaseClient,
+  reviewIds: string[],
+): Promise<ReviewReplySummary[]> {
+  if (reviewIds.length === 0) {
+    return [];
+  }
+
+  const { data } = await client
+    .from("review_replies")
+    .select("id,review_id,user_id,parent_reply_id,body,created_at,updated_at")
+    .in("review_id", reviewIds)
+    .order("created_at", { ascending: true });
+
+  return (data ?? []) as ReviewReplySummary[];
 }
