@@ -1,12 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import {
-  deleteReviewAction,
-  deleteReviewReplyAction,
-  postReviewReplyAction,
-  updateReviewReplyAction,
-} from "@/app/actions/reviews";
+import { deleteReviewAction } from "@/app/actions/reviews";
 import { HelpfulToggleButton } from "@/components/helpful-toggle-button";
+import { ReviewReplyThread } from "@/components/review-reply-thread";
 import { SiteNav } from "@/components/site-nav";
 import { logInfo } from "@/lib/logging";
 import { deriveReviewInsights } from "@/lib/metrics/review-insights";
@@ -222,108 +218,9 @@ export default async function ModuleDetailPage({
     };
   });
   const repliesByReviewId = new Map<string, typeof replyPresentationRows>();
-  const repliesByParentId = new Map<string, typeof replyPresentationRows>();
   for (const reply of replyPresentationRows) {
     repliesByReviewId.set(reply.reviewId, [...(repliesByReviewId.get(reply.reviewId) ?? []), reply]);
-    if (reply.parentReplyId) {
-      repliesByParentId.set(reply.parentReplyId, [
-        ...(repliesByParentId.get(reply.parentReplyId) ?? []),
-        reply,
-      ]);
-    }
   }
-  const renderReplyThread = (
-    reply: (typeof replyPresentationRows)[number],
-    moduleCodeValue: string,
-    reviewId: string,
-    depth: number,
-  ) => (
-    <div
-      className={`review-reply ${depth > 0 ? "review-reply-child" : ""}`}
-      id={`reply-${reply.id}`}
-      key={reply.id}
-    >
-      <div className="review-reply-header">
-        <div className="review-avatar review-avatar-small">
-          {reply.authorAvatarUrl ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              className="review-avatar-photo"
-              src={reply.authorAvatarUrl}
-              alt={`${reply.authorName} avatar`}
-            />
-          ) : (
-            reply.authorInitials
-          )}
-        </div>
-        <div className="review-meta">
-          <div className="review-author">{reply.authorName}</div>
-          <div className="review-date">{formatReviewDate(reply.createdAt)}</div>
-          <div className="review-email">{reply.authorEmail}</div>
-        </div>
-      </div>
-      <p className="review-body reply-body">{reply.body}</p>
-
-      <div className="reply-actions">
-        <details className={`reply-details ${depth > 0 ? "reply-details-nested" : ""}`}>
-          <summary className="btn btn-ghost btn-sm reply-btn">
-            <span className="reply-open-label">Reply</span>
-            <span className="reply-close-label">Close</span>
-          </summary>
-          <form
-            action={postReviewReplyAction}
-            className={`reply-form ${depth > 0 ? "reply-form-nested" : ""}`}
-          >
-            <input type="hidden" name="moduleCode" value={moduleCodeValue} />
-            <input type="hidden" name="reviewId" value={reviewId} />
-            <input type="hidden" name="parentReplyId" value={reply.id} />
-            <textarea
-              name="body"
-              rows={2}
-              maxLength={2000}
-              placeholder="Reply to this comment..."
-            />
-            <button className="btn btn-ghost btn-sm" type="submit">
-              Reply
-            </button>
-          </form>
-        </details>
-
-        {reply.userId === user.id ? (
-          <>
-            <details className="reply-details">
-              <summary className="btn btn-ghost btn-sm reply-btn">
-                <span className="reply-open-label">Edit Reply</span>
-                <span className="reply-close-label">Close</span>
-              </summary>
-              <form action={updateReviewReplyAction} className="reply-form">
-                <input type="hidden" name="moduleCode" value={moduleCodeValue} />
-                <input type="hidden" name="reviewId" value={reviewId} />
-                <input type="hidden" name="replyId" value={reply.id} />
-                <textarea name="body" rows={2} maxLength={2000} defaultValue={reply.body} />
-                <button className="btn btn-ghost btn-sm" type="submit">
-                  Save
-                </button>
-              </form>
-            </details>
-
-            <form action={deleteReviewReplyAction}>
-              <input type="hidden" name="moduleCode" value={moduleCodeValue} />
-              <input type="hidden" name="reviewId" value={reviewId} />
-              <input type="hidden" name="replyId" value={reply.id} />
-              <button className="btn btn-ghost btn-sm" type="submit">
-                Delete Reply
-              </button>
-            </form>
-          </>
-        ) : null}
-      </div>
-
-      {(repliesByParentId.get(reply.id) ?? []).map((childReply) =>
-        renderReplyThread(childReply, moduleCodeValue, reviewId, depth + 1),
-      )}
-    </div>
-  );
   const helpfulCountByReviewId = new Map<string, number>();
   const currentUserHelpfulReviewIds = new Set<string>();
   for (const vote of helpfulVoteRows) {
@@ -337,6 +234,13 @@ export default async function ModuleDetailPage({
   }
 
   const studyYear = moduleItem.studyYears[0] ?? profile.year ?? 1;
+  const currentUserInitials =
+    profile.full_name
+      .split(/\s+/)
+      .slice(0, 2)
+      .map((part: string) => part[0]?.toUpperCase() ?? "")
+      .join("") || "?";
+  const currentUserAvatarUrl = normalizeAvatarUrl(profile.avatar_url);
   const leaders =
     moduleItem.leaders.length > 0
       ? moduleItem.leaders
@@ -623,26 +527,6 @@ export default async function ModuleDetailPage({
                   initialCount={helpfulCountByReviewId.get(review.id) ?? 0}
                   initiallyVoted={currentUserHelpfulReviewIds.has(review.id)}
                 />
-              <details className="reply-details">
-                  <summary className="btn btn-ghost btn-sm reply-btn">
-                    <span className="reply-open-label">Reply</span>
-                    <span className="reply-close-label">Close</span>
-                  </summary>
-                  <form action={postReviewReplyAction} className="reply-form">
-                    <input type="hidden" name="moduleCode" value={moduleItem.code} />
-                    <input type="hidden" name="reviewId" value={review.id} />
-                    <input type="hidden" name="parentReplyId" value="" />
-                    <textarea
-                      name="body"
-                      rows={2}
-                      maxLength={2000}
-                      placeholder="Add a reply..."
-                    />
-                    <button className="btn btn-ghost btn-sm" type="submit">
-                      Reply
-                    </button>
-                  </form>
-                </details>
                 <span style={{ flex: 1 }} />
                 <span className="review-breakdown">
                   Overall: {overallScore.toFixed(1)} | Difficulty: {review.difficultyRating} |
@@ -650,28 +534,17 @@ export default async function ModuleDetailPage({
                   Assessment: {review.assessmentRating}
                 </span>
               </div>
-              {(repliesByReviewId.get(review.id) ?? []).filter((reply) => !reply.parentReplyId).length >
-              0 ? (
-                <details className="review-thread" open={shouldOpenReplies}>
-                  <summary className="reply-thread-btn">
-                    <span className="reply-thread-show">
-                      View replies (
-                      {
-                        (repliesByReviewId.get(review.id) ?? []).filter(
-                          (reply) => !reply.parentReplyId,
-                        ).length
-                      }
-                      )
-                    </span>
-                    <span className="reply-thread-hide">Hide replies</span>
-                  </summary>
-                  <div className="review-replies">
-                    {(repliesByReviewId.get(review.id) ?? [])
-                      .filter((reply) => !reply.parentReplyId)
-                      .map((reply) => renderReplyThread(reply, moduleItem.code, review.id, 0))}
-                  </div>
-                </details>
-              ) : null}
+              <ReviewReplyThread
+                moduleCode={moduleItem.code}
+                reviewId={review.id}
+                currentUserId={user.id}
+                currentUserName={profile.full_name}
+                currentUserEmail={profile.email}
+                currentUserInitials={currentUserInitials}
+                currentUserAvatarUrl={currentUserAvatarUrl}
+                initialReplies={repliesByReviewId.get(review.id) ?? []}
+                initiallyOpen={shouldOpenReplies}
+              />
               {review.userId === user.id ? (
                 <div
                   className="review-actions"

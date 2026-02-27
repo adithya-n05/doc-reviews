@@ -27,41 +27,32 @@ describe("module detail review rendering", () => {
 
   it("shows helpful/reply review actions and editorial tip label", () => {
     expect(source).toContain('import { HelpfulToggleButton } from "@/components/helpful-toggle-button";');
+    expect(source).toContain('import { ReviewReplyThread } from "@/components/review-reply-thread";');
     expect(source).toContain("<HelpfulToggleButton");
     expect(source).toContain("initialCount={helpfulCountByReviewId.get(review.id) ?? 0}");
     expect(source).toContain("initiallyVoted={currentUserHelpfulReviewIds.has(review.id)}");
-    expect(source).toContain('className="reply-details"');
-    expect(source).toContain('className="btn btn-ghost btn-sm reply-btn"');
-    expect(source).toContain("postReviewReplyAction");
-    expect(source).toContain('name="parentReplyId"');
-    expect(source).toContain('className="reply-form"');
-    expect(source).toContain("reply-open-label");
-    expect(source).toContain("reply-close-label");
+    expect(source).toContain("<ReviewReplyThread");
     expect(source).toContain("Tip for future students:");
   });
 
   it("renders collapsible reply threads with explicit expand controls", () => {
-    expect(source).toContain('className="review-thread"');
-    expect(source).toContain('className="reply-thread-btn"');
-    expect(source).toContain("View replies");
-    expect(source).toContain("Hide replies");
+    expect(source).toContain("<ReviewReplyThread");
+    expect(source).toContain("initialReplies={repliesByReviewId.get(review.id) ?? []}");
+    expect(source).toContain("reviewId={review.id}");
   });
 
   it("opens reply thread automatically after reply mutations", () => {
     expect(source).toContain("const openRepliesForReviewId =");
     expect(source).toContain("const shouldOpenReplies = openRepliesForReviewId === review.id");
-    expect(source).toContain("<details className=\"review-thread\" open={shouldOpenReplies}>");
+    expect(source).toContain("initiallyOpen={shouldOpenReplies}");
   });
 
-  it("renders owner controls for editing and deleting replies", () => {
-    expect(source).toContain("updateReviewReplyAction");
-    expect(source).toContain("deleteReviewReplyAction");
-    expect(source).toContain('className="reply-actions"');
-    expect(source).toContain("Edit Reply");
-    expect(source).toContain("Delete Reply");
-    expect(source).toContain("reply.userId === user.id");
-    expect(source).toContain('id={`reply-${reply.id}`}');
-    expect(source).toContain('className="btn btn-ghost btn-sm reply-btn"');
+  it("passes current user identity props to optimistic reply thread", () => {
+    expect(source).toContain("currentUserId={user.id}");
+    expect(source).toContain("currentUserName={profile.full_name}");
+    expect(source).toContain("currentUserEmail={profile.email}");
+    expect(source).toContain("currentUserInitials={currentUserInitials}");
+    expect(source).toContain("currentUserAvatarUrl={currentUserAvatarUrl}");
   });
 
   it("switches primary CTA to edit state when user already has a review", () => {
