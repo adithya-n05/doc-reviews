@@ -68,10 +68,12 @@ export default async function OnboardingPage({
   const initialSelectedCodes = moduleOptions
     .filter((module) => selectedIds.has(module.id))
     .map((module) => module.code);
+  const navDisplayName =
+    profile.full_name.trim().length > 0 ? profile.full_name : profile.email;
 
   return (
     <div className="site-shell">
-      <SiteNav authed={true} />
+      <SiteNav authed={true} active="modules" displayName={navDisplayName} />
       <main className="auth-wrap">
         <section className="auth-card" style={{ width: "min(760px, 100%)" }}>
           <p className="label-caps">Create Your Account</p>
