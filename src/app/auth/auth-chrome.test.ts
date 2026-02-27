@@ -20,6 +20,11 @@ describe('auth pages chrome', () => {
     expect(signup).not.toContain('SiteNav');
   });
 
+  it('signup email field enforces imperial domain pattern client-side', () => {
+    const signup = source('src/app/auth/signup/page.tsx');
+    expect(signup).toContain('pattern="^[^@\\s]+@(ic\\.ac\\.uk|imperial\\.ac\\.uk)$"');
+  });
+
   it('verify page uses auth brand component and not SiteNav', () => {
     const verify = source('src/app/auth/verify/page.tsx');
     expect(verify).toContain('import { AuthBrand } from "@/components/auth-brand";');

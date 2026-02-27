@@ -47,6 +47,7 @@ export default async function SignupPage({ searchParams }: SignupPageProps) {
                 type="email"
                 name="email"
                 placeholder="abc123@ic.ac.uk"
+                pattern="^[^@\s]+@(ic\.ac\.uk|imperial\.ac\.uk)$"
                 required
                 autoComplete="email"
               />
