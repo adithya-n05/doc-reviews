@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { AuthBrand } from "@/components/auth-brand";
+import { SignupProgress } from "@/components/signup-progress";
 
 type VerifyPageProps = {
   searchParams?: Promise<Record<string, string | string[] | undefined>>;
@@ -32,6 +33,7 @@ export default async function VerifyPage({ searchParams }: VerifyPageProps) {
           <p className="auth-subtitle">
             Confirm your Imperial address before you can review modules.
           </p>
+          <SignupProgress step={2} />
 
           {sent ? (
             <p className="form-banner success">

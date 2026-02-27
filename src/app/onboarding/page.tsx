@@ -1,6 +1,7 @@
 import { saveOnboardingAction } from "@/app/actions/onboarding";
 import { ModuleChecklist } from "@/components/module-checklist";
 import { SiteNav } from "@/components/site-nav";
+import { SignupProgress } from "@/components/signup-progress";
 import { requireUserContext } from "@/lib/server/auth-context";
 
 type OnboardingPageProps = {
@@ -81,6 +82,7 @@ export default async function OnboardingPage({
           <p className="auth-subtitle">
             Choose your current year and modules. This controls what you can review.
           </p>
+          <SignupProgress step={3} />
 
           {error ? <p className="form-banner error">{error}</p> : null}
 

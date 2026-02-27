@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { signupAction } from "@/app/actions/auth";
 import { AuthBrand } from "@/components/auth-brand";
+import { SignupProgress } from "@/components/signup-progress";
 
 type SignupPageProps = {
   searchParams?: Promise<Record<string, string | string[] | undefined>>;
@@ -31,6 +32,7 @@ export default async function SignupPage({ searchParams }: SignupPageProps) {
           <p className="auth-subtitle">
             Registration is restricted to Imperial Computing students.
           </p>
+          <SignupProgress step={1} />
 
           {error ? <p className="form-banner error">{error}</p> : null}
 
