@@ -46,6 +46,30 @@ type ResolveDeps = {
   persistInsights?: typeof upsertModuleReviewInsightsCacheRow;
 };
 
+async function persistInsightsSafely(
+  adminClient: SupabaseClient,
+  persistInsights: typeof upsertModuleReviewInsightsCacheRow,
+  input: {
+    moduleId: string;
+    reviewCount: number;
+    reviewsFingerprint: string;
+    summary: string;
+    topKeywords: Array<{ word: string; count: number }>;
+    sentiment: {
+      positive: number;
+      neutral: number;
+      negative: number;
+    };
+    source: "ai" | "fallback";
+  },
+): Promise<void> {
+  try {
+    await persistInsights(adminClient, input);
+  } catch {
+    // Cache persistence is best-effort and must not break module detail rendering.
+  }
+}
+
 export async function resolveModuleReviewInsights(
   params: ResolveParams,
   deps: ResolveDeps = {},
@@ -97,7 +121,7 @@ export async function resolveModuleReviewInsights(
     });
 
     if (params.adminClient) {
-      await persistInsights(params.adminClient, {
+      await persistInsightsSafely(params.adminClient, persistInsights, {
         moduleId: params.moduleId,
         reviewCount: reviewCorpus.length,
         reviewsFingerprint,
@@ -124,7 +148,7 @@ export async function resolveModuleReviewInsights(
     });
 
     if (params.adminClient) {
-      await persistInsights(params.adminClient, {
+      await persistInsightsSafely(params.adminClient, persistInsights, {
         moduleId: params.moduleId,
         reviewCount: reviewCorpus.length,
         reviewsFingerprint,
@@ -150,7 +174,7 @@ export async function resolveModuleReviewInsights(
   });
 
   if (params.adminClient) {
-    await persistInsights(params.adminClient, {
+    await persistInsightsSafely(params.adminClient, persistInsights, {
       moduleId: params.moduleId,
       reviewCount: reviewCorpus.length,
       reviewsFingerprint,

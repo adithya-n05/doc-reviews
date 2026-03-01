@@ -157,4 +157,33 @@ describe("resolveModuleReviewInsights", () => {
     expect(result.reviewCount).toBe(1);
     expect(persistInsights).not.toHaveBeenCalled();
   });
+
+  it("does not throw when cache persistence fails", async () => {
+    const generateInsights = vi.fn().mockResolvedValue({
+      summary: "Fallback summary",
+      topKeywords: [{ word: "fallback", count: 1 }],
+      sentiment: { positive: 0, neutral: 1, negative: 0 },
+      source: "fallback",
+    });
+    const persistInsights = vi
+      .fn()
+      .mockRejectedValue(new Error("Failed to upsert module review insights"));
+
+    const result = await resolveModuleReviewInsights(
+      {
+        moduleId: "module-1",
+        reviews: REVIEWS,
+        cachedRow: null,
+        apiKey: "key",
+        model: "gpt-4.1-mini",
+        adminClient: {} as never,
+      },
+      { generateInsights, persistInsights },
+    );
+
+    expect(result.insights.summary).toBe("Fallback summary");
+    expect(result.insights.source).toBe("fallback");
+    expect(result.reviewCount).toBe(1);
+    expect(persistInsights).toHaveBeenCalledOnce();
+  });
 });
