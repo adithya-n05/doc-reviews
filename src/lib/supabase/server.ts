@@ -13,8 +13,13 @@ export async function createSupabaseServerClient(): Promise<SupabaseClient> {
         return cookieStore.getAll();
       },
       setAll(cookiesToSet) {
-        for (const { name, value, options } of cookiesToSet) {
-          cookieStore.set(name, value, options);
+        try {
+          for (const { name, value, options } of cookiesToSet) {
+            cookieStore.set(name, value, options);
+          }
+        } catch {
+          // In Server Components, cookie writes can throw. The Supabase SSR
+          // helper still works with read-only cookie access, so swallow writes.
         }
       },
     },

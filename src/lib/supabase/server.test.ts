@@ -62,4 +62,19 @@ describe("createSupabaseServerClient", () => {
       httpOnly: true,
     });
   });
+
+  it("does not throw when cookie writes are unavailable in Server Components", async () => {
+    cookieStoreSetMock.mockImplementation(() => {
+      throw new Error("Cookies can only be modified in a Server Action or Route Handler.");
+    });
+
+    await createSupabaseServerClient();
+    const [, , options] = createServerClientMock.mock.calls[0];
+
+    expect(() =>
+      options.cookies.setAll([
+        { name: "sb-access-token", value: "a", options: { path: "/" } },
+      ]),
+    ).not.toThrow();
+  });
 });
