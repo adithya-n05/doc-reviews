@@ -149,24 +149,29 @@ describe("mapReviewsWithProfiles", () => {
     expect(mapped[0].tips).toBe("Start tutorial sheets early every week.");
   });
 
-  it("throws when profile is missing to prevent anonymous rendering", () => {
-    expect(() => mapReviewsWithProfiles(reviews, {})).toThrow(
-      "Missing profile for review user: u1",
-    );
+  it("falls back to a safe public identity when profile is missing", () => {
+    const mapped = mapReviewsWithProfiles(reviews, {});
+
+    expect(mapped).toHaveLength(1);
+    expect(mapped[0].reviewerName).toBe("Unknown Student");
+    expect(mapped[0].reviewerEmail).toBe("Email unavailable");
+    expect(mapped[0].reviewerInitials).toBe("US");
+    expect(mapped[0].reviewerAvatarUrl).toBeNull();
+    expect(mapped[0].year).toBeNull();
   });
 
-  it("throws when profile has empty name or email", () => {
-    expect(() =>
-      mapReviewsWithProfiles(reviews, {
-        u1: { fullName: "", email: "sm123@ic.ac.uk", year: 1, avatarUrl: null },
-      }),
-    ).toThrow("Review identity is incomplete for user: u1");
+  it("falls back when profile has empty name or email", () => {
+    const missingName = mapReviewsWithProfiles(reviews, {
+      u1: { fullName: "", email: "sm123@ic.ac.uk", year: 1, avatarUrl: null },
+    });
+    expect(missingName[0].reviewerName).toBe("Unknown Student");
+    expect(missingName[0].reviewerEmail).toBe("sm123@ic.ac.uk");
 
-    expect(() =>
-      mapReviewsWithProfiles(reviews, {
-        u1: { fullName: "Sophie M.", email: "", year: 1, avatarUrl: null },
-      }),
-    ).toThrow("Review identity is incomplete for user: u1");
+    const missingEmail = mapReviewsWithProfiles(reviews, {
+      u1: { fullName: "Sophie M.", email: "", year: 1, avatarUrl: null },
+    });
+    expect(missingEmail[0].reviewerName).toBe("Sophie M.");
+    expect(missingEmail[0].reviewerEmail).toBe("Email unavailable");
   });
 
   it("normalizes invalid avatar urls to null", () => {

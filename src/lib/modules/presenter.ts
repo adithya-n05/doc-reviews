@@ -202,15 +202,9 @@ export function mapReviewsWithProfiles(
 ): PublicReview[] {
   return reviews.map((review) => {
     const profile = profilesById[review.user_id];
-    if (!profile) {
-      throw new Error(`Missing profile for review user: ${review.user_id}`);
-    }
-
-    const fullName = profile.fullName.trim();
-    const email = profile.email.trim().toLowerCase();
-    if (!fullName || !email) {
-      throw new Error(`Review identity is incomplete for user: ${review.user_id}`);
-    }
+    const fullName = profile?.fullName?.trim() || "Unknown Student";
+    const normalizedEmail = profile?.email?.trim().toLowerCase() ?? "";
+    const email = normalizedEmail || "Email unavailable";
 
     return {
       id: review.id,
@@ -218,8 +212,8 @@ export function mapReviewsWithProfiles(
       reviewerName: fullName,
       reviewerEmail: email,
       reviewerInitials: toPublicReviewerInitials(fullName),
-      reviewerAvatarUrl: normalizeAvatarUrl(profile.avatarUrl),
-      year: profile.year,
+      reviewerAvatarUrl: normalizeAvatarUrl(profile?.avatarUrl),
+      year: profile?.year ?? null,
       teachingRating: review.teaching_rating,
       workloadRating: review.workload_rating,
       difficultyRating: review.difficulty_rating,
